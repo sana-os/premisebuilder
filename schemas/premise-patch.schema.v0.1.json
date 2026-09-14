@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:premise-builder:schema:patch:0.1.0",
+  "title": "Premise Builder Override Patch 0.1.0",
+  "description": "Schema for a scoped, revision-bound Premise Builder Override patch.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaRef",
+    "format",
+    "formatVersion",
+    "protocolVersion",
+    "documentType",
+    "meta",
+    "operations"
+  ],
+  "properties": {
+    "schemaRef": {
+      "const": "urn:premise-builder:schema:patch:0.1.0"
+    },
+    "format": {
+      "const": "premise-builder-patch"
+    },
+    "formatVersion": {
+      "const": "0.1.0"
+    },
+    "protocolVersion": {
+      "const": "0.1.0"
+    },
+    "documentType": {
+      "const": "override"
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/operation"
+      }
+    }
+  },
+  "$defs": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "patchId",
+        "baseDocumentId",
+        "baseRevision",
+        "label",
+        "contentLanguage",
+        "createdByRef",
+        "scope",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "patchId": {
+          "type": "string",
+          "pattern": "^pbp_[A-Za-z0-9_-]{6,120}$"
+        },
+        "baseDocumentId": {
+          "type": "string",
+          "pattern": "^pb_[A-Za-z0-9_-]{6,120}$"
+        },
+        "baseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "contentLanguage": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+          "maxLength": 35
+        },
+        "createdByRef": {
+          "type": "string",
+          "pattern": "^participant_[A-Za-z0-9_-]{3,120}$"
+        },
+        "scope": {
+          "enum": ["user", "branch", "environment", "session"]
+        },
+        "expiresAt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["changeId", "op", "path", "reason", "createdAt"],
+      "properties": {
+        "changeId": {
+          "type": "string",
+          "pattern": "^chg_[A-Za-z0-9_-]{6,120}$"
+        },
+        "op": {
+          "enum": ["add", "replace", "remove"]
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^/(items|participants)/[A-Za-z0-9_.~-]+(?:/[A-Za-z0-9_.~-]+)*$",
+          "maxLength": 500
+        },
+        "previousValue": true,
+        "value": true,
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "add"
+              }
+            },
+            "required": ["op"]
+          },
+          "then": {
+            "required": ["value"],
+            "not": {
+              "required": ["previousValue"]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "replace"
+              }
+            },
+            "required": ["op"]
+          },
+          "then": {
+            "required": ["previousValue", "value"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "remove"
+              }
+            },
+            "required": ["op"]
+          },
+          "then": {
+            "required": ["previousValue"],
+            "not": {
+              "required": ["value"]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

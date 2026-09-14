@@ -1,0 +1,821 @@
+{
+  "templateId": "web-small-app",
+  "templateVersion": "0.1.0",
+  "locale": "en",
+  "direction": "ltr",
+  "template": {
+    "name": "Websites & Small Web Apps",
+    "summary": "Define the working premise for a website or a clearly bounded web application."
+  },
+  "answerContext": {
+    "answeringFrom": "Answering from",
+    "recordedBy": "Recorded by",
+    "speakingAs": "Speaking as",
+    "captureMethod": "How this was obtained",
+    "authority": "Authority for this answer",
+    "confirmation": "Source confirmation",
+    "changeForQuestion": "Change for this question",
+    "multiplePerspectives": "Add another perspective"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "Confirmed",
+      "description": "Use this as an accepted project premise."
+    },
+    {
+      "value": "provisional",
+      "label": "Use provisionally",
+      "description": "Use this for now, but keep it visibly open to revision."
+    },
+    {
+      "value": "unspecified",
+      "label": "Not decided",
+      "description": "Leave this open. Do not let an AI silently fill it in."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "Ask for a proposal",
+      "description": "Request alternatives or a recommendation without treating one as chosen."
+    },
+    {
+      "value": "delegated",
+      "label": "Delegate within bounds",
+      "description": "Allow the implementer or AI to decide within the stated limits and report the choice."
+    },
+    {
+      "value": "not_applicable",
+      "label": "Does not apply",
+      "description": "Mark this question as outside the project."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "Choose whose perspective this answer represents and who recorded it.",
+    "validation.speakingRoleMismatch": "The selected speaking role is not assigned to that participant.",
+    "validation.inferenceUnconfirmed": "An inferred answer must remain unconfirmed until an authorized person verifies it.",
+    "validation.resolutionAuthorityRequired": "Confirming this premise requires an authorized decision source.",
+    "validation.exclusiveChoice": "This option cannot be combined with other selections.",
+    "validation.noteRequired": "Add a short note to explain this selection.",
+    "validation.selectionLimit": "Reduce the number of selected options.",
+    "review.authRuntime": "Authentication is in scope, but the selected runtime may require an external or server component.",
+    "review.paymentHandling": "Payment-related data is in scope. Confirm who processes it and whether the project may store any of it.",
+    "review.analyticsPrivacy": "Analytics or telemetry is in scope. Recheck the privacy boundary, consent, and prohibited practices."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "Project intent",
+      "description": "Define what is being built, why it matters, and the current phase.",
+      "perspectiveHint": "Prefer the requester or decision owner. Record a developer's interpretation as a separate contribution."
+    },
+    {
+      "id": "audience.context",
+      "label": "Audience & context",
+      "description": "Describe the people who will use the result and the conditions around use.",
+      "perspectiveHint": "When possible, record actual end-user input separately from assumptions made by the project team."
+    },
+    {
+      "id": "scope.deliverables",
+      "label": "Scope & deliverables",
+      "description": "Make the release boundary, required surfaces, and exclusions visible.",
+      "perspectiveHint": "A requester can describe desired scope; a developer can separately record feasibility and implementation consequences."
+    },
+    {
+      "id": "content.data",
+      "label": "Content & data",
+      "description": "Clarify content responsibility and how user-entered data may be handled.",
+      "perspectiveHint": "Use the content owner for editorial facts and an authorized technical or privacy source for data handling."
+    },
+    {
+      "id": "design.interaction",
+      "label": "Design & interaction",
+      "description": "Capture visual direction and interaction preferences without confusing them with hard constraints.",
+      "perspectiveHint": "Keep end-user observations, requester preferences, and designer recommendations as separate contributions."
+    },
+    {
+      "id": "technology.runtime",
+      "label": "Technology & runtime",
+      "description": "Define stack flexibility, runtime boundaries, browser support, and external services.",
+      "perspectiveHint": "A developer may recommend an implementation. Record whether that recommendation is advisory or an authorized technical decision."
+    },
+    {
+      "id": "quality.accessibility",
+      "label": "Quality & accessibility",
+      "description": "Set the expected level of accessibility, responsive behavior, and performance.",
+      "perspectiveHint": "Combine observed user needs with technical or compliance authority; do not replace one with the other."
+    },
+    {
+      "id": "risk.boundaries",
+      "label": "Risks & boundaries",
+      "description": "State what must not happen and which failures would be costly.",
+      "perspectiveHint": "Confirm hard prohibitions with a decision owner or relevant domain authority."
+    },
+    {
+      "id": "delivery.operations",
+      "label": "Delivery & operations",
+      "description": "Define hosting, deployment, maintenance, and handoff expectations.",
+      "perspectiveHint": "Record the maintainer's operational needs separately from the developer's preferred workflow."
+    },
+    {
+      "id": "acceptance.validation",
+      "label": "Acceptance & validation",
+      "description": "Define who accepts the work and what evidence will count as complete.",
+      "perspectiveHint": "The final resolution should come from the person or group authorized to accept the release."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.project_kind",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "What are you building?",
+      "help": "Choose the closest primary shape for this release.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "informational_site", "label": "Informational website" },
+        { "value": "landing_page", "label": "Landing page" },
+        { "value": "portfolio", "label": "Portfolio" },
+        { "value": "public_content_site", "label": "Public content site" },
+        { "value": "browser_local_utility", "label": "Browser-local utility" },
+        { "value": "small_web_app", "label": "Small web application" },
+        { "value": "mixed", "label": "A mixed release", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "project.intent.primary_outcome",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "What is the primary outcome this release should enable?",
+      "help": "Choose the outcome that should win when tradeoffs are necessary.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "explain_information", "label": "Help people understand information" },
+        { "value": "generate_leads", "label": "Generate inquiries or leads" },
+        { "value": "showcase_work", "label": "Showcase work or credentials" },
+        { "value": "complete_workflow", "label": "Let users complete a workflow" },
+        { "value": "provide_utility", "label": "Provide a focused tool or utility" },
+        { "value": "publish_content", "label": "Publish or organize content" },
+        { "value": "validate_idea", "label": "Validate an idea or prototype" },
+        { "value": "other", "label": "Another outcome", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "What phase is the project in?",
+      "help": "This changes whether the work should create, preserve, extend, or repair existing behavior.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "new_build", "label": "New build" },
+        { "value": "redesign", "label": "Redesign" },
+        { "value": "extension", "label": "Extension" },
+        { "value": "repair", "label": "Repair" }
+      ]
+    },
+    {
+      "questionId": "project.intent.success_evidence",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "What observable result would make this release worthwhile?",
+      "help": "Describe evidence rather than a general aspiration. A short answer is enough.",
+      "responseType": "long-text",
+      "placeholder": "For example: a first-time visitor can understand the offer and submit an inquiry without help."
+    },
+    {
+      "questionId": "audience.context.primary_group",
+      "category": "audience.context",
+      "order": 50,
+      "prompt": "Who is the primary audience?",
+      "help": "Choose the group whose needs should guide the first release.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "general_public", "label": "General public" },
+        { "value": "prospective_customers", "label": "Prospective customers" },
+        { "value": "existing_customers", "label": "Existing customers" },
+        { "value": "internal_staff", "label": "Internal staff" },
+        { "value": "professionals", "label": "Professionals or specialists" },
+        { "value": "creators", "label": "Creators or contributors" },
+        { "value": "students_researchers", "label": "Students or researchers" },
+        { "value": "defined_community", "label": "A defined community" },
+        { "value": "mixed", "label": "Several groups equally", "requiresNote": true },
+        { "value": "other", "label": "Another audience", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "audience.context.relationship",
+      "category": "audience.context",
+      "order": 60,
+      "prompt": "What relationship will most users have with the project?",
+      "help": "This helps set onboarding, explanation, and navigation depth.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "first_time_visitors", "label": "Mostly first-time visitors" },
+        { "value": "occasional_visitors", "label": "Occasional visitors" },
+        { "value": "returning_users", "label": "Returning users" },
+        { "value": "authenticated_members", "label": "Authenticated members" },
+        { "value": "known_internal_users", "label": "Known internal users" },
+        { "value": "mixed", "label": "A mixed audience" }
+      ]
+    },
+    {
+      "questionId": "audience.context.domain_familiarity",
+      "category": "audience.context",
+      "order": 70,
+      "prompt": "How familiar is the primary audience with the subject?",
+      "help": "Answer from observed or reported user knowledge when possible.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "none", "label": "No prior knowledge assumed" },
+        { "value": "basic", "label": "Basic familiarity" },
+        { "value": "working", "label": "Working knowledge" },
+        { "value": "expert", "label": "Expert knowledge" },
+        { "value": "mixed", "label": "Widely mixed knowledge" }
+      ]
+    },
+    {
+      "questionId": "audience.context.primary_context",
+      "category": "audience.context",
+      "order": 80,
+      "prompt": "In which conditions will the project be used?",
+      "help": "Select all conditions that materially affect design or implementation.",
+      "responseType": "multi-choice",
+      "choices": [
+        { "value": "mobile_on_move", "label": "Mobile while moving" },
+        { "value": "mobile_stationary", "label": "Mobile while stationary" },
+        { "value": "desktop_office", "label": "Desktop in an office" },
+        { "value": "desktop_home", "label": "Desktop at home" },
+        { "value": "tablet_or_kiosk", "label": "Tablet or kiosk" },
+        { "value": "constrained_network", "label": "Slow or unreliable network" },
+        { "value": "assistive_technology", "label": "Assistive technology" },
+        { "value": "mixed", "label": "Mixed or unpredictable conditions" }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.required_surfaces",
+      "category": "scope.deliverables",
+      "order": 90,
+      "prompt": "Which surfaces are required in this release?",
+      "help": "Select only what must be present for this release, not possible future additions.",
+      "responseType": "multi-choice",
+      "choices": [
+        { "value": "home_or_entry", "label": "Home or entry view" },
+        { "value": "content_pages", "label": "Content pages" },
+        { "value": "listing_or_index", "label": "Listing or index" },
+        { "value": "detail_views", "label": "Detail views" },
+        { "value": "form", "label": "Form" },
+        { "value": "dashboard", "label": "Dashboard or workspace" },
+        { "value": "settings", "label": "Settings" },
+        { "value": "authentication", "label": "Sign-in or account flow" },
+        { "value": "admin", "label": "Administration view" },
+        { "value": "legal", "label": "Legal or policy pages" },
+        { "value": "error_empty_states", "label": "Error and empty states" },
+        { "value": "other", "label": "Another required surface", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.primary_user_action",
+      "category": "scope.deliverables",
+      "order": 100,
+      "prompt": "What is the most important action a user must be able to complete?",
+      "help": "Choose the action that defines the primary flow.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "read_or_understand", "label": "Read or understand" },
+        { "value": "navigate_or_discover", "label": "Navigate or discover content" },
+        { "value": "submit_form", "label": "Submit a form" },
+        { "value": "search_or_filter", "label": "Search or filter" },
+        { "value": "create_or_edit", "label": "Create or edit something" },
+        { "value": "calculate_or_transform", "label": "Calculate or transform data" },
+        { "value": "upload_or_download", "label": "Upload or download" },
+        { "value": "manage_account", "label": "Sign in or manage an account" },
+        { "value": "purchase_or_pay", "label": "Purchase or pay" },
+        { "value": "other", "label": "Another primary action", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.release_boundary",
+      "category": "scope.deliverables",
+      "order": 110,
+      "prompt": "How is the first release bounded?",
+      "help": "Choose the clearest current boundary. A vague boundary should remain visibly unresolved.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "single_page", "label": "One page" },
+        { "value": "small_fixed_set", "label": "A small fixed set of pages" },
+        { "value": "bounded_app_flow", "label": "One clearly bounded app flow" },
+        { "value": "existing_scope_redesign", "label": "The current product scope, redesigned" },
+        { "value": "specific_repair", "label": "A specific repair only" },
+        { "value": "phased_mvp", "label": "A defined MVP phase" },
+        { "value": "not_yet_bounded", "label": "The boundary is not yet clear" }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.explicit_exclusions",
+      "category": "scope.deliverables",
+      "order": 120,
+      "prompt": "What is explicitly outside this release?",
+      "help": "List tempting additions or assumptions that should not enter the work without a new decision.",
+      "responseType": "long-text",
+      "placeholder": "For example: no accounts, no server database, no payments, and no CMS in the first release."
+    },
+    {
+      "questionId": "content.data.source_owner",
+      "category": "content.data",
+      "order": 130,
+      "prompt": "Who is responsible for the project content?",
+      "help": "Choose who supplies or approves the text, media, and source information.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "owner_supplies_final", "label": "Project owner supplies final content" },
+        { "value": "owner_supplies_draft", "label": "Project owner supplies a draft" },
+        { "value": "developer_structures", "label": "Developer structures supplied material" },
+        { "value": "developer_writes_from_brief", "label": "Developer writes from an approved brief" },
+        { "value": "shared_responsibility", "label": "Shared responsibility" },
+        { "value": "migrate_existing", "label": "Migrate existing content" },
+        { "value": "not_yet_assigned", "label": "Not yet assigned" }
+      ]
+    },
+    {
+      "questionId": "content.data.readiness",
+      "category": "content.data",
+      "order": 140,
+      "prompt": "How ready is the content?",
+      "help": "Assess the material available now, not the expected state at launch.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "final", "label": "Final and approved" },
+        { "value": "mostly_ready", "label": "Mostly ready" },
+        { "value": "partial", "label": "Partially available" },
+        { "value": "source_material_only", "label": "Only source material exists" },
+        { "value": "not_started", "label": "Not started" }
+      ]
+    },
+    {
+      "questionId": "content.data.user_input_types",
+      "category": "content.data",
+      "order": 150,
+      "prompt": "What user data may enter the system?",
+      "help": "Select every data type the release intentionally receives, including telemetry.",
+      "responseType": "multi-choice",
+      "choices": [
+        { "value": "none", "label": "No user data", "exclusive": true },
+        { "value": "contact_details", "label": "Contact details" },
+        { "value": "account_profile", "label": "Account or profile data" },
+        { "value": "free_text", "label": "Free-form text" },
+        { "value": "files", "label": "Uploaded files" },
+        { "value": "payment_related", "label": "Payment-related data" },
+        { "value": "analytics_telemetry", "label": "Analytics or telemetry" },
+        { "value": "location_device", "label": "Location or device data" },
+        { "value": "other", "label": "Another data type", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "content.data.storage",
+      "category": "content.data",
+      "order": 160,
+      "prompt": "Where may project or user-entered data be stored?",
+      "help": "Choose the strongest current boundary. This is about the product being defined, not Premise Builder itself.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "no_user_data", "label": "No user data is stored" },
+        { "value": "session_only", "label": "Only for the current session" },
+        { "value": "browser_local_only", "label": "Only in the user's browser" },
+        { "value": "server_storage_allowed", "label": "Project-controlled server storage is allowed" },
+        { "value": "third_party_storage", "label": "An approved third party may store it" },
+        { "value": "hybrid", "label": "A defined mix of local, server, or third-party storage", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "content.data.retention",
+      "category": "content.data",
+      "order": 170,
+      "prompt": "How long may retained user data remain?",
+      "help": "This appears when the project receives data that may persist.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "no_retention", "label": "Do not retain it" },
+        { "value": "until_session_ends", "label": "Until the session ends" },
+        { "value": "until_local_deletion", "label": "Until the user deletes local data" },
+        { "value": "fixed_period", "label": "For a defined period", "requiresNote": true },
+        { "value": "account_lifetime", "label": "For the account lifetime" },
+        { "value": "governed_by_policy", "label": "As required by an approved policy", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "design.interaction.tone",
+      "category": "design.interaction",
+      "order": 180,
+      "prompt": "Which visual qualities should guide the design?",
+      "help": "Select up to three. These are preferences unless a separate constraint makes one mandatory.",
+      "responseType": "multi-choice",
+      "maxSelections": 3,
+      "choices": [
+        { "value": "minimal", "label": "Minimal" },
+        { "value": "editorial", "label": "Editorial" },
+        { "value": "technical", "label": "Technical" },
+        { "value": "playful", "label": "Playful" },
+        { "value": "premium", "label": "Premium" },
+        { "value": "warm", "label": "Warm" },
+        { "value": "institutional", "label": "Institutional" },
+        { "value": "bold", "label": "Bold" },
+        { "value": "quiet", "label": "Quiet" },
+        { "value": "brand_led", "label": "Led by an existing brand" }
+      ]
+    },
+    {
+      "questionId": "design.interaction.brand_source",
+      "category": "design.interaction",
+      "order": 190,
+      "prompt": "What visual system should the project follow?",
+      "help": "Choose the most authoritative source available now.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "fixed_design_system", "label": "A fixed design system" },
+        { "value": "existing_brand_guidelines", "label": "Existing brand guidelines" },
+        { "value": "partial_assets", "label": "Partial brand assets" },
+        { "value": "visual_reference_only", "label": "Reference examples only" },
+        { "value": "no_existing_brand", "label": "No existing visual system" },
+        { "value": "preserve_current_ui", "label": "Preserve the current interface" }
+      ]
+    },
+    {
+      "questionId": "design.interaction.information_density",
+      "category": "design.interaction",
+      "order": 200,
+      "prompt": "How much information should be visible at once?",
+      "help": "Base this on the primary task and audience, not taste alone.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "sparse_guided", "label": "Sparse and guided" },
+        { "value": "balanced", "label": "Balanced" },
+        { "value": "dense_operational", "label": "Dense and operational" },
+        { "value": "progressive_disclosure", "label": "Reveal detail progressively" },
+        { "value": "varies_by_view", "label": "Different by view", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "design.interaction.motion",
+      "category": "design.interaction",
+      "order": 210,
+      "prompt": "How should motion be used?",
+      "help": "Motion must not obscure state or block reduced-motion preferences.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "none", "label": "No nonessential motion" },
+        { "value": "subtle_feedback", "label": "Subtle state feedback only" },
+        { "value": "moderate_transitions", "label": "Moderate transitions" },
+        { "value": "expressive", "label": "Expressive motion where useful" },
+        { "value": "reduced_motion_first", "label": "Reduced-motion-first experience" }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.stack_policy",
+      "category": "technology.runtime",
+      "order": 220,
+      "prompt": "How fixed is the implementation stack?",
+      "help": "A fixed stack is a constraint; a preferred stack remains open to justified alternatives.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "fixed", "label": "Fixed stack", "requiresNote": true },
+        { "value": "preferred_negotiable", "label": "Preferred but negotiable", "requiresNote": true },
+        { "value": "open_to_recommendation", "label": "Open to a recommendation" },
+        { "value": "preserve_existing", "label": "Preserve the existing stack" },
+        { "value": "static_files_only", "label": "Plain static files only" }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.mode",
+      "category": "technology.runtime",
+      "order": 230,
+      "prompt": "What runtime model may the product use?",
+      "help": "Choose what the deployed product may rely on at runtime.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "fully_static", "label": "Fully static" },
+        { "value": "browser_local", "label": "Static with browser-local state" },
+        { "value": "static_external_apis", "label": "Static front end with approved external APIs" },
+        { "value": "server_backed", "label": "Server-backed application" },
+        { "value": "hybrid", "label": "Hybrid runtime", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.browser_support",
+      "category": "technology.runtime",
+      "order": 240,
+      "prompt": "Which browser support boundary applies?",
+      "help": "Choose a testable policy rather than promising every browser.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "evergreen_current", "label": "Current evergreen browsers" },
+        { "value": "recent_two_versions", "label": "Current and previous two major versions" },
+        { "value": "mobile_priority", "label": "Modern mobile browsers are the priority" },
+        { "value": "enterprise_legacy", "label": "An enterprise or legacy browser is required", "requiresNote": true },
+        { "value": "specified_matrix", "label": "Use a supplied browser matrix", "requiresNote": true },
+        { "value": "no_special_constraint", "label": "No special constraint beyond reasonable modern support" }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.external_services",
+      "category": "technology.runtime",
+      "order": 250,
+      "prompt": "Which external services are expected?",
+      "help": "Select services required by the release. Approval, credentials, and data boundaries are resolved separately.",
+      "responseType": "multi-choice",
+      "choices": [
+        { "value": "none", "label": "No external services", "exclusive": true },
+        { "value": "cms", "label": "Content management system" },
+        { "value": "analytics", "label": "Analytics" },
+        { "value": "authentication", "label": "Authentication provider" },
+        { "value": "payments", "label": "Payment provider" },
+        { "value": "email_forms", "label": "Email or form delivery" },
+        { "value": "maps", "label": "Maps or location service" },
+        { "value": "ai_api", "label": "AI service or API" },
+        { "value": "other", "label": "Another service", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.discoverability",
+      "category": "technology.runtime",
+      "order": 260,
+      "prompt": "How should the project be discoverable?",
+      "help": "This controls whether search indexing and machine-readable publication are requirements.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "public_search_critical", "label": "Public search visibility is critical" },
+        { "value": "public_search_helpful", "label": "Public search visibility is helpful" },
+        { "value": "direct_link_only", "label": "Direct-link access is sufficient" },
+        { "value": "private_noindex", "label": "Keep it private or noindex" },
+        { "value": "app_shell", "label": "Index only the public app shell" }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.target",
+      "category": "quality.accessibility",
+      "order": 270,
+      "prompt": "What accessibility target applies?",
+      "help": "Choose the level that can be defended during review.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "semantic_baseline", "label": "Semantic and operable baseline" },
+        { "value": "wcag_aa", "label": "WCAG AA target" },
+        { "value": "legal_contractual", "label": "A legal or contractual standard", "requiresNote": true },
+        { "value": "best_effort", "label": "Best effort within a stated scope", "requiresNote": true },
+        { "value": "specific_requirements", "label": "Use supplied accessibility requirements", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.keyboard",
+      "category": "quality.accessibility",
+      "order": 280,
+      "prompt": "What level of keyboard operation is required?",
+      "help": "Keyboard access includes focus visibility, logical order, and operable controls.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "all_controls", "label": "All controls and flows" },
+        { "value": "primary_flow", "label": "The primary flow at minimum" },
+        { "value": "content_navigation", "label": "Content navigation only" },
+        { "value": "fixed_pointer_environment", "label": "A fixed pointer-only environment", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.responsive",
+      "category": "quality.accessibility",
+      "order": 290,
+      "prompt": "Which responsive priority applies?",
+      "help": "Choose the intended balance, while keeping unsupported viewports explicit.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "mobile_desktop_equal", "label": "Mobile and desktop are equally important" },
+        { "value": "mobile_priority", "label": "Mobile is the priority" },
+        { "value": "desktop_priority", "label": "Desktop is the priority" },
+        { "value": "fixed_environment", "label": "A fixed display environment", "requiresNote": true },
+        { "value": "preserve_current_behavior", "label": "Preserve the current responsive behavior" }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.performance",
+      "category": "quality.accessibility",
+      "order": 300,
+      "prompt": "What performance expectation should guide tradeoffs?",
+      "help": "Choose the strongest useful standard the project can verify.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "core_web_vitals", "label": "Meet agreed Core Web Vitals targets" },
+        { "value": "constrained_network", "label": "Remain usable on a constrained network" },
+        { "value": "balanced", "label": "Balance speed and feature depth" },
+        { "value": "feature_priority", "label": "Required capability may outweigh speed" },
+        { "value": "explicit_budget", "label": "Use a supplied performance budget", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.prohibited_practices",
+      "category": "risk.boundaries",
+      "order": 310,
+      "prompt": "Which practices are prohibited?",
+      "help": "Select hard boundaries only. Preferences belong in their relevant category.",
+      "responseType": "multi-choice",
+      "choices": [
+        { "value": "none_known", "label": "No known prohibited practices", "exclusive": true },
+        { "value": "inline_css", "label": "Inline CSS" },
+        { "value": "external_fonts", "label": "Externally loaded fonts" },
+        { "value": "behavioral_tracking", "label": "Behavioral tracking" },
+        { "value": "nonessential_cookies", "label": "Nonessential cookies" },
+        { "value": "unapproved_cdn", "label": "Unapproved external CDNs" },
+        { "value": "client_side_secrets", "label": "Secrets in client-side code" },
+        { "value": "autoplay_media", "label": "Autoplay media" },
+        { "value": "unconfirmed_destructive_actions", "label": "Destructive actions without confirmation" },
+        { "value": "vendor_lock_in", "label": "Vendor lock-in" },
+        { "value": "other", "label": "Another prohibition", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.privacy_level",
+      "category": "risk.boundaries",
+      "order": 320,
+      "prompt": "What is the highest privacy sensitivity in scope?",
+      "help": "Choose based on the most sensitive intentional data flow, not the average one.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "none", "label": "No personal data" },
+        { "value": "low_nonsensitive", "label": "Low-risk, non-sensitive personal data" },
+        { "value": "personal_data", "label": "Personal data" },
+        { "value": "sensitive_data", "label": "Sensitive personal data" },
+        { "value": "regulated_data", "label": "Regulated or specially protected data", "requiresNote": true },
+        { "value": "unknown", "label": "The sensitivity is not yet understood" }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.high_cost_failure",
+      "category": "risk.boundaries",
+      "order": 330,
+      "prompt": "Which failures would carry the highest cost?",
+      "help": "Select the failures that should change design, review, or implementation priority.",
+      "responseType": "multi-choice",
+      "choices": [
+        { "value": "no_unusual_cost", "label": "No unusual failure cost", "exclusive": true },
+        { "value": "data_loss", "label": "Data loss" },
+        { "value": "privacy_breach", "label": "Privacy or security breach" },
+        { "value": "inaccessible_primary_flow", "label": "An inaccessible primary flow" },
+        { "value": "wrong_information", "label": "Incorrect or misleading information" },
+        { "value": "downtime", "label": "Downtime or unavailability" },
+        { "value": "performance_failure", "label": "Performance degradation" },
+        { "value": "brand_damage", "label": "Brand or trust damage" },
+        { "value": "scope_overrun", "label": "Scope or cost overrun" },
+        { "value": "other", "label": "Another high-cost failure", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.compliance",
+      "category": "risk.boundaries",
+      "order": 340,
+      "prompt": "Which compliance sources apply?",
+      "help": "Select known sources. Record the exact standard or policy in the note when applicable.",
+      "responseType": "multi-choice",
+      "choices": [
+        { "value": "none_known", "label": "No known compliance requirement", "exclusive": true },
+        { "value": "privacy_law", "label": "Privacy law or regulation", "requiresNote": true },
+        { "value": "cookie_consent", "label": "Cookie or consent requirements", "requiresNote": true },
+        { "value": "accessibility_law", "label": "Accessibility law or standard", "requiresNote": true },
+        { "value": "copyright_licensing", "label": "Copyright or licensing rules", "requiresNote": true },
+        { "value": "industry_specific", "label": "Industry-specific rules", "requiresNote": true },
+        { "value": "organization_policy", "label": "Organization policy", "requiresNote": true },
+        { "value": "other", "label": "Another compliance source", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.hosting",
+      "category": "delivery.operations",
+      "order": 350,
+      "prompt": "Where is the release expected to be hosted?",
+      "help": "Choose the current target even if deployment details are still provisional.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "github_pages", "label": "GitHub Pages" },
+        { "value": "cloudflare_pages", "label": "Cloudflare Pages" },
+        { "value": "other_static_host", "label": "Another static host", "requiresNote": true },
+        { "value": "cloud_application_platform", "label": "A cloud application platform", "requiresNote": true },
+        { "value": "existing_environment", "label": "An existing managed environment", "requiresNote": true },
+        { "value": "local_only", "label": "Local use only" }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.deployment_workflow",
+      "category": "delivery.operations",
+      "order": 360,
+      "prompt": "How should releases be deployed?",
+      "help": "Choose the workflow the maintainer can actually operate.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "manual_upload", "label": "Manual upload" },
+        { "value": "git_push_automatic", "label": "Automatic deployment from a Git push" },
+        { "value": "pull_request_gate", "label": "Pull request review before deployment" },
+        { "value": "platform_cli", "label": "Platform command-line deployment" },
+        { "value": "existing_ci", "label": "Existing CI/CD workflow", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.maintenance_owner",
+      "category": "delivery.operations",
+      "order": 370,
+      "prompt": "Who will maintain the project after release?",
+      "help": "Record the role that must be able to understand and operate the result.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "original_developer", "label": "The original developer" },
+        { "value": "internal_team", "label": "An internal team" },
+        { "value": "client_or_owner", "label": "The client or project owner" },
+        { "value": "shared", "label": "Shared maintenance" },
+        { "value": "no_regular_maintenance", "label": "No regular maintenance is planned" },
+        { "value": "not_yet_assigned", "label": "Not yet assigned" }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.handoff",
+      "category": "delivery.operations",
+      "order": 380,
+      "prompt": "What handoff level is required?",
+      "help": "Choose the smallest package that lets the next maintainer work safely.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "source_only", "label": "Source files only" },
+        { "value": "source_readme", "label": "Source files and a README" },
+        { "value": "docs_and_tests", "label": "Source, documentation, and tests" },
+        { "value": "operational_runbook", "label": "Documentation plus an operational runbook" },
+        { "value": "full_transfer", "label": "Full ownership and access transfer" },
+        { "value": "ongoing_support", "label": "Ongoing support arrangement" }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.approver",
+      "category": "acceptance.validation",
+      "order": 390,
+      "prompt": "Who has authority to accept the release?",
+      "help": "Choose the approving role, not merely the person performing the review.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "decision_owner", "label": "Decision owner" },
+        { "value": "requester", "label": "Requester or client" },
+        { "value": "end_user_representative", "label": "End-user representative" },
+        { "value": "technical_reviewer", "label": "Technical reviewer" },
+        { "value": "compliance_reviewer", "label": "Compliance reviewer" },
+        { "value": "multiple_approvers", "label": "Multiple approvers", "requiresNote": true },
+        { "value": "not_yet_assigned", "label": "Not yet assigned" }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.review_method",
+      "category": "acceptance.validation",
+      "order": 400,
+      "prompt": "What evidence should be used for acceptance?",
+      "help": "Select the primary review method. Supporting evidence can be added in context.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "visual_review", "label": "Visual review" },
+        { "value": "requirements_checklist", "label": "Requirements checklist" },
+        { "value": "scenario_demonstration", "label": "Scenario demonstration" },
+        { "value": "automated_tests", "label": "Automated test results" },
+        { "value": "accessibility_audit", "label": "Accessibility audit" },
+        { "value": "performance_audit", "label": "Performance audit" },
+        { "value": "combined", "label": "A defined combination", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.must_pass_scenarios",
+      "category": "acceptance.validation",
+      "order": 410,
+      "prompt": "Which scenarios must pass before release?",
+      "help": "Select the scenarios that block acceptance when they fail.",
+      "responseType": "multi-choice",
+      "choices": [
+        { "value": "primary_content", "label": "Primary content is understandable" },
+        { "value": "primary_action", "label": "Primary user action completes" },
+        { "value": "form_submission", "label": "Form submission succeeds" },
+        { "value": "local_persistence", "label": "Local save and reload work" },
+        { "value": "authentication", "label": "Authentication flow works" },
+        { "value": "payment", "label": "Payment flow works" },
+        { "value": "keyboard", "label": "Required keyboard flow works" },
+        { "value": "mobile", "label": "Required mobile flow works" },
+        { "value": "import_export", "label": "Import and export preserve data" },
+        { "value": "failure_recovery", "label": "Failure and recovery behavior works" },
+        { "value": "other", "label": "Another must-pass scenario", "requiresNote": true }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.unresolved_policy",
+      "category": "acceptance.validation",
+      "order": 420,
+      "prompt": "How should unresolved premises affect the work?",
+      "help": "Choose the default policy. Individual unknowns may still use a different explicit status.",
+      "responseType": "single-choice",
+      "choices": [
+        { "value": "block_dependent_work", "label": "Block dependent work" },
+        { "value": "provisional_with_label", "label": "Proceed with a clearly labeled provisional choice" },
+        { "value": "proposal_before_work", "label": "Request a proposal before dependent work" },
+        { "value": "delegate_with_bounds", "label": "Delegate within explicit bounds" },
+        { "value": "document_and_continue", "label": "Document the unknown and continue where independent" },
+        { "value": "case_by_case", "label": "Decide case by case" }
+      ]
+    }
+  ]
+}

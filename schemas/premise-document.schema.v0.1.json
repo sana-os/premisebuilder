@@ -1,0 +1,590 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:premise-builder:schema:document:0.1.0",
+  "title": "Premise Builder Document 0.1.0",
+  "description": "Schema for Premise Builder Base and Unified Context documents.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaRef",
+    "format",
+    "formatVersion",
+    "protocolVersion",
+    "documentType",
+    "meta",
+    "handling",
+    "participants",
+    "items",
+    "conflicts"
+  ],
+  "properties": {
+    "schemaRef": {
+      "const": "urn:premise-builder:schema:document:0.1.0"
+    },
+    "format": {
+      "const": "premise-builder"
+    },
+    "formatVersion": {
+      "const": "0.1.0"
+    },
+    "protocolVersion": {
+      "const": "0.1.0"
+    },
+    "documentType": {
+      "enum": ["base", "unified"]
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "handling": {
+      "$ref": "#/$defs/handling"
+    },
+    "participants": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/participantRef"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/participant"
+      }
+    },
+    "items": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/stableId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/premiseItem"
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/conflict"
+      }
+    },
+    "derivedFrom": {
+      "$ref": "#/$defs/derivedFrom"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "documentType": {
+            "const": "unified"
+          }
+        },
+        "required": ["documentType"]
+      },
+      "then": {
+        "required": ["derivedFrom"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "documentType": {
+            "const": "base"
+          }
+        },
+        "required": ["documentType"]
+      },
+      "then": {
+        "not": {
+          "required": ["derivedFrom"]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)+$",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "localeTag": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+      "maxLength": 35
+    },
+    "participantRef": {
+      "type": "string",
+      "pattern": "^participant_[A-Za-z0-9_-]{3,120}$"
+    },
+    "contributionId": {
+      "type": "string",
+      "pattern": "^pbc_[A-Za-z0-9_-]{6,120}$"
+    },
+    "roleId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,79}$"
+    },
+    "template": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "family", "version"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{1,79}$"
+        },
+        "family": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,63}$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "maxLength": 40
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentId",
+        "projectName",
+        "template",
+        "contentLanguage",
+        "revision",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "pattern": "^pb_[A-Za-z0-9_-]{6,120}$"
+        },
+        "projectName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "template": {
+          "$ref": "#/$defs/template"
+        },
+        "contentLanguage": {
+          "$ref": "#/$defs/localeTag"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "promotedFromPatchIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^pbp_[A-Za-z0-9_-]{6,120}$"
+          }
+        }
+      }
+    },
+    "handling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["privacy", "storage", "networkPolicy", "aiInterpretation"],
+      "properties": {
+        "privacy": {
+          "const": "private-by-default"
+        },
+        "storage": {
+          "const": "browser-local-only"
+        },
+        "networkPolicy": {
+          "const": "no-project-data-transmission"
+        },
+        "aiInterpretation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "governingInstructionPolicy",
+            "unknownPolicy",
+            "conflictPolicy",
+            "proposalPolicy"
+          ],
+          "properties": {
+            "governingInstructionPolicy": {
+              "const": "never-override-host-instructions"
+            },
+            "unknownPolicy": {
+              "const": "do-not-assume"
+            },
+            "conflictPolicy": {
+              "const": "report-before-dependent-work"
+            },
+            "proposalPolicy": {
+              "const": "requires-human-approval"
+            }
+          }
+        }
+      }
+    },
+    "participant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "label", "labelLanguage", "roles"],
+      "properties": {
+        "kind": {
+          "enum": ["individual", "group", "role", "unknown"]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "labelLanguage": {
+          "$ref": "#/$defs/localeTag"
+        },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "maxItems": 40,
+          "items": {
+            "$ref": "#/$defs/roleId"
+          }
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 4000
+        }
+      }
+    },
+    "contribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "perspectiveRef",
+        "recordedByRef",
+        "speakingAs",
+        "captureMethod",
+        "authority",
+        "confirmation",
+        "value",
+        "recordedAt"
+      ],
+      "properties": {
+        "perspectiveRef": {
+          "$ref": "#/$defs/participantRef"
+        },
+        "recordedByRef": {
+          "$ref": "#/$defs/participantRef"
+        },
+        "speakingAs": {
+          "$ref": "#/$defs/roleId"
+        },
+        "captureMethod": {
+          "enum": [
+            "direct_input",
+            "interview",
+            "observation",
+            "inference",
+            "document_import",
+            "data_import",
+            "other"
+          ]
+        },
+        "authority": {
+          "enum": [
+            "decision_owner",
+            "domain_authority",
+            "implementation_authority",
+            "consulted",
+            "informant",
+            "recorder_only",
+            "unknown"
+          ]
+        },
+        "confirmation": {
+          "enum": [
+            "directly_reported",
+            "source_confirmed",
+            "unconfirmed",
+            "disputed",
+            "imported_unverified"
+          ]
+        },
+        "value": true,
+        "note": {
+          "type": "string",
+          "maxLength": 8000
+        },
+        "recordedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "value",
+        "decidedByRefs",
+        "decisionMethod",
+        "decidedAt"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "confirmed",
+            "provisional",
+            "unspecified",
+            "proposal_requested",
+            "delegated",
+            "not_applicable",
+            "conflict"
+          ]
+        },
+        "value": true,
+        "decidedByRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 40,
+          "items": {
+            "$ref": "#/$defs/participantRef"
+          }
+        },
+        "decisionMethod": {
+          "enum": [
+            "explicit_confirmation",
+            "working_selection",
+            "delegated_choice",
+            "rule_derived",
+            "unresolved",
+            "imported_resolution"
+          ]
+        },
+        "decidedAt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 4000
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": ["confirmed", "delegated", "not_applicable"]
+              }
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "decidedByRefs": {
+                "minItems": 1
+              },
+              "decidedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "premiseItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "labelLanguage",
+        "category",
+        "axis",
+        "kind",
+        "scope",
+        "enforcement",
+        "priority",
+        "contributions",
+        "resolution",
+        "dependencies",
+        "updatedAt"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "labelLanguage": {
+          "$ref": "#/$defs/localeTag"
+        },
+        "category": {
+          "$ref": "#/$defs/stableId"
+        },
+        "axis": {
+          "enum": ["fact", "view", "care", "unknown"]
+        },
+        "kind": {
+          "enum": ["observation", "requirement", "decision", "preference", "constraint", "risk"]
+        },
+        "scope": {
+          "enum": ["project", "user", "branch", "environment", "session"]
+        },
+        "enforcement": {
+          "enum": ["hard", "soft", "advisory"]
+        },
+        "priority": {
+          "enum": ["must", "should", "could"]
+        },
+        "contributions": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/contributionId"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/contribution"
+          }
+        },
+        "resolution": {
+          "$ref": "#/$defs/resolution"
+        },
+        "rationale": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 8000
+        },
+        "acceptanceCriteria": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/stableId"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 100,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conflictId", "type", "itemIds", "message", "status", "detectedAt"],
+      "properties": {
+        "conflictId": {
+          "type": "string",
+          "pattern": "^pbc_[A-Za-z0-9_-]{6,120}$"
+        },
+        "type": {
+          "enum": [
+            "base-mismatch",
+            "missing-target",
+            "existing-target",
+            "previous-value-mismatch",
+            "exclusive-choice",
+            "missing-dependency",
+            "missing-participant",
+            "speaking-role-mismatch",
+            "unresolved-perspective-divergence",
+            "resolution-authority-missing",
+            "unsupported-version"
+          ]
+        },
+        "itemIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableId"
+          }
+        },
+        "participantIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/participantRef"
+          }
+        },
+        "message": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "status": {
+          "enum": ["open", "resolved"]
+        },
+        "detectedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "resolvedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "resolution": {
+          "type": "string",
+          "maxLength": 4000
+        }
+      }
+    },
+    "derivedFrom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseDocumentId", "baseRevision", "patchIds", "generatedAt"],
+      "properties": {
+        "baseDocumentId": {
+          "type": "string",
+          "pattern": "^pb_[A-Za-z0-9_-]{6,120}$"
+        },
+        "baseRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "patchIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^pbp_[A-Za-z0-9_-]{6,120}$"
+          }
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

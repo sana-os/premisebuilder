@@ -1,0 +1,485 @@
+{
+  "templateId": "web-small-app",
+  "version": "0.1.0",
+  "mappingDefaults": {
+    "recordAs": "contribution",
+    "allowMultipleContributions": true,
+    "autoResolve": false,
+    "suggestResolutionWhenAuthorized": true,
+    "defaultResolutionStatus": "provisional",
+    "emptyResponseStatus": "unspecified",
+    "axisWhenUnresolved": "unknown"
+  },
+  "categoryProvenance": {
+    "project.intent": {
+      "preferredPerspectiveRoles": ["requester", "decision_owner", "developer"],
+      "acceptedResolutionAuthorities": ["decision_owner"]
+    },
+    "audience.context": {
+      "preferredPerspectiveRoles": ["end_user", "requester", "decision_owner", "developer"],
+      "acceptedResolutionAuthorities": ["decision_owner", "domain_authority"]
+    },
+    "scope.deliverables": {
+      "preferredPerspectiveRoles": ["requester", "decision_owner", "developer"],
+      "acceptedResolutionAuthorities": ["decision_owner"]
+    },
+    "content.data": {
+      "preferredPerspectiveRoles": ["requester", "decision_owner", "end_user", "developer"],
+      "acceptedResolutionAuthorities": ["decision_owner", "domain_authority"]
+    },
+    "design.interaction": {
+      "preferredPerspectiveRoles": ["end_user", "requester", "designer", "decision_owner"],
+      "acceptedResolutionAuthorities": ["decision_owner", "domain_authority"]
+    },
+    "technology.runtime": {
+      "preferredPerspectiveRoles": ["developer", "maintainer", "decision_owner"],
+      "acceptedResolutionAuthorities": ["decision_owner", "implementation_authority"]
+    },
+    "quality.accessibility": {
+      "preferredPerspectiveRoles": ["end_user", "developer", "designer", "security_compliance"],
+      "acceptedResolutionAuthorities": ["decision_owner", "domain_authority", "implementation_authority"]
+    },
+    "risk.boundaries": {
+      "preferredPerspectiveRoles": ["decision_owner", "security_compliance", "developer", "maintainer"],
+      "acceptedResolutionAuthorities": ["decision_owner", "domain_authority"]
+    },
+    "delivery.operations": {
+      "preferredPerspectiveRoles": ["maintainer", "developer", "decision_owner", "requester"],
+      "acceptedResolutionAuthorities": ["decision_owner", "implementation_authority"]
+    },
+    "acceptance.validation": {
+      "preferredPerspectiveRoles": ["decision_owner", "requester", "end_user", "security_compliance"],
+      "acceptedResolutionAuthorities": ["decision_owner", "domain_authority"]
+    }
+  },
+  "mappings": [
+    {
+      "questionId": "project.intent.project_kind",
+      "itemId": "project.project_kind",
+      "axisWhenResolved": "fact",
+      "kind": "decision",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "project.intent.primary_outcome",
+      "itemId": "project.primary_outcome",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "itemId": "project.current_phase",
+      "axisWhenResolved": "fact",
+      "kind": "observation",
+      "enforcement": "advisory",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "project.intent.success_evidence",
+      "itemId": "project.success_evidence",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "text"
+    },
+    {
+      "questionId": "audience.context.primary_group",
+      "itemId": "audience.primary_group",
+      "axisWhenResolved": "fact",
+      "kind": "observation",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "audience.context.relationship",
+      "itemId": "audience.relationship",
+      "axisWhenResolved": "fact",
+      "kind": "observation",
+      "enforcement": "advisory",
+      "priority": "should",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "audience.context.domain_familiarity",
+      "itemId": "audience.domain_familiarity",
+      "axisWhenResolved": "fact",
+      "kind": "observation",
+      "enforcement": "advisory",
+      "priority": "should",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "audience.context.primary_context",
+      "itemId": "audience.primary_context",
+      "axisWhenResolved": "fact",
+      "kind": "observation",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "scope.deliverables.required_surfaces",
+      "itemId": "scope.required_surfaces",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "scope.deliverables.primary_user_action",
+      "itemId": "scope.primary_user_action",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "scope.deliverables.release_boundary",
+      "itemId": "scope.release_boundary",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "not_yet_bounded": { "resolutionStatus": "unspecified" }
+      }
+    },
+    {
+      "questionId": "scope.deliverables.explicit_exclusions",
+      "itemId": "scope.explicit_exclusions",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "text"
+    },
+    {
+      "questionId": "content.data.source_owner",
+      "itemId": "content.source_owner",
+      "axisWhenResolved": "fact",
+      "kind": "decision",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "not_yet_assigned": { "resolutionStatus": "unspecified" }
+      }
+    },
+    {
+      "questionId": "content.data.readiness",
+      "itemId": "content.readiness",
+      "axisWhenResolved": "fact",
+      "kind": "observation",
+      "enforcement": "advisory",
+      "priority": "should",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "content.data.user_input_types",
+      "itemId": "data.user_input_types",
+      "axisWhenResolved": "fact",
+      "kind": "observation",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "content.data.storage",
+      "itemId": "technology.data_storage",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar",
+      "provenanceOverride": {
+        "preferredPerspectiveRoles": ["decision_owner", "security_compliance", "developer"],
+        "acceptedResolutionAuthorities": ["decision_owner", "domain_authority", "implementation_authority"]
+      }
+    },
+    {
+      "questionId": "content.data.retention",
+      "itemId": "data.retention",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar",
+      "provenanceOverride": {
+        "preferredPerspectiveRoles": ["decision_owner", "security_compliance", "maintainer"],
+        "acceptedResolutionAuthorities": ["decision_owner", "domain_authority"]
+      }
+    },
+    {
+      "questionId": "design.interaction.tone",
+      "itemId": "design.tone",
+      "axisWhenResolved": "view",
+      "kind": "preference",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "design.interaction.brand_source",
+      "itemId": "design.brand_source",
+      "axisWhenResolved": "fact",
+      "kind": "constraint",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "fixed_design_system": { "enforcement": "hard" },
+        "preserve_current_ui": { "enforcement": "hard" }
+      }
+    },
+    {
+      "questionId": "design.interaction.information_density",
+      "itemId": "design.information_density",
+      "axisWhenResolved": "view",
+      "kind": "preference",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "design.interaction.motion",
+      "itemId": "interaction.motion",
+      "axisWhenResolved": "view",
+      "kind": "preference",
+      "enforcement": "soft",
+      "priority": "could",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "technology.runtime.stack_policy",
+      "itemId": "technology.stack_policy",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "fixed": { "enforcement": "hard" },
+        "open_to_recommendation": { "enforcement": "advisory" },
+        "preserve_existing": { "enforcement": "hard" },
+        "static_files_only": { "enforcement": "hard" }
+      }
+    },
+    {
+      "questionId": "technology.runtime.mode",
+      "itemId": "technology.runtime_mode",
+      "axisWhenResolved": "fact",
+      "kind": "decision",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "technology.runtime.browser_support",
+      "itemId": "technology.browser_support",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "enterprise_legacy": { "enforcement": "hard" },
+        "specified_matrix": { "enforcement": "hard" }
+      }
+    },
+    {
+      "questionId": "technology.runtime.external_services",
+      "itemId": "technology.external_services",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "technology.runtime.discoverability",
+      "itemId": "technology.discoverability",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "private_noindex": { "enforcement": "hard" }
+      }
+    },
+    {
+      "questionId": "quality.accessibility.target",
+      "itemId": "quality.accessibility_target",
+      "axisWhenResolved": "care",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "legal_contractual": { "enforcement": "hard" },
+        "specific_requirements": { "enforcement": "hard" }
+      }
+    },
+    {
+      "questionId": "quality.accessibility.keyboard",
+      "itemId": "quality.keyboard_support",
+      "axisWhenResolved": "care",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "quality.accessibility.responsive",
+      "itemId": "quality.responsive_behavior",
+      "axisWhenResolved": "care",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "fixed_environment": { "enforcement": "hard" }
+      }
+    },
+    {
+      "questionId": "quality.accessibility.performance",
+      "itemId": "quality.performance_expectation",
+      "axisWhenResolved": "care",
+      "kind": "risk",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "explicit_budget": { "enforcement": "hard" }
+      }
+    },
+    {
+      "questionId": "risk.boundaries.prohibited_practices",
+      "itemId": "risk.prohibited_practices",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "risk.boundaries.privacy_level",
+      "itemId": "risk.privacy_level",
+      "axisWhenResolved": "care",
+      "kind": "risk",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": { "resolutionStatus": "unspecified" }
+      }
+    },
+    {
+      "questionId": "risk.boundaries.high_cost_failure",
+      "itemId": "risk.high_cost_failure",
+      "axisWhenResolved": "care",
+      "kind": "risk",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "risk.boundaries.compliance",
+      "itemId": "risk.compliance_sources",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "delivery.operations.hosting",
+      "itemId": "delivery.hosting_target",
+      "axisWhenResolved": "fact",
+      "kind": "decision",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "delivery.operations.deployment_workflow",
+      "itemId": "delivery.deployment_workflow",
+      "axisWhenResolved": "fact",
+      "kind": "decision",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "delivery.operations.maintenance_owner",
+      "itemId": "delivery.maintenance_owner",
+      "axisWhenResolved": "fact",
+      "kind": "decision",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "not_yet_assigned": { "resolutionStatus": "unspecified" }
+      }
+    },
+    {
+      "questionId": "delivery.operations.handoff",
+      "itemId": "delivery.handoff_level",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "should",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "acceptance.validation.approver",
+      "itemId": "acceptance.approver",
+      "axisWhenResolved": "fact",
+      "kind": "decision",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "not_yet_assigned": { "resolutionStatus": "unspecified" }
+      }
+    },
+    {
+      "questionId": "acceptance.validation.review_method",
+      "itemId": "acceptance.review_method",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "acceptance.validation.must_pass_scenarios",
+      "itemId": "acceptance.must_pass_scenarios",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "array"
+    },
+    {
+      "questionId": "acceptance.validation.unresolved_policy",
+      "itemId": "acceptance.unresolved_policy",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar"
+    }
+  ]
+}

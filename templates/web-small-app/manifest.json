@@ -1,0 +1,85 @@
+{
+  "id": "web-small-app",
+  "family": "software",
+  "version": "0.1.0",
+  "protocolVersion": "0.1.0",
+  "defaultLocale": "en",
+  "locales": [
+    "en"
+  ],
+  "questionSet": "questions/{locale}.json",
+  "rules": "rules.json",
+  "mappings": "mappings.json",
+  "responseTypes": [
+    "single-choice",
+    "multi-choice",
+    "short-text",
+    "long-text"
+  ],
+  "projectPhases": [
+    "new_build",
+    "redesign",
+    "extension",
+    "repair"
+  ],
+  "categoryOrder": [
+    "project.intent",
+    "audience.context",
+    "scope.deliverables",
+    "content.data",
+    "design.interaction",
+    "technology.runtime",
+    "quality.accessibility",
+    "risk.boundaries",
+    "delivery.operations",
+    "acceptance.validation"
+  ],
+  "categoryCount": 10,
+  "questionCount": 42,
+  "participantRolePresets": [
+    "developer",
+    "end_user",
+    "requester",
+    "decision_owner",
+    "designer",
+    "maintainer",
+    "security_compliance",
+    "mixed",
+    "unknown"
+  ],
+  "provenance": {
+    "contributionMode": "per-answer",
+    "persistentAnswerContext": true,
+    "allowPerAnswerContextOverride": true,
+    "requiredContributionFields": [
+      "perspectiveRef",
+      "recordedByRef",
+      "speakingAs",
+      "captureMethod",
+      "authority",
+      "confirmation",
+      "value",
+      "recordedAt"
+    ],
+    "inferenceConfirmation": "unconfirmed",
+    "resolutionMode": "separate",
+    "autoResolveFromContribution": false,
+    "suggestResolutionFromAuthorizedContribution": true,
+    "requireExplicitResolutionAction": true,
+    "defaultAcceptedResolutionAuthorities": [
+      "decision_owner"
+    ]
+  },
+  "resolution": {
+    "defaultStatus": "provisional",
+    "userSelectableStatuses": [
+      "confirmed",
+      "provisional",
+      "unspecified",
+      "proposal_requested",
+      "delegated",
+      "not_applicable"
+    ],
+    "derivedStatus": "conflict"
+  }
+}

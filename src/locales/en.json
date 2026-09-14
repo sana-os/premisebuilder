@@ -1,0 +1,31 @@
+{
+  "locale": "en",
+  "direction": "ltr",
+  "name": "English",
+  "strings": {
+    "brand.name": "Premise Builder",
+    "brand.meta": "web-small-app · English",
+    "privacy.localOnly": "Local-only",
+    "home.eyebrow": "Premise alignment",
+    "home.title": "Align the work before you build.",
+    "home.description": "Turn requirements, interpretations, boundaries, and unresolved decisions into a role-aware project context.",
+    "home.privacyTitle": "Your project data stays in this browser.",
+    "home.privacyDetail": "There is no account, cloud sync, analytics, or project-data API.",
+    "home.newProject": "New project",
+    "home.import": "Import JSON",
+    "home.recent": "Recent projects",
+    "workspace.questions": "Questions",
+    "workspace.review": "Review",
+    "workspace.overrides": "Overrides",
+    "workspace.export": "Export",
+    "question.previous": "Previous",
+    "question.next": "Next question",
+    "question.review": "Review premise",
+    "question.unresolved": "Leave unresolved",
+    "review.confirmBase": "Confirm Base revision",
+    "export.base": "Download Base",
+    "export.patch": "Download Override",
+    "export.unified": "Download Unified",
+    "export.markdown": "Download AI Context"
+  }
+}

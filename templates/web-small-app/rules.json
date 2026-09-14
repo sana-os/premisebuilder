@@ -1,0 +1,188 @@
+{
+  "templateId": "web-small-app",
+  "version": "0.1.0",
+  "rules": [
+    {
+      "ruleId": "provenance.attribution_required",
+      "type": "contribution-validation",
+      "scope": "all-questions",
+      "severity": "error",
+      "requireFields": [
+        "perspectiveRef",
+        "recordedByRef",
+        "speakingAs",
+        "captureMethod",
+        "authority",
+        "confirmation",
+        "value",
+        "recordedAt"
+      ],
+      "messageKey": "validation.provenanceRequired"
+    },
+    {
+      "ruleId": "provenance.speaking_role_membership",
+      "type": "contribution-validation",
+      "scope": "all-questions",
+      "severity": "error",
+      "assert": {
+        "speakingAsBelongsToPerspectiveRoles": true
+      },
+      "messageKey": "validation.speakingRoleMismatch"
+    },
+    {
+      "ruleId": "provenance.inference_stays_unconfirmed",
+      "type": "contribution-validation",
+      "scope": "all-questions",
+      "severity": "error",
+      "when": {
+        "field": "captureMethod",
+        "operator": "equals",
+        "value": "inference"
+      },
+      "assert": {
+        "field": "confirmation",
+        "operator": "equals",
+        "value": "unconfirmed"
+      },
+      "messageKey": "validation.inferenceUnconfirmed"
+    },
+    {
+      "ruleId": "resolution.accepted_authority_required",
+      "type": "resolution-validation",
+      "scope": "all-questions",
+      "severity": "error",
+      "when": {
+        "field": "resolution.status",
+        "operator": "in",
+        "values": ["confirmed", "delegated", "not_applicable"]
+      },
+      "assert": {
+        "deciderAuthorityInResolvedMapping": true,
+        "decidedByRefsMinimum": 1,
+        "decidedAtRequired": true
+      },
+      "messageKey": "validation.resolutionAuthorityRequired"
+    },
+    {
+      "ruleId": "resolution.no_silent_promotion",
+      "type": "resolution-transition",
+      "scope": "all-questions",
+      "severity": "error",
+      "assert": {
+        "explicitUserActionRequired": true,
+        "contributionNeverEqualsResolutionByImplication": true
+      }
+    },
+    {
+      "ruleId": "answer.exclusive_choice",
+      "type": "answer-validation",
+      "scope": "multi-choice",
+      "severity": "error",
+      "when": {
+        "selectedChoiceProperty": "exclusive",
+        "operator": "equals",
+        "value": true
+      },
+      "assert": {
+        "maximumSelectedChoices": 1
+      },
+      "messageKey": "validation.exclusiveChoice"
+    },
+    {
+      "ruleId": "answer.required_note",
+      "type": "answer-validation",
+      "scope": "choice-answers",
+      "severity": "error",
+      "when": {
+        "selectedChoiceProperty": "requiresNote",
+        "operator": "equals",
+        "value": true
+      },
+      "assert": {
+        "noteMinimumTrimmedLength": 1
+      },
+      "messageKey": "validation.noteRequired"
+    },
+    {
+      "ruleId": "answer.selection_limit",
+      "type": "answer-validation",
+      "scope": "multi-choice",
+      "severity": "error",
+      "when": {
+        "questionProperty": "maxSelections",
+        "operator": "exists"
+      },
+      "assert": {
+        "selectedCountAtMostQuestionMaxSelections": true
+      },
+      "messageKey": "validation.selectionLimit"
+    },
+    {
+      "ruleId": "visibility.data_retention",
+      "type": "visibility",
+      "targetQuestionIds": ["content.data.retention"],
+      "defaultVisible": false,
+      "showWhen": {
+        "questionId": "content.data.user_input_types",
+        "operator": "contains_any",
+        "values": [
+          "contact_details",
+          "account_profile",
+          "free_text",
+          "files",
+          "payment_related",
+          "analytics_telemetry",
+          "location_device",
+          "other"
+        ]
+      }
+    },
+    {
+      "ruleId": "review.authentication_runtime",
+      "type": "review-warning",
+      "severity": "warning",
+      "when": {
+        "all": [
+          {
+            "questionId": "scope.deliverables.required_surfaces",
+            "operator": "contains",
+            "value": "authentication"
+          },
+          {
+            "questionId": "technology.runtime.mode",
+            "operator": "in",
+            "values": ["fully_static", "browser_local"]
+          },
+          {
+            "questionId": "technology.runtime.external_services",
+            "operator": "not_contains",
+            "value": "authentication"
+          }
+        ]
+      },
+      "messageKey": "review.authRuntime"
+    },
+    {
+      "ruleId": "review.payment_handling",
+      "type": "review-warning",
+      "severity": "warning",
+      "when": {
+        "questionId": "content.data.user_input_types",
+        "operator": "contains",
+        "value": "payment_related"
+      },
+      "messageKey": "review.paymentHandling"
+    },
+    {
+      "ruleId": "review.analytics_privacy",
+      "type": "review-warning",
+      "severity": "warning",
+      "when": {
+        "questionId": "content.data.user_input_types",
+        "operator": "contains",
+        "value": "analytics_telemetry"
+      },
+      "messageKey": "review.analyticsPrivacy"
+    }
+  ]
+}
