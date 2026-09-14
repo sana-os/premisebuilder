@@ -770,6 +770,16 @@ function renderResolutionControls(response) {
   updateResolutionHint(deciders);
 }
 
+function restoreResolutionDraft(response, status, sourceId, deciderId) {
+  renderResolutionControls(response);
+  elements.resolutionSelect.value = status;
+  elements.resolutionSourceSelect.value = sourceId || "";
+  elements.resolutionDeciderSelect.value = deciderId || "";
+  elements.resolutionSourceSelect.disabled = !["confirmed", "provisional"].includes(status);
+  elements.resolutionDeciderSelect.disabled = !RESOLVED_STATUSES.has(status);
+  updateResolutionHint(eligibleDeciders(currentQuestion().questionId, state, bundle));
+}
+
 function applyResolutionFromControls() {
   const requestedStatus = elements.resolutionSelect.value;
   const requestedSourceId = elements.resolutionSourceSelect.value || null;
@@ -785,13 +795,13 @@ function applyResolutionFromControls() {
     if (active && hasValue(active.value)) sourceId = response.activeContributionId;
     else {
       showValidation("Choose a contribution before using an answer as the project premise.");
-      renderResolutionControls(response);
+      restoreResolutionDraft(response, requestedStatus, requestedSourceId, requestedDeciderId);
       return;
     }
   }
   if (AUTHORIZED_STATUSES.has(requestedStatus) && !deciderId) {
     showValidation("Choose an authorized participant to confirm this resolution.");
-    renderResolutionControls(response);
+    restoreResolutionDraft(response, requestedStatus, sourceId, requestedDeciderId);
     return;
   }
   const usesSource = ["confirmed", "provisional"].includes(requestedStatus);
