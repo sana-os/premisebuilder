@@ -32,6 +32,7 @@ const bootData = globalThis.__PREMISE_BUILDER_DATA__;
 const store = new BrowserStore();
 const elements = Object.fromEntries([
   "loadingView", "errorView", "homeView", "setupView", "workspaceView", "brandHomeButton", "topImportButton",
+  "languageJapanese", "languageEnglish",
   "templateList", "importButton", "importFileInput", "projectList", "projectEmptyState", "storageState",
   "cancelSetupButton", "cancelSetupInlineButton", "setupTemplateName", "projectForm", "projectName", "projectPhase", "contentLanguage",
   "recorderLabel", "recorderRole", "recorderDecisionOwner", "differentPerspective", "perspectiveFields",
@@ -57,7 +58,12 @@ const elements = Object.fromEntries([
 ].map((id) => [id, document.getElementById(id)]));
 
 let bundle;
+let uiLocale = "ja";
+let chromeLocale = {};
 let chromeStrings = {};
+let chromeText = {};
+let chromeLabels = {};
+let chromeMessages = {};
 let questions = [];
 let categoryById = new Map();
 let mappingByQuestion = new Map();
@@ -74,20 +80,36 @@ let registeredTools = false;
 bootstrap();
 
 function bootstrap() {
-  wireEvents();
   try {
     if (!bootData?.templates?.[TEMPLATE_ID]) throw new Error("Bundled template data is missing");
-    configureBundle(TEMPLATE_ID);
-    const chromeLocale = bootData.locales?.en || { locale: "en", direction: "ltr" };
+    const firstPathSegment = globalThis.location.pathname.split("/").filter(Boolean)[0];
+    uiLocale = bootData.locales?.[firstPathSegment]
+      ? firstPathSegment
+      : bootData.templates[TEMPLATE_ID].manifest.defaultLocale;
+    chromeLocale = bootData.locales?.[uiLocale] || bootData.locales?.en || { locale: "en", direction: "ltr" };
     chromeStrings = chromeLocale.strings || {};
+    chromeText = chromeLocale.text || {};
+    chromeLabels = chromeLocale.labels || {};
+    chromeMessages = chromeLocale.messages || {};
     document.documentElement.lang = chromeLocale.locale;
     document.documentElement.dir = chromeLocale.direction;
+    document.title = uiLocale === "ja"
+      ? "Premise Builder — Webプロジェクトの要件整理"
+      : "Premise Builder — Requirements Alignment for Web Projects";
+    document.querySelector('meta[name="description"]').content = uiLocale === "ja"
+      ? "作業開始前に、要件、役割、制約、未決定事項の認識を揃えます。"
+      : "Align requirements, roles, constraints, and unknowns before work begins.";
     for (const node of document.querySelectorAll("[data-i18n]")) {
       if (chromeStrings[node.dataset.i18n]) node.textContent = chromeStrings[node.dataset.i18n];
     }
-    const routeMatch = globalThis.location.pathname.match(/^\/[a-z0-9-]+\/new\/([A-Za-z0-9_.-]+)\/?$/);
+    translateStaticTree(document.body);
+    elements.languageJapanese.setAttribute("aria-current", uiLocale === "ja" ? "page" : "false");
+    elements.languageEnglish.setAttribute("aria-current", uiLocale === "en" ? "page" : "false");
+    configureBundle(TEMPLATE_ID, uiLocale);
+    wireEvents();
+    const routeMatch = globalThis.location.pathname.match(/^\/(?:[a-z0-9-]+\/)?new\/([A-Za-z0-9_.-]+)\/?$/);
     if (routeMatch && bootData.templates[routeMatch[1]]) {
-      configureBundle(routeMatch[1]);
+      configureBundle(routeMatch[1], uiLocale);
       showSetup();
     } else showHome();
     registerWebMcpTools();
@@ -111,15 +133,57 @@ function assertTemplateCompatibility() {
   ) throw new Error("The bundled template files do not share one compatible version");
 }
 
-function configureBundle(templateId) {
+function configureBundle(templateId, locale = uiLocale) {
   const selected = bootData.templates[templateId];
   if (!selected) throw new Error(`Unsupported template: ${templateId}`);
-  bundle = selected;
+  bundle = { ...selected, locale: selected.locales?.[locale] || selected.locale };
   assertTemplateCompatibility();
   questions = orderedQuestions(bundle);
   categoryById = new Map(bundle.locale.categories.map((category) => [category.id, category]));
   mappingByQuestion = new Map(bundle.mappings.mappings.map((mapping) => [mapping.questionId, mapping]));
   questionByItem = new Map(bundle.mappings.mappings.map((mapping) => [mapping.itemId, mapping.questionId]));
+}
+
+function t(key, values = {}, fallback = key) {
+  let text = chromeMessages[key] || fallback;
+  for (const [name, value] of Object.entries(values)) text = text.replaceAll(`{${name}}`, String(value));
+  return text;
+}
+
+function labelFor(group, value, fallback = humanize(value)) {
+  return chromeLabels[group]?.[value] || fallback;
+}
+
+function translateText(value) {
+  return chromeText[value] || value;
+}
+
+function translateIssue(entry) {
+  return t(`validation.${entry.code}`, {}, translateText(entry.message));
+}
+
+function translateStaticTree(root) {
+  if (!root || !Object.keys(chromeText).length) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      return ["SCRIPT", "STYLE", "PRE", "CODE"].includes(node.parentElement?.tagName)
+        ? NodeFilter.FILTER_REJECT
+        : NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    const source = node.nodeValue.trim();
+    if (!source || !chromeText[source]) continue;
+    const start = node.nodeValue.match(/^\s*/)?.[0] || "";
+    const end = node.nodeValue.match(/\s*$/)?.[0] || "";
+    node.nodeValue = `${start}${chromeText[source]}${end}`;
+  }
+  for (const element of root.querySelectorAll("[aria-label], [placeholder], [title]")) {
+    for (const attribute of ["aria-label", "placeholder", "title"]) {
+      const source = element.getAttribute(attribute);
+      if (source && chromeText[source]) element.setAttribute(attribute, chromeText[source]);
+    }
+  }
 }
 
 function wireEvents() {
@@ -224,8 +288,13 @@ function wireEvents() {
 }
 
 function replacePresetLabel(input, role) {
-  const knownLabels = new Set(Object.values(ROLE_LABELS));
-  if (!input.value.trim() || knownLabels.has(input.value.trim())) input.value = ROLE_LABELS[role] || humanize(role);
+  const knownLabels = new Set([
+    ...Object.values(ROLE_LABELS),
+    ...Object.keys(ROLE_LABELS).map((value) => labelFor("role", value, ROLE_LABELS[value]))
+  ]);
+  if (!input.value.trim() || knownLabels.has(input.value.trim())) {
+    input.value = labelFor("role", role, ROLE_LABELS[role] || humanize(role));
+  }
 }
 
 function showOnly(target) {
@@ -247,6 +316,7 @@ function renderTemplateList() {
   for (const entry of bootData.registry) {
     const template = bootData.templates[entry.id];
     if (!template) continue;
+    const templateLocale = template.locales?.[uiLocale] || template.locale;
     const button = document.createElement("button");
     button.type = "button";
     button.className = "action-card action-card-primary";
@@ -257,9 +327,9 @@ function renderTemplateList() {
     icon.textContent = "＋";
     const copy = document.createElement("span");
     const title = document.createElement("strong");
-    title.textContent = template.locale.template.name;
+    title.textContent = templateLocale.template.name;
     const detail = document.createElement("small");
-    detail.textContent = template.locale.template.summary;
+    detail.textContent = templateLocale.template.summary;
     copy.append(title, detail);
     button.append(icon, copy);
     elements.templateList.append(button);
@@ -269,9 +339,9 @@ function renderTemplateList() {
 function showSetup() {
   showOnly(elements.setupView);
   elements.projectForm.reset();
-  elements.contentLanguage.value = "en";
-  elements.recorderLabel.value = "Developer";
-  elements.perspectiveLabel.value = "End users";
+  elements.contentLanguage.value = uiLocale;
+  elements.recorderLabel.value = labelFor("role", "developer", "Developer");
+  elements.perspectiveLabel.value = uiLocale === "ja" ? "エンドユーザー" : "End users";
   elements.perspectiveFields.hidden = true;
   elements.perspectiveLabel.required = false;
   elements.setupTemplateName.textContent = bundle.locale.template.name;
@@ -293,7 +363,7 @@ function createProjectFromForm(event) {
   };
   if (!input.projectName || !input.recorderLabel) return;
   if (!/^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$/.test(input.contentLanguage)) {
-    elements.contentLanguage.setCustomValidity("Use a language tag such as en, ja, or pt-br.");
+    elements.contentLanguage.setCustomValidity(t("language.invalid", {}, "Use a language tag such as en, ja, or pt-br."));
     elements.contentLanguage.reportValidity();
     elements.contentLanguage.setCustomValidity("");
     return;
@@ -304,7 +374,7 @@ function createProjectFromForm(event) {
   currentQuestionIndex = 0;
   persistNow();
   showWorkspace();
-  toast("Local project created. Nothing was sent to a server.");
+  toast(t("project.created", {}, "Local project created. Nothing was sent to a server."));
 }
 
 function showWorkspace() {
@@ -313,7 +383,12 @@ function showWorkspace() {
   const requestedIndex = questions.findIndex((question) => question.questionId === state.currentQuestionId);
   currentQuestionIndex = requestedIndex >= 0 ? requestedIndex : 0;
   elements.workspaceProjectName.textContent = state.document.meta.projectName;
-  elements.workspaceProjectMeta.textContent = `${state.document.meta.template.id} ${state.document.meta.template.version} · ${state.document.meta.contentLanguage} · revision ${state.baseDocument?.meta.revision || state.document.meta.revision}`;
+  elements.workspaceProjectMeta.textContent = t("project.meta", {
+    template: state.document.meta.template.id,
+    version: state.document.meta.template.version,
+    language: state.document.meta.contentLanguage,
+    revision: state.baseDocument?.meta.revision || state.document.meta.revision
+  }, `${state.document.meta.template.id} ${state.document.meta.template.version} · ${state.document.meta.contentLanguage} · revision ${state.baseDocument?.meta.revision || state.document.meta.revision}`);
   renderAll();
   switchWorkspaceView(activeWorkspaceView, false);
 }
@@ -321,12 +396,17 @@ function showWorkspace() {
 function openWorkspace(documentId) {
   const workspace = store.loadWorkspace(documentId);
   if (!workspace?.state) {
-    toast("That local project could not be opened.");
+    toast(t("project.openFailed", {}, "That local project could not be opened."));
     renderProjectList();
     return;
   }
-  configureBundle(workspace.state.document.meta.template.id);
+  configureBundle(workspace.state.document.meta.template.id, uiLocale);
   state = workspace.state;
+  if (state.baseDocument && state.baseConfirmationKnown === undefined) {
+    state.baseConfirmationKnown = Boolean(state.baseDocument.meta.confirmedAt);
+    state.baseConfirmedAt = state.baseDocument.meta.confirmedAt || null;
+  }
+  if (state.importedAt === undefined) state.importedAt = null;
   patches = workspace.patches;
   activeWorkspaceView = "questions";
   showWorkspace();
@@ -348,7 +428,9 @@ function renderProjectList() {
   elements.projectList.replaceChildren();
   elements.projectEmptyState.hidden = projects.length > 0;
   const durableCount = projects.filter((project) => !project.sessionOnly).length;
-  elements.storageState.textContent = store.available ? `${durableCount} saved locally` : "Session only — export recommended";
+  elements.storageState.textContent = store.available
+    ? t("storage.count", { count: durableCount }, `${durableCount} saved locally`)
+    : t("storage.sessionOnly", {}, "Session only — export recommended");
   elements.storageState.classList.toggle("error", !store.available);
   for (const project of projects) {
     const item = document.createElement("li");
@@ -360,17 +442,21 @@ function renderProjectList() {
     const name = document.createElement("strong");
     name.textContent = project.projectName;
     const meta = document.createElement("span");
-    meta.textContent = `${project.templateId} · revision ${project.revision} · updated ${formatDate(project.updatedAt)}`;
+    meta.textContent = t("project.listMeta", {
+      template: project.templateId,
+      revision: project.revision,
+      updated: formatDate(project.updatedAt)
+    }, `${project.templateId} · revision ${project.revision} · updated ${formatDate(project.updatedAt)}`);
     open.append(name, meta);
     const actions = document.createElement("div");
     actions.className = "projectbar-actions";
     const status = document.createElement("span");
     status.className = "project-state-tag";
-    status.textContent = humanize(project.status);
+    status.textContent = labelFor("projectStatus", project.status);
     const remove = document.createElement("button");
     remove.type = "button";
     remove.className = "text-button danger-text";
-    remove.textContent = "Delete";
+    remove.textContent = translateText("Delete");
     remove.addEventListener("click", () => openDeleteDialog(project.documentId, project.projectName));
     actions.append(status, remove);
     item.append(open, actions);
@@ -513,7 +599,11 @@ function renderQuestion({ focus = false } = {}) {
   if (contribution) state.context = clone(contribution.context);
   state.currentQuestionId = question.questionId;
   elements.questionCategory.textContent = category.label;
-  elements.questionProgress.textContent = `Question ${visibleIndex + 1} of ${visible.length} · ${question.questionId}`;
+  elements.questionProgress.textContent = t("question.progress", {
+    current: visibleIndex + 1,
+    total: visible.length,
+    id: question.questionId
+  }, `Question ${visibleIndex + 1} of ${visible.length} · ${question.questionId}`);
   elements.progressBar.style.width = `${((visibleIndex + 1) / visible.length) * 100}%`;
   elements.questionHelp.textContent = question.help;
   elements.questionPrompt.textContent = question.prompt;
@@ -537,13 +627,15 @@ function renderContributionSelect(response) {
   elements.contributionSelect.replaceChildren();
   const draft = document.createElement("option");
   draft.value = "__new__";
-  draft.textContent = Object.keys(response.contributions).length ? "New contribution" : "New contribution — not yet answered";
+  draft.textContent = Object.keys(response.contributions).length
+    ? t("contribution.new", {}, "New contribution")
+    : t("contribution.newEmpty", {}, "New contribution — not yet answered");
   elements.contributionSelect.append(draft);
   for (const [id, contribution] of Object.entries(response.contributions)) {
     const option = document.createElement("option");
     option.value = id;
-    const perspective = state.document.participants[contribution.context.perspectiveRef]?.label || "Unknown source";
-    option.textContent = `${perspective} · ${humanize(contribution.context.captureMethod)}${hasValue(contribution.value) ? "" : " · draft"}`;
+    const perspective = state.document.participants[contribution.context.perspectiveRef]?.label || t("source.unknown", {}, "Unknown source");
+    option.textContent = `${perspective} · ${labelFor("capture", contribution.context.captureMethod)}${hasValue(contribution.value) ? "" : ` · ${labelFor("projectStatus", "draft", "draft")}`}`;
     elements.contributionSelect.append(option);
   }
   elements.contributionSelect.value = previous;
@@ -557,7 +649,10 @@ function renderContextControls() {
   const perspective = state.document.participants[state.context.perspectiveRef] || entries[0]?.[1];
   if (!perspective) return;
   if (!perspective.roles.includes(state.context.speakingAs)) state.context.speakingAs = perspective.roles[0];
-  fillSelect(elements.speakingAsSelect, perspective.roles.map((role) => ({ value: role, label: ROLE_LABELS[role] || humanize(role) })), state.context.speakingAs);
+  fillSelect(elements.speakingAsSelect, perspective.roles.map((role) => ({
+    value: role,
+    label: labelFor("role", role, ROLE_LABELS[role] || humanize(role))
+  })), state.context.speakingAs);
   elements.captureMethodSelect.value = state.context.captureMethod;
   elements.authoritySelect.value = state.context.authority;
   if (state.context.captureMethod === "inference") {
@@ -569,7 +664,10 @@ function renderContextControls() {
     elements.confirmationSelect.value = state.context.confirmation;
   }
   const recorder = state.document.participants[state.context.recordedByRef];
-  elements.contextSummary.textContent = `${perspective.label} · recorded by ${recorder?.label || "Unknown"}`;
+  elements.contextSummary.textContent = t("context.summary", {
+    perspective: perspective.label,
+    recorder: recorder?.label || translateText("Unknown")
+  }, `${perspective.label} · recorded by ${recorder?.label || "Unknown"}`);
 }
 
 function renderAnswerControl(question, value) {
@@ -595,7 +693,7 @@ function renderAnswerControl(question, value) {
       copy.append(text);
       if (choice.requiresNote) {
         const detail = document.createElement("small");
-        detail.textContent = "Add context below";
+        detail.textContent = t("choice.addContext", {}, "Add context below");
         copy.append(detail);
       }
       label.append(input, copy);
@@ -608,7 +706,7 @@ function renderAnswerControl(question, value) {
   textarea.className = "text-answer";
   textarea.rows = question.responseType === "short-text" ? 3 : 6;
   textarea.maxLength = 8000;
-  textarea.placeholder = question.placeholder || "Add a concise answer.";
+  textarea.placeholder = question.placeholder || t("answer.placeholder", {}, "Add a concise answer.");
   textarea.value = typeof value === "string" ? value : "";
   textarea.setAttribute("aria-label", question.prompt);
   textarea.addEventListener("input", () => commitContribution());
@@ -629,7 +727,7 @@ function handleChoiceChange(question, changedInput, choice) {
     const checked = inputs.filter((input) => input.checked);
     if (question.maxSelections && checked.length > question.maxSelections) {
       changedInput.checked = false;
-      showValidation(`Choose no more than ${question.maxSelections} options.`);
+      showValidation(t("answer.selectionLimit", { count: question.maxSelections }, `Choose no more than ${question.maxSelections} options.`));
       return;
     }
   }
@@ -668,7 +766,7 @@ function commitContribution({ announce = false } = {}) {
     if (response.resolution.status === "confirmed" && response.resolution.sourceContributionId === contributionId && !valuesEqual(previous?.value, value)) {
       response.resolution.status = "provisional";
       response.resolution.decidedAt = now;
-      if (announce) showValidation("The accepted value changed, so the resolution returned to provisional.");
+      if (announce) showValidation(t("answer.acceptedChanged", {}, "The accepted value changed, so the resolution returned to provisional."));
     }
     markAndRebuild();
     renderContributionSelect(response);
@@ -678,8 +776,8 @@ function commitContribution({ announce = false } = {}) {
   } else {
     scheduleSave();
   }
-  if (!result.valid) showValidation(result.errors[0].message);
-  else if (announce) showValidation("Contribution saved locally. Its project resolution remains separate.", true);
+  if (!result.valid) showValidation(translateIssue(result.errors[0]));
+  else if (announce) showValidation(t("answer.saved", {}, "Contribution saved locally. Its project resolution remains separate."), true);
   return result;
 }
 
@@ -704,7 +802,7 @@ function removeActiveContribution() {
   const response = responseFor(currentQuestion().questionId);
   const id = response.activeContributionId;
   if (!id) return;
-  if (!globalThis.confirm("Remove this contribution from the local project?")) return;
+  if (!globalThis.confirm(t("contribution.removeConfirm", {}, "Remove this contribution from the local project?"))) return;
   delete response.contributions[id];
   if (response.resolution.sourceContributionId === id) {
     response.resolution = createBlankResponse().resolution;
@@ -715,7 +813,7 @@ function removeActiveContribution() {
   markAndRebuild();
   renderQuestion();
   renderAllSecondary();
-  toast("Contribution removed from this local project.");
+  toast(t("contribution.removed", {}, "Contribution removed from this local project."));
 }
 
 function handleContextChange() {
@@ -756,28 +854,18 @@ function renderResolutionControls(response) {
     : "unspecified";
 
   const sources = Object.entries(response.contributions).filter(([, contribution]) => hasValue(contribution.value));
-  const sourceOptions = [{ value: "", label: "No resolved value" }, ...sources.map(([id, contribution]) => ({
+  const sourceOptions = [{ value: "", label: t("resolution.noValue", {}, "No resolved value") }, ...sources.map(([id, contribution]) => ({
     value: id,
-    label: `${state.document.participants[contribution.context.perspectiveRef]?.label || "Unknown"} · ${shortValue(contribution.value)}`
+    label: `${state.document.participants[contribution.context.perspectiveRef]?.label || translateText("Unknown")} · ${shortValue(contribution.value)}`
   }))];
   fillSelect(elements.resolutionSourceSelect, sourceOptions, response.resolution.sourceContributionId || "");
   const usesSource = ["confirmed", "provisional"].includes(elements.resolutionSelect.value);
   elements.resolutionSourceSelect.disabled = !usesSource;
 
-  const deciderOptions = [{ value: "", label: "No decider recorded" }, ...deciders.map((id) => ({ value: id, label: state.document.participants[id].label }))];
+  const deciderOptions = [{ value: "", label: t("resolution.noDecider", {}, "No decider recorded") }, ...deciders.map((id) => ({ value: id, label: state.document.participants[id].label }))];
   fillSelect(elements.resolutionDeciderSelect, deciderOptions, response.resolution.decidedByRefs[0] || "");
   elements.resolutionDeciderSelect.disabled = !RESOLVED_STATUSES.has(elements.resolutionSelect.value);
   updateResolutionHint(deciders);
-}
-
-function restoreResolutionDraft(response, status, sourceId, deciderId) {
-  renderResolutionControls(response);
-  elements.resolutionSelect.value = status;
-  elements.resolutionSourceSelect.value = sourceId || "";
-  elements.resolutionDeciderSelect.value = deciderId || "";
-  elements.resolutionSourceSelect.disabled = !["confirmed", "provisional"].includes(status);
-  elements.resolutionDeciderSelect.disabled = !RESOLVED_STATUSES.has(status);
-  updateResolutionHint(eligibleDeciders(currentQuestion().questionId, state, bundle));
 }
 
 function applyResolutionFromControls() {
@@ -794,14 +882,14 @@ function applyResolutionFromControls() {
     const active = activeContribution(response);
     if (active && hasValue(active.value)) sourceId = response.activeContributionId;
     else {
-      showValidation("Choose a contribution before using an answer as the project premise.");
-      restoreResolutionDraft(response, requestedStatus, requestedSourceId, requestedDeciderId);
+      showValidation(t("resolution.chooseContribution", {}, "Choose a contribution before using an answer as the project premise."));
+      renderResolutionControls(response);
       return;
     }
   }
   if (AUTHORIZED_STATUSES.has(requestedStatus) && !deciderId) {
-    showValidation("Choose an authorized participant to confirm this resolution.");
-    restoreResolutionDraft(response, requestedStatus, sourceId, requestedDeciderId);
+    showValidation(t("resolution.chooseDecider", {}, "Choose an authorized participant to confirm this resolution."));
+    renderResolutionControls(response);
     return;
   }
   const usesSource = ["confirmed", "provisional"].includes(requestedStatus);
@@ -816,14 +904,17 @@ function applyResolutionFromControls() {
   renderResolutionControls(response);
   renderCategoryList();
   renderAllSecondary();
-  showValidation("Project resolution saved separately from the source contribution.", true);
+  showValidation(t("resolution.saved", {}, "Project resolution saved separately from the source contribution."), true);
 }
 
 function updateResolutionHint(deciders) {
   const selected = bundle.locale.resolutionStates.find((entry) => entry.value === elements.resolutionSelect.value);
-  const accepted = acceptedAuthoritiesForQuestion(currentQuestion().questionId, bundle).map((value) => AUTHORITY_LABELS[value] || humanize(value));
-  if (!deciders.length) elements.resolutionHint.textContent = `No qualifying decider is recorded yet. Accepted authority: ${accepted.join(" or ")}.`;
-  else elements.resolutionHint.textContent = selected?.description || "Choose how this input should be used.";
+  const accepted = acceptedAuthoritiesForQuestion(currentQuestion().questionId, bundle)
+    .map((value) => labelFor("authority", value, AUTHORITY_LABELS[value] || humanize(value)));
+  if (!deciders.length) elements.resolutionHint.textContent = t("resolution.noQualifiedDecider", {
+    authorities: accepted.join(uiLocale === "ja" ? "、" : " or ")
+  }, `No qualifying decider is recorded yet. Accepted authority: ${accepted.join(" or ")}.`);
+  else elements.resolutionHint.textContent = selected?.description || t("resolution.chooseUse", {}, "Choose how this input should be used.");
 }
 
 function leaveQuestionUnresolved() {
@@ -832,7 +923,7 @@ function leaveQuestionUnresolved() {
   const response = responseFor(currentQuestion().questionId);
   response.resolution = { status: "unspecified", sourceContributionId: null, decidedByRefs: [], decidedAt: null, note: "" };
   markAndRebuild();
-  showValidation("Left unresolved. An AI should not assume a value.", true);
+  showValidation(t("resolution.leftOpen", {}, "Left unresolved. An AI should not assume a value."), true);
   navigateQuestion(1, false);
 }
 
@@ -873,7 +964,7 @@ function addParticipant(event) {
   elements.participantDialog.close();
   renderQuestion();
   renderAllSecondary();
-  toast(`${label} was added to this local project.`);
+  toast(uiLocale === "ja" ? `${label}をこのローカルプロジェクトに追加しました。` : `${label} was added to this local project.`);
 }
 
 function renderAllSecondary() {
@@ -901,7 +992,7 @@ function renderSummary() {
     const number = document.createElement("strong");
     number.textContent = String(value);
     const caption = document.createElement("span");
-    caption.textContent = label;
+    caption.textContent = labelFor("status", label === "proposal" ? "proposal_requested" : label, humanize(label));
     chip.append(number, caption);
     elements.statusCounts.append(chip);
   }
@@ -911,7 +1002,7 @@ function renderSummary() {
     const row = document.createElement("div");
     row.className = "axis-row";
     const label = document.createElement("span");
-    label.textContent = humanize(axis);
+    label.textContent = labelFor("axis", axis);
     const bar = document.createElement("span");
     bar.className = "axis-bar";
     const fill = document.createElement("i");
@@ -925,37 +1016,42 @@ function renderSummary() {
   const openConflicts = state.document.conflicts.filter((entry) => entry.status === "open").length;
   elements.documentStatus.className = "document-status";
   if (openConflicts) {
-    elements.documentStatus.textContent = `${openConflicts} conflict${openConflicts === 1 ? "" : "s"}`;
+    elements.documentStatus.textContent = t("status.conflicts", { count: openConflicts }, `${openConflicts} conflict${openConflicts === 1 ? "" : "s"}`);
     elements.documentStatus.classList.add("conflict");
   } else if (!state.baseDocument) {
-    elements.documentStatus.textContent = "Draft";
+    elements.documentStatus.textContent = t("status.draft", {}, "Draft");
     elements.documentStatus.classList.add("draft");
   } else if (state.dirtySinceBase) {
-    elements.documentStatus.textContent = "Changes pending";
+    elements.documentStatus.textContent = t("status.pending", {}, "Changes pending");
     elements.documentStatus.classList.add("draft");
-  } else elements.documentStatus.textContent = `Base r${state.baseDocument.meta.revision}`;
+  } else elements.documentStatus.textContent = t("status.base", { revision: state.baseDocument.meta.revision }, `Base r${state.baseDocument.meta.revision}`);
   const next = visibleQuestions().find((question) => !questionHasProgress(question.questionId));
   elements.summaryNext.replaceChildren();
   const strong = document.createElement("strong");
-  strong.textContent = next ? "Next unresolved question" : "Questionnaire pass complete";
+  strong.textContent = next
+    ? t("summary.next", {}, "Next unresolved question")
+    : t("summary.complete", {}, "Questionnaire pass complete");
   const detail = document.createElement("span");
-  detail.textContent = next ? next.prompt : "Review the premise before confirming a Base.";
+  if (next) detail.textContent = next.prompt;
+  else if (!state.baseDocument) detail.textContent = t("summary.reviewBeforeBase", {}, "Review the premise before confirming a Base.");
+  else if (state.dirtySinceBase) detail.textContent = t("summary.reviewChanges", {}, "Review changes before confirming the next Base revision.");
+  else detail.textContent = t("summary.baseReady", { revision: state.baseDocument.meta.revision }, `Base r${state.baseDocument.meta.revision} is confirmed. You can export it or create an Override.`);
   elements.summaryNext.append(strong, detail);
   elements.jsonPreview.textContent = JSON.stringify(state.document, null, 2);
 }
 
 function setupReviewFilters() {
   const participants = Object.entries(state.document.participants).map(([value, participant]) => ({ value, label: participant.label }));
-  fillFilter(elements.filterAxis, ["fact", "view", "care", "unknown"].map((value) => ({ value, label: humanize(value) })));
-  fillFilter(elements.filterStatus, bundle.locale.resolutionStates.map(({ value, label }) => ({ value, label })).concat({ value: "conflict", label: "Conflict" }));
+  fillFilter(elements.filterAxis, ["fact", "view", "care", "unknown"].map((value) => ({ value, label: labelFor("axis", value) })));
+  fillFilter(elements.filterStatus, bundle.locale.resolutionStates.map(({ value, label }) => ({ value, label })).concat({ value: "conflict", label: labelFor("status", "conflict") }));
   fillFilter(elements.filterCategory, bundle.locale.categories.map((category) => ({ value: category.id, label: category.label })));
-  fillFilter(elements.filterEnforcement, ["hard", "soft", "advisory"].map((value) => ({ value, label: humanize(value) })));
-  fillFilter(elements.filterPriority, ["must", "should", "could"].map((value) => ({ value, label: humanize(value) })));
+  fillFilter(elements.filterEnforcement, ["hard", "soft", "advisory"].map((value) => ({ value, label: labelFor("enforcement", value) })));
+  fillFilter(elements.filterPriority, ["must", "should", "could"].map((value) => ({ value, label: labelFor("priority", value) })));
   fillFilter(elements.filterPerspective, participants);
   fillFilter(elements.filterRecorder, participants);
-  fillFilter(elements.filterCapture, ["direct_input", "interview", "observation", "inference", "document_import", "data_import", "other"].map((value) => ({ value, label: humanize(value) })));
-  fillFilter(elements.filterAuthority, Object.entries(AUTHORITY_LABELS).map(([value, label]) => ({ value, label })));
-  fillFilter(elements.filterConfirmation, ["directly_reported", "source_confirmed", "unconfirmed", "disputed", "imported_unverified"].map((value) => ({ value, label: humanize(value) })));
+  fillFilter(elements.filterCapture, ["direct_input", "interview", "observation", "inference", "document_import", "data_import", "other"].map((value) => ({ value, label: labelFor("capture", value) })));
+  fillFilter(elements.filterAuthority, Object.entries(AUTHORITY_LABELS).map(([value, label]) => ({ value, label: labelFor("authority", value, label) })));
+  fillFilter(elements.filterConfirmation, ["directly_reported", "source_confirmed", "unconfirmed", "disputed", "imported_unverified"].map((value) => ({ value, label: labelFor("confirmation", value) })));
 }
 
 function renderReview() {
@@ -963,16 +1059,28 @@ function renderReview() {
   setupReviewFilters();
   const unresolved = Object.entries(state.document.items).filter(([, item]) => ["unspecified", "proposal_requested", "conflict"].includes(item.resolution.status));
   const warningMessages = activeReviewWarnings();
-  renderAttentionList(elements.unresolvedList, [...warningMessages, ...unresolved.slice(0, 8).map(([id, item]) => `${item.label} — ${humanize(item.resolution.status)} (${id})`)], "No unresolved premises or deterministic warnings.");
-  renderAttentionList(elements.conflictList, state.document.conflicts.filter((entry) => entry.status === "open").map((entry) => entry.message), "No deterministic conflict detected.", true);
+  renderAttentionList(elements.unresolvedList, [...warningMessages, ...unresolved.slice(0, 8).map(([id, item]) => `${item.label} — ${labelFor("status", item.resolution.status)} (${id})`)], t("review.noUnresolved", {}, "No unresolved premises or deterministic warnings."));
+  renderAttentionList(elements.conflictList, state.document.conflicts.filter((entry) => entry.status === "open").map((entry) => translateText(entry.message)), t("review.noConflict", {}, "No deterministic conflict detected."), true);
   elements.baseWarning.classList.add("notice-warn");
   elements.baseWarning.hidden = false;
-  if (!state.baseDocument) elements.baseWarning.textContent = "No Base has been confirmed yet. You may confirm a revision while unknowns remain visible.";
-  else if (state.dirtySinceBase) elements.baseWarning.textContent = `The questionnaire has changes after Base revision ${state.baseDocument.meta.revision}. Confirming creates revision ${state.baseDocument.meta.revision + 1}.`;
+  if (!state.baseDocument) elements.baseWarning.textContent = t("review.noBase", {}, "No Base has been confirmed yet. You may confirm a revision while unknowns remain visible.");
+  else if (state.dirtySinceBase) elements.baseWarning.textContent = t("review.changed", {
+    revision: state.baseDocument.meta.revision,
+    next: state.baseDocument.meta.revision + 1
+  }, `The questionnaire has changes after Base revision ${state.baseDocument.meta.revision}. Confirming creates revision ${state.baseDocument.meta.revision + 1}.`);
   else {
-    elements.baseWarning.textContent = `Base revision ${state.baseDocument.meta.revision} was confirmed ${formatDate(state.baseConfirmedAt)}.`;
+    elements.baseWarning.textContent = state.baseConfirmationKnown
+      ? t("review.confirmed", { revision: state.baseDocument.meta.revision, time: formatDate(state.baseConfirmedAt) }, `Base revision ${state.baseDocument.meta.revision} was confirmed ${formatDate(state.baseConfirmedAt)}.`)
+      : t("review.legacyImported", { revision: state.baseDocument.meta.revision, time: formatDate(state.importedAt) }, `Base revision ${state.baseDocument.meta.revision} was imported from a legacy document. Its original confirmation time was not recorded. Imported ${formatDate(state.importedAt)}.`);
     elements.baseWarning.classList.remove("notice-warn");
   }
+  const nextRevision = state.baseDocument ? state.baseDocument.meta.revision + 1 : 1;
+  elements.confirmBaseButton.disabled = Boolean(state.baseDocument && !state.dirtySinceBase);
+  elements.confirmBaseButton.textContent = !state.baseDocument
+    ? (chromeStrings["review.confirmBase"] || "Confirm Base revision")
+    : state.dirtySinceBase
+      ? t("base.confirmNextButton", { revision: nextRevision }, `Confirm as Base r${nextRevision}`)
+      : t("base.confirmedButton", { revision: state.baseDocument.meta.revision }, `Base r${state.baseDocument.meta.revision} confirmed`);
   renderReviewRows();
 }
 
@@ -1031,7 +1139,7 @@ function renderReviewRows() {
     const cell = document.createElement("td");
     cell.colSpan = 6;
     cell.className = "no-results";
-    cell.textContent = "No premise items match these filters.";
+    cell.textContent = t("review.noResults", {}, "No premise items match these filters.");
     row.append(cell);
     elements.reviewRows.append(row);
     return;
@@ -1039,7 +1147,7 @@ function renderReviewRows() {
   for (const [itemId, item] of rows) {
     const row = document.createElement("tr");
     const titleCell = document.createElement("td");
-    titleCell.dataset.label = "Premise";
+    titleCell.dataset.label = translateText("Premise");
     const title = document.createElement("div");
     title.className = "item-title";
     const strong = document.createElement("strong");
@@ -1054,39 +1162,39 @@ function renderReviewRows() {
       title.append(note);
     }
     titleCell.append(title);
-    const axisCell = tagCell("Axis", item.axis, `tag-${item.axis}`);
-    const statusCell = tagCell("Status", humanize(item.resolution.status), item.resolution.status === "conflict" ? "tag-conflict" : "");
+    const axisCell = tagCell(translateText("Axis"), labelFor("axis", item.axis), `tag-${item.axis}`);
+    const statusCell = tagCell(translateText("Status"), labelFor("status", item.resolution.status), item.resolution.status === "conflict" ? "tag-conflict" : "");
     const sourceCell = document.createElement("td");
-    sourceCell.dataset.label = "Source";
+    sourceCell.dataset.label = translateText("Source");
     sourceCell.className = "source-cell";
     const contributions = Object.values(item.contributions);
-    if (!contributions.length) sourceCell.textContent = "No contribution";
+    if (!contributions.length) sourceCell.textContent = t("review.noContribution", {}, "No contribution");
     else {
       for (const contribution of contributions.slice(0, 2)) {
         const line = document.createElement("span");
-        line.textContent = `${state.document.participants[contribution.perspectiveRef]?.label || "Unknown"} → ${state.document.participants[contribution.recordedByRef]?.label || "Unknown"}`;
+        line.textContent = `${state.document.participants[contribution.perspectiveRef]?.label || translateText("Unknown")} → ${state.document.participants[contribution.recordedByRef]?.label || translateText("Unknown")}`;
         const detail = document.createElement("small");
-        detail.textContent = `${humanize(contribution.captureMethod)} · ${humanize(contribution.confirmation)}`;
+        detail.textContent = `${labelFor("capture", contribution.captureMethod)} · ${labelFor("confirmation", contribution.confirmation)}`;
         sourceCell.append(line, detail);
       }
       if (contributions.length > 2) {
         const more = document.createElement("small");
-        more.textContent = `+${contributions.length - 2} more`;
+        more.textContent = t("review.more", { count: contributions.length - 2 }, `+${contributions.length - 2} more`);
         sourceCell.append(more);
       }
     }
     const valueCell = document.createElement("td");
-    valueCell.dataset.label = "Resolution";
+    valueCell.dataset.label = translateText("Resolution");
     valueCell.textContent = shortValue(item.resolution.value, 110);
     const editCell = document.createElement("td");
-    editCell.dataset.label = "Action";
+    editCell.dataset.label = translateText("Action");
     const questionId = questionByItem.get(itemId);
     if (questionId) {
       const edit = document.createElement("button");
       edit.type = "button";
       edit.className = "button button-secondary review-edit";
       edit.dataset.editQuestion = questionId;
-      edit.textContent = "Edit";
+      edit.textContent = t("review.edit", {}, "Edit");
       editCell.append(edit);
     }
     row.append(titleCell, axisCell, statusCell, sourceCell, valueCell, editCell);
@@ -1105,11 +1213,22 @@ function tagCell(label, value, extraClass = "") {
 }
 
 function handleConfirmBase() {
+  if (state.baseDocument && !state.dirtySinceBase) return;
+  const nextRevision = state.baseDocument ? state.baseDocument.meta.revision + 1 : 1;
+  const prompt = state.baseDocument
+    ? t("base.confirmNext", { revision: nextRevision }, `Confirm the current changes as Base revision ${nextRevision}? The existing Base will be replaced.`)
+    : t("base.confirmFirst", { revision: nextRevision }, `Confirm Base revision ${nextRevision}? It becomes the baseline for exports and Overrides.`);
+  if (!globalThis.confirm(prompt)) return;
   confirmBase(state, bundle);
   persistNow();
   renderAllSecondary();
-  elements.workspaceProjectMeta.textContent = `${state.document.meta.template.id} ${state.document.meta.template.version} · ${state.document.meta.contentLanguage} · revision ${state.baseDocument.meta.revision}`;
-  toast(`Base revision ${state.baseDocument.meta.revision} confirmed locally.`);
+  elements.workspaceProjectMeta.textContent = t("project.meta", {
+    template: state.document.meta.template.id,
+    version: state.document.meta.template.version,
+    language: state.document.meta.contentLanguage,
+    revision: state.baseDocument.meta.revision
+  }, `${state.document.meta.template.id} ${state.document.meta.template.version} · ${state.document.meta.contentLanguage} · revision ${state.baseDocument.meta.revision}`);
+  toast(t("base.confirmedToast", { revision: state.baseDocument.meta.revision }, `Base revision ${state.baseDocument.meta.revision} confirmed locally.`));
 }
 
 function renderOverrides() {
@@ -1117,7 +1236,9 @@ function renderOverrides() {
   const hasBase = Boolean(state.baseDocument);
   elements.overrideNeedsBase.hidden = hasBase;
   elements.createPatchButton.disabled = !hasBase;
-  elements.overrideBaseState.textContent = hasBase ? `Base r${state.baseDocument.meta.revision}` : "Base required";
+  elements.overrideBaseState.textContent = hasBase
+    ? t("status.base", { revision: state.baseDocument.meta.revision }, `Base r${state.baseDocument.meta.revision}`)
+    : t("base.required", {}, "Base required");
   elements.overrideBaseState.className = `status-pill${hasBase ? "" : " warn"}`;
   const patchParticipants = state.baseDocument?.participants || state.document.participants;
   const participants = Object.entries(patchParticipants).map(([value, participant]) => ({ value, label: participant.label }));
@@ -1151,7 +1272,7 @@ function renderPatchExpectedValue() {
     ? `/items/${encodePointerSegment(itemId)}`
     : `/items/${encodePointerSegment(itemId)}/resolution/value`;
   const result = readPointer(source, path);
-  elements.patchPreviousValue.textContent = result.exists ? JSON.stringify(result.value, null, 2) : "Target not found";
+  elements.patchPreviousValue.textContent = result.exists ? JSON.stringify(result.value, null, 2) : t("patch.targetMissing", {}, "Target not found");
 }
 
 function currentMerge() {
@@ -1166,14 +1287,14 @@ function createPatchFromForm(event) {
   const reason = elements.patchReason.value.trim();
   const createdByRef = elements.patchCreatedBy.value;
   const operationType = elements.patchOperation.value;
-  if (!label || !reason || !createdByRef) return showPatchValidation("Add an Override label, creator, and reason.");
+  if (!label || !reason || !createdByRef) return showPatchValidation(t("patch.requiredFields", {}, "Add an Override label, creator, and reason."));
   const now = new Date().toISOString();
   let operation;
   try {
     if (operationType === "add") {
       const itemId = elements.patchNewItemId.value.trim();
       const itemLabel = elements.patchNewItemLabel.value.trim();
-      if (!/^[A-Za-z0-9][A-Za-z0-9_.-]{0,119}$/.test(itemId) || ["__proto__", "prototype", "constructor"].includes(itemId) || !itemLabel) throw new Error("Add a safe, stable item ID and label for the new premise.");
+      if (!/^[A-Za-z0-9][A-Za-z0-9_.-]{0,119}$/.test(itemId) || ["__proto__", "prototype", "constructor"].includes(itemId) || !itemLabel) throw new Error(t("patch.invalidItem", {}, "Add a safe, stable item ID and label for the new premise."));
       const value = parseLooseValue(elements.patchValue.value);
       const enforcement = elements.patchNewItemEnforcement.value;
       operation = {
@@ -1189,11 +1310,11 @@ function createPatchFromForm(event) {
       };
     } else {
       const itemId = elements.patchTargetItem.value;
-      if (!itemId) throw new Error("Choose a premise item to change.");
+      if (!itemId) throw new Error(t("patch.chooseItem", {}, "Choose a premise item to change."));
       const source = currentMerge().unified;
       const path = operationType === "remove" ? `/items/${encodePointerSegment(itemId)}` : `/items/${encodePointerSegment(itemId)}/resolution/value`;
       const current = readPointer(source, path);
-      if (!current.exists) throw new Error("The selected target is no longer available.");
+      if (!current.exists) throw new Error(t("patch.targetGone", {}, "The selected target is no longer available."));
       operation = { changeId: createId("chg"), op: operationType, path, previousValue: clone(current.value), reason, createdAt: now };
       if (operationType === "replace") operation.value = parseLooseValue(elements.patchValue.value);
     }
@@ -1216,7 +1337,7 @@ function createPatchFromForm(event) {
     operations: [operation]
   };
   const validation = validatePatch(patch);
-  if (!validation.valid) return showPatchValidation(validation.errors[0].message);
+  if (!validation.valid) return showPatchValidation(translateIssue(validation.errors[0]));
   patches.push(patch);
   state.patchIds = patches.map((entry) => entry.meta.patchId);
   elements.patchForm.reset();
@@ -1225,12 +1346,12 @@ function createPatchFromForm(event) {
   persistNow();
   renderOverrides();
   renderExport();
-  showPatchValidation("Override created and applied locally.", true);
+  showPatchValidation(t("patch.created", {}, "Override created and applied locally."), true);
 }
 
 function parseLooseValue(raw) {
   const value = raw.trim();
-  if (!value) throw new Error("Enter a new value.");
+  if (!value) throw new Error(t("patch.valueRequired", {}, "Enter a new value."));
   try { return JSON.parse(value); } catch { return value; }
 }
 
@@ -1240,12 +1361,12 @@ function showPatchValidation(message, success = false) {
 }
 
 function renderPatchList() {
-  elements.patchCount.textContent = `${patches.length} patch${patches.length === 1 ? "" : "es"}`;
+  elements.patchCount.textContent = t("patch.count", { count: patches.length }, `${patches.length} patch${patches.length === 1 ? "" : "es"}`);
   elements.patchList.replaceChildren();
   if (!patches.length) {
     const empty = document.createElement("div");
     empty.className = "empty-diff";
-    empty.textContent = "No Overrides yet.";
+    empty.textContent = t("patch.none", {}, "No Overrides yet.");
     elements.patchList.append(empty);
     return;
   }
@@ -1261,15 +1382,15 @@ function renderPatchList() {
     remove.className = "patch-remove";
     remove.dataset.patchAction = "remove";
     remove.dataset.patchId = patch.meta.patchId;
-    remove.textContent = "Remove";
+    remove.textContent = t("patch.remove", {}, "Remove");
     head.append(title, remove);
     const meta = document.createElement("span");
-    meta.textContent = `${patch.meta.scope} · Base r${patch.meta.baseRevision}${patch.meta.expiresAt ? ` · expires ${formatDate(patch.meta.expiresAt)}` : ""}`;
+    meta.textContent = `${labelFor("scope", patch.meta.scope)} · Base r${patch.meta.baseRevision}${patch.meta.expiresAt ? ` · ${t("patch.expires", { time: formatDate(patch.meta.expiresAt) }, `expires ${formatDate(patch.meta.expiresAt)}`)}` : ""}`;
     const path = document.createElement("code");
     path.textContent = `${patch.operations[0].op} ${patch.operations[0].path}`;
     const order = document.createElement("div");
     order.className = "inline-actions";
-    for (const [action, label, disabled] of [["up", "Move up", index === 0], ["down", "Move down", index === patches.length - 1]]) {
+    for (const [action, label, disabled] of [["up", t("patch.moveUp", {}, "Move up"), index === 0], ["down", t("patch.moveDown", {}, "Move down"), index === patches.length - 1]]) {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "text-button";
@@ -1304,21 +1425,25 @@ function renderDiff() {
   if (!state.baseDocument || !merge.rows.length) {
     const empty = document.createElement("div");
     empty.className = "empty-diff";
-    empty.textContent = state.baseDocument ? "Create an Override to compare Base and Unified values." : "A confirmed Base is required for comparison.";
+    empty.textContent = state.baseDocument
+      ? t("diff.empty", {}, "Create an Override to compare Base and Unified values.")
+      : t("diff.baseRequired", {}, "A confirmed Base is required for comparison.");
     elements.diffRows.append(empty);
-    elements.diffState.textContent = "No differences";
+    elements.diffState.textContent = t("diff.none", {}, "No differences");
     elements.diffState.className = "status-pill";
     return;
   }
-  elements.diffState.textContent = merge.conflicts.length ? `${merge.conflicts.length} conflict${merge.conflicts.length === 1 ? "" : "s"}` : `${merge.rows.length} applied`;
+  elements.diffState.textContent = merge.conflicts.length
+    ? t("status.conflicts", { count: merge.conflicts.length }, `${merge.conflicts.length} conflict${merge.conflicts.length === 1 ? "" : "s"}`)
+    : t("diff.applied", { count: merge.rows.length }, `${merge.rows.length} applied`);
   elements.diffState.className = `status-pill${merge.conflicts.length ? " conflict" : ""}`;
   for (const row of merge.rows) {
     const card = document.createElement("article");
     card.className = `diff-row${row.conflict ? " conflict" : ""}`;
-    const identity = diffCell("Change", `${row.operation.op}\n${row.operation.path}\n${row.patch.meta.label}`);
-    const base = diffCell("Before", shortValue(row.before, 500));
-    const requested = diffCell("Override", row.operation.op === "remove" ? "[remove]" : shortValue(row.requested, 500));
-    const result = diffCell(row.conflict ? "Conflict" : (row.skippedReason ? "Not applied" : "Unified"), row.conflict?.message || row.skippedReason || shortValue(row.after, 500));
+    const identity = diffCell(translateText("Change"), `${labelFor("operation", row.operation.op)}\n${row.operation.path}\n${row.patch.meta.label}`);
+    const base = diffCell(translateText("Before"), shortValue(row.before, 500));
+    const requested = diffCell("Override", row.operation.op === "remove" ? `[${labelFor("operation", "remove")}]` : shortValue(row.requested, 500));
+    const result = diffCell(row.conflict ? labelFor("status", "conflict") : (row.skippedReason ? translateText("Not applied") : "Unified"), translateText(row.conflict?.message || row.skippedReason || shortValue(row.after, 500)));
     card.append(identity, base, requested, result);
     elements.diffRows.append(card);
   }
@@ -1343,9 +1468,9 @@ function renderExport() {
   elements.exportMarkdownButton.disabled = !hasBase;
   elements.copyMarkdownButton.disabled = !hasBase;
   elements.exportBaseWarning.hidden = hasBase && !state.dirtySinceBase;
-  if (!hasBase) elements.exportBaseWarning.textContent = "Confirm a Base revision in Review before exporting authoritative project context.";
-  else if (state.dirtySinceBase) elements.exportBaseWarning.textContent = `Exports use confirmed Base revision ${state.baseDocument.meta.revision}; later questionnaire changes are not included until you confirm a new revision.`;
-  fillSelect(elements.patchExportSelect, patches.length ? patches.map((patch) => ({ value: patch.meta.patchId, label: patch.meta.label })) : [{ value: "", label: "No Override available" }], elements.patchExportSelect.value || patches[0]?.meta.patchId || "");
+  if (!hasBase) elements.exportBaseWarning.textContent = t("export.noBase", {}, "Confirm a Base revision in Review before exporting authoritative project context.");
+  else if (state.dirtySinceBase) elements.exportBaseWarning.textContent = t("export.pending", { revision: state.baseDocument.meta.revision }, `Exports use confirmed Base revision ${state.baseDocument.meta.revision}; later questionnaire changes are not included until you confirm a new revision.`);
+  fillSelect(elements.patchExportSelect, patches.length ? patches.map((patch) => ({ value: patch.meta.patchId, label: patch.meta.label })) : [{ value: "", label: t("export.noOverride", {}, "No Override available") }], elements.patchExportSelect.value || patches[0]?.meta.patchId || "");
   elements.exportPatchButton.disabled = !patches.length;
   renderExportPreview();
 }
@@ -1355,44 +1480,44 @@ function renderExportPreview() {
   const format = elements.exportPreviewSelect.value;
   const base = state.baseDocument || state.document;
   if (format === "base") elements.exportPreview.textContent = JSON.stringify(base, null, 2);
-  else if (format === "unified") elements.exportPreview.textContent = state.baseDocument ? JSON.stringify(currentMerge().unified, null, 2) : "Confirm a Base revision first.";
-  else elements.exportPreview.textContent = state.baseDocument ? generateAIContext(currentMerge().unified, patches) : "Confirm a Base revision first.";
+  else if (format === "unified") elements.exportPreview.textContent = state.baseDocument ? JSON.stringify(currentMerge().unified, null, 2) : t("export.confirmFirst", {}, "Confirm a Base revision first.");
+  else elements.exportPreview.textContent = state.baseDocument ? generateAIContext(currentMerge().unified, patches) : t("export.confirmFirst", {}, "Confirm a Base revision first.");
 }
 
 function exportBase() {
   if (!state.baseDocument) return;
   downloadText(exportFilename(state.baseDocument, "base", "json"), `${JSON.stringify(state.baseDocument, null, 2)}\n`);
-  toast("Base JSON created locally.");
+  toast(t("export.baseDone", {}, "Base JSON created locally."));
 }
 
 function exportPatch() {
   const patch = patches.find((entry) => entry.meta.patchId === elements.patchExportSelect.value);
   if (!patch) return;
   downloadText(`${state.document.meta.projectName.toLowerCase().replace(/[^a-z0-9]+/g, "-") || "premise"}.override.${patch.meta.patchId}.json`, `${JSON.stringify(patch, null, 2)}\n`);
-  toast("Override JSON created locally.");
+  toast(t("export.patchDone", {}, "Override JSON created locally."));
 }
 
 function exportUnified() {
   if (!state.baseDocument) return;
   const unified = currentMerge().unified;
   downloadText(exportFilename(unified, "unified", "json"), `${JSON.stringify(unified, null, 2)}\n`);
-  toast("Unified JSON created locally.");
+  toast(t("export.unifiedDone", {}, "Unified JSON created locally."));
 }
 
 function exportMarkdown() {
   if (!state.baseDocument) return;
   const unified = currentMerge().unified;
   downloadText(exportFilename(unified, "AI_CONTEXT", "md"), generateAIContext(unified, patches), "text/markdown");
-  toast("AI Context Markdown created locally.");
+  toast(t("export.markdownDone", {}, "AI Context Markdown created locally."));
 }
 
 async function copyMarkdown() {
   if (!state.baseDocument) return;
   try {
     await navigator.clipboard.writeText(generateAIContext(currentMerge().unified, patches));
-    toast("AI Context copied to the clipboard.");
+    toast(t("export.copied", {}, "AI Context copied to the clipboard."));
   } catch {
-    toast("Clipboard access was unavailable. Download the Markdown file instead.");
+    toast(t("export.copyFailed", {}, "Clipboard access was unavailable. Download the Markdown file instead."));
   }
 }
 
@@ -1405,30 +1530,29 @@ async function handleImport(file) {
     const imported = await readJsonFile(file);
     if (imported.format === "premise-builder-patch") return importPatch(imported);
     const importBundle = bootData.templates[imported.meta?.template?.id];
-    if (!importBundle) throw new Error("This template is not supported by the current application.");
+    if (!importBundle) throw new Error(t("import.unsupportedTemplate", {}, "This template is not supported by the current application."));
     const validation = validateDocument(imported, importBundle);
-    if (!validation.valid) throw new Error(validation.errors[0].message);
-    configureBundle(imported.meta.template.id);
+    if (!validation.valid) throw new Error(translateIssue(validation.errors[0]));
+    configureBundle(imported.meta.template.id, uiLocale);
     const document = clone(imported);
     if (store.hasProject(document.meta.documentId)) {
       document.meta.documentId = createId("pb");
-      document.meta.projectName = `${document.meta.projectName} (imported copy)`;
-      document.meta.updatedAt = new Date().toISOString();
+      document.meta.projectName = `${document.meta.projectName} ${t("import.copySuffix", {}, "(imported copy)")}`;
     }
     state = stateFromImportedDocument(document, bundle);
     patches = [];
     persistNow();
     activeWorkspaceView = "review";
     showWorkspace();
-    toast("Premise document imported as a new local project.");
+    toast(t("import.done", {}, "Premise document imported as a new local project."));
   } catch (error) {
-    toast(`Import stopped: ${error.message}`);
+    toast(t("import.stopped", { reason: translateText(error.message) }, `Import stopped: ${error.message}`));
   }
 }
 
 function importPatch(patch) {
   const validation = validatePatch(patch);
-  if (!validation.valid) throw new Error(validation.errors[0].message);
+  if (!validation.valid) throw new Error(translateIssue(validation.errors[0]));
   let targetState = state;
   let targetPatches = patches;
   if (!targetState?.baseDocument || targetState.baseDocument.meta.documentId !== patch.meta.baseDocumentId) {
@@ -1436,28 +1560,28 @@ function importPatch(patch) {
       const workspace = store.loadWorkspace(entry.documentId);
       return workspace?.state?.baseDocument?.meta.documentId === patch.meta.baseDocumentId;
     });
-    if (!project) throw new Error("No local Base matches this Override.");
+    if (!project) throw new Error(t("import.noBase", {}, "No local Base matches this Override."));
     const workspace = store.loadWorkspace(project.documentId);
     targetState = workspace.state;
     targetPatches = workspace.patches;
   }
-  if (targetPatches.some((entry) => entry.meta.patchId === patch.meta.patchId)) throw new Error("This Override is already stored with the project.");
+  if (targetPatches.some((entry) => entry.meta.patchId === patch.meta.patchId)) throw new Error(t("import.duplicateOverride", {}, "This Override is already stored with the project."));
   targetPatches.push(clone(patch));
   targetState.patchIds = targetPatches.map((entry) => entry.meta.patchId);
   store.saveWorkspace(targetState, targetPatches);
   state = targetState;
   patches = targetPatches;
-  configureBundle(state.document.meta.template.id);
+  configureBundle(state.document.meta.template.id, uiLocale);
   activeWorkspaceView = "overrides";
   showWorkspace();
-  toast("Override imported. Any Base mismatch is shown as a conflict.");
+  toast(t("import.overrideDone", {}, "Override imported. Any Base mismatch is shown as a conflict."));
 }
 
 function openDeleteDialog(documentId, projectName = null) {
   if (!documentId) return;
   pendingDeleteId = documentId;
   const project = store.listProjects().find((entry) => entry.documentId === documentId);
-  elements.deleteProjectName.textContent = projectName || project?.projectName || state?.document.meta.projectName || "this project";
+  elements.deleteProjectName.textContent = projectName || project?.projectName || state?.document.meta.projectName || translateText("this project");
   elements.deleteDialog.showModal();
 }
 
@@ -1470,7 +1594,7 @@ function confirmDeleteProject() {
   }
   pendingDeleteId = null;
   showHome();
-  toast(result.ok ? "The selected local project was deleted." : result.error);
+  toast(result.ok ? t("delete.done", {}, "The selected local project was deleted.") : result.error);
 }
 
 function markAndRebuild() {
@@ -1481,7 +1605,9 @@ function markAndRebuild() {
 
 function scheduleSave() {
   if (!state) return;
-  elements.saveState.textContent = store.available ? "Saving locally…" : "Session only — export recommended";
+  elements.saveState.textContent = store.available
+    ? t("storage.saving", {}, "Saving locally…")
+    : t("storage.sessionOnly", {}, "Session only — export recommended");
   elements.saveState.classList.toggle("error", !store.available);
   clearTimeout(saveTimer);
   saveTimer = setTimeout(persistNow, 350);
@@ -1491,7 +1617,7 @@ function persistNow() {
   clearTimeout(saveTimer);
   if (!state) return;
   const result = store.saveWorkspace(state, patches);
-  elements.saveState.textContent = result.ok ? "Saved in this browser" : result.error;
+  elements.saveState.textContent = result.ok ? t("storage.saved", {}, "Saved in this browser") : result.error;
   elements.saveState.classList.toggle("error", !result.ok);
 }
 
@@ -1511,7 +1637,7 @@ function fillFilter(select, options) {
   select.replaceChildren();
   const all = document.createElement("option");
   all.value = "";
-  all.textContent = "All";
+  all.textContent = t("filter.all", {}, "All");
   select.append(all);
   for (const item of options) {
     const option = document.createElement("option");
@@ -1529,8 +1655,8 @@ function shortValue(value, limit = 72) {
 }
 
 function formatDate(value) {
-  if (!value) return "unknown time";
-  try { return new Intl.DateTimeFormat("en", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)); }
+  if (!value) return t("time.unknown", {}, "unknown time");
+  try { return new Intl.DateTimeFormat(uiLocale === "ja" ? "ja-JP" : "en", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)); }
   catch { return value; }
 }
 

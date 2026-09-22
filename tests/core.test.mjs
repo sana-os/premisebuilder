@@ -60,6 +60,9 @@ test("confirming Base creates an immutable snapshot at revision one", () => {
   const state = makeState();
   const base = confirmBase(state, bundle);
   assert.equal(base.meta.revision, 1);
+  assert.equal(base.meta.confirmedAt, state.baseConfirmedAt);
+  assert.equal(state.baseConfirmationKnown, true);
+  assert.match(base.meta.confirmedAt, /^\d{4}-\d{2}-\d{2}T/);
   assert.equal(state.dirtySinceBase, false);
   assert.notEqual(base, state.document);
 });

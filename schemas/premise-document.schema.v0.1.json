@@ -187,6 +187,16 @@
           "type": "string",
           "format": "date-time"
         },
+        "confirmedAt": {
+          "description": "Time this exact Base revision was explicitly confirmed. Optional for legacy imports.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "importedAt": {
+          "description": "Time this local document copy was imported. This is not a Base confirmation time.",
+          "type": "string",
+          "format": "date-time"
+        },
         "promotedFromPatchIds": {
           "type": "array",
           "uniqueItems": true,
@@ -581,6 +591,11 @@
           }
         },
         "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "baseConfirmedAt": {
+          "description": "Confirmation time copied from the source Base when available.",
           "type": "string",
           "format": "date-time"
         }

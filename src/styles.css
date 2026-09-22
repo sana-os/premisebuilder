@@ -109,6 +109,10 @@ h1, h2, h3 { color: var(--ink); }
 .brand-name { font-weight: 800; letter-spacing: 0.01em; }
 .brand-meta { color: #9fb0c7; font-size: 0.78rem; }
 .topbar-actions { gap: 0.75rem; }
+.language-switcher { display: inline-flex; padding: 0.2rem; background: #182235; border: 1px solid #344157; border-radius: 999px; }
+.language-switcher a { min-height: 30px; padding: 0.35rem 0.65rem; color: #b8c4d7; border-radius: 999px; font-size: 0.78rem; font-weight: 760; text-decoration: none; }
+.language-switcher a[aria-current="page"] { color: #07111f; background: var(--accent-light); }
+:lang(ja) { line-break: strict; word-break: normal; }
 .privacy-badge, .status-pill, .document-status, .storage-state, .save-state {
   display: inline-flex;
   align-items: center;
@@ -384,6 +388,8 @@ pre { max-width: 100%; overflow: auto; color: #c9d5e7; background: #0c1525; bord
 .file-type { width: fit-content; padding: 0.2rem 0.45rem; color: var(--accent-strong); background: var(--accent-soft); border-radius: 4px; font-size: 0.68rem; font-weight: 850; }
 .inline-actions { flex-wrap: wrap; gap: 0.55rem; }
 .export-preview-panel { margin-block-start: 1rem; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); }
+.export-preview-panel .section-heading-row h2 { flex: 0 0 auto; white-space: nowrap; overflow-wrap: normal; }
+.export-preview-panel .section-heading-row select { min-width: 0; }
 .export-preview-panel pre { max-height: 500px; padding: 1rem; }
 
 dialog { width: min(560px, calc(100% - 2rem)); padding: 0; border: 0; border-radius: var(--radius-lg); box-shadow: 0 30px 90px rgba(5, 12, 25, 0.34); }
@@ -392,6 +398,9 @@ dialog::backdrop { background: rgba(5, 12, 25, 0.66); backdrop-filter: blur(3px)
 .dialog-card h2 { margin: 0; font-size: 1.5rem; }
 .dialog-card p { margin: 0; color: var(--ink-3); }
 .dialog-document { max-height: 80vh; overflow: auto; }
+.guide-dialog ol { display: grid; gap: 0.55rem; margin: 0; padding-inline-start: 1.4rem; color: var(--ink-2); }
+.guide-example { display: grid; gap: 0.55rem; padding: 1rem; background: var(--surface-2); border-radius: 10px; }
+.guide-example h3 { margin: 0; font-size: 1rem; }
 .toast { position: fixed; inset-inline-end: 1rem; inset-block-end: 1rem; z-index: 100; max-width: min(420px, calc(100% - 2rem)); padding: 0.85rem 1rem; color: white; background: var(--surface-dark); border: 1px solid #52627a; border-radius: 10px; box-shadow: var(--shadow); font-weight: 680; }
 
 @media (max-width: 1200px) {
@@ -422,6 +431,7 @@ dialog::backdrop { background: rgba(5, 12, 25, 0.66); backdrop-filter: blur(3px)
   .topbar { min-height: 62px; }
   .brand-mark { width: 36px; height: 36px; }
   .brand-meta, .topbar .button-quiet { display: none; }
+  .language-switcher a { padding-inline: 0.5rem; }
   .privacy-badge { font-size: 0.76rem; }
   .home-shell, .setup-shell, .workspace { width: min(100% - 1rem, 100%); }
   .home-shell { padding-block-start: 2rem; }
@@ -451,6 +461,11 @@ dialog::backdrop { background: rgba(5, 12, 25, 0.66); backdrop-filter: blur(3px)
   .diff-row { grid-template-columns: 1fr; }
   .dialog-actions, .form-actions { display: grid; grid-template-columns: 1fr; }
   .dialog-actions .button, .form-actions .button { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .privacy-badge { display: none; }
+  .brand-name { font-size: 0.86rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

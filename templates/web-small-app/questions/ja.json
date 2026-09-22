@@ -1,0 +1,1688 @@
+{
+  "templateId": "web-small-app",
+  "templateVersion": "0.1.0",
+  "locale": "ja",
+  "direction": "ltr",
+  "template": {
+    "name": "Webサイト・小規模Webアプリ",
+    "summary": "Webサイトまたは明確に範囲を限定したWebアプリケーションの作業前提を定義します。"
+  },
+  "answerContext": {
+    "answeringFrom": "回答元",
+    "recordedBy": "記録者",
+    "speakingAs": "回答時の役割",
+    "captureMethod": "取得方法",
+    "authority": "この回答の権限",
+    "confirmation": "情報源の確認状態",
+    "changeForQuestion": "この質問で変更",
+    "multiplePerspectives": "別の観点を追加"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "確定",
+      "description": "承認済みのプロジェクト前提として使用します。"
+    },
+    {
+      "value": "provisional",
+      "label": "暫定",
+      "description": "現時点では使用しますが、変更可能であることを明示します。"
+    },
+    {
+      "value": "unspecified",
+      "label": "未決定",
+      "description": "未決定のままにします。AIに暗黙の補完をさせません。"
+    },
+    {
+      "value": "proposal_requested",
+      "label": "提案を求める",
+      "description": "選択済みとは扱わず、代替案または推奨案を求めます。"
+    },
+    {
+      "value": "delegated",
+      "label": "範囲を定めて委任",
+      "description": "定めた範囲内で実装者またはAIに判断を任せ、選択結果の報告を求めます。"
+    },
+    {
+      "value": "not_applicable",
+      "label": "該当なし",
+      "description": "この質問をプロジェクトの対象外として扱います。"
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "この回答が表す観点と記録者を選択してください。",
+    "validation.speakingRoleMismatch": "選択した回答時の役割は、その参加者に割り当てられていません。",
+    "validation.inferenceUnconfirmed": "推測による回答は、権限のある人が確認するまで未確認のままにしてください。",
+    "validation.resolutionAuthorityRequired": "この前提の確定には、権限のある決定元が必要です。",
+    "validation.exclusiveChoice": "この選択肢は他の選択肢と組み合わせられません。",
+    "validation.noteRequired": "この選択について短い補足を入力してください。",
+    "validation.selectionLimit": "選択数を上限以内に減らしてください。",
+    "review.authRuntime": "認証が対象に含まれていますが、選択した実行モデルでは外部サービスまたはサーバーが必要になる可能性があります。",
+    "review.paymentHandling": "決済関連データが対象に含まれています。処理主体と、プロジェクトが保存できる範囲を確認してください。",
+    "review.analyticsPrivacy": "分析またはテレメトリが対象に含まれています。プライバシー境界、同意、禁止事項を再確認してください。"
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "プロジェクトの目的",
+      "description": "何を作るのか、なぜ重要なのか、現在どの段階にあるのかを定義します。",
+      "perspectiveHint": "依頼者または決定権者を優先してください。開発者による解釈は、別のContributionとして記録します。"
+    },
+    {
+      "id": "audience.context",
+      "label": "対象者と利用状況",
+      "description": "成果物を使う人と、その利用条件を説明します。",
+      "perspectiveHint": "可能な場合は、実際のエンドユーザーから得た情報と、プロジェクトチームの仮定を分けて記録します。"
+    },
+    {
+      "id": "scope.deliverables",
+      "label": "スコープと成果物",
+      "description": "リリース範囲、必要な画面・機能、除外事項を明示します。",
+      "perspectiveHint": "依頼者は希望する範囲を説明できます。開発者は実現可能性と実装上の影響を別に記録できます。"
+    },
+    {
+      "id": "content.data",
+      "label": "コンテンツとデータ",
+      "description": "コンテンツの責任者と、ユーザー入力データの取り扱いを明確にします。",
+      "perspectiveHint": "編集上の事実はコンテンツ責任者から、データ取り扱いは権限のある技術・プライバシー担当者から確認します。"
+    },
+    {
+      "id": "design.interaction",
+      "label": "デザインと操作",
+      "description": "視覚的な方向性と操作上の希望を、必須制約と混同せずに記録します。",
+      "perspectiveHint": "エンドユーザーの観察、依頼者の希望、デザイナーの提案を別々のContributionとして保持します。"
+    },
+    {
+      "id": "technology.runtime",
+      "label": "技術と実行環境",
+      "description": "技術スタックの自由度、実行時の境界、ブラウザ対応、外部サービスを定義します。",
+      "perspectiveHint": "開発者は実装案を提示できます。その案が助言なのか、権限を伴う技術判断なのかを記録します。"
+    },
+    {
+      "id": "quality.accessibility",
+      "label": "品質とアクセシビリティ",
+      "description": "アクセシビリティ、レスポンシブ対応、性能の期待水準を定めます。",
+      "perspectiveHint": "観察された利用者ニーズと技術・コンプライアンス上の権限を組み合わせ、一方で他方を置き換えないようにします。"
+    },
+    {
+      "id": "risk.boundaries",
+      "label": "リスクと境界",
+      "description": "起きてはならないことと、高コストになる障害を明示します。",
+      "perspectiveHint": "禁止事項は、決定権者または該当分野の権限者に確認します。"
+    },
+    {
+      "id": "delivery.operations",
+      "label": "デリバリーと運用",
+      "description": "ホスティング、デプロイ、保守、引き継ぎの期待を定義します。",
+      "perspectiveHint": "保守担当者の運用要件と、開発者が望む作業手順を分けて記録します。"
+    },
+    {
+      "id": "acceptance.validation",
+      "label": "受入と検証",
+      "description": "誰が成果物を受け入れ、何を完了の証拠とするかを定義します。",
+      "perspectiveHint": "最終Resolutionは、リリースを受け入れる権限を持つ人またはグループが決定します。"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.project_kind",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "何を作りますか？",
+      "help": "このリリースに最も近い形を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "informational_site",
+          "label": "情報提供サイト"
+        },
+        {
+          "value": "landing_page",
+          "label": "ランディングページ"
+        },
+        {
+          "value": "portfolio",
+          "label": "ポートフォリオ"
+        },
+        {
+          "value": "public_content_site",
+          "label": "公開コンテンツサイト"
+        },
+        {
+          "value": "browser_local_utility",
+          "label": "ブラウザ内で動作するユーティリティ"
+        },
+        {
+          "value": "small_web_app",
+          "label": "小規模Webアプリケーション"
+        },
+        {
+          "value": "mixed",
+          "label": "複数の形を含むリリース",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.primary_outcome",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "このリリースで実現すべき主な成果は何ですか？",
+      "help": "トレードオフが必要なときに優先する成果を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "explain_information",
+          "label": "情報を理解できるようにする"
+        },
+        {
+          "value": "generate_leads",
+          "label": "問い合わせや見込み客を獲得する"
+        },
+        {
+          "value": "showcase_work",
+          "label": "実績や能力を紹介する"
+        },
+        {
+          "value": "complete_workflow",
+          "label": "利用者が一連の作業を完了できるようにする"
+        },
+        {
+          "value": "provide_utility",
+          "label": "目的を絞ったツールを提供する"
+        },
+        {
+          "value": "publish_content",
+          "label": "コンテンツを公開・整理する"
+        },
+        {
+          "value": "validate_idea",
+          "label": "アイデアや試作品を検証する"
+        },
+        {
+          "value": "other",
+          "label": "その他の成果",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "プロジェクトは現在どの段階ですか？",
+      "help": "既存の動作を新規作成、維持、拡張、修復のどれとして扱うかが変わります。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "新規開発"
+        },
+        {
+          "value": "redesign",
+          "label": "再設計"
+        },
+        {
+          "value": "extension",
+          "label": "拡張"
+        },
+        {
+          "value": "repair",
+          "label": "修復"
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.success_evidence",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "どのような観測可能な結果があれば、このリリースに価値があったと言えますか？",
+      "help": "一般的な願望ではなく、確認できる証拠を記述してください。短い回答で構いません。",
+      "responseType": "long-text",
+      "placeholder": "例：初めて訪れた人が、助けを借りずに内容を理解して問い合わせを送信できる。"
+    },
+    {
+      "questionId": "audience.context.primary_group",
+      "category": "audience.context",
+      "order": 50,
+      "prompt": "主な対象者は誰ですか？",
+      "help": "最初のリリースでニーズを優先するグループを選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "general_public",
+          "label": "一般の利用者"
+        },
+        {
+          "value": "prospective_customers",
+          "label": "見込み顧客"
+        },
+        {
+          "value": "existing_customers",
+          "label": "既存顧客"
+        },
+        {
+          "value": "internal_staff",
+          "label": "社内スタッフ"
+        },
+        {
+          "value": "professionals",
+          "label": "専門職・実務担当者"
+        },
+        {
+          "value": "creators",
+          "label": "制作者・寄稿者"
+        },
+        {
+          "value": "students_researchers",
+          "label": "学生・研究者"
+        },
+        {
+          "value": "defined_community",
+          "label": "特定のコミュニティ"
+        },
+        {
+          "value": "mixed",
+          "label": "複数のグループを同等に重視",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "その他の対象者",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.relationship",
+      "category": "audience.context",
+      "order": 60,
+      "prompt": "多くの利用者は、このプロジェクトとどのような関係にありますか？",
+      "help": "初期案内、説明量、ナビゲーションの深さを決める手掛かりになります。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "first_time_visitors",
+          "label": "主に初回訪問者"
+        },
+        {
+          "value": "occasional_visitors",
+          "label": "時々訪れる利用者"
+        },
+        {
+          "value": "returning_users",
+          "label": "継続的に利用する人"
+        },
+        {
+          "value": "authenticated_members",
+          "label": "認証済みメンバー"
+        },
+        {
+          "value": "known_internal_users",
+          "label": "既知の社内利用者"
+        },
+        {
+          "value": "mixed",
+          "label": "複数の関係が混在"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.domain_familiarity",
+      "category": "audience.context",
+      "order": 70,
+      "prompt": "主な対象者は、この分野にどの程度詳しいですか？",
+      "help": "可能な限り、観察または本人から得た知識レベルを基に回答してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "事前知識を前提としない"
+        },
+        {
+          "value": "basic",
+          "label": "基本的な知識がある"
+        },
+        {
+          "value": "working",
+          "label": "実務で使える知識がある"
+        },
+        {
+          "value": "expert",
+          "label": "専門知識がある"
+        },
+        {
+          "value": "mixed",
+          "label": "知識レベルが大きく異なる"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.primary_context",
+      "category": "audience.context",
+      "order": 80,
+      "prompt": "プロジェクトはどのような状況で利用されますか？",
+      "help": "デザインや実装に実質的な影響がある条件をすべて選択してください。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "mobile_on_move",
+          "label": "移動中のモバイル利用"
+        },
+        {
+          "value": "mobile_stationary",
+          "label": "静止した状態でのモバイル利用"
+        },
+        {
+          "value": "desktop_office",
+          "label": "職場でのデスクトップ利用"
+        },
+        {
+          "value": "desktop_home",
+          "label": "自宅でのデスクトップ利用"
+        },
+        {
+          "value": "tablet_or_kiosk",
+          "label": "タブレットまたはキオスク"
+        },
+        {
+          "value": "constrained_network",
+          "label": "低速または不安定なネットワーク"
+        },
+        {
+          "value": "assistive_technology",
+          "label": "支援技術の利用"
+        },
+        {
+          "value": "mixed",
+          "label": "混在または予測困難な状況"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.required_surfaces",
+      "category": "scope.deliverables",
+      "order": 90,
+      "prompt": "このリリースに必要な画面・機能領域はどれですか？",
+      "help": "将来追加できるものではなく、このリリースに必須のものだけを選択してください。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "home_or_entry",
+          "label": "ホームまたは入口画面"
+        },
+        {
+          "value": "content_pages",
+          "label": "コンテンツページ"
+        },
+        {
+          "value": "listing_or_index",
+          "label": "一覧または索引"
+        },
+        {
+          "value": "detail_views",
+          "label": "詳細画面"
+        },
+        {
+          "value": "form",
+          "label": "フォーム"
+        },
+        {
+          "value": "dashboard",
+          "label": "ダッシュボードまたはワークスペース"
+        },
+        {
+          "value": "settings",
+          "label": "設定"
+        },
+        {
+          "value": "authentication",
+          "label": "サインインまたはアカウントフロー"
+        },
+        {
+          "value": "admin",
+          "label": "管理画面"
+        },
+        {
+          "value": "legal",
+          "label": "法務・方針ページ"
+        },
+        {
+          "value": "error_empty_states",
+          "label": "エラー状態と空状態"
+        },
+        {
+          "value": "other",
+          "label": "その他の必須領域",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.primary_user_action",
+      "category": "scope.deliverables",
+      "order": 100,
+      "prompt": "利用者が完了できるべき最も重要な操作は何ですか？",
+      "help": "主要フローを定義する操作を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "read_or_understand",
+          "label": "読む・理解する"
+        },
+        {
+          "value": "navigate_or_discover",
+          "label": "コンテンツを探す・移動する"
+        },
+        {
+          "value": "submit_form",
+          "label": "フォームを送信する"
+        },
+        {
+          "value": "search_or_filter",
+          "label": "検索・絞り込みを行う"
+        },
+        {
+          "value": "create_or_edit",
+          "label": "何かを作成・編集する"
+        },
+        {
+          "value": "calculate_or_transform",
+          "label": "データを計算・変換する"
+        },
+        {
+          "value": "upload_or_download",
+          "label": "アップロード・ダウンロードする"
+        },
+        {
+          "value": "manage_account",
+          "label": "サインイン・アカウント管理を行う"
+        },
+        {
+          "value": "purchase_or_pay",
+          "label": "購入・支払いを行う"
+        },
+        {
+          "value": "other",
+          "label": "その他の主要操作",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.release_boundary",
+      "category": "scope.deliverables",
+      "order": 110,
+      "prompt": "最初のリリース範囲をどのように区切りますか？",
+      "help": "現時点で最も明確な境界を選択してください。曖昧な境界は未決定として見える状態にします。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "single_page",
+          "label": "1ページ"
+        },
+        {
+          "value": "small_fixed_set",
+          "label": "少数の固定ページ"
+        },
+        {
+          "value": "bounded_app_flow",
+          "label": "明確に区切られた1つのアプリフロー"
+        },
+        {
+          "value": "existing_scope_redesign",
+          "label": "現在の製品範囲を再設計"
+        },
+        {
+          "value": "specific_repair",
+          "label": "特定の修復のみ"
+        },
+        {
+          "value": "phased_mvp",
+          "label": "定義済みのMVP段階"
+        },
+        {
+          "value": "not_yet_bounded",
+          "label": "範囲はまだ明確でない"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.explicit_exclusions",
+      "category": "scope.deliverables",
+      "order": 120,
+      "prompt": "このリリースで明示的に対象外とするものは何ですか？",
+      "help": "新しい決定なしに作業へ入れてはならない、追加候補や暗黙の前提を列挙してください。",
+      "responseType": "long-text",
+      "placeholder": "例：最初のリリースでは、アカウント、サーバーデータベース、決済、CMSを含めない。"
+    },
+    {
+      "questionId": "content.data.source_owner",
+      "category": "content.data",
+      "order": 130,
+      "prompt": "プロジェクトのコンテンツは誰が担当しますか？",
+      "help": "文章、メディア、元情報を提供または承認する主体を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "owner_supplies_final",
+          "label": "プロジェクト所有者が完成コンテンツを提供"
+        },
+        {
+          "value": "owner_supplies_draft",
+          "label": "プロジェクト所有者が草案を提供"
+        },
+        {
+          "value": "developer_structures",
+          "label": "開発者が提供資料を構成"
+        },
+        {
+          "value": "developer_writes_from_brief",
+          "label": "開発者が承認済みの概要から作成"
+        },
+        {
+          "value": "shared_responsibility",
+          "label": "共同で担当"
+        },
+        {
+          "value": "migrate_existing",
+          "label": "既存コンテンツを移行"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "未割り当て"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.readiness",
+      "category": "content.data",
+      "order": 140,
+      "prompt": "コンテンツはどの程度準備できていますか？",
+      "help": "公開時の見込みではなく、現在利用できる資料を評価してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "final",
+          "label": "完成・承認済み"
+        },
+        {
+          "value": "mostly_ready",
+          "label": "ほぼ準備済み"
+        },
+        {
+          "value": "partial",
+          "label": "一部のみ利用可能"
+        },
+        {
+          "value": "source_material_only",
+          "label": "元資料のみ存在"
+        },
+        {
+          "value": "not_started",
+          "label": "未着手"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.user_input_types",
+      "category": "content.data",
+      "order": 150,
+      "prompt": "どのようなユーザーデータがシステムに入りますか？",
+      "help": "テレメトリを含め、リリースが意図して受け取るデータ種別をすべて選択してください。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "ユーザーデータなし",
+          "exclusive": true
+        },
+        {
+          "value": "contact_details",
+          "label": "連絡先情報"
+        },
+        {
+          "value": "account_profile",
+          "label": "アカウント・プロフィール情報"
+        },
+        {
+          "value": "free_text",
+          "label": "自由記述"
+        },
+        {
+          "value": "files",
+          "label": "アップロードファイル"
+        },
+        {
+          "value": "payment_related",
+          "label": "決済関連データ"
+        },
+        {
+          "value": "analytics_telemetry",
+          "label": "分析・テレメトリ"
+        },
+        {
+          "value": "location_device",
+          "label": "位置・端末データ"
+        },
+        {
+          "value": "other",
+          "label": "その他のデータ種別",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.storage",
+      "category": "content.data",
+      "order": 160,
+      "prompt": "プロジェクトデータまたはユーザー入力データをどこに保存できますか？",
+      "help": "現時点で最も厳しい境界を選択してください。Premise Builder自体ではなく、定義対象の製品について答えます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_user_data",
+          "label": "ユーザーデータを保存しない"
+        },
+        {
+          "value": "session_only",
+          "label": "現在のセッション中のみ"
+        },
+        {
+          "value": "browser_local_only",
+          "label": "利用者のブラウザ内のみ"
+        },
+        {
+          "value": "server_storage_allowed",
+          "label": "プロジェクト管理下のサーバー保存を許可"
+        },
+        {
+          "value": "third_party_storage",
+          "label": "承認済み第三者による保存を許可"
+        },
+        {
+          "value": "hybrid",
+          "label": "ローカル、サーバー、第三者保存を定義済みの形で併用",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.retention",
+      "category": "content.data",
+      "order": 170,
+      "prompt": "保持するユーザーデータをいつまで残せますか？",
+      "help": "永続する可能性のあるデータをプロジェクトが受け取る場合に表示されます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_retention",
+          "label": "保持しない"
+        },
+        {
+          "value": "until_session_ends",
+          "label": "セッション終了まで"
+        },
+        {
+          "value": "until_local_deletion",
+          "label": "利用者がローカルデータを削除するまで"
+        },
+        {
+          "value": "fixed_period",
+          "label": "定めた期間",
+          "requiresNote": true
+        },
+        {
+          "value": "account_lifetime",
+          "label": "アカウントの存続期間"
+        },
+        {
+          "value": "governed_by_policy",
+          "label": "承認済み方針に従う",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.tone",
+      "category": "design.interaction",
+      "order": 180,
+      "prompt": "デザインを導く視覚的な特性はどれですか？",
+      "help": "最大3つ選択してください。別の制約で必須とされない限り、これらは希望として扱います。",
+      "responseType": "multi-choice",
+      "maxSelections": 3,
+      "choices": [
+        {
+          "value": "minimal",
+          "label": "最小限"
+        },
+        {
+          "value": "editorial",
+          "label": "編集的"
+        },
+        {
+          "value": "technical",
+          "label": "技術的"
+        },
+        {
+          "value": "playful",
+          "label": "遊び心がある"
+        },
+        {
+          "value": "premium",
+          "label": "上質"
+        },
+        {
+          "value": "warm",
+          "label": "温かみがある"
+        },
+        {
+          "value": "institutional",
+          "label": "組織的"
+        },
+        {
+          "value": "bold",
+          "label": "力強い"
+        },
+        {
+          "value": "quiet",
+          "label": "落ち着いた"
+        },
+        {
+          "value": "brand_led",
+          "label": "既存ブランドを基準にする"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.brand_source",
+      "category": "design.interaction",
+      "order": 190,
+      "prompt": "プロジェクトはどの視覚システムに従いますか？",
+      "help": "現在利用できる最も権威のある情報源を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed_design_system",
+          "label": "固定のデザインシステム"
+        },
+        {
+          "value": "existing_brand_guidelines",
+          "label": "既存のブランドガイドライン"
+        },
+        {
+          "value": "partial_assets",
+          "label": "一部のブランド素材"
+        },
+        {
+          "value": "visual_reference_only",
+          "label": "参考例のみ"
+        },
+        {
+          "value": "no_existing_brand",
+          "label": "既存の視覚システムなし"
+        },
+        {
+          "value": "preserve_current_ui",
+          "label": "現在のインターフェースを維持"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.information_density",
+      "category": "design.interaction",
+      "order": 200,
+      "prompt": "一度にどの程度の情報を表示しますか？",
+      "help": "好みだけでなく、主要タスクと対象者に基づいて選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sparse_guided",
+          "label": "情報を絞って案内を重視"
+        },
+        {
+          "value": "balanced",
+          "label": "バランス型"
+        },
+        {
+          "value": "dense_operational",
+          "label": "高密度で運用重視"
+        },
+        {
+          "value": "progressive_disclosure",
+          "label": "詳細を段階的に表示"
+        },
+        {
+          "value": "varies_by_view",
+          "label": "画面ごとに変える",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.motion",
+      "category": "design.interaction",
+      "order": 210,
+      "prompt": "動きをどのように使用しますか？",
+      "help": "動きによって状態を分かりにくくしたり、動きの抑制設定を妨げたりしてはいけません。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不要な動きは使用しない"
+        },
+        {
+          "value": "subtle_feedback",
+          "label": "控えめな状態フィードバックのみ"
+        },
+        {
+          "value": "moderate_transitions",
+          "label": "適度なトランジション"
+        },
+        {
+          "value": "expressive",
+          "label": "有効な場面で表現的な動きを使用"
+        },
+        {
+          "value": "reduced_motion_first",
+          "label": "動きの抑制を優先"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.stack_policy",
+      "category": "technology.runtime",
+      "order": 220,
+      "prompt": "実装スタックはどの程度固定されていますか？",
+      "help": "固定スタックは制約です。推奨スタックには、妥当な理由があれば代替案を認めます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "固定スタック",
+          "requiresNote": true
+        },
+        {
+          "value": "preferred_negotiable",
+          "label": "希望はあるが変更可能",
+          "requiresNote": true
+        },
+        {
+          "value": "open_to_recommendation",
+          "label": "提案を受け付ける"
+        },
+        {
+          "value": "preserve_existing",
+          "label": "既存スタックを維持"
+        },
+        {
+          "value": "static_files_only",
+          "label": "単純な静的ファイルのみ"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.mode",
+      "category": "technology.runtime",
+      "order": 230,
+      "prompt": "製品はどの実行モデルを使用できますか？",
+      "help": "デプロイ後の製品が実行時に依存できるものを選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fully_static",
+          "label": "完全な静的サイト"
+        },
+        {
+          "value": "browser_local",
+          "label": "静的サイト＋ブラウザ内状態"
+        },
+        {
+          "value": "static_external_apis",
+          "label": "静的フロントエンド＋承認済み外部API"
+        },
+        {
+          "value": "server_backed",
+          "label": "サーバーを使用するアプリケーション"
+        },
+        {
+          "value": "hybrid",
+          "label": "複合型の実行モデル",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.browser_support",
+      "category": "technology.runtime",
+      "order": 240,
+      "prompt": "どのブラウザ対応範囲を適用しますか？",
+      "help": "すべてのブラウザを約束するのではなく、検証可能な方針を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "evergreen_current",
+          "label": "現在の主要な自動更新ブラウザ"
+        },
+        {
+          "value": "recent_two_versions",
+          "label": "現在および過去2メジャーバージョン"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "最新モバイルブラウザを優先"
+        },
+        {
+          "value": "enterprise_legacy",
+          "label": "企業向け・旧式ブラウザが必要",
+          "requiresNote": true
+        },
+        {
+          "value": "specified_matrix",
+          "label": "提示されたブラウザ一覧を使用",
+          "requiresNote": true
+        },
+        {
+          "value": "no_special_constraint",
+          "label": "合理的な最新ブラウザ対応以外の特別な制約なし"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.external_services",
+      "category": "technology.runtime",
+      "order": 250,
+      "prompt": "どの外部サービスが必要ですか？",
+      "help": "リリースに必要なサービスを選択してください。承認、認証情報、データ境界は別途決定します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "外部サービスなし",
+          "exclusive": true
+        },
+        {
+          "value": "cms",
+          "label": "コンテンツ管理システム"
+        },
+        {
+          "value": "analytics",
+          "label": "アクセス解析"
+        },
+        {
+          "value": "authentication",
+          "label": "認証プロバイダー"
+        },
+        {
+          "value": "payments",
+          "label": "決済プロバイダー"
+        },
+        {
+          "value": "email_forms",
+          "label": "メール・フォーム送信"
+        },
+        {
+          "value": "maps",
+          "label": "地図・位置情報サービス"
+        },
+        {
+          "value": "ai_api",
+          "label": "AIサービス・API"
+        },
+        {
+          "value": "other",
+          "label": "その他のサービス",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.discoverability",
+      "category": "technology.runtime",
+      "order": 260,
+      "prompt": "プロジェクトをどのように発見できる状態にしますか？",
+      "help": "検索インデックスと機械可読な公開情報を要件とするかを決めます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "public_search_critical",
+          "label": "公開検索での発見が必須"
+        },
+        {
+          "value": "public_search_helpful",
+          "label": "公開検索で見つかるとよい"
+        },
+        {
+          "value": "direct_link_only",
+          "label": "直接リンクで十分"
+        },
+        {
+          "value": "private_noindex",
+          "label": "非公開またはnoindex"
+        },
+        {
+          "value": "app_shell",
+          "label": "公開アプリシェルのみ索引対象"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.target",
+      "category": "quality.accessibility",
+      "order": 270,
+      "prompt": "どのアクセシビリティ目標を適用しますか？",
+      "help": "レビュー時に根拠を示せる水準を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "semantic_baseline",
+          "label": "意味構造と操作性の基礎水準"
+        },
+        {
+          "value": "wcag_aa",
+          "label": "WCAG AAを目標"
+        },
+        {
+          "value": "legal_contractual",
+          "label": "法令または契約上の基準",
+          "requiresNote": true
+        },
+        {
+          "value": "best_effort",
+          "label": "明示した範囲内で最善を尽くす",
+          "requiresNote": true
+        },
+        {
+          "value": "specific_requirements",
+          "label": "提示されたアクセシビリティ要件を使用",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.keyboard",
+      "category": "quality.accessibility",
+      "order": 280,
+      "prompt": "どの程度のキーボード操作が必要ですか？",
+      "help": "キーボード対応には、フォーカスの視認性、論理的な順序、操作可能なコントロールが含まれます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "all_controls",
+          "label": "すべてのコントロールとフロー"
+        },
+        {
+          "value": "primary_flow",
+          "label": "少なくとも主要フロー"
+        },
+        {
+          "value": "content_navigation",
+          "label": "コンテンツの移動のみ"
+        },
+        {
+          "value": "fixed_pointer_environment",
+          "label": "固定されたポインター専用環境",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.responsive",
+      "category": "quality.accessibility",
+      "order": 290,
+      "prompt": "どのレスポンシブ優先度を適用しますか？",
+      "help": "対応しない表示幅を明示しつつ、意図するバランスを選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mobile_desktop_equal",
+          "label": "モバイルとデスクトップを同等に重視"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "モバイルを優先"
+        },
+        {
+          "value": "desktop_priority",
+          "label": "デスクトップを優先"
+        },
+        {
+          "value": "fixed_environment",
+          "label": "固定の表示環境",
+          "requiresNote": true
+        },
+        {
+          "value": "preserve_current_behavior",
+          "label": "現在のレスポンシブ動作を維持"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.performance",
+      "category": "quality.accessibility",
+      "order": 300,
+      "prompt": "どの性能基準をトレードオフ判断に使用しますか？",
+      "help": "プロジェクトが検証できる範囲で、最も有用で厳しい基準を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "core_web_vitals",
+          "label": "合意したCore Web Vitals目標を満たす"
+        },
+        {
+          "value": "constrained_network",
+          "label": "制約のあるネットワークでも利用可能"
+        },
+        {
+          "value": "balanced",
+          "label": "速度と機能の深さを両立"
+        },
+        {
+          "value": "feature_priority",
+          "label": "必要な機能を速度より優先する場合がある"
+        },
+        {
+          "value": "explicit_budget",
+          "label": "提示されたパフォーマンス予算を使用",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.prohibited_practices",
+      "category": "risk.boundaries",
+      "order": 310,
+      "prompt": "禁止する慣行はどれですか？",
+      "help": "必須の境界だけを選択してください。希望は該当カテゴリに記録します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "既知の禁止事項なし",
+          "exclusive": true
+        },
+        {
+          "value": "inline_css",
+          "label": "インラインCSS"
+        },
+        {
+          "value": "external_fonts",
+          "label": "外部読み込みフォント"
+        },
+        {
+          "value": "behavioral_tracking",
+          "label": "行動追跡"
+        },
+        {
+          "value": "nonessential_cookies",
+          "label": "必須でないCookie"
+        },
+        {
+          "value": "unapproved_cdn",
+          "label": "未承認の外部CDN"
+        },
+        {
+          "value": "client_side_secrets",
+          "label": "クライアント側コード内の秘密情報"
+        },
+        {
+          "value": "autoplay_media",
+          "label": "メディアの自動再生"
+        },
+        {
+          "value": "unconfirmed_destructive_actions",
+          "label": "確認なしの破壊的操作"
+        },
+        {
+          "value": "vendor_lock_in",
+          "label": "ベンダーロックイン"
+        },
+        {
+          "value": "other",
+          "label": "その他の禁止事項",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.privacy_level",
+      "category": "risk.boundaries",
+      "order": 320,
+      "prompt": "対象範囲で最も高いプライバシー機密度はどれですか？",
+      "help": "平均的なデータではなく、意図するデータフローのうち最も機密性の高いものを基に選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "個人データなし"
+        },
+        {
+          "value": "low_nonsensitive",
+          "label": "低リスクで機密性の低い個人データ"
+        },
+        {
+          "value": "personal_data",
+          "label": "個人データ"
+        },
+        {
+          "value": "sensitive_data",
+          "label": "機微な個人データ"
+        },
+        {
+          "value": "regulated_data",
+          "label": "規制対象または特別に保護されるデータ",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "機密度がまだ不明"
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.high_cost_failure",
+      "category": "risk.boundaries",
+      "order": 330,
+      "prompt": "どの障害が最も大きな損失につながりますか？",
+      "help": "設計、レビュー、実装の優先度を変えるべき障害を選択してください。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "no_unusual_cost",
+          "label": "特別に高コストな障害なし",
+          "exclusive": true
+        },
+        {
+          "value": "data_loss",
+          "label": "データ消失"
+        },
+        {
+          "value": "privacy_breach",
+          "label": "プライバシー・セキュリティ侵害"
+        },
+        {
+          "value": "inaccessible_primary_flow",
+          "label": "主要フローをアクセシブルに利用できない"
+        },
+        {
+          "value": "wrong_information",
+          "label": "誤った、または誤解を招く情報"
+        },
+        {
+          "value": "downtime",
+          "label": "停止・利用不能"
+        },
+        {
+          "value": "performance_failure",
+          "label": "性能低下"
+        },
+        {
+          "value": "brand_damage",
+          "label": "ブランド・信頼の毀損"
+        },
+        {
+          "value": "scope_overrun",
+          "label": "スコープ・コスト超過"
+        },
+        {
+          "value": "other",
+          "label": "その他の高コスト障害",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.compliance",
+      "category": "risk.boundaries",
+      "order": 340,
+      "prompt": "どのコンプライアンス情報源が適用されますか？",
+      "help": "既知の情報源を選択してください。該当する場合は、正確な規格・方針をメモに記録します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "既知のコンプライアンス要件なし",
+          "exclusive": true
+        },
+        {
+          "value": "privacy_law",
+          "label": "プライバシー法令・規制",
+          "requiresNote": true
+        },
+        {
+          "value": "cookie_consent",
+          "label": "Cookie・同意要件",
+          "requiresNote": true
+        },
+        {
+          "value": "accessibility_law",
+          "label": "アクセシビリティ法令・規格",
+          "requiresNote": true
+        },
+        {
+          "value": "copyright_licensing",
+          "label": "著作権・ライセンス規則",
+          "requiresNote": true
+        },
+        {
+          "value": "industry_specific",
+          "label": "業界固有の規則",
+          "requiresNote": true
+        },
+        {
+          "value": "organization_policy",
+          "label": "組織の方針",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "その他のコンプライアンス情報源",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.hosting",
+      "category": "delivery.operations",
+      "order": 350,
+      "prompt": "リリースはどこでホストする予定ですか？",
+      "help": "デプロイ詳細が暫定的でも、現在の対象を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "github_pages",
+          "label": "GitHub Pages"
+        },
+        {
+          "value": "cloudflare_pages",
+          "label": "Cloudflare Pages"
+        },
+        {
+          "value": "other_static_host",
+          "label": "その他の静的ホスト",
+          "requiresNote": true
+        },
+        {
+          "value": "cloud_application_platform",
+          "label": "クラウドアプリケーション基盤",
+          "requiresNote": true
+        },
+        {
+          "value": "existing_environment",
+          "label": "既存の管理環境",
+          "requiresNote": true
+        },
+        {
+          "value": "local_only",
+          "label": "ローカル利用のみ"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.deployment_workflow",
+      "category": "delivery.operations",
+      "order": 360,
+      "prompt": "リリースをどのようにデプロイしますか？",
+      "help": "保守担当者が実際に運用できる手順を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "manual_upload",
+          "label": "手動アップロード"
+        },
+        {
+          "value": "git_push_automatic",
+          "label": "Git pushから自動デプロイ"
+        },
+        {
+          "value": "pull_request_gate",
+          "label": "デプロイ前にPull Requestレビュー"
+        },
+        {
+          "value": "platform_cli",
+          "label": "プラットフォームのCLIでデプロイ"
+        },
+        {
+          "value": "existing_ci",
+          "label": "既存のCI/CDワークフロー",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.maintenance_owner",
+      "category": "delivery.operations",
+      "order": 370,
+      "prompt": "リリース後は誰がプロジェクトを保守しますか？",
+      "help": "成果物を理解して運用できる必要がある役割を記録してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "original_developer",
+          "label": "元の開発者"
+        },
+        {
+          "value": "internal_team",
+          "label": "社内チーム"
+        },
+        {
+          "value": "client_or_owner",
+          "label": "依頼者またはプロジェクト所有者"
+        },
+        {
+          "value": "shared",
+          "label": "共同保守"
+        },
+        {
+          "value": "no_regular_maintenance",
+          "label": "定期保守の予定なし"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "未割り当て"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.handoff",
+      "category": "delivery.operations",
+      "order": 380,
+      "prompt": "どの引き継ぎレベルが必要ですか？",
+      "help": "次の保守担当者が安全に作業できる最小の構成を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "source_only",
+          "label": "ソースファイルのみ"
+        },
+        {
+          "value": "source_readme",
+          "label": "ソースファイルとREADME"
+        },
+        {
+          "value": "docs_and_tests",
+          "label": "ソース、文書、テスト"
+        },
+        {
+          "value": "operational_runbook",
+          "label": "文書と運用手順書"
+        },
+        {
+          "value": "full_transfer",
+          "label": "所有権とアクセス権の完全移管"
+        },
+        {
+          "value": "ongoing_support",
+          "label": "継続的なサポート契約"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.approver",
+      "category": "acceptance.validation",
+      "order": 390,
+      "prompt": "リリースを受け入れる権限を持つのは誰ですか？",
+      "help": "レビュー作業を行う人ではなく、承認する役割を選択してください。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "decision_owner",
+          "label": "決定権者"
+        },
+        {
+          "value": "requester",
+          "label": "依頼者・クライアント"
+        },
+        {
+          "value": "end_user_representative",
+          "label": "エンドユーザー代表"
+        },
+        {
+          "value": "technical_reviewer",
+          "label": "技術レビュー担当"
+        },
+        {
+          "value": "compliance_reviewer",
+          "label": "コンプライアンスレビュー担当"
+        },
+        {
+          "value": "multiple_approvers",
+          "label": "複数の承認者",
+          "requiresNote": true
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "未割り当て"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.review_method",
+      "category": "acceptance.validation",
+      "order": 400,
+      "prompt": "受入にはどの証拠を使用しますか？",
+      "help": "主要なレビュー方法を選択してください。補足証拠はコンテキストに追加できます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "visual_review",
+          "label": "視覚レビュー"
+        },
+        {
+          "value": "requirements_checklist",
+          "label": "要件チェックリスト"
+        },
+        {
+          "value": "scenario_demonstration",
+          "label": "シナリオ実演"
+        },
+        {
+          "value": "automated_tests",
+          "label": "自動テスト結果"
+        },
+        {
+          "value": "accessibility_audit",
+          "label": "アクセシビリティ監査"
+        },
+        {
+          "value": "performance_audit",
+          "label": "性能監査"
+        },
+        {
+          "value": "combined",
+          "label": "定義済みの組み合わせ",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.must_pass_scenarios",
+      "category": "acceptance.validation",
+      "order": 410,
+      "prompt": "リリース前に成功必須のシナリオはどれですか？",
+      "help": "失敗した場合に受入を止めるシナリオを選択してください。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "primary_content",
+          "label": "主要コンテンツを理解できる"
+        },
+        {
+          "value": "primary_action",
+          "label": "主要な利用者操作を完了できる"
+        },
+        {
+          "value": "form_submission",
+          "label": "フォーム送信が成功する"
+        },
+        {
+          "value": "local_persistence",
+          "label": "ローカル保存と再読み込みが動作する"
+        },
+        {
+          "value": "authentication",
+          "label": "認証フローが動作する"
+        },
+        {
+          "value": "payment",
+          "label": "決済フローが動作する"
+        },
+        {
+          "value": "keyboard",
+          "label": "必要なキーボード操作が動作する"
+        },
+        {
+          "value": "mobile",
+          "label": "必要なモバイル操作が動作する"
+        },
+        {
+          "value": "import_export",
+          "label": "Import・Exportでデータが保持される"
+        },
+        {
+          "value": "failure_recovery",
+          "label": "障害発生時と復旧の動作が機能する"
+        },
+        {
+          "value": "other",
+          "label": "その他の成功必須シナリオ",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.unresolved_policy",
+      "category": "acceptance.validation",
+      "order": 420,
+      "prompt": "未解決の前提を作業にどう反映しますか？",
+      "help": "既定の方針を選択してください。個別のUnknownには別の明示的状態を設定できます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "block_dependent_work",
+          "label": "依存する作業を止める"
+        },
+        {
+          "value": "provisional_with_label",
+          "label": "暫定であることを明示して進める"
+        },
+        {
+          "value": "proposal_before_work",
+          "label": "依存作業の前に提案を求める"
+        },
+        {
+          "value": "delegate_with_bounds",
+          "label": "範囲を明示して委任する"
+        },
+        {
+          "value": "document_and_continue",
+          "label": "未決定事項を記録し、独立した作業を続ける"
+        },
+        {
+          "value": "case_by_case",
+          "label": "個別に判断する"
+        }
+      ]
+    }
+  ]
+}

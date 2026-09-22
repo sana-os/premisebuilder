@@ -133,9 +133,14 @@ export function applyPatches(baseDocument, patches = []) {
     baseDocumentId: baseDocument.meta.documentId,
     baseRevision: baseDocument.meta.revision,
     patchIds: appliedPatchIds,
+    ...(baseDocument.meta.confirmedAt ? { baseConfirmedAt: baseDocument.meta.confirmedAt } : {}),
     generatedAt: new Date().toISOString()
   };
-  unified.meta.updatedAt = unified.derivedFrom.generatedAt;
+  const appliedPatchTimes = patches
+    .filter((patch) => appliedPatchIds.includes(patch.meta.patchId))
+    .map((patch) => patch.meta.updatedAt)
+    .filter(Boolean);
+  unified.meta.updatedAt = [baseDocument.meta.updatedAt, ...appliedPatchTimes].sort().at(-1);
   unified.conflicts = [...baseConflicts, ...conflicts];
   return { unified, conflicts, rows };
 }

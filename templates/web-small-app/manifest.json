@@ -3,9 +3,10 @@
   "family": "software",
   "version": "0.1.0",
   "protocolVersion": "0.1.0",
-  "defaultLocale": "en",
+  "defaultLocale": "ja",
   "locales": [
-    "en"
+    "en",
+    "ja"
   ],
   "questionSet": "questions/{locale}.json",
   "rules": "rules.json",

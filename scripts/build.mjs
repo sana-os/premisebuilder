@@ -92,9 +92,13 @@ await writeFile(
   `globalThis.__PREMISE_BUILDER_DATA__ = ${JSON.stringify({ registry, locales: chromeLocales, templates: templateBundles })};\n`
 );
 await writeFile(resolve(dist, "robots.txt"), "User-agent: *\nAllow: /\nSitemap: https://premisebuilder.info/sitemap.xml\n");
+const sitemapUrls = [...localeRoutes].sort().flatMap((locale) => [
+  `  <url><loc>https://premisebuilder.info/${locale}/</loc></url>`,
+  ...registry.map((template) => `  <url><loc>https://premisebuilder.info/${locale}/new/${template.id}/</loc></url>`)
+]);
 await writeFile(
   resolve(dist, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://premisebuilder.info/en/</loc></url>\n  <url><loc>https://premisebuilder.info/en/new/web-small-app/</loc></url>\n</urlset>\n`
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.join("\n")}\n</urlset>\n`
 );
 await writeFile(
   resolve(dist, "_headers"),

@@ -235,6 +235,8 @@ export function createProjectState(input, bundle) {
     document,
     baseDocument: null,
     baseConfirmedAt: null,
+    baseConfirmationKnown: false,
+    importedAt: null,
     dirtySinceBase: true,
     responses,
     context: initialContext,
@@ -424,10 +426,12 @@ export function confirmBase(state, bundle) {
   const nextRevision = state.baseDocument ? state.baseDocument.meta.revision + 1 : 1;
   state.document.meta.revision = nextRevision;
   state.document.meta.updatedAt = now;
+  state.document.meta.confirmedAt = now;
   state.document.documentType = "base";
   delete state.document.derivedFrom;
   state.baseDocument = clone(state.document);
   state.baseConfirmedAt = now;
+  state.baseConfirmationKnown = true;
   state.dirtySinceBase = false;
   return state.baseDocument;
 }
@@ -438,9 +442,12 @@ export function markDraftChanged(state) {
 
 export function stateFromImportedDocument(importedDocument, bundle) {
   const document = clone(importedDocument);
+  const importedAt = new Date().toISOString();
   const importedUpdatedAt = document.meta.updatedAt;
+  const importedConfirmedAt = document.meta.confirmedAt || document.derivedFrom?.baseConfirmedAt || null;
   document.documentType = "base";
   delete document.derivedFrom;
+  document.meta.importedAt = importedAt;
   const mappingByItem = new Map(bundle.mappings.mappings.map((mapping) => [mapping.itemId, mapping]));
   const questionsById = new Map(bundle.locale.questions.map((question) => [question.questionId, question]));
   const responses = {};
@@ -501,7 +508,9 @@ export function stateFromImportedDocument(importedDocument, bundle) {
     stateVersion: 1,
     document,
     baseDocument: clone(document),
-    baseConfirmedAt: document.meta.updatedAt,
+    baseConfirmedAt: importedConfirmedAt,
+    baseConfirmationKnown: Boolean(importedConfirmedAt),
+    importedAt,
     dirtySinceBase: false,
     responses,
     context: firstContext,
@@ -512,8 +521,12 @@ export function stateFromImportedDocument(importedDocument, bundle) {
   rebuildDocument(state, bundle);
   state.document.meta.revision = document.meta.revision;
   state.document.meta.updatedAt = importedUpdatedAt;
+  state.document.meta.importedAt = importedAt;
+  if (importedConfirmedAt) state.document.meta.confirmedAt = importedConfirmedAt;
+  else delete state.document.meta.confirmedAt;
   state.baseDocument = clone(state.document);
-  state.baseConfirmedAt = document.meta.updatedAt;
+  state.baseConfirmedAt = importedConfirmedAt;
+  state.baseConfirmationKnown = Boolean(importedConfirmedAt);
   state.dirtySinceBase = false;
   return state;
 }

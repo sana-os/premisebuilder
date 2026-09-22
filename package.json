@@ -1,12 +1,13 @@
 {
   "name": "premise-builder",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "localize:ja": "node scripts/generate-ja-questions.mjs",
     "serve": "node scripts/serve.mjs",
     "test": "node --test",
-    "check": "node --check src/app.js && node --check src/core.js && node --check src/storage.js && node --check src/validation.js && node --check src/merge.js && node --check src/import-export.js && npm test && npm run build && node scripts/check-static.mjs"
+    "check": "npm run localize:ja && node --check src/app.js && node --check src/core.js && node --check src/storage.js && node --check src/validation.js && node --check src/merge.js && node --check src/import-export.js && npm test && npm run build && node scripts/check-static.mjs"
   }
 }

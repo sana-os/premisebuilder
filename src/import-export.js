@@ -35,13 +35,18 @@ function section(title, entries, fallback = "None recorded.") {
 
 export function generateAIContext(document, patches = []) {
   const items = Object.entries(document.items);
+  const contextGeneratedAt = new Date().toISOString();
+  const baseConfirmedAt = document.meta.confirmedAt || document.derivedFrom?.baseConfirmedAt || null;
   const lines = [
     "# AI Context — Premise Builder",
     "",
     `Project: **${document.meta.projectName}**`,
     `Document: \`${document.meta.documentId}\` · revision ${document.meta.revision}`,
     `Template: \`${document.meta.template.id}\` ${document.meta.template.version}`,
-    `Generated: ${new Date().toISOString()}`,
+    `Base confirmed: ${baseConfirmedAt || "not recorded (legacy document)"}`,
+    ...(document.meta.importedAt ? [`Imported locally: ${document.meta.importedAt}`] : []),
+    ...(document.derivedFrom?.generatedAt ? [`Unified generated: ${document.derivedFrom.generatedAt}`] : []),
+    `AI Context generated: ${contextGeneratedAt}`,
     "",
     "## AI Context Handling",
     "",

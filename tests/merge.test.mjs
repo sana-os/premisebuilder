@@ -43,6 +43,9 @@ test("a matching replacement changes Unified and preserves Base", () => {
   const result = applyPatches(base, [patch]);
   assert.equal(result.unified.items["project.current_phase"].resolution.value, "repair");
   assert.equal(base.items["project.current_phase"].resolution.value, "new_build");
+  assert.equal(result.unified.derivedFrom.baseConfirmedAt, base.meta.confirmedAt);
+  assert.equal(result.unified.meta.updatedAt, patch.meta.updatedAt);
+  assert.match(result.unified.derivedFrom.generatedAt, /^\d{4}-\d{2}-\d{2}T/);
   assert.equal(result.conflicts.length, 0);
 });
 
