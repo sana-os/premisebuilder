@@ -32,7 +32,7 @@ const bootData = globalThis.__PREMISE_BUILDER_DATA__;
 const store = new BrowserStore();
 const elements = Object.fromEntries([
   "loadingView", "errorView", "homeView", "setupView", "workspaceView", "brandHomeButton", "topImportButton",
-  "languageJapanese", "languageEnglish",
+  "languageSwitcher",
   "templateList", "importButton", "importFileInput", "projectList", "projectEmptyState", "storageState",
   "cancelSetupButton", "cancelSetupInlineButton", "setupTemplateName", "projectForm", "projectName", "projectPhase", "contentLanguage",
   "recorderLabel", "recorderRole", "recorderDecisionOwner", "differentPerspective", "perspectiveFields",
@@ -93,18 +93,13 @@ function bootstrap() {
     chromeMessages = chromeLocale.messages || {};
     document.documentElement.lang = chromeLocale.locale;
     document.documentElement.dir = chromeLocale.direction;
-    document.title = uiLocale === "ja"
-      ? "Premise Builder — Webプロジェクトの要件整理"
-      : "Premise Builder — Requirements Alignment for Web Projects";
-    document.querySelector('meta[name="description"]').content = uiLocale === "ja"
-      ? "作業開始前に、要件、役割、制約、未決定事項の認識を揃えます。"
-      : "Align requirements, roles, constraints, and unknowns before work begins.";
+    document.title = chromeStrings["meta.title"] || "Premise Builder — Requirements Alignment for Web Projects";
+    document.querySelector('meta[name="description"]').content = chromeStrings["meta.description"] || "Align requirements, roles, constraints, and unknowns before work begins.";
     for (const node of document.querySelectorAll("[data-i18n]")) {
       if (chromeStrings[node.dataset.i18n]) node.textContent = chromeStrings[node.dataset.i18n];
     }
     translateStaticTree(document.body);
-    elements.languageJapanese.setAttribute("aria-current", uiLocale === "ja" ? "page" : "false");
-    elements.languageEnglish.setAttribute("aria-current", uiLocale === "en" ? "page" : "false");
+    renderLanguageSwitcher();
     configureBundle(TEMPLATE_ID, uiLocale);
     wireEvents();
     const routeMatch = globalThis.location.pathname.match(/^\/(?:[a-z0-9-]+\/)?new\/([A-Za-z0-9_.-]+)\/?$/);
@@ -116,6 +111,24 @@ function bootstrap() {
   } catch (error) {
     console.error(error);
     showOnly(elements.errorView);
+  }
+}
+
+function renderLanguageSwitcher() {
+  const pathParts = globalThis.location.pathname.split("/").filter(Boolean);
+  if (bootData.locales?.[pathParts[0]]) pathParts.shift();
+  const suffix = pathParts.length ? `/${pathParts.join("/")}/` : "/";
+  elements.languageSwitcher.replaceChildren();
+  const localeOrder = bootData.templates?.[TEMPLATE_ID]?.manifest?.locales || Object.keys(bootData.locales || {});
+  for (const localeId of localeOrder) {
+    const locale = bootData.locales?.[localeId];
+    if (!locale) continue;
+    const link = document.createElement("a");
+    link.href = `/${localeId}${suffix}`;
+    link.lang = localeId;
+    link.textContent = locale.name || localeId;
+    link.setAttribute("aria-current", localeId === uiLocale ? "page" : "false");
+    elements.languageSwitcher.append(link);
   }
 }
 
@@ -341,7 +354,7 @@ function showSetup() {
   elements.projectForm.reset();
   elements.contentLanguage.value = uiLocale;
   elements.recorderLabel.value = labelFor("role", "developer", "Developer");
-  elements.perspectiveLabel.value = uiLocale === "ja" ? "エンドユーザー" : "End users";
+  elements.perspectiveLabel.value = labelFor("role", "end_user", "End user");
   elements.perspectiveFields.hidden = true;
   elements.perspectiveLabel.required = false;
   elements.setupTemplateName.textContent = bundle.locale.template.name;
@@ -363,7 +376,7 @@ function createProjectFromForm(event) {
   };
   if (!input.projectName || !input.recorderLabel) return;
   if (!/^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$/.test(input.contentLanguage)) {
-    elements.contentLanguage.setCustomValidity(t("language.invalid", {}, "Use a language tag such as en, ja, or pt-br."));
+    elements.contentLanguage.setCustomValidity(t("language.invalid", {}, "Use a language tag such as en, ja, es, or pt-br."));
     elements.contentLanguage.reportValidity();
     elements.contentLanguage.setCustomValidity("");
     return;
@@ -911,9 +924,12 @@ function updateResolutionHint(deciders) {
   const selected = bundle.locale.resolutionStates.find((entry) => entry.value === elements.resolutionSelect.value);
   const accepted = acceptedAuthoritiesForQuestion(currentQuestion().questionId, bundle)
     .map((value) => labelFor("authority", value, AUTHORITY_LABELS[value] || humanize(value)));
+  const authorityList = typeof Intl.ListFormat === "function"
+    ? new Intl.ListFormat(uiLocale || "en", { style: "long", type: "disjunction" }).format(accepted)
+    : accepted.join(", ");
   if (!deciders.length) elements.resolutionHint.textContent = t("resolution.noQualifiedDecider", {
-    authorities: accepted.join(uiLocale === "ja" ? "、" : " or ")
-  }, `No qualifying decider is recorded yet. Accepted authority: ${accepted.join(" or ")}.`);
+    authorities: authorityList
+  }, `No qualifying decider is recorded yet. Accepted authority: ${authorityList}.`);
   else elements.resolutionHint.textContent = selected?.description || t("resolution.chooseUse", {}, "Choose how this input should be used.");
 }
 
@@ -964,7 +980,7 @@ function addParticipant(event) {
   elements.participantDialog.close();
   renderQuestion();
   renderAllSecondary();
-  toast(uiLocale === "ja" ? `${label}をこのローカルプロジェクトに追加しました。` : `${label} was added to this local project.`);
+  toast(t("participant.added", { label }, `${label} was added to this local project.`));
 }
 
 function renderAllSecondary() {
@@ -1656,7 +1672,7 @@ function shortValue(value, limit = 72) {
 
 function formatDate(value) {
   if (!value) return t("time.unknown", {}, "unknown time");
-  try { return new Intl.DateTimeFormat(uiLocale === "ja" ? "ja-JP" : "en", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)); }
+  try { return new Intl.DateTimeFormat(uiLocale || "en", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)); }
   catch { return value; }
 }
 

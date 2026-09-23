@@ -5,9 +5,11 @@
   "strings": {
     "brand.name": "Premise Builder",
     "brand.meta": "web-small-app · 日本語",
+    "meta.title": "Premise Builder — Webプロジェクトの要件整理",
+    "meta.description": "作業開始前に、要件、役割、制約、未決定事項の認識を揃えます。",
     "privacy.localOnly": "ローカルのみ",
     "home.eyebrow": "前提の整列",
-    "home.title": "作り始める前に、認識を揃える。",
+    "home.title": "作り始める前に、認⁠識を揃える。",
     "home.description": "要件、解釈、境界、未決定事項を、役割と出所が分かるプロジェクトコンテキストにまとめます。",
     "home.privacyTitle": "プロジェクトデータはこのブラウザ内に保存されます。",
     "home.privacyDetail": "アカウント、クラウド同期、分析、プロジェクトデータAPIはありません。",
@@ -337,9 +339,10 @@
     }
   },
   "messages": {
-    "language.invalid": "en、ja、pt-brなどの言語タグを入力してください。",
+    "language.invalid": "en、ja、es、pt-brなどの言語タグを入力してください。",
     "project.created": "ローカルプロジェクトを作成しました。サーバーには何も送信されていません。",
     "project.openFailed": "このローカルプロジェクトを開けませんでした。",
+    "participant.added": "{label}をこのローカルプロジェクトに追加しました。",
     "storage.count": "{count}件をローカル保存",
     "storage.sessionOnly": "セッションのみ — Exportを推奨",
     "storage.saving": "ローカルに保存中…",

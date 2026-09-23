@@ -111,7 +111,7 @@ h1, h2, h3 { color: var(--ink); }
 .topbar-actions { gap: 0.75rem; }
 .language-switcher { display: inline-flex; padding: 0.2rem; background: #182235; border: 1px solid #344157; border-radius: 999px; }
 .language-switcher a { min-height: 30px; padding: 0.35rem 0.65rem; color: #b8c4d7; border-radius: 999px; font-size: 0.78rem; font-weight: 760; text-decoration: none; }
-.language-switcher a[aria-current="page"] { color: #07111f; background: var(--accent-light); }
+.language-switcher a[aria-current="page"] { color: #07111f; background: var(--accent-soft); }
 :lang(ja) { line-break: strict; word-break: normal; }
 .privacy-badge, .status-pill, .document-status, .storage-state, .save-state {
   display: inline-flex;

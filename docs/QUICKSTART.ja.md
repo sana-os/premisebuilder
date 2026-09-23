@@ -1,4 +1,4 @@
-# Premise Builder 日本語版クイックスタート
+# Premise Builder 日本語クイックスタート
 
 Premise Builderは、回答そのもの（Contribution）と、プロジェクトが採用する前提（Resolution）を分けて記録する、ブラウザ内完結型の要件整理ツールです。入力内容はサーバーへ送信されません。
 
@@ -8,14 +8,14 @@ Premise Builderは、回答そのもの（Contribution）と、プロジェク�
 
 | 項目 | 入力例 |
 |---|---|
-| Project name | `Premise Builder v0.2 — Japanese Edition` |
+| Project name | `Premise Builder v0.3` |
 | Current phase | `Extension` |
 | Project content language | `ja` |
 | Recorder label | `Project owner` |
 | Recorder role | `Developer` |
 | Decision authority | プロジェクトの決定権を持つ場合だけオン |
 
-英語版を使う場合は `/en/` を開きます。画面言語を切り替えても、保存済みJSONの安定IDや選択値は変わりません。
+英語UIは `/en/`、スペイン語UIは `/es/` で開きます。画面言語を切り替えても、保存済みJSONの安定IDや選択値は変わりません。
 
 ## 2. 回答と出所を入力する
 

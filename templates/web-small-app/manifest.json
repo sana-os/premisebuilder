@@ -6,7 +6,8 @@
   "defaultLocale": "ja",
   "locales": [
     "en",
-    "ja"
+    "ja",
+    "es"
   ],
   "questionSet": "questions/{locale}.json",
   "rules": "rules.json",

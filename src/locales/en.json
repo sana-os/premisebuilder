@@ -5,6 +5,8 @@
   "strings": {
     "brand.name": "Premise Builder",
     "brand.meta": "web-small-app · English",
+    "meta.title": "Premise Builder — Requirements Alignment for Web Projects",
+    "meta.description": "Align requirements, roles, constraints, and unknowns before work begins.",
     "privacy.localOnly": "Local-only",
     "home.eyebrow": "Premise alignment",
     "home.title": "Align the work before you build.",

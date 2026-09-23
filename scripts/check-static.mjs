@@ -25,7 +25,6 @@ if (/\b(margin|padding|border)-(left|right)\s*:|\b(left|right)\s*:/.test(css)) {
 
 const manifest = JSON.parse(await readFile(resolve(root, "templates/web-small-app/manifest.json"), "utf8"));
 const questions = JSON.parse(await readFile(resolve(root, "templates/web-small-app/questions/en.json"), "utf8"));
-const japaneseQuestions = JSON.parse(await readFile(resolve(root, "templates/web-small-app/questions/ja.json"), "utf8"));
 const mappings = JSON.parse(await readFile(resolve(root, "templates/web-small-app/mappings.json"), "utf8"));
 const questionIds = questions.questions.map((question) => question.questionId);
 const mappingIds = mappings.mappings.map((mapping) => mapping.questionId);
@@ -35,32 +34,71 @@ if (new Set(questionIds).size !== manifest.questionCount || questionIds.length !
 if (mappingIds.length !== questionIds.length || questionIds.some((id) => !mappingIds.includes(id))) {
   throw new Error("Every public question must have exactly one language-neutral mapping");
 }
-if (japaneseQuestions.questions.length !== questions.questions.length) {
-  throw new Error("The Japanese and English question sets have different lengths");
-}
-for (const [index, englishQuestion] of questions.questions.entries()) {
-  const japaneseQuestion = japaneseQuestions.questions[index];
-  if (englishQuestion.questionId !== japaneseQuestion.questionId || englishQuestion.responseType !== japaneseQuestion.responseType) {
-    throw new Error(`Question identity differs between English and Japanese at index ${index}`);
+const localizedQuestionSets = {};
+for (const locale of manifest.locales) {
+  const localized = JSON.parse(await readFile(resolve(root, `templates/web-small-app/questions/${locale}.json`), "utf8"));
+  localizedQuestionSets[locale] = localized;
+  if (localized.locale !== locale || localized.questions.length !== questions.questions.length) {
+    throw new Error(`The ${locale} question set does not match the English question count or locale`);
   }
-  const stableChoices = (question) => (question.choices || []).map(({ value, requiresNote, exclusive }) => ({ value, requiresNote: Boolean(requiresNote), exclusive: Boolean(exclusive) }));
-  if (JSON.stringify(stableChoices(englishQuestion)) !== JSON.stringify(stableChoices(japaneseQuestion))) {
-    throw new Error(`Choice semantics differ between English and Japanese: ${englishQuestion.questionId}`);
+  for (const [index, englishQuestion] of questions.questions.entries()) {
+    const localizedQuestion = localized.questions[index];
+    if (
+      englishQuestion.questionId !== localizedQuestion.questionId ||
+      englishQuestion.category !== localizedQuestion.category ||
+      englishQuestion.responseType !== localizedQuestion.responseType ||
+      englishQuestion.order !== localizedQuestion.order
+    ) throw new Error(`Question identity differs between English and ${locale} at index ${index}`);
+    const stableChoices = (question) => (question.choices || []).map(({ value, requiresNote, exclusive }) => ({
+      value,
+      requiresNote: Boolean(requiresNote),
+      exclusive: Boolean(exclusive)
+    }));
+    if (JSON.stringify(stableChoices(englishQuestion)) !== JSON.stringify(stableChoices(localizedQuestion))) {
+      throw new Error(`Choice semantics differ between English and ${locale}: ${englishQuestion.questionId}`);
+    }
   }
 }
 
-for (const path of [
+const chromeLocales = {};
+for (const locale of manifest.locales) {
+  chromeLocales[locale] = JSON.parse(await readFile(resolve(root, `src/locales/${locale}.json`), "utf8"));
+}
+const completeChromeReference = chromeLocales.ja;
+for (const locale of manifest.locales.filter((locale) => locale !== "en")) {
+  for (const group of ["text", "messages"]) {
+    const expected = Object.keys(completeChromeReference[group] || {}).sort();
+    const actual = Object.keys(chromeLocales[locale][group] || {}).sort();
+    if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+      throw new Error(`Application ${group} keys differ between Japanese and ${locale}`);
+    }
+  }
+  const expectedLabelGroups = Object.keys(completeChromeReference.labels || {}).sort();
+  const actualLabelGroups = Object.keys(chromeLocales[locale].labels || {}).sort();
+  if (JSON.stringify(actualLabelGroups) !== JSON.stringify(expectedLabelGroups)) {
+    throw new Error(`Application label groups differ between Japanese and ${locale}`);
+  }
+  for (const group of expectedLabelGroups) {
+    const expected = Object.keys(completeChromeReference.labels[group]).sort();
+    const actual = Object.keys(chromeLocales[locale].labels[group] || {}).sort();
+    if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+      throw new Error(`Application label keys differ for ${group} between Japanese and ${locale}`);
+    }
+  }
+}
+
+const requiredDistPaths = [
   "dist/index.html",
-  "dist/en/index.html",
-  "dist/en/new/web-small-app/index.html",
-  "dist/ja/index.html",
-  "dist/ja/new/web-small-app/index.html",
   "dist/app-data.js",
   "dist/_headers",
   "dist/schemas/premise-document.schema.v0.1.json"
-]) await access(resolve(root, path));
+];
+for (const locale of manifest.locales) {
+  requiredDistPaths.push(`dist/${locale}/index.html`, `dist/${locale}/new/web-small-app/index.html`);
+}
+for (const path of requiredDistPaths) await access(resolve(root, path));
 
 const distFiles = await readdir(resolve(root, "dist"));
 if (!distFiles.includes("robots.txt") || !distFiles.includes("sitemap.xml")) throw new Error("Public discovery files are missing");
 
-console.log(`Static checks passed: ${manifest.questionCount} questions in English and Japanese, ${ids.length} unique interface IDs, no runtime network primitives.`);
+console.log(`Static checks passed: ${manifest.questionCount} questions across ${manifest.locales.length} locales (${manifest.locales.join(", ")}), ${ids.length} unique interface IDs, no runtime network primitives.`);

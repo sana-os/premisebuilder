@@ -13,8 +13,10 @@ const mappings = readJson("templates/web-small-app/mappings.json");
 const rules = readJson("templates/web-small-app/rules.json");
 const english = readJson("templates/web-small-app/questions/en.json");
 const japanese = readJson("templates/web-small-app/questions/ja.json");
+const spanish = readJson("templates/web-small-app/questions/es.json");
 const englishBundle = { manifest, mappings, rules, locale: english };
 const japaneseBundle = { manifest, mappings, rules, locale: japanese };
+const spanishBundle = { manifest, mappings, rules, locale: spanish };
 
 function stableChoiceShape(question) {
   return (question.choices || []).map(({ value, requiresNote, exclusive }) => ({
@@ -59,20 +61,22 @@ function withoutLegacyGenerationTimes(document) {
   return normalized;
 }
 
-test("English and Japanese question sets preserve every stable ID and choice value", () => {
+test("English, Japanese, and Spanish question sets preserve every stable ID and choice value", () => {
   assert.equal(english.questions.length, 42);
-  assert.equal(japanese.questions.length, 42);
-  for (const [index, englishQuestion] of english.questions.entries()) {
-    const japaneseQuestion = japanese.questions[index];
-    assert.equal(japaneseQuestion.questionId, englishQuestion.questionId);
-    assert.equal(japaneseQuestion.category, englishQuestion.category);
-    assert.equal(japaneseQuestion.responseType, englishQuestion.responseType);
-    assert.equal(japaneseQuestion.order, englishQuestion.order);
-    assert.deepEqual(stableChoiceShape(japaneseQuestion), stableChoiceShape(englishQuestion));
+  for (const localized of [japanese, spanish]) {
+    assert.equal(localized.questions.length, 42);
+    for (const [index, englishQuestion] of english.questions.entries()) {
+      const localizedQuestion = localized.questions[index];
+      assert.equal(localizedQuestion.questionId, englishQuestion.questionId);
+      assert.equal(localizedQuestion.category, englishQuestion.category);
+      assert.equal(localizedQuestion.responseType, englishQuestion.responseType);
+      assert.equal(localizedQuestion.order, englishQuestion.order);
+      assert.deepEqual(stableChoiceShape(localizedQuestion), stableChoiceShape(englishQuestion));
+    }
   }
 });
 
-test("English Base imported through the Japanese edition re-exports without semantic drift", () => {
+test("English Base imported through Japanese and Spanish re-exports without semantic drift", () => {
   const englishState = createProjectState({
     projectName: "English compatibility fixture",
     phase: "extension",
@@ -86,15 +90,35 @@ test("English Base imported through the Japanese edition re-exports without sema
   }, englishBundle);
   const englishBase = confirmBase(englishState, englishBundle);
   const englishUnified = applyPatches(englishBase, []).unified;
-  const japaneseState = stateFromImportedDocument(englishUnified, japaneseBundle);
+  for (const localizedBundle of [japaneseBundle, spanishBundle]) {
+    const localizedState = stateFromImportedDocument(englishUnified, localizedBundle);
+    assert.deepEqual(stableDocumentShape(localizedState.baseDocument), stableDocumentShape(englishBase));
+    assert.equal(localizedState.baseDocument.meta.confirmedAt, englishBase.meta.confirmedAt);
+    assert.equal(localizedState.baseDocument.meta.updatedAt, englishBase.meta.updatedAt);
+    assert.equal(localizedState.baseConfirmationKnown, true);
+    assert.match(localizedState.importedAt, /^\d{4}-\d{2}-\d{2}T/);
+    assert.equal(localizedState.baseDocument.meta.importedAt, localizedState.importedAt);
+    assert.equal(validateDocument(localizedState.baseDocument, localizedBundle).valid, true);
+  }
+});
 
-  assert.deepEqual(stableDocumentShape(japaneseState.baseDocument), stableDocumentShape(englishBase));
-  assert.equal(japaneseState.baseDocument.meta.confirmedAt, englishBase.meta.confirmedAt);
-  assert.equal(japaneseState.baseDocument.meta.updatedAt, englishBase.meta.updatedAt);
-  assert.equal(japaneseState.baseConfirmationKnown, true);
-  assert.match(japaneseState.importedAt, /^\d{4}-\d{2}-\d{2}T/);
-  assert.equal(japaneseState.baseDocument.meta.importedAt, japaneseState.importedAt);
-  assert.equal(validateDocument(japaneseState.baseDocument, japaneseBundle).valid, true);
+test("Spanish Base remains valid when reconstructed by the English edition", () => {
+  const spanishState = createProjectState({
+    projectName: "Ejemplo de compatibilidad en español",
+    phase: "new",
+    contentLanguage: "es",
+    recorderLabel: "Responsable del proyecto",
+    recorderRole: "developer",
+    recorderIsDecisionOwner: true,
+    perspectiveMode: "same_recorder",
+    perspectiveLabel: "",
+    perspectiveRole: "end_user"
+  }, spanishBundle);
+  const spanishBase = confirmBase(spanishState, spanishBundle);
+  const englishState = stateFromImportedDocument(spanishBase, englishBundle);
+
+  assert.deepEqual(stableDocumentShape(englishState.baseDocument), stableDocumentShape(spanishBase));
+  assert.equal(validateDocument(englishState.baseDocument, englishBundle).valid, true);
 });
 
 test("legacy import records import time without inventing confirmation time", () => {
