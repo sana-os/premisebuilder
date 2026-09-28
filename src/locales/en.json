@@ -4,8 +4,10 @@
   "name": "English",
   "strings": {
     "brand.name": "Premise Builder",
-    "brand.meta": "web-small-app · English",
-    "meta.title": "Premise Builder — Requirements Alignment for Web Projects",
+    "brand.meta": "Project alignment · English",
+    "meta.title": "Premise Builder — Project Requirements Alignment",
+    "home.authorLink": "Deshimaru Sakaguchi — Author & research",
+    "home.companionLink": "Preference Compass — Human–AI relationship portability",
     "meta.description": "Align requirements, roles, constraints, and unknowns before work begins.",
     "privacy.localOnly": "Local-only",
     "home.eyebrow": "Premise alignment",

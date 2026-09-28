@@ -1,0 +1,1313 @@
+{
+  "templateId": "game-development",
+  "templateVersion": "0.1.0",
+  "locale": "en",
+  "direction": "ltr",
+  "template": {
+    "name": "Game Development",
+    "summary": "40 questions to align play, scope, production and release."
+  },
+  "answerContext": {
+    "answeringFrom": "Answering from",
+    "recordedBy": "Recorded by",
+    "speakingAs": "Speaking as",
+    "captureMethod": "How this was obtained",
+    "authority": "Authority for this answer",
+    "confirmation": "Source confirmation",
+    "changeForQuestion": "Change for this question",
+    "multiplePerspectives": "Add another perspective"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "Confirmed",
+      "description": "Use this as an accepted project premise."
+    },
+    {
+      "value": "provisional",
+      "label": "Provisional",
+      "description": "Use this for now, but keep it visibly open to revision."
+    },
+    {
+      "value": "unspecified",
+      "label": "Not decided",
+      "description": "Leave this open. Do not let an AI silently fill it in."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "Ask for a proposal",
+      "description": "Request alternatives or a recommendation without treating one as chosen."
+    },
+    {
+      "value": "delegated",
+      "label": "Delegate within bounds",
+      "description": "Allow the implementer or AI to decide within the stated limits and report the choice."
+    },
+    {
+      "value": "not_applicable",
+      "label": "Does not apply",
+      "description": "Mark this question as outside the project."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "Choose whose perspective this answer represents and who recorded it.",
+    "validation.speakingRoleMismatch": "The selected speaking role is not assigned to that participant.",
+    "validation.inferenceUnconfirmed": "An inferred answer must remain unconfirmed until an authorized person verifies it.",
+    "validation.resolutionAuthorityRequired": "Confirming this premise requires an authorized decision source.",
+    "validation.exclusiveChoice": "This option cannot be combined with other selections.",
+    "validation.noteRequired": "Add a short note to explain this selection.",
+    "validation.selectionLimit": "Reduce the number of selected options.",
+    "review.authRuntime": "Authentication is in scope, but the selected runtime may require an external or server component.",
+    "review.paymentHandling": "Payment-related data is in scope. Confirm who processes it and whether the project may store any of it.",
+    "review.analyticsPrivacy": "Analytics or telemetry is in scope. Recheck the privacy boundary, consent, and prohibited practices.",
+    "review.onlineOffline": "Online play is selected with an offline-only network policy. Clarify whether this release includes online features."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "Intent & experience",
+      "description": "Define the experience and release goal.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.players",
+      "label": "Players & sessions",
+      "description": "Identify players, devices and play conditions.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.rules",
+      "label": "Core loop & rules",
+      "description": "Describe actions, outcomes and progression.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.scope",
+      "label": "Scope & content",
+      "description": "Bound the work for this release.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.presentation",
+      "label": "Art, audio & narrative",
+      "description": "Describe presentation and asset responsibilities.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.technology",
+      "label": "Technology & persistence",
+      "description": "Set implementation and service boundaries.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.accessibility",
+      "label": "Usability & accessibility",
+      "description": "Make the intended experience playable.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.boundaries",
+      "label": "Boundaries & rights",
+      "description": "Record limits on content, data and monetization.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.delivery",
+      "label": "Production & release",
+      "description": "Plan capacity, distribution and maintenance.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    },
+    {
+      "id": "game.validation",
+      "label": "Playtesting & acceptance",
+      "description": "Define evidence and authority for completion.",
+      "perspectiveHint": "Keep player observations, creator intentions and technical recommendations separate."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.release_goal",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "What should this release achieve?",
+      "help": "Choose the milestone whose success you will evaluate.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "prototype",
+          "label": "Test the core play with a prototype"
+        },
+        {
+          "value": "vertical_slice",
+          "label": "A representative polished slice"
+        },
+        {
+          "value": "demo",
+          "label": "A public demo"
+        },
+        {
+          "value": "full_release",
+          "label": "A complete release"
+        },
+        {
+          "value": "update",
+          "label": "An update to an existing game"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.experience",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "What should players primarily experience?",
+      "help": "Choose the priority when design goals compete; describe the intended feeling in the note.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mastery",
+          "label": "Mastery and challenge"
+        },
+        {
+          "value": "exploration",
+          "label": "Exploration and discovery"
+        },
+        {
+          "value": "story",
+          "label": "Story and emotion"
+        },
+        {
+          "value": "creation",
+          "label": "Creation and experimentation"
+        },
+        {
+          "value": "connection",
+          "label": "Cooperation or competition"
+        },
+        {
+          "value": "relaxation",
+          "label": "Relaxation"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "What phase is the project in?",
+      "help": "Preserve existing behavior where the work requires it.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "New build"
+        },
+        {
+          "value": "redesign",
+          "label": "Redesign"
+        },
+        {
+          "value": "extension",
+          "label": "Extension"
+        },
+        {
+          "value": "repair",
+          "label": "Repair"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.concept",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "What is the game concept and genre?",
+      "help": "Describe what the player does and what makes it distinctive. References are examples, not permission to copy.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.players.audience",
+      "category": "game.players",
+      "order": 50,
+      "prompt": "Who are the intended players?",
+      "help": "Record age range, experience, languages and actual player evidence separately from assumptions.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.players.platforms",
+      "category": "game.players",
+      "order": 60,
+      "prompt": "Which platforms are in this release?",
+      "help": "Select committed targets and note minimum devices and operating systems.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "browser",
+          "label": "Browser"
+        },
+        {
+          "value": "desktop",
+          "label": "Desktop computer"
+        },
+        {
+          "value": "mobile",
+          "label": "Phone or tablet"
+        },
+        {
+          "value": "console",
+          "label": "Console"
+        },
+        {
+          "value": "xr",
+          "label": "VR or AR"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.player_mode",
+      "category": "game.players",
+      "order": 70,
+      "prompt": "How do players play together?",
+      "help": "Specify maximum players, local or online play, and whether modes share progress.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "solo",
+          "label": "Single player"
+        },
+        {
+          "value": "local_coop",
+          "label": "Local cooperation"
+        },
+        {
+          "value": "local_versus",
+          "label": "Local competition"
+        },
+        {
+          "value": "online_coop",
+          "label": "Online cooperation"
+        },
+        {
+          "value": "online_versus",
+          "label": "Online competition"
+        },
+        {
+          "value": "async",
+          "label": "Asynchronous interaction"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.session",
+      "category": "game.players",
+      "order": 80,
+      "prompt": "How long is a typical session?",
+      "help": "Consider interruption, resuming and the total expected play time.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "short",
+          "label": "Under 10 minutes"
+        },
+        {
+          "value": "medium",
+          "label": "10–30 minutes"
+        },
+        {
+          "value": "long",
+          "label": "30–60 minutes"
+        },
+        {
+          "value": "extended",
+          "label": "Over one hour"
+        },
+        {
+          "value": "flexible",
+          "label": "Player-defined"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.core_loop",
+      "category": "game.rules",
+      "order": 90,
+      "prompt": "What actions form the core play loop?",
+      "help": "Describe action → feedback → next decision, using one concrete example.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.rules.outcomes",
+      "category": "game.rules",
+      "order": 100,
+      "prompt": "How does play end or succeed?",
+      "help": "State win, loss, retry and completion conditions; an open-ended game may have none.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.rules.progression",
+      "category": "game.rules",
+      "order": 110,
+      "prompt": "Which progression systems are needed?",
+      "help": "State limits and reset rules in the note.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "levels",
+          "label": "Stages or chapters"
+        },
+        {
+          "value": "skills",
+          "label": "Player or character skills"
+        },
+        {
+          "value": "collection",
+          "label": "Collection and unlocks"
+        },
+        {
+          "value": "economy",
+          "label": "Resources and economy"
+        },
+        {
+          "value": "ranking",
+          "label": "Scores or rankings"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.difficulty",
+      "category": "game.rules",
+      "order": 120,
+      "prompt": "How should difficulty work?",
+      "help": "Explain fairness, randomness, failure costs and any adaptation boundaries.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "Fixed difficulty"
+        },
+        {
+          "value": "selectable",
+          "label": "Player-selected difficulty"
+        },
+        {
+          "value": "adaptive",
+          "label": "Adaptive difficulty"
+        },
+        {
+          "value": "sandbox",
+          "label": "No required challenge"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.content_budget",
+      "category": "game.scope",
+      "order": 130,
+      "prompt": "How much playable content is included?",
+      "help": "Give counts or bounds for stages, characters, items and play time; identify who creates them.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.scope.required_features",
+      "category": "game.scope",
+      "order": 140,
+      "prompt": "Which supporting features are required?",
+      "help": "Select only what must ship in this release.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "tutorial",
+          "label": "Tutorial"
+        },
+        {
+          "value": "settings",
+          "label": "Settings"
+        },
+        {
+          "value": "inventory",
+          "label": "Inventory"
+        },
+        {
+          "value": "achievements",
+          "label": "Achievements"
+        },
+        {
+          "value": "editor",
+          "label": "Level editor"
+        },
+        {
+          "value": "replays",
+          "label": "Replays"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.exclusions",
+      "category": "game.scope",
+      "order": 150,
+      "prompt": "What is explicitly out of scope?",
+      "help": "List tempting additions that must wait; explain what would justify revisiting them.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.scope.dependencies",
+      "category": "game.scope",
+      "order": 160,
+      "prompt": "What existing work or dependencies must be preserved?",
+      "help": "Name existing code, formats, tools, assets and compatibility constraints, or state that this is a new project.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.presentation.visual_style",
+      "category": "game.presentation",
+      "order": 170,
+      "prompt": "What is the visual direction?",
+      "help": "Specify camera, readability, references and what should feel distinctive.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "text",
+          "label": "Text-led"
+        },
+        {
+          "value": "2d",
+          "label": "2D"
+        },
+        {
+          "value": "3d",
+          "label": "3D"
+        },
+        {
+          "value": "hybrid",
+          "label": "Mixed 2D and 3D"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.narrative",
+      "category": "game.presentation",
+      "order": 180,
+      "prompt": "What role does narrative play?",
+      "help": "Describe setting, tone, branching and localization needs.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "No narrative required",
+          "exclusive": true
+        },
+        {
+          "value": "background",
+          "label": "Background and atmosphere"
+        },
+        {
+          "value": "linear",
+          "label": "Linear story"
+        },
+        {
+          "value": "branching",
+          "label": "Branching story"
+        },
+        {
+          "value": "emergent",
+          "label": "Player-created stories"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.audio",
+      "category": "game.presentation",
+      "order": 190,
+      "prompt": "Which audio elements are required?",
+      "help": "Specify volume controls, subtitles and whether sound may carry essential information.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "effects",
+          "label": "Sound effects"
+        },
+        {
+          "value": "music",
+          "label": "Music"
+        },
+        {
+          "value": "voice",
+          "label": "Voice acting"
+        },
+        {
+          "value": "ambient",
+          "label": "Ambient sound"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.asset_pipeline",
+      "category": "game.presentation",
+      "order": 200,
+      "prompt": "Who supplies and approves the assets?",
+      "help": "Separate placeholders from final assets; record formats, licenses, credits and any generated-asset policy.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.technology.engine",
+      "category": "game.technology",
+      "order": 210,
+      "prompt": "How is the engine or framework chosen?",
+      "help": "Name fixed tools and versions, or criteria such as team skills, licensing and target platforms.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "A specific tool is required"
+        },
+        {
+          "value": "existing",
+          "label": "Keep the existing stack"
+        },
+        {
+          "value": "evaluate",
+          "label": "Evaluate alternatives first"
+        },
+        {
+          "value": "delegated",
+          "label": "Implementer proposes within constraints"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.input",
+      "category": "game.technology",
+      "order": 220,
+      "prompt": "Which input methods must work?",
+      "help": "Specify remapping and whether switching devices during play is supported.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "keyboard_mouse",
+          "label": "Keyboard and mouse"
+        },
+        {
+          "value": "controller",
+          "label": "Controller"
+        },
+        {
+          "value": "touch",
+          "label": "Touch"
+        },
+        {
+          "value": "motion",
+          "label": "Motion or XR controllers"
+        },
+        {
+          "value": "assistive",
+          "label": "Assistive input"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.save",
+      "category": "game.technology",
+      "order": 230,
+      "prompt": "How is progress saved?",
+      "help": "Describe save timing, migration, deletion and recovery from interrupted writes.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "No persistent progress",
+          "exclusive": true
+        },
+        {
+          "value": "local",
+          "label": "Local saves"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud or account saves"
+        },
+        {
+          "value": "hybrid",
+          "label": "Local with cloud synchronization"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.network",
+      "category": "game.technology",
+      "order": 240,
+      "prompt": "What network behavior is required?",
+      "help": "For online play, define authority, synchronization, disconnection handling, server cost and ownership.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "offline",
+          "label": "Fully playable offline"
+        },
+        {
+          "value": "optional",
+          "label": "Optional online features"
+        },
+        {
+          "value": "required",
+          "label": "Connection required"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.onboarding",
+      "category": "game.accessibility",
+      "order": 250,
+      "prompt": "How do players learn the game?",
+      "help": "Specify what a first-time player should accomplish without outside help.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "guided",
+          "label": "Guided tutorial"
+        },
+        {
+          "value": "contextual",
+          "label": "Contextual hints"
+        },
+        {
+          "value": "manual",
+          "label": "Reference or manual"
+        },
+        {
+          "value": "discovery",
+          "label": "Discovery through play"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.access",
+      "category": "game.accessibility",
+      "order": 260,
+      "prompt": "Which accessibility features are required?",
+      "help": "Confirm needs with intended players; do not assume one setting serves everyone.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "remap",
+          "label": "Remappable controls"
+        },
+        {
+          "value": "subtitles",
+          "label": "Subtitles and text alternatives"
+        },
+        {
+          "value": "color",
+          "label": "Information beyond color alone"
+        },
+        {
+          "value": "motion",
+          "label": "Reduced motion and flashing"
+        },
+        {
+          "value": "text",
+          "label": "Adjustable text size"
+        },
+        {
+          "value": "timing",
+          "label": "Timing and difficulty assistance"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.performance",
+      "category": "game.accessibility",
+      "order": 270,
+      "prompt": "What measurable performance targets must hold?",
+      "help": "Name test hardware, frame rate, loading time, memory or battery limits and how to measure them.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.accessibility.interruption",
+      "category": "game.accessibility",
+      "order": 280,
+      "prompt": "What happens when play is interrupted?",
+      "help": "Cover pause, backgrounding, focus loss, disconnects and return; consider fairness in multiplayer.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.boundaries.content_limits",
+      "category": "game.boundaries",
+      "order": 290,
+      "prompt": "What content or interactions must be avoided?",
+      "help": "Record audience and rating expectations, sensitive content limits, chat moderation and reporting where relevant.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.boundaries.monetization",
+      "category": "game.boundaries",
+      "order": 300,
+      "prompt": "What monetization is planned?",
+      "help": "Specify purchase boundaries and prohibited pressure; leave undecided details visibly open.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "free",
+          "label": "Free, without monetization"
+        },
+        {
+          "value": "paid",
+          "label": "One-time purchase"
+        },
+        {
+          "value": "ads",
+          "label": "Advertising"
+        },
+        {
+          "value": "iap",
+          "label": "In-game purchases"
+        },
+        {
+          "value": "subscription",
+          "label": "Subscription"
+        },
+        {
+          "value": "donation",
+          "label": "Optional donations"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.boundaries.data",
+      "category": "game.boundaries",
+      "order": 310,
+      "prompt": "Which player data is collected or shared?",
+      "help": "Identify purpose, storage, retention, deletion and service operators; local save data also needs a boundary.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.boundaries.rights",
+      "category": "game.boundaries",
+      "order": 320,
+      "prompt": "What rights and distribution constraints apply?",
+      "help": "List asset and engine licenses, attribution, ownership, platform requirements and who verifies them.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.delivery.capacity",
+      "category": "game.delivery",
+      "order": 330,
+      "prompt": "What people, time and budget are available?",
+      "help": "Name responsibilities, skills, milestones and a contingency for missing capacity.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.delivery.distribution",
+      "category": "game.delivery",
+      "order": 340,
+      "prompt": "How will players receive the game?",
+      "help": "Name channels, release ownership and any account or review requirements.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "web",
+          "label": "Hosted web game"
+        },
+        {
+          "value": "download",
+          "label": "Direct download"
+        },
+        {
+          "value": "store",
+          "label": "Digital store"
+        },
+        {
+          "value": "private",
+          "label": "Private testing"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.delivery.handoff",
+      "category": "game.delivery",
+      "order": 350,
+      "prompt": "What must be handed over with the game?",
+      "help": "Specify reproducible builds, source, editable assets, licenses, test evidence and operation instructions.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.delivery.maintenance",
+      "category": "game.delivery",
+      "order": 360,
+      "prompt": "Who handles updates and incidents after release?",
+      "help": "Define ownership, support duration, compatibility, rollback and service shutdown expectations.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.validation.playtest",
+      "category": "game.validation",
+      "order": 370,
+      "prompt": "How will the intended experience be tested?",
+      "help": "Define participants, scenarios, observations and revision criteria; separate opinions from measured behavior.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.validation.must_pass",
+      "category": "game.validation",
+      "order": 380,
+      "prompt": "Which scenarios must pass before release?",
+      "help": "Add concrete steps and expected results in the note.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "first_play",
+          "label": "First play through the core loop"
+        },
+        {
+          "value": "completion",
+          "label": "Win, loss and retry"
+        },
+        {
+          "value": "save_restore",
+          "label": "Save and restore"
+        },
+        {
+          "value": "devices",
+          "label": "Target devices and inputs"
+        },
+        {
+          "value": "network",
+          "label": "Disconnect and reconnect"
+        },
+        {
+          "value": "access",
+          "label": "Accessibility settings"
+        },
+        {
+          "value": "none",
+          "label": "None required",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.validation.approval",
+      "category": "game.validation",
+      "order": 390,
+      "prompt": "Who decides the game is ready, using what criteria?",
+      "help": "Name the decision role, acceptable defects and measurable release gates.",
+      "responseType": "long-text",
+      "placeholder": "Describe the premise, limits and evidence. You may leave it unresolved."
+    },
+    {
+      "questionId": "game.validation.unknowns",
+      "category": "game.validation",
+      "order": 400,
+      "prompt": "How should unresolved design decisions be handled?",
+      "help": "State delegated boundaries and when work should stop for renewed alignment.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "pause",
+          "label": "Pause affected work until clarified"
+        },
+        {
+          "value": "prototype",
+          "label": "Test a reversible prototype"
+        },
+        {
+          "value": "propose",
+          "label": "Request alternatives before deciding"
+        },
+        {
+          "value": "delegate",
+          "label": "Delegate within recorded limits"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    }
+  ]
+}

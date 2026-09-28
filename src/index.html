@@ -6,7 +6,7 @@
     <meta name="description" content="Align requirements, roles, constraints, and unknowns before work begins.">
     <meta name="theme-color" content="#0b1220">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
-    <title>Premise Builder — Requirements Alignment for Web Projects</title>
+    <title>Premise Builder — Project Requirements Alignment</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1220'/%3E%3Cpath d='M7 9h11M7 16h18M14 23h11' stroke='%236ee7d8' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='9' r='3' fill='%23f8fafc'/%3E%3Ccircle cx='10' cy='23' r='3' fill='%23f8fafc'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="/styles.css">
   </head>
@@ -16,7 +16,7 @@
     <header class="topbar">
       <button id="brandHomeButton" class="brand-block brand-button" type="button" aria-label="Open Premise Builder home">
         <span class="brand-mark" aria-hidden="true"><i></i><b></b></span>
-        <span><span class="brand-name" data-i18n="brand.name">Premise Builder</span><span class="brand-meta" data-i18n="brand.meta">web-small-app · English</span></span>
+        <span><span class="brand-name" data-i18n="brand.name">Premise Builder</span><span class="brand-meta" data-i18n="brand.meta">Project alignment · English</span></span>
       </button>
       <div class="topbar-actions">
         <nav id="languageSwitcher" class="language-switcher" aria-label="Language"></nav>
@@ -58,6 +58,8 @@
           <button class="text-button" type="button" data-open-dialog="privacyDialog">Privacy boundary</button>
           <button class="text-button" type="button" data-open-dialog="formatDialog">Format &amp; AI handling</button>
           <a href="/schemas/premise-document.schema.v0.1.json">Document schema</a>
+          <a href="https://deshimarusakaguchi.com/" data-i18n="home.authorLink">Deshimaru Sakaguchi — Author &amp; research</a>
+          <a href="https://preferencecompass.info/" data-i18n="home.companionLink">Preference Compass — Human–AI relationship portability</a>
         </footer>
       </section>
 
@@ -101,7 +103,7 @@
       <section id="workspaceView" class="workspace" hidden>
         <div class="projectbar">
           <div><button id="allProjectsButton" class="back-button" type="button">← All projects</button><p id="workspaceProjectName" class="project-title"></p><p id="workspaceProjectMeta" class="project-meta"></p></div>
-          <div class="projectbar-actions"><span id="saveState" class="save-state" role="status" aria-live="polite"></span><button id="deleteProjectButton" class="button button-secondary" type="button">Delete</button></div>
+          <div class="projectbar-actions"><span id="saveState" class="save-state" role="status" aria-live="polite"></span><button class="button button-secondary" type="button" data-open-dialog="guideDialog">Quick start &amp; input example</button><button id="deleteProjectButton" class="button button-secondary" type="button">Delete</button></div>
         </div>
         <nav class="view-tabs" aria-label="Project workspace"><button class="view-tab active" type="button" data-workspace-view="questions" data-i18n="workspace.questions">Questions</button><button class="view-tab" type="button" data-workspace-view="review" data-i18n="workspace.review">Review</button><button class="view-tab" type="button" data-workspace-view="overrides" data-i18n="workspace.overrides">Overrides</button><button class="view-tab" type="button" data-workspace-view="export" data-i18n="workspace.export">Export</button></nav>
         <div id="workspaceGrid" class="workspace-grid" data-active-view="questions">
@@ -183,7 +185,13 @@
     <input id="importFileInput" type="file" accept="application/json,.json" hidden>
     <dialog id="deleteDialog"><form method="dialog" class="dialog-card"><p class="eyebrow">Local data</p><h2>Delete <span id="deleteProjectName"></span>?</h2><p>This removes only this project and its Overrides from this browser. Export first if you need a backup.</p><div class="dialog-actions"><button class="button button-secondary" value="cancel">Keep project</button><button id="confirmDeleteButton" class="button button-danger" value="confirm">Delete project</button></div></form></dialog>
     <dialog id="participantDialog"><form id="participantForm" class="dialog-card"><p class="eyebrow">Answer provenance</p><h2>Add a participant or role</h2><label class="field"><span>Label</span><input id="participantLabel" maxlength="240" placeholder="Primary users" required></label><label class="field"><span>Role</span><select id="participantRole"><option value="developer">Developer</option><option value="end_user">End user</option><option value="requester">Requester</option><option value="decision_owner">Decision owner</option><option value="designer">Designer</option><option value="maintainer">Maintainer</option><option value="security_compliance">Security or compliance</option><option value="mixed">Mixed group</option><option value="unknown">Unknown</option></select></label><div class="dialog-actions"><button id="cancelParticipantButton" class="button button-secondary" type="button">Cancel</button><button class="button button-primary" type="submit">Add participant</button></div></form></dialog>
-    <dialog id="guideDialog"><form method="dialog" class="dialog-card dialog-document guide-dialog"><p class="eyebrow">First project</p><h2>Quick start &amp; input example</h2><ol><li>Create a local project and identify the recorder and decision authority.</li><li>Answer a question, then record why, whose perspective it represents, and how it was obtained.</li><li>Choose a separate Resolution, review the premise, and confirm a Base revision.</li></ol><section class="guide-example"><h3>Example: responsive priority</h3><p><strong>Answer:</strong> Desktop is the priority.</p><p><strong>Context:</strong> Prioritize desktop for entry and review. On mobile, keep reading, progress checks, basic answers, and small edits usable. Japanese text must not cause clipping or unintended horizontal overflow.</p><p><strong>Resolution:</strong> Confirmed, using the Project owner contribution, resolved by the Project owner.</p></section><p>After confirmation, export Base or Unified JSON as a portable backup. An imported legacy file without a recorded confirmation time remains explicitly marked as unknown.</p><button class="button button-primary" value="close">Close</button></form></dialog>
+    <dialog id="guideDialog" aria-labelledby="guideTitle">
+      <form method="dialog" class="guide-dialog">
+        <header class="guide-header"><div><p class="eyebrow">First project</p><h2 id="guideTitle">Quick start &amp; input example</h2></div><button class="button button-secondary" value="close" autofocus>Close</button></header>
+        <div id="guideContent" class="guide-content" tabindex="0" aria-labelledby="guideTitle"></div>
+        <footer class="guide-footer"><button class="button button-primary" value="close">Close</button></footer>
+      </form>
+    </dialog>
     <dialog id="privacyDialog"><form method="dialog" class="dialog-card dialog-document"><p class="eyebrow">Privacy boundary</p><h2>Your project remains local</h2><p>Project names, participants, answers, notes, imported files, and generated contexts are stored only in this browser. Premise Builder has no project-data server, analytics, advertising, tracking, remote fonts, or third-party scripts.</p><p>The public host serves only the application, schemas, and question templates. Clearing site data can remove local work; export is the portable backup.</p><button class="button button-primary" value="close">Close</button></form></dialog>
     <dialog id="formatDialog"><form method="dialog" class="dialog-card dialog-document"><p class="eyebrow">Premise as Code</p><h2>How exported context should be read</h2><p>Fact, View, Care, and Unknown describe the premise. Each contribution separately records its perspective, recorder, speaking role, capture method, authority, and confirmation.</p><p>A contribution is not a confirmed requirement by itself. Unspecified means “do not assume”; proposal-requested permits suggestions but not silent decisions; delegated permits a bounded decision that must be reported.</p><button class="button button-primary" value="close">Close</button></form></dialog>
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>

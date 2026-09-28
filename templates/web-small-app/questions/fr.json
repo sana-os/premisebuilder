@@ -1,0 +1,1688 @@
+{
+  "templateId": "web-small-app",
+  "templateVersion": "0.1.0",
+  "locale": "fr",
+  "direction": "ltr",
+  "template": {
+    "name": "Sites web et petites applications web",
+    "summary": "Définissez les prémisses d’un site web ou d’une application web bien délimitée."
+  },
+  "answerContext": {
+    "answeringFrom": "Réponse provenant de",
+    "recordedBy": "Saisi par",
+    "speakingAs": "Rôle exprimé",
+    "captureMethod": "Mode d’obtention",
+    "authority": "Pouvoir de décision pour cette réponse",
+    "confirmation": "Confirmation par la source",
+    "changeForQuestion": "Modifier pour cette question",
+    "multiplePerspectives": "Ajouter un autre point de vue"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "Confirmé",
+      "description": "Adopter comme prémisse acceptée du projet."
+    },
+    {
+      "value": "provisional",
+      "label": "Provisoire",
+      "description": "Utiliser pour le moment tout en laissant la révision explicitement possible."
+    },
+    {
+      "value": "unspecified",
+      "label": "Non décidé",
+      "description": "Laisser ouvert. Ne pas laisser l’IA combler le manque implicitement."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "Demander une proposition",
+      "description": "Demander des alternatives ou une recommandation sans considérer une option comme choisie."
+    },
+    {
+      "value": "delegated",
+      "label": "Déléguer dans des limites",
+      "description": "Autoriser la personne chargée de la réalisation ou l’IA à décider dans les limites indiquées et à rapporter son choix."
+    },
+    {
+      "value": "not_applicable",
+      "label": "Sans objet",
+      "description": "Indiquer que la question ne concerne pas ce projet."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "Choisissez le point de vue représenté et la personne qui a saisi la réponse.",
+    "validation.speakingRoleMismatch": "Le rôle exprimé n’est pas attribué à ce participant.",
+    "validation.inferenceUnconfirmed": "Une réponse déduite doit rester non confirmée jusqu’à vérification par une personne habilitée.",
+    "validation.resolutionAuthorityRequired": "Confirmer cette prémisse nécessite une source habilitée à décider.",
+    "validation.exclusiveChoice": "Cette option ne peut pas être combinée avec d’autres.",
+    "validation.noteRequired": "Ajoutez une courte note expliquant ce choix.",
+    "validation.selectionLimit": "Réduisez le nombre d’options sélectionnées.",
+    "review.authRuntime": "L’authentification est prévue, mais l’environnement choisi peut nécessiter un composant externe ou serveur.",
+    "review.paymentHandling": "Des données de paiement sont prévues. Confirmez qui les traite et si le projet peut en stocker.",
+    "review.analyticsPrivacy": "Des analyses ou télémesures sont prévues. Revérifiez les limites de confidentialité, le consentement et les pratiques interdites."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "Intention du projet",
+      "description": "Définir ce qui sera créé, son intérêt et la phase actuelle.",
+      "perspectiveHint": "Privilégiez le commanditaire ou le responsable des décisions. Saisissez séparément l’interprétation du développeur."
+    },
+    {
+      "id": "audience.context",
+      "label": "Public et contexte",
+      "description": "Décrire les utilisateurs et les conditions d’utilisation.",
+      "perspectiveHint": "Séparez si possible les réponses réelles des utilisateurs des hypothèses de l’équipe."
+    },
+    {
+      "id": "scope.deliverables",
+      "label": "Périmètre et livrables",
+      "description": "Rendre visibles les limites de la version, les interfaces requises et les exclusions.",
+      "perspectiveHint": "Le commanditaire décrit le périmètre souhaité ; le développeur précise séparément la faisabilité et les conséquences techniques."
+    },
+    {
+      "id": "content.data",
+      "label": "Contenu et données",
+      "description": "Clarifier les responsabilités éditoriales et le traitement des données saisies.",
+      "perspectiveHint": "Consultez le responsable éditorial pour les contenus et une source technique ou de confidentialité habilitée pour les données."
+    },
+    {
+      "id": "design.interaction",
+      "label": "Design et interaction",
+      "description": "Recueillir les préférences visuelles et d’interaction sans les confondre avec des contraintes impératives.",
+      "perspectiveHint": "Séparez observations des utilisateurs, préférences du commanditaire et recommandations du designer."
+    },
+    {
+      "id": "technology.runtime",
+      "label": "Technologie et exécution",
+      "description": "Définir la flexibilité technique, les limites d’exécution, les navigateurs et les services externes.",
+      "perspectiveHint": "Un développeur peut recommander une solution. Précisez si elle est indicative ou constitue une décision technique autorisée."
+    },
+    {
+      "id": "quality.accessibility",
+      "label": "Qualité et accessibilité",
+      "description": "Fixer les attentes d’accessibilité, d’adaptation aux écrans et de performance.",
+      "perspectiveHint": "Combinez les besoins observés avec l’autorité technique ou réglementaire, sans substituer l’un à l’autre."
+    },
+    {
+      "id": "risk.boundaries",
+      "label": "Risques et limites",
+      "description": "Indiquer les événements interdits et les défaillances coûteuses.",
+      "perspectiveHint": "Confirmez les interdictions impératives avec un décideur ou l’autorité du domaine."
+    },
+    {
+      "id": "delivery.operations",
+      "label": "Livraison et exploitation",
+      "description": "Définir hébergement, déploiement, maintenance et transmission.",
+      "perspectiveHint": "Séparez les besoins d’exploitation de la maintenance du processus préféré du développeur."
+    },
+    {
+      "id": "acceptance.validation",
+      "label": "Acceptation et validation",
+      "description": "Définir qui accepte le résultat et quelles preuves établissent son achèvement.",
+      "perspectiveHint": "La résolution finale doit venir de la personne ou du groupe habilité à accepter la version."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.project_kind",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "Que créez-vous ?",
+      "help": "Choisissez la forme principale la plus proche pour cette version.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "informational_site",
+          "label": "Site d’information"
+        },
+        {
+          "value": "landing_page",
+          "label": "Page d’accueil promotionnelle"
+        },
+        {
+          "value": "portfolio",
+          "label": "Portfolio"
+        },
+        {
+          "value": "public_content_site",
+          "label": "Site public de contenu"
+        },
+        {
+          "value": "browser_local_utility",
+          "label": "Utilitaire local au navigateur"
+        },
+        {
+          "value": "small_web_app",
+          "label": "Petite application web"
+        },
+        {
+          "value": "mixed",
+          "label": "Version mixte",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.primary_outcome",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "Quel résultat principal cette version doit-elle permettre ?",
+      "help": "Choisissez le résultat prioritaire en cas de compromis.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "explain_information",
+          "label": "Aider à comprendre une information"
+        },
+        {
+          "value": "generate_leads",
+          "label": "Générer des demandes ou des prospects"
+        },
+        {
+          "value": "showcase_work",
+          "label": "Présenter des réalisations ou compétences"
+        },
+        {
+          "value": "complete_workflow",
+          "label": "Permettre de réaliser un processus"
+        },
+        {
+          "value": "provide_utility",
+          "label": "Fournir un outil ciblé"
+        },
+        {
+          "value": "publish_content",
+          "label": "Publier ou organiser du contenu"
+        },
+        {
+          "value": "validate_idea",
+          "label": "Valider une idée ou un prototype"
+        },
+        {
+          "value": "other",
+          "label": "Autre résultat",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "À quelle phase se trouve le projet ?",
+      "help": "Cela détermine s’il faut créer, préserver, étendre ou corriger le comportement existant.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "Nouvelle création"
+        },
+        {
+          "value": "redesign",
+          "label": "Refonte"
+        },
+        {
+          "value": "extension",
+          "label": "Extension"
+        },
+        {
+          "value": "repair",
+          "label": "Correction"
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.success_evidence",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "Quel résultat observable justifierait cette version ?",
+      "help": "Décrivez des preuves plutôt qu’une aspiration générale. Une réponse courte suffit.",
+      "responseType": "long-text",
+      "placeholder": "Exemple : un nouveau visiteur comprend l’offre et envoie une demande sans aide."
+    },
+    {
+      "questionId": "audience.context.primary_group",
+      "category": "audience.context",
+      "order": 50,
+      "prompt": "Quel est le public principal ?",
+      "help": "Choisissez le groupe dont les besoins doivent guider la première version.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "general_public",
+          "label": "Grand public"
+        },
+        {
+          "value": "prospective_customers",
+          "label": "Clients potentiels"
+        },
+        {
+          "value": "existing_customers",
+          "label": "Clients existants"
+        },
+        {
+          "value": "internal_staff",
+          "label": "Personnel interne"
+        },
+        {
+          "value": "professionals",
+          "label": "Professionnels ou spécialistes"
+        },
+        {
+          "value": "creators",
+          "label": "Créateurs ou contributeurs"
+        },
+        {
+          "value": "students_researchers",
+          "label": "Étudiants ou chercheurs"
+        },
+        {
+          "value": "defined_community",
+          "label": "Communauté définie"
+        },
+        {
+          "value": "mixed",
+          "label": "Plusieurs groupes à égalité",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "Autre public",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.relationship",
+      "category": "audience.context",
+      "order": 60,
+      "prompt": "Quelle relation la plupart des utilisateurs auront-ils avec le projet ?",
+      "help": "Cela aide à définir l’accueil, les explications et la profondeur de navigation.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "first_time_visitors",
+          "label": "Surtout de nouveaux visiteurs"
+        },
+        {
+          "value": "occasional_visitors",
+          "label": "Visiteurs occasionnels"
+        },
+        {
+          "value": "returning_users",
+          "label": "Utilisateurs réguliers"
+        },
+        {
+          "value": "authenticated_members",
+          "label": "Membres authentifiés"
+        },
+        {
+          "value": "known_internal_users",
+          "label": "Utilisateurs internes connus"
+        },
+        {
+          "value": "mixed",
+          "label": "Public mixte"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.domain_familiarity",
+      "category": "audience.context",
+      "order": 70,
+      "prompt": "Quelle est la connaissance du sujet par le public principal ?",
+      "help": "Appuyez-vous si possible sur des connaissances observées ou rapportées.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Aucune connaissance préalable supposée"
+        },
+        {
+          "value": "basic",
+          "label": "Connaissances de base"
+        },
+        {
+          "value": "working",
+          "label": "Connaissances pratiques"
+        },
+        {
+          "value": "expert",
+          "label": "Expertise"
+        },
+        {
+          "value": "mixed",
+          "label": "Connaissances très variées"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.primary_context",
+      "category": "audience.context",
+      "order": 80,
+      "prompt": "Dans quelles conditions le projet sera-t-il utilisé ?",
+      "help": "Sélectionnez toutes les conditions influençant réellement le design ou la réalisation.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "mobile_on_move",
+          "label": "Mobile en déplacement"
+        },
+        {
+          "value": "mobile_stationary",
+          "label": "Mobile à l’arrêt"
+        },
+        {
+          "value": "desktop_office",
+          "label": "Ordinateur au bureau"
+        },
+        {
+          "value": "desktop_home",
+          "label": "Ordinateur à domicile"
+        },
+        {
+          "value": "tablet_or_kiosk",
+          "label": "Tablette ou borne"
+        },
+        {
+          "value": "constrained_network",
+          "label": "Réseau lent ou instable"
+        },
+        {
+          "value": "assistive_technology",
+          "label": "Technologie d’assistance"
+        },
+        {
+          "value": "mixed",
+          "label": "Conditions mixtes ou imprévisibles"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.required_surfaces",
+      "category": "scope.deliverables",
+      "order": 90,
+      "prompt": "Quelles interfaces sont requises dans cette version ?",
+      "help": "Sélectionnez uniquement les éléments obligatoires de cette version, pas les ajouts futurs possibles.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "home_or_entry",
+          "label": "Accueil ou vue d’entrée"
+        },
+        {
+          "value": "content_pages",
+          "label": "Pages de contenu"
+        },
+        {
+          "value": "listing_or_index",
+          "label": "Liste ou index"
+        },
+        {
+          "value": "detail_views",
+          "label": "Vues détaillées"
+        },
+        {
+          "value": "form",
+          "label": "Formulaire"
+        },
+        {
+          "value": "dashboard",
+          "label": "Tableau de bord ou espace de travail"
+        },
+        {
+          "value": "settings",
+          "label": "Paramètres"
+        },
+        {
+          "value": "authentication",
+          "label": "Connexion ou gestion de compte"
+        },
+        {
+          "value": "admin",
+          "label": "Vue d’administration"
+        },
+        {
+          "value": "legal",
+          "label": "Pages légales ou de politique"
+        },
+        {
+          "value": "error_empty_states",
+          "label": "États d’erreur et vides"
+        },
+        {
+          "value": "other",
+          "label": "Autre interface requise",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.primary_user_action",
+      "category": "scope.deliverables",
+      "order": 100,
+      "prompt": "Quelle est l’action la plus importante que l’utilisateur doit accomplir ?",
+      "help": "Choisissez l’action qui définit le parcours principal.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "read_or_understand",
+          "label": "Lire ou comprendre"
+        },
+        {
+          "value": "navigate_or_discover",
+          "label": "Naviguer ou découvrir du contenu"
+        },
+        {
+          "value": "submit_form",
+          "label": "Envoyer un formulaire"
+        },
+        {
+          "value": "search_or_filter",
+          "label": "Rechercher ou filtrer"
+        },
+        {
+          "value": "create_or_edit",
+          "label": "Créer ou modifier"
+        },
+        {
+          "value": "calculate_or_transform",
+          "label": "Calculer ou transformer des données"
+        },
+        {
+          "value": "upload_or_download",
+          "label": "Téléverser ou télécharger"
+        },
+        {
+          "value": "manage_account",
+          "label": "Se connecter ou gérer un compte"
+        },
+        {
+          "value": "purchase_or_pay",
+          "label": "Acheter ou payer"
+        },
+        {
+          "value": "other",
+          "label": "Autre action principale",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.release_boundary",
+      "category": "scope.deliverables",
+      "order": 110,
+      "prompt": "Quelles sont les limites de la première version ?",
+      "help": "Choisissez la limite actuellement la plus claire. Une limite vague doit rester visiblement ouverte.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "single_page",
+          "label": "Une page"
+        },
+        {
+          "value": "small_fixed_set",
+          "label": "Petit ensemble fixe de pages"
+        },
+        {
+          "value": "bounded_app_flow",
+          "label": "Un parcours applicatif bien délimité"
+        },
+        {
+          "value": "existing_scope_redesign",
+          "label": "Périmètre actuel du produit, repensé"
+        },
+        {
+          "value": "specific_repair",
+          "label": "Une correction précise uniquement"
+        },
+        {
+          "value": "phased_mvp",
+          "label": "Phase MVP définie"
+        },
+        {
+          "value": "not_yet_bounded",
+          "label": "Limite encore incertaine"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.explicit_exclusions",
+      "category": "scope.deliverables",
+      "order": 120,
+      "prompt": "Qu’est-ce qui est explicitement exclu de cette version ?",
+      "help": "Listez les ajouts ou hypothèses qui nécessiteraient une nouvelle décision.",
+      "responseType": "long-text",
+      "placeholder": "Exemple : aucun compte, base serveur, paiement ni CMS dans la première version."
+    },
+    {
+      "questionId": "content.data.source_owner",
+      "category": "content.data",
+      "order": 130,
+      "prompt": "Qui est responsable du contenu du projet ?",
+      "help": "Choisissez qui fournit ou approuve les textes, médias et informations sources.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "owner_supplies_final",
+          "label": "Contenu final fourni par le responsable"
+        },
+        {
+          "value": "owner_supplies_draft",
+          "label": "Brouillon fourni par le responsable"
+        },
+        {
+          "value": "developer_structures",
+          "label": "Le développeur structure les éléments fournis"
+        },
+        {
+          "value": "developer_writes_from_brief",
+          "label": "Le développeur rédige à partir d’un brief approuvé"
+        },
+        {
+          "value": "shared_responsibility",
+          "label": "Responsabilité partagée"
+        },
+        {
+          "value": "migrate_existing",
+          "label": "Migration du contenu existant"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "Pas encore attribué"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.readiness",
+      "category": "content.data",
+      "order": 140,
+      "prompt": "Quel est le degré de préparation du contenu ?",
+      "help": "Évaluez ce qui est disponible maintenant, pas ce qui est attendu au lancement.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "final",
+          "label": "Final et approuvé"
+        },
+        {
+          "value": "mostly_ready",
+          "label": "Presque prêt"
+        },
+        {
+          "value": "partial",
+          "label": "Partiellement disponible"
+        },
+        {
+          "value": "source_material_only",
+          "label": "Seules les sources existent"
+        },
+        {
+          "value": "not_started",
+          "label": "Pas commencé"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.user_input_types",
+      "category": "content.data",
+      "order": 150,
+      "prompt": "Quelles données utilisateur peuvent entrer dans le système ?",
+      "help": "Sélectionnez toutes les données reçues intentionnellement, y compris la télémétrie.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Aucune donnée utilisateur",
+          "exclusive": true
+        },
+        {
+          "value": "contact_details",
+          "label": "Coordonnées"
+        },
+        {
+          "value": "account_profile",
+          "label": "Données de compte ou profil"
+        },
+        {
+          "value": "free_text",
+          "label": "Texte libre"
+        },
+        {
+          "value": "files",
+          "label": "Fichiers téléversés"
+        },
+        {
+          "value": "payment_related",
+          "label": "Données de paiement"
+        },
+        {
+          "value": "analytics_telemetry",
+          "label": "Analyses ou télémétrie"
+        },
+        {
+          "value": "location_device",
+          "label": "Données de localisation ou appareil"
+        },
+        {
+          "value": "other",
+          "label": "Autre type de données",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.storage",
+      "category": "content.data",
+      "order": 160,
+      "prompt": "Où les données du projet ou des utilisateurs peuvent-elles être stockées ?",
+      "help": "Choisissez la limite actuelle la plus stricte. Cela concerne le produit défini, pas Premise Builder.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_user_data",
+          "label": "Aucune donnée utilisateur stockée"
+        },
+        {
+          "value": "session_only",
+          "label": "Session actuelle uniquement"
+        },
+        {
+          "value": "browser_local_only",
+          "label": "Navigateur de l’utilisateur uniquement"
+        },
+        {
+          "value": "server_storage_allowed",
+          "label": "Stockage serveur contrôlé par le projet autorisé"
+        },
+        {
+          "value": "third_party_storage",
+          "label": "Stockage par un tiers approuvé autorisé"
+        },
+        {
+          "value": "hybrid",
+          "label": "Combinaison définie de stockage local, serveur ou tiers",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.retention",
+      "category": "content.data",
+      "order": 170,
+      "prompt": "Combien de temps les données utilisateur peuvent-elles être conservées ?",
+      "help": "Cette question apparaît lorsque des données peuvent persister.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_retention",
+          "label": "Ne pas les conserver"
+        },
+        {
+          "value": "until_session_ends",
+          "label": "Jusqu’à la fin de la session"
+        },
+        {
+          "value": "until_local_deletion",
+          "label": "Jusqu’à suppression des données locales par l’utilisateur"
+        },
+        {
+          "value": "fixed_period",
+          "label": "Pendant une durée définie",
+          "requiresNote": true
+        },
+        {
+          "value": "account_lifetime",
+          "label": "Pendant la durée de vie du compte"
+        },
+        {
+          "value": "governed_by_policy",
+          "label": "Selon une politique approuvée",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.tone",
+      "category": "design.interaction",
+      "order": 180,
+      "prompt": "Quelles qualités visuelles doivent guider le design ?",
+      "help": "Choisissez au plus trois qualités. Ce sont des préférences sauf contrainte explicite.",
+      "responseType": "multi-choice",
+      "maxSelections": 3,
+      "choices": [
+        {
+          "value": "minimal",
+          "label": "Minimaliste"
+        },
+        {
+          "value": "editorial",
+          "label": "Éditorial"
+        },
+        {
+          "value": "technical",
+          "label": "Technique"
+        },
+        {
+          "value": "playful",
+          "label": "Ludique"
+        },
+        {
+          "value": "premium",
+          "label": "Haut de gamme"
+        },
+        {
+          "value": "warm",
+          "label": "Chaleureux"
+        },
+        {
+          "value": "institutional",
+          "label": "Institutionnel"
+        },
+        {
+          "value": "bold",
+          "label": "Audacieux"
+        },
+        {
+          "value": "quiet",
+          "label": "Discret"
+        },
+        {
+          "value": "brand_led",
+          "label": "Guidé par une marque existante"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.brand_source",
+      "category": "design.interaction",
+      "order": 190,
+      "prompt": "Quel système visuel le projet doit-il suivre ?",
+      "help": "Choisissez la source actuellement la plus autoritative.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed_design_system",
+          "label": "Système de design imposé"
+        },
+        {
+          "value": "existing_brand_guidelines",
+          "label": "Charte de marque existante"
+        },
+        {
+          "value": "partial_assets",
+          "label": "Éléments de marque partiels"
+        },
+        {
+          "value": "visual_reference_only",
+          "label": "Exemples de référence uniquement"
+        },
+        {
+          "value": "no_existing_brand",
+          "label": "Aucun système visuel existant"
+        },
+        {
+          "value": "preserve_current_ui",
+          "label": "Conserver l’interface actuelle"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.information_density",
+      "category": "design.interaction",
+      "order": 200,
+      "prompt": "Quelle quantité d’informations doit être visible simultanément ?",
+      "help": "Fondez la réponse sur la tâche et le public, pas seulement sur le goût.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sparse_guided",
+          "label": "Épurée et guidée"
+        },
+        {
+          "value": "balanced",
+          "label": "Équilibrée"
+        },
+        {
+          "value": "dense_operational",
+          "label": "Dense et fonctionnelle"
+        },
+        {
+          "value": "progressive_disclosure",
+          "label": "Révéler les détails progressivement"
+        },
+        {
+          "value": "varies_by_view",
+          "label": "Variable selon la vue",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.motion",
+      "category": "design.interaction",
+      "order": 210,
+      "prompt": "Comment utiliser les animations ?",
+      "help": "Le mouvement ne doit ni masquer l’état ni ignorer les préférences de réduction des animations.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Aucun mouvement superflu"
+        },
+        {
+          "value": "subtle_feedback",
+          "label": "Retours d’état subtils uniquement"
+        },
+        {
+          "value": "moderate_transitions",
+          "label": "Transitions modérées"
+        },
+        {
+          "value": "expressive",
+          "label": "Mouvement expressif là où il est utile"
+        },
+        {
+          "value": "reduced_motion_first",
+          "label": "Priorité à la réduction des animations"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.stack_policy",
+      "category": "technology.runtime",
+      "order": 220,
+      "prompt": "Dans quelle mesure la pile technique est-elle imposée ?",
+      "help": "Une pile imposée est une contrainte ; une préférence laisse place aux alternatives justifiées.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "Pile technique imposée",
+          "requiresNote": true
+        },
+        {
+          "value": "preferred_negotiable",
+          "label": "Préférée mais négociable",
+          "requiresNote": true
+        },
+        {
+          "value": "open_to_recommendation",
+          "label": "Ouverte aux recommandations"
+        },
+        {
+          "value": "preserve_existing",
+          "label": "Conserver la pile existante"
+        },
+        {
+          "value": "static_files_only",
+          "label": "Fichiers statiques simples uniquement"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.mode",
+      "category": "technology.runtime",
+      "order": 230,
+      "prompt": "Quel modèle d’exécution le produit peut-il utiliser ?",
+      "help": "Choisissez les ressources sur lesquelles le produit déployé peut s’appuyer.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fully_static",
+          "label": "Entièrement statique"
+        },
+        {
+          "value": "browser_local",
+          "label": "Statique avec état local au navigateur"
+        },
+        {
+          "value": "static_external_apis",
+          "label": "Interface statique avec API externes approuvées"
+        },
+        {
+          "value": "server_backed",
+          "label": "Application avec serveur"
+        },
+        {
+          "value": "hybrid",
+          "label": "Exécution hybride",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.browser_support",
+      "category": "technology.runtime",
+      "order": 240,
+      "prompt": "Quelle limite de compatibilité des navigateurs s’applique ?",
+      "help": "Choisissez une politique vérifiable plutôt que de promettre tous les navigateurs.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "evergreen_current",
+          "label": "Navigateurs actuels à mise à jour continue"
+        },
+        {
+          "value": "recent_two_versions",
+          "label": "Version actuelle et deux versions majeures précédentes"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "Priorité aux navigateurs mobiles modernes"
+        },
+        {
+          "value": "enterprise_legacy",
+          "label": "Navigateur ancien ou d’entreprise requis",
+          "requiresNote": true
+        },
+        {
+          "value": "specified_matrix",
+          "label": "Matrice de navigateurs fournie",
+          "requiresNote": true
+        },
+        {
+          "value": "no_special_constraint",
+          "label": "Support moderne raisonnable, sans contrainte particulière"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.external_services",
+      "category": "technology.runtime",
+      "order": 250,
+      "prompt": "Quels services externes sont prévus ?",
+      "help": "Sélectionnez les services requis. Autorisation, identifiants et limites de données sont traités séparément.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Aucun service externe",
+          "exclusive": true
+        },
+        {
+          "value": "cms",
+          "label": "Système de gestion de contenu"
+        },
+        {
+          "value": "analytics",
+          "label": "Analyses"
+        },
+        {
+          "value": "authentication",
+          "label": "Fournisseur d’authentification"
+        },
+        {
+          "value": "payments",
+          "label": "Prestataire de paiement"
+        },
+        {
+          "value": "email_forms",
+          "label": "Envoi d’e-mails ou formulaires"
+        },
+        {
+          "value": "maps",
+          "label": "Service de cartes ou localisation"
+        },
+        {
+          "value": "ai_api",
+          "label": "Service ou API d’IA"
+        },
+        {
+          "value": "other",
+          "label": "Autre service",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.discoverability",
+      "category": "technology.runtime",
+      "order": 260,
+      "prompt": "Comment doit-on pouvoir découvrir le projet ?",
+      "help": "Cela détermine les exigences d’indexation et de publication lisible par machine.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "public_search_critical",
+          "label": "Visibilité dans les recherches publiques essentielle"
+        },
+        {
+          "value": "public_search_helpful",
+          "label": "Visibilité dans les recherches publiques utile"
+        },
+        {
+          "value": "direct_link_only",
+          "label": "Accès par lien direct suffisant"
+        },
+        {
+          "value": "private_noindex",
+          "label": "Garder privé ou utiliser noindex"
+        },
+        {
+          "value": "app_shell",
+          "label": "Indexer uniquement l’enveloppe publique de l’application"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.target",
+      "category": "quality.accessibility",
+      "order": 270,
+      "prompt": "Quel objectif d’accessibilité s’applique ?",
+      "help": "Choisissez un niveau que vous pourrez justifier lors de la révision.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "semantic_baseline",
+          "label": "Socle sémantique et utilisable"
+        },
+        {
+          "value": "wcag_aa",
+          "label": "Objectif WCAG AA"
+        },
+        {
+          "value": "legal_contractual",
+          "label": "Norme légale ou contractuelle",
+          "requiresNote": true
+        },
+        {
+          "value": "best_effort",
+          "label": "Meilleur effort dans un périmètre défini",
+          "requiresNote": true
+        },
+        {
+          "value": "specific_requirements",
+          "label": "Exigences d’accessibilité fournies",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.keyboard",
+      "category": "quality.accessibility",
+      "order": 280,
+      "prompt": "Quel niveau d’utilisation au clavier est requis ?",
+      "help": "Cela inclut la visibilité du focus, l’ordre logique et des commandes utilisables.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "all_controls",
+          "label": "Toutes les commandes et tous les parcours"
+        },
+        {
+          "value": "primary_flow",
+          "label": "Au moins le parcours principal"
+        },
+        {
+          "value": "content_navigation",
+          "label": "Navigation du contenu uniquement"
+        },
+        {
+          "value": "fixed_pointer_environment",
+          "label": "Environnement fixe uniquement au pointeur",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.responsive",
+      "category": "quality.accessibility",
+      "order": 290,
+      "prompt": "Quelle priorité d’adaptation aux écrans s’applique ?",
+      "help": "Choisissez l’équilibre souhaité en explicitant les tailles non prises en charge.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mobile_desktop_equal",
+          "label": "Mobile et ordinateur à égalité"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "Mobile prioritaire"
+        },
+        {
+          "value": "desktop_priority",
+          "label": "Ordinateur prioritaire"
+        },
+        {
+          "value": "fixed_environment",
+          "label": "Environnement d’affichage fixe",
+          "requiresNote": true
+        },
+        {
+          "value": "preserve_current_behavior",
+          "label": "Conserver le comportement responsive actuel"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.performance",
+      "category": "quality.accessibility",
+      "order": 300,
+      "prompt": "Quelle exigence de performance doit guider les compromis ?",
+      "help": "Choisissez le critère utile le plus exigeant que le projet puisse vérifier.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "core_web_vitals",
+          "label": "Atteindre les objectifs Core Web Vitals convenus"
+        },
+        {
+          "value": "constrained_network",
+          "label": "Rester utilisable sur un réseau limité"
+        },
+        {
+          "value": "balanced",
+          "label": "Équilibrer rapidité et fonctionnalités"
+        },
+        {
+          "value": "feature_priority",
+          "label": "La capacité requise peut primer sur la vitesse"
+        },
+        {
+          "value": "explicit_budget",
+          "label": "Budget de performance fourni",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.prohibited_practices",
+      "category": "risk.boundaries",
+      "order": 310,
+      "prompt": "Quelles pratiques sont interdites ?",
+      "help": "Ne sélectionnez que les interdictions impératives. Les préférences vont dans leur catégorie.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "Aucune pratique interdite connue",
+          "exclusive": true
+        },
+        {
+          "value": "inline_css",
+          "label": "CSS en ligne"
+        },
+        {
+          "value": "external_fonts",
+          "label": "Polices chargées à distance"
+        },
+        {
+          "value": "behavioral_tracking",
+          "label": "Suivi comportemental"
+        },
+        {
+          "value": "nonessential_cookies",
+          "label": "Cookies non essentiels"
+        },
+        {
+          "value": "unapproved_cdn",
+          "label": "CDN externes non approuvés"
+        },
+        {
+          "value": "client_side_secrets",
+          "label": "Secrets dans le code client"
+        },
+        {
+          "value": "autoplay_media",
+          "label": "Lecture automatique de médias"
+        },
+        {
+          "value": "unconfirmed_destructive_actions",
+          "label": "Actions destructrices sans confirmation"
+        },
+        {
+          "value": "vendor_lock_in",
+          "label": "Dépendance à un fournisseur"
+        },
+        {
+          "value": "other",
+          "label": "Autre interdiction",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.privacy_level",
+      "category": "risk.boundaries",
+      "order": 320,
+      "prompt": "Quel est le niveau maximal de sensibilité des données ?",
+      "help": "Évaluez le flux intentionnel le plus sensible, pas le flux moyen.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Aucune donnée personnelle"
+        },
+        {
+          "value": "low_nonsensitive",
+          "label": "Données personnelles non sensibles à faible risque"
+        },
+        {
+          "value": "personal_data",
+          "label": "Données personnelles"
+        },
+        {
+          "value": "sensitive_data",
+          "label": "Données personnelles sensibles"
+        },
+        {
+          "value": "regulated_data",
+          "label": "Données réglementées ou spécialement protégées",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sensibilité encore mal comprise"
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.high_cost_failure",
+      "category": "risk.boundaries",
+      "order": 330,
+      "prompt": "Quelles défaillances coûteraient le plus cher ?",
+      "help": "Choisissez celles qui modifieraient les priorités de conception, révision ou réalisation.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "no_unusual_cost",
+          "label": "Aucun coût de défaillance inhabituel",
+          "exclusive": true
+        },
+        {
+          "value": "data_loss",
+          "label": "Perte de données"
+        },
+        {
+          "value": "privacy_breach",
+          "label": "Atteinte à la confidentialité ou à la sécurité"
+        },
+        {
+          "value": "inaccessible_primary_flow",
+          "label": "Parcours principal inaccessible"
+        },
+        {
+          "value": "wrong_information",
+          "label": "Informations erronées ou trompeuses"
+        },
+        {
+          "value": "downtime",
+          "label": "Interruption ou indisponibilité"
+        },
+        {
+          "value": "performance_failure",
+          "label": "Dégradation des performances"
+        },
+        {
+          "value": "brand_damage",
+          "label": "Atteinte à la marque ou à la confiance"
+        },
+        {
+          "value": "scope_overrun",
+          "label": "Dépassement du périmètre ou des coûts"
+        },
+        {
+          "value": "other",
+          "label": "Autre défaillance coûteuse",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.compliance",
+      "category": "risk.boundaries",
+      "order": 340,
+      "prompt": "Quelles obligations de conformité s’appliquent ?",
+      "help": "Choisissez les sources connues et précisez la norme ou règle exacte en note.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "Aucune obligation de conformité connue",
+          "exclusive": true
+        },
+        {
+          "value": "privacy_law",
+          "label": "Loi ou réglementation sur la confidentialité",
+          "requiresNote": true
+        },
+        {
+          "value": "cookie_consent",
+          "label": "Règles sur les cookies ou le consentement",
+          "requiresNote": true
+        },
+        {
+          "value": "accessibility_law",
+          "label": "Loi ou norme d’accessibilité",
+          "requiresNote": true
+        },
+        {
+          "value": "copyright_licensing",
+          "label": "Règles de droit d’auteur ou de licence",
+          "requiresNote": true
+        },
+        {
+          "value": "industry_specific",
+          "label": "Règles sectorielles",
+          "requiresNote": true
+        },
+        {
+          "value": "organization_policy",
+          "label": "Politique de l’organisation",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "Autre source de conformité",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.hosting",
+      "category": "delivery.operations",
+      "order": 350,
+      "prompt": "Où cette version sera-t-elle hébergée ?",
+      "help": "Choisissez la cible actuelle même si les détails restent provisoires.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "github_pages",
+          "label": "GitHub Pages"
+        },
+        {
+          "value": "cloudflare_pages",
+          "label": "Cloudflare Pages"
+        },
+        {
+          "value": "other_static_host",
+          "label": "Autre hébergeur statique",
+          "requiresNote": true
+        },
+        {
+          "value": "cloud_application_platform",
+          "label": "Plateforme d’applications cloud",
+          "requiresNote": true
+        },
+        {
+          "value": "existing_environment",
+          "label": "Environnement géré existant",
+          "requiresNote": true
+        },
+        {
+          "value": "local_only",
+          "label": "Utilisation locale uniquement"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.deployment_workflow",
+      "category": "delivery.operations",
+      "order": 360,
+      "prompt": "Comment les versions doivent-elles être déployées ?",
+      "help": "Choisissez un processus réellement exploitable par la maintenance.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "manual_upload",
+          "label": "Téléversement manuel"
+        },
+        {
+          "value": "git_push_automatic",
+          "label": "Déploiement automatique après un push Git"
+        },
+        {
+          "value": "pull_request_gate",
+          "label": "Révision de pull request avant déploiement"
+        },
+        {
+          "value": "platform_cli",
+          "label": "Déploiement par ligne de commande de la plateforme"
+        },
+        {
+          "value": "existing_ci",
+          "label": "Processus CI/CD existant",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.maintenance_owner",
+      "category": "delivery.operations",
+      "order": 370,
+      "prompt": "Qui assurera la maintenance après publication ?",
+      "help": "Indiquez le rôle qui doit comprendre et exploiter le résultat.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "original_developer",
+          "label": "Développeur d’origine"
+        },
+        {
+          "value": "internal_team",
+          "label": "Équipe interne"
+        },
+        {
+          "value": "client_or_owner",
+          "label": "Client ou responsable du projet"
+        },
+        {
+          "value": "shared",
+          "label": "Maintenance partagée"
+        },
+        {
+          "value": "no_regular_maintenance",
+          "label": "Aucune maintenance régulière prévue"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "Pas encore attribué"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.handoff",
+      "category": "delivery.operations",
+      "order": 380,
+      "prompt": "Quel niveau de transmission est requis ?",
+      "help": "Choisissez le plus petit ensemble permettant une maintenance sûre.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "source_only",
+          "label": "Fichiers sources uniquement"
+        },
+        {
+          "value": "source_readme",
+          "label": "Sources et README"
+        },
+        {
+          "value": "docs_and_tests",
+          "label": "Sources, documentation et tests"
+        },
+        {
+          "value": "operational_runbook",
+          "label": "Documentation et manuel d’exploitation"
+        },
+        {
+          "value": "full_transfer",
+          "label": "Transfert complet de propriété et des accès"
+        },
+        {
+          "value": "ongoing_support",
+          "label": "Accord d’assistance continue"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.approver",
+      "category": "acceptance.validation",
+      "order": 390,
+      "prompt": "Qui peut accepter la version ?",
+      "help": "Choisissez le rôle approbateur, pas seulement la personne qui effectue la révision.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "decision_owner",
+          "label": "Responsable des décisions"
+        },
+        {
+          "value": "requester",
+          "label": "Commanditaire ou client"
+        },
+        {
+          "value": "end_user_representative",
+          "label": "Représentant des utilisateurs finaux"
+        },
+        {
+          "value": "technical_reviewer",
+          "label": "Réviseur technique"
+        },
+        {
+          "value": "compliance_reviewer",
+          "label": "Réviseur conformité"
+        },
+        {
+          "value": "multiple_approvers",
+          "label": "Plusieurs approbateurs",
+          "requiresNote": true
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "Pas encore attribué"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.review_method",
+      "category": "acceptance.validation",
+      "order": 400,
+      "prompt": "Quelles preuves doivent servir à l’acceptation ?",
+      "help": "Choisissez la méthode principale. Ajoutez les preuves complémentaires dans le contexte.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "visual_review",
+          "label": "Révision visuelle"
+        },
+        {
+          "value": "requirements_checklist",
+          "label": "Liste de contrôle des exigences"
+        },
+        {
+          "value": "scenario_demonstration",
+          "label": "Démonstration de scénarios"
+        },
+        {
+          "value": "automated_tests",
+          "label": "Résultats de tests automatisés"
+        },
+        {
+          "value": "accessibility_audit",
+          "label": "Audit d’accessibilité"
+        },
+        {
+          "value": "performance_audit",
+          "label": "Audit de performance"
+        },
+        {
+          "value": "combined",
+          "label": "Combinaison définie",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.must_pass_scenarios",
+      "category": "acceptance.validation",
+      "order": 410,
+      "prompt": "Quels scénarios doivent réussir avant publication ?",
+      "help": "Choisissez ceux dont l’échec bloque l’acceptation.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "primary_content",
+          "label": "Le contenu principal est compréhensible"
+        },
+        {
+          "value": "primary_action",
+          "label": "L’action principale peut être achevée"
+        },
+        {
+          "value": "form_submission",
+          "label": "L’envoi de formulaire réussit"
+        },
+        {
+          "value": "local_persistence",
+          "label": "Sauvegarde locale et rechargement fonctionnent"
+        },
+        {
+          "value": "authentication",
+          "label": "L’authentification fonctionne"
+        },
+        {
+          "value": "payment",
+          "label": "Le paiement fonctionne"
+        },
+        {
+          "value": "keyboard",
+          "label": "Le parcours clavier requis fonctionne"
+        },
+        {
+          "value": "mobile",
+          "label": "Le parcours mobile requis fonctionne"
+        },
+        {
+          "value": "import_export",
+          "label": "Import et export préservent les données"
+        },
+        {
+          "value": "failure_recovery",
+          "label": "Gestion des erreurs et récupération fonctionnent"
+        },
+        {
+          "value": "other",
+          "label": "Autre scénario obligatoire",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.unresolved_policy",
+      "category": "acceptance.validation",
+      "order": 420,
+      "prompt": "Comment les prémisses ouvertes doivent-elles affecter le travail ?",
+      "help": "Choisissez la règle par défaut. Chaque inconnue peut conserver un autre état explicite.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "block_dependent_work",
+          "label": "Bloquer le travail dépendant"
+        },
+        {
+          "value": "provisional_with_label",
+          "label": "Continuer avec un choix clairement provisoire"
+        },
+        {
+          "value": "proposal_before_work",
+          "label": "Demander une proposition avant le travail dépendant"
+        },
+        {
+          "value": "delegate_with_bounds",
+          "label": "Déléguer dans des limites explicites"
+        },
+        {
+          "value": "document_and_continue",
+          "label": "Documenter l’inconnue et poursuivre le travail indépendant"
+        },
+        {
+          "value": "case_by_case",
+          "label": "Décider au cas par cas"
+        }
+      ]
+    }
+  ]
+}

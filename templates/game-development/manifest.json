@@ -1,6 +1,6 @@
 {
-  "id": "web-small-app",
-  "family": "software",
+  "id": "game-development",
+  "family": "game",
   "version": "0.1.0",
   "protocolVersion": "0.1.0",
   "defaultLocale": "ja",
@@ -32,18 +32,18 @@
   ],
   "categoryOrder": [
     "project.intent",
-    "audience.context",
-    "scope.deliverables",
-    "content.data",
-    "design.interaction",
-    "technology.runtime",
-    "quality.accessibility",
-    "risk.boundaries",
-    "delivery.operations",
-    "acceptance.validation"
+    "game.players",
+    "game.rules",
+    "game.scope",
+    "game.presentation",
+    "game.technology",
+    "game.accessibility",
+    "game.boundaries",
+    "game.delivery",
+    "game.validation"
   ],
   "categoryCount": 10,
-  "questionCount": 42,
+  "questionCount": 40,
   "participantRolePresets": [
     "developer",
     "end_user",

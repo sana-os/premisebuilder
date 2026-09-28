@@ -1,0 +1,1313 @@
+{
+  "templateId": "game-development",
+  "templateVersion": "0.1.0",
+  "locale": "ja",
+  "direction": "ltr",
+  "template": {
+    "name": "ゲーム制作",
+    "summary": "40問で遊びの設計、制作範囲、開発・公開の前提を整理します。"
+  },
+  "answerContext": {
+    "answeringFrom": "回答元",
+    "recordedBy": "記録者",
+    "speakingAs": "回答時の役割",
+    "captureMethod": "取得方法",
+    "authority": "この回答の権限",
+    "confirmation": "情報源の確認状態",
+    "changeForQuestion": "この質問で変更",
+    "multiplePerspectives": "別の観点を追加"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "確定",
+      "description": "承認済みのプロジェクト前提として使用します。"
+    },
+    {
+      "value": "provisional",
+      "label": "暫定",
+      "description": "現時点では使用しますが、変更可能であることを明示します。"
+    },
+    {
+      "value": "unspecified",
+      "label": "未決定",
+      "description": "未決定のままにします。AIに暗黙の補完をさせません。"
+    },
+    {
+      "value": "proposal_requested",
+      "label": "提案を求める",
+      "description": "選択済みとは扱わず、代替案または推奨案を求めます。"
+    },
+    {
+      "value": "delegated",
+      "label": "範囲を定めて委任",
+      "description": "定めた範囲内で実装者またはAIに判断を任せ、選択結果の報告を求めます。"
+    },
+    {
+      "value": "not_applicable",
+      "label": "該当なし",
+      "description": "この質問をプロジェクトの対象外として扱います。"
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "この回答が表す観点と記録者を選択してください。",
+    "validation.speakingRoleMismatch": "選択した回答時の役割は、その参加者に割り当てられていません。",
+    "validation.inferenceUnconfirmed": "推測による回答は、権限のある人が確認するまで未確認のままにしてください。",
+    "validation.resolutionAuthorityRequired": "この前提の確定には、権限のある決定元が必要です。",
+    "validation.exclusiveChoice": "この選択肢は他の選択肢と組み合わせられません。",
+    "validation.noteRequired": "この選択について短い補足を入力してください。",
+    "validation.selectionLimit": "選択数を上限以内に減らしてください。",
+    "review.authRuntime": "認証が対象に含まれていますが、選択した実行モデルでは外部サービスまたはサーバーが必要になる可能性があります。",
+    "review.paymentHandling": "決済関連データが対象に含まれています。処理主体と、プロジェクトが保存できる範囲を確認してください。",
+    "review.analyticsPrivacy": "分析またはテレメトリが対象に含まれています。プライバシー境界、同意、禁止事項を再確認してください。",
+    "review.onlineOffline": "オンラインの遊びとオフライン完結が同時に選ばれています。今回オンライン機能を含めるか確認してください。"
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "企画・プレイ体験",
+      "description": "届けたい体験と今回の制作目標を定めます。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.players",
+      "label": "プレイヤー・遊ぶ環境",
+      "description": "誰が、何を使い、どのような状況で遊ぶかを整理します。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.rules",
+      "label": "遊びの循環・ルール",
+      "description": "操作、結果、成長のつながりを定めます。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.scope",
+      "label": "制作範囲・コンテンツ",
+      "description": "今回作る量と作らない範囲を明確にします。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.presentation",
+      "label": "美術・音・物語",
+      "description": "表現方針と素材の制作・調達責任を整理します。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.technology",
+      "label": "技術・保存",
+      "description": "実装、保存、サービスの境界を定めます。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.accessibility",
+      "label": "操作性・アクセシビリティ",
+      "description": "想定した体験を無理なく遊べる条件を整理します。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.boundaries",
+      "label": "守る境界・権利",
+      "description": "表現、データ、収益化で守る条件を記録します。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.delivery",
+      "label": "制作体制・公開",
+      "description": "制作資源、配布、保守を整理します。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    },
+    {
+      "id": "game.validation",
+      "label": "プレイテスト・完成判定",
+      "description": "完成と判断する根拠と決定者を定めます。",
+      "perspectiveHint": "プレイヤーの観察、制作者の意図、技術上の提案を分けて記録します。"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.release_goal",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "今回の制作で何を達成しますか？",
+      "help": "今回、成功を判定する単位を選びます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "prototype",
+          "label": "試作で遊びの核を検証"
+        },
+        {
+          "value": "vertical_slice",
+          "label": "完成品質の一部分を制作"
+        },
+        {
+          "value": "demo",
+          "label": "公開体験版"
+        },
+        {
+          "value": "full_release",
+          "label": "完成版の公開"
+        },
+        {
+          "value": "update",
+          "label": "既存ゲームの更新"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.experience",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "プレイヤーに最も届けたい体験は？",
+      "help": "設計が競合したときの優先軸を選び、目指す感覚を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mastery",
+          "label": "上達と挑戦"
+        },
+        {
+          "value": "exploration",
+          "label": "探索と発見"
+        },
+        {
+          "value": "story",
+          "label": "物語と感情"
+        },
+        {
+          "value": "creation",
+          "label": "創作と実験"
+        },
+        {
+          "value": "connection",
+          "label": "協力や競争"
+        },
+        {
+          "value": "relaxation",
+          "label": "くつろぎ"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "現在の制作フェーズは？",
+      "help": "既存作品がある場合は、維持する要素も補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "新規制作"
+        },
+        {
+          "value": "redesign",
+          "label": "再設計"
+        },
+        {
+          "value": "extension",
+          "label": "拡張"
+        },
+        {
+          "value": "repair",
+          "label": "修正"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.concept",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "ゲームのコンセプトとジャンルは？",
+      "help": "誰が何をして楽しむゲームか、特徴と参考作品を記します。参考作品は複製の許可を意味しません。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.players.audience",
+      "category": "game.players",
+      "order": 50,
+      "prompt": "想定するプレイヤーは？",
+      "help": "年齢層、経験、対応言語を記し、実際の声と推測を分けます。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.players.platforms",
+      "category": "game.players",
+      "order": 60,
+      "prompt": "今回対応するプラットフォームは？",
+      "help": "対応を約束する対象を選び、最低動作環境を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "browser",
+          "label": "ブラウザ"
+        },
+        {
+          "value": "desktop",
+          "label": "PC"
+        },
+        {
+          "value": "mobile",
+          "label": "スマートフォン・タブレット"
+        },
+        {
+          "value": "console",
+          "label": "ゲーム機"
+        },
+        {
+          "value": "xr",
+          "label": "VR・AR"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.player_mode",
+      "category": "game.players",
+      "order": 70,
+      "prompt": "プレイ人数と参加方式は？",
+      "help": "最大人数、ローカル・オンラインの区別、進行共有を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "solo",
+          "label": "一人用"
+        },
+        {
+          "value": "local_coop",
+          "label": "ローカル協力"
+        },
+        {
+          "value": "local_versus",
+          "label": "ローカル対戦"
+        },
+        {
+          "value": "online_coop",
+          "label": "オンライン協力"
+        },
+        {
+          "value": "online_versus",
+          "label": "オンライン対戦"
+        },
+        {
+          "value": "async",
+          "label": "非同期の交流"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.session",
+      "category": "game.players",
+      "order": 80,
+      "prompt": "1回のプレイ時間の目安は？",
+      "help": "中断・再開と、全体の想定プレイ時間も補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "short",
+          "label": "10分未満"
+        },
+        {
+          "value": "medium",
+          "label": "10〜30分"
+        },
+        {
+          "value": "long",
+          "label": "30〜60分"
+        },
+        {
+          "value": "extended",
+          "label": "1時間以上"
+        },
+        {
+          "value": "flexible",
+          "label": "プレイヤーが自由に決定"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.core_loop",
+      "category": "game.rules",
+      "order": 90,
+      "prompt": "繰り返して楽しむ基本の流れは？",
+      "help": "行動→反応・報酬→次の判断を、具体例で説明します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.rules.outcomes",
+      "category": "game.rules",
+      "order": 100,
+      "prompt": "成功・失敗・終了をどう判定しますか？",
+      "help": "勝利、敗北、再挑戦、クリアの条件を記します。終わりがない設計も明示できます。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.rules.progression",
+      "category": "game.rules",
+      "order": 110,
+      "prompt": "必要な成長・進行システムは？",
+      "help": "成長の上限やリセットの条件を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "levels",
+          "label": "ステージ・章"
+        },
+        {
+          "value": "skills",
+          "label": "腕前・キャラクター能力"
+        },
+        {
+          "value": "collection",
+          "label": "収集・解放"
+        },
+        {
+          "value": "economy",
+          "label": "資源・経済"
+        },
+        {
+          "value": "ranking",
+          "label": "スコア・順位"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.difficulty",
+      "category": "game.rules",
+      "order": 120,
+      "prompt": "難易度をどう設計しますか？",
+      "help": "公平性、ランダム性、失敗の負担、自動調整の限界を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "固定"
+        },
+        {
+          "value": "selectable",
+          "label": "選択式"
+        },
+        {
+          "value": "adaptive",
+          "label": "自動調整"
+        },
+        {
+          "value": "sandbox",
+          "label": "挑戦を必須にしない"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.content_budget",
+      "category": "game.scope",
+      "order": 130,
+      "prompt": "今回作るコンテンツの量は？",
+      "help": "ステージ、キャラクター、アイテム、プレイ時間の数量・上限と制作担当を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.scope.required_features",
+      "category": "game.scope",
+      "order": 140,
+      "prompt": "遊び以外に必要な機能は？",
+      "help": "今回の公開に必須のものを選びます。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "tutorial",
+          "label": "チュートリアル"
+        },
+        {
+          "value": "settings",
+          "label": "設定画面"
+        },
+        {
+          "value": "inventory",
+          "label": "インベントリ"
+        },
+        {
+          "value": "achievements",
+          "label": "実績"
+        },
+        {
+          "value": "editor",
+          "label": "ステージエディター"
+        },
+        {
+          "value": "replays",
+          "label": "リプレイ"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.exclusions",
+      "category": "game.scope",
+      "order": 150,
+      "prompt": "今回、明確に作らないものは？",
+      "help": "追加したくなりそうな機能と、再検討する条件を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.scope.dependencies",
+      "category": "game.scope",
+      "order": 160,
+      "prompt": "引き継ぐ資産や依存関係は？",
+      "help": "既存コード、形式、ツール、素材、互換性の制約を記します。新規ならその旨を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.presentation.visual_style",
+      "category": "game.presentation",
+      "order": 170,
+      "prompt": "見た目の基本方針は？",
+      "help": "視点、見やすさ、参考例、独自性を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "text",
+          "label": "テキスト中心"
+        },
+        {
+          "value": "2d",
+          "label": "2D"
+        },
+        {
+          "value": "3d",
+          "label": "3D"
+        },
+        {
+          "value": "hybrid",
+          "label": "2D・3D混合"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.narrative",
+      "category": "game.presentation",
+      "order": 180,
+      "prompt": "物語はどのような役割を持ちますか？",
+      "help": "世界観、雰囲気、分岐、翻訳の必要性を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "物語は不要",
+          "exclusive": true
+        },
+        {
+          "value": "background",
+          "label": "背景・雰囲気"
+        },
+        {
+          "value": "linear",
+          "label": "一本道の物語"
+        },
+        {
+          "value": "branching",
+          "label": "分岐する物語"
+        },
+        {
+          "value": "emergent",
+          "label": "プレイから生まれる物語"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.audio",
+      "category": "game.presentation",
+      "order": 190,
+      "prompt": "必要な音の要素は？",
+      "help": "音量調整、字幕、音だけで重要情報を伝えてよいかを補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "effects",
+          "label": "効果音"
+        },
+        {
+          "value": "music",
+          "label": "音楽"
+        },
+        {
+          "value": "voice",
+          "label": "音声・演技"
+        },
+        {
+          "value": "ambient",
+          "label": "環境音"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.asset_pipeline",
+      "category": "game.presentation",
+      "order": 200,
+      "prompt": "素材は誰が制作・調達・承認しますか？",
+      "help": "仮素材と本番素材を分け、形式、ライセンス、クレジット、生成素材の方針を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.technology.engine",
+      "category": "game.technology",
+      "order": 210,
+      "prompt": "エンジン・フレームワークの選定方針は？",
+      "help": "指定ツールとバージョン、または技能・費用・対応機種などの選定基準を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "指定あり"
+        },
+        {
+          "value": "existing",
+          "label": "既存構成を維持"
+        },
+        {
+          "value": "evaluate",
+          "label": "比較して決める"
+        },
+        {
+          "value": "delegated",
+          "label": "制約内で実装者が提案"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.input",
+      "category": "game.technology",
+      "order": 220,
+      "prompt": "対応する入力方法は？",
+      "help": "キー変更と、プレイ中の入力機器切替への対応を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "keyboard_mouse",
+          "label": "キーボード・マウス"
+        },
+        {
+          "value": "controller",
+          "label": "コントローラー"
+        },
+        {
+          "value": "touch",
+          "label": "タッチ"
+        },
+        {
+          "value": "motion",
+          "label": "モーション・XR機器"
+        },
+        {
+          "value": "assistive",
+          "label": "支援入力機器"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.save",
+      "category": "game.technology",
+      "order": 230,
+      "prompt": "進行状況をどう保存しますか？",
+      "help": "保存タイミング、互換性、削除、保存失敗時の復旧を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "保存しない",
+          "exclusive": true
+        },
+        {
+          "value": "local",
+          "label": "端末内保存"
+        },
+        {
+          "value": "cloud",
+          "label": "クラウド・アカウント保存"
+        },
+        {
+          "value": "hybrid",
+          "label": "端末保存とクラウド同期"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.network",
+      "category": "game.technology",
+      "order": 240,
+      "prompt": "ネットワーク接続の要件は？",
+      "help": "オンラインの場合は判定の主体、同期、切断対応、サーバー費用と担当を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "offline",
+          "label": "オフラインで完結"
+        },
+        {
+          "value": "optional",
+          "label": "オンライン機能は任意"
+        },
+        {
+          "value": "required",
+          "label": "接続必須"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.onboarding",
+      "category": "game.accessibility",
+      "order": 250,
+      "prompt": "遊び方をどう伝えますか？",
+      "help": "初めての人が外部の説明なしにできるべきことを補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "guided",
+          "label": "段階的チュートリアル"
+        },
+        {
+          "value": "contextual",
+          "label": "状況に応じたヒント"
+        },
+        {
+          "value": "manual",
+          "label": "説明書・参照画面"
+        },
+        {
+          "value": "discovery",
+          "label": "遊びながら発見"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.access",
+      "category": "game.accessibility",
+      "order": 260,
+      "prompt": "必要なアクセシビリティ対応は？",
+      "help": "想定プレイヤーに必要性を確認し、一つの設定で全員に対応できると決めつけません。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "remap",
+          "label": "操作の割り当て変更"
+        },
+        {
+          "value": "subtitles",
+          "label": "字幕・文字による代替"
+        },
+        {
+          "value": "color",
+          "label": "色だけに頼らない表示"
+        },
+        {
+          "value": "motion",
+          "label": "動き・点滅の抑制"
+        },
+        {
+          "value": "text",
+          "label": "文字サイズ調整"
+        },
+        {
+          "value": "timing",
+          "label": "時間制限・難易度の補助"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.performance",
+      "category": "game.accessibility",
+      "order": 270,
+      "prompt": "計測できる動作性能の目標は？",
+      "help": "試験機材、フレームレート、ロード時間、メモリ・電池の上限と測定方法を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.accessibility.interruption",
+      "category": "game.accessibility",
+      "order": 280,
+      "prompt": "中断や離脱時にどう動作しますか？",
+      "help": "一時停止、バックグラウンド、フォーカス喪失、切断、復帰と、対戦時の公平性を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.boundaries.content_limits",
+      "category": "game.boundaries",
+      "order": 290,
+      "prompt": "避けるべき表現・交流は？",
+      "help": "対象年齢・レーティングの想定、表現の限界、必要ならチャット管理や通報を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.boundaries.monetization",
+      "category": "game.boundaries",
+      "order": 300,
+      "prompt": "収益化の方針は？",
+      "help": "購入の範囲と避ける誘導を補足し、未定事項は未定として残します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "free",
+          "label": "無料・収益化なし"
+        },
+        {
+          "value": "paid",
+          "label": "買い切り"
+        },
+        {
+          "value": "ads",
+          "label": "広告"
+        },
+        {
+          "value": "iap",
+          "label": "ゲーム内課金"
+        },
+        {
+          "value": "subscription",
+          "label": "定額制"
+        },
+        {
+          "value": "donation",
+          "label": "任意の寄付"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.boundaries.data",
+      "category": "game.boundaries",
+      "order": 310,
+      "prompt": "収集・共有するプレイヤーデータは？",
+      "help": "目的、保存場所、保持期間、削除、サービス運営者を記します。端末内セーブも対象です。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.boundaries.rights",
+      "category": "game.boundaries",
+      "order": 320,
+      "prompt": "権利・配布の制約は？",
+      "help": "素材・エンジンの利用条件、帰属表示、所有権、配布先の要件と確認担当を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.delivery.capacity",
+      "category": "game.delivery",
+      "order": 330,
+      "prompt": "人員・時間・予算の制約は？",
+      "help": "担当、技能、節目、不足した場合の調整方針を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.delivery.distribution",
+      "category": "game.delivery",
+      "order": 340,
+      "prompt": "どう配布しますか？",
+      "help": "配布先、公開担当、アカウントや審査の必要性を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "web",
+          "label": "Web公開"
+        },
+        {
+          "value": "download",
+          "label": "直接ダウンロード"
+        },
+        {
+          "value": "store",
+          "label": "ストア"
+        },
+        {
+          "value": "private",
+          "label": "限定テスト配布"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.delivery.handoff",
+      "category": "game.delivery",
+      "order": 350,
+      "prompt": "ゲーム本体以外に何を納品しますか？",
+      "help": "再現可能なビルド、ソース、編集可能な素材、ライセンス、試験結果、運用手順を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.delivery.maintenance",
+      "category": "game.delivery",
+      "order": 360,
+      "prompt": "公開後の更新・障害対応は誰が担いますか？",
+      "help": "担当、期間、互換性、切り戻し、サービス終了時の扱いを記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.validation.playtest",
+      "category": "game.validation",
+      "order": 370,
+      "prompt": "狙った楽しさをどう検証しますか？",
+      "help": "参加者、場面、観察項目、修正基準を定め、感想と計測した行動を分けます。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.validation.must_pass",
+      "category": "game.validation",
+      "order": 380,
+      "prompt": "公開前に必ず通す試験は？",
+      "help": "具体的な手順と期待結果を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "first_play",
+          "label": "初回起動から基本の遊びまで"
+        },
+        {
+          "value": "completion",
+          "label": "成功・失敗・再挑戦"
+        },
+        {
+          "value": "save_restore",
+          "label": "保存・復元"
+        },
+        {
+          "value": "devices",
+          "label": "対象機材・入力"
+        },
+        {
+          "value": "network",
+          "label": "切断・再接続"
+        },
+        {
+          "value": "access",
+          "label": "アクセシビリティ設定"
+        },
+        {
+          "value": "none",
+          "label": "必要なし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.validation.approval",
+      "category": "game.validation",
+      "order": 390,
+      "prompt": "誰が、何を根拠に完成と判断しますか？",
+      "help": "決定者の役割、許容する不具合、公開条件を記します。",
+      "responseType": "long-text",
+      "placeholder": "前提、境界、根拠を記します。未解決のままにもできます。"
+    },
+    {
+      "questionId": "game.validation.unknowns",
+      "category": "game.validation",
+      "order": 400,
+      "prompt": "未決定の設計をどう扱いますか？",
+      "help": "任せる範囲と、停止して前提を合わせ直す条件を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "pause",
+          "label": "関係する作業を止めて確認"
+        },
+        {
+          "value": "prototype",
+          "label": "戻せる試作で検証"
+        },
+        {
+          "value": "propose",
+          "label": "案を比較してから決定"
+        },
+        {
+          "value": "delegate",
+          "label": "記録した範囲で委任"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    }
+  ]
+}

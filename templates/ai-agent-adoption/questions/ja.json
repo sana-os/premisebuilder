@@ -1,0 +1,1198 @@
+{
+  "templateId": "ai-agent-adoption",
+  "templateVersion": "0.1.0",
+  "locale": "ja",
+  "direction": "ltr",
+  "template": {
+    "name": "AIエージェント導入計画",
+    "summary": "48問で任せたい仕事、期待する効果、権限、検証方法のずれを整理します。"
+  },
+  "answerContext": {
+    "answeringFrom": "回答元",
+    "recordedBy": "記録者",
+    "speakingAs": "回答時の役割",
+    "captureMethod": "取得方法",
+    "authority": "この回答の権限",
+    "confirmation": "情報源の確認状態",
+    "changeForQuestion": "この質問で変更",
+    "multiplePerspectives": "別の観点を追加"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "確定",
+      "description": "承認済みのプロジェクト前提として使用します。"
+    },
+    {
+      "value": "provisional",
+      "label": "暫定",
+      "description": "現時点では使用しますが、変更可能であることを明示します。"
+    },
+    {
+      "value": "unspecified",
+      "label": "未決定",
+      "description": "未決定のままにします。AIに暗黙の補完をさせません。"
+    },
+    {
+      "value": "proposal_requested",
+      "label": "提案を求める",
+      "description": "選択済みとは扱わず、代替案または推奨案を求めます。"
+    },
+    {
+      "value": "delegated",
+      "label": "範囲を定めて委任",
+      "description": "定めた範囲内で実装者またはAIに判断を任せ、選択結果の報告を求めます。"
+    },
+    {
+      "value": "not_applicable",
+      "label": "該当なし",
+      "description": "この質問をプロジェクトの対象外として扱います。"
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "この回答が表す観点と記録者を選択してください。",
+    "validation.speakingRoleMismatch": "選択した回答時の役割は、その参加者に割り当てられていません。",
+    "validation.inferenceUnconfirmed": "推測による回答は、権限のある人が確認するまで未確認のままにしてください。",
+    "validation.resolutionAuthorityRequired": "この前提の確定には、権限のある決定元が必要です。",
+    "validation.exclusiveChoice": "この選択肢は他の選択肢と組み合わせられません。",
+    "validation.noteRequired": "この選択について短い補足を入力してください。",
+    "validation.selectionLimit": "選択数を上限以内に減らしてください。",
+    "review.authRuntime": "認証が対象に含まれていますが、選択した実行モデルでは外部サービスまたはサーバーが必要になる可能性があります。",
+    "review.paymentHandling": "決済関連データが対象に含まれています。処理主体と、プロジェクトが保存できる範囲を確認してください。",
+    "review.analyticsPrivacy": "分析またはテレメトリが対象に含まれています。プライバシー境界、同意、禁止事項を再確認してください。",
+    "review.agent.baseline": "削減効果を比べる現状値が未計測です。改善を判断する前に、現状の負担と測定方法を定めてください。",
+    "review.agent.authority": "回答・下書きのみの範囲と、状態を変える操作が両方選ばれています。操作を準備するのか、実行するのかを確認してください。",
+    "review.agent.review": "人の確認を前提にしていますが、対応体制が決まっていません。担当と、確認待ちの動作を定めてください。",
+    "review.agent.release": "代表的な業務での評価根拠がないまま直接導入する計画です。導入条件と最初の影響範囲を確認してください。"
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "導入目的・対象範囲",
+      "description": "エージェントを選ぶ前に、任せたい仕事を明確にします。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.workflow",
+      "label": "現行業務・比較の基準",
+      "description": "観察した課題と推測を分けます。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.outcomes",
+      "label": "期待する効果・根拠",
+      "description": "期待を検証できる仮説にします。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.fit",
+      "label": "方式選択・自律性",
+      "description": "仕事に必要な自律性の範囲を定めます。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.people",
+      "label": "関係者・責任分担",
+      "description": "効果を得る人、確認する人、責任を担う人を整理します。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.data",
+      "label": "情報源・データの境界",
+      "description": "参照できる情報と持ち出せる範囲を定めます。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.actions",
+      "label": "実行できる操作・権限",
+      "description": "操作できることと、操作してよいことを分けます。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.context",
+      "label": "文脈・引き継ぎ",
+      "description": "処理や担当者をまたいでも前提を保持します。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.boundaries",
+      "label": "失敗・停止・復旧",
+      "description": "限界と復旧方法を実行できる形にします。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.evaluation",
+      "label": "評価・受け入れ条件",
+      "description": "代表的な条件で業務全体を検証します。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.operations",
+      "label": "費用・運用",
+      "description": "継続的に必要な人とシステムの負担を含めます。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    },
+    {
+      "id": "agent.rollout",
+      "label": "導入・見直し",
+      "description": "試行、定着、拡大、撤退を計画します。",
+      "perspectiveHint": "導入側の期待、現場の観察、技術的な見立てを分けて記録します。"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.use_case",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "誰の、どの仕事を変えたいですか？",
+      "help": "実際の依頼例、欲しい成果物、それを使う人を記します。「AIを導入する」だけで終わらせません。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "project.intent.trigger",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "何をきっかけに仕事を始めますか？",
+      "help": "頻度、件数、期限、1件の仕事の区切りを補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "request",
+          "label": "人が依頼"
+        },
+        {
+          "value": "event",
+          "label": "決めたイベントの発生"
+        },
+        {
+          "value": "schedule",
+          "label": "定期実行"
+        },
+        {
+          "value": "monitor",
+          "label": "継続的な監視"
+        },
+        {
+          "value": "none",
+          "label": "該当するものなし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "今回の計画はどの段階ですか？",
+      "help": "既存の導入がある場合は維持・変更する動作を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "新規導入"
+        },
+        {
+          "value": "redesign",
+          "label": "再設計"
+        },
+        {
+          "value": "extension",
+          "label": "既存導入の拡大"
+        },
+        {
+          "value": "repair",
+          "label": "既存導入の改善・修正"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.exclusions",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "今回任せない仕事・対象外は何ですか？",
+      "help": "対象外の判断、利用者、業務と、その理由を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.workflow.workflow",
+      "category": "agent.workflow",
+      "order": 50,
+      "prompt": "現在は誰が、どのような手順で仕事をしていますか？",
+      "help": "入力→判断→操作→確認→納品をたどり、暗黙の調整や例外対応も含めます。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.workflow.bottleneck",
+      "category": "agent.workflow",
+      "order": 60,
+      "prompt": "観察できている主なボトルネックは？",
+      "help": "根拠と困っている人を補足し、作業時間と意思決定待ちを区別します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "search",
+          "label": "情報を探す"
+        },
+        {
+          "value": "production",
+          "label": "成果物を作る"
+        },
+        {
+          "value": "judgment",
+          "label": "判断する"
+        },
+        {
+          "value": "coordination",
+          "label": "調整・承認待ち"
+        },
+        {
+          "value": "rework",
+          "label": "誤り・手戻り"
+        },
+        {
+          "value": "capacity",
+          "label": "対応できる人・時間の不足"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.baseline",
+      "category": "agent.workflow",
+      "order": 70,
+      "prompt": "現状の実績をどこまで把握していますか？",
+      "help": "期間、件数、作業量、品質、人の作業時間、待ち時間を補足します。推定は推定として残します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "measured",
+          "label": "代表的な業務で計測済み"
+        },
+        {
+          "value": "partial",
+          "label": "一部の記録あり"
+        },
+        {
+          "value": "estimated",
+          "label": "推定のみ"
+        },
+        {
+          "value": "not_measured",
+          "label": "未計測"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.variation",
+      "category": "agent.workflow",
+      "order": 80,
+      "prompt": "仕事の流れや例外はどの程度決まっていますか？",
+      "help": "通常の例と難しい例を挙げ、情報不足や矛盾も含めます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "ほぼ固定手順"
+        },
+        {
+          "value": "branches",
+          "label": "分岐・例外を列挙できる"
+        },
+        {
+          "value": "open",
+          "label": "その都度手順を考える"
+        },
+        {
+          "value": "mixed",
+          "label": "混在"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.benefit",
+      "category": "agent.outcomes",
+      "order": 90,
+      "prompt": "最も優先する効果は何ですか？",
+      "help": "誰が効果を得るかを補足します。出力が速くなっても、業務全体の負担が減るとは限りません。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "time",
+          "label": "人の作業時間を減らす"
+        },
+        {
+          "value": "cost",
+          "label": "総費用を減らす"
+        },
+        {
+          "value": "quality",
+          "label": "品質・ばらつきを改善"
+        },
+        {
+          "value": "speed",
+          "label": "完了までの時間を短縮"
+        },
+        {
+          "value": "coverage",
+          "label": "対応件数・時間帯を広げる"
+        },
+        {
+          "value": "capability",
+          "label": "これまで難しかった仕事を可能にする"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.hypothesis",
+      "category": "agent.outcomes",
+      "order": 100,
+      "prompt": "なぜAIエージェントで、その効果が出ると考えていますか？",
+      "help": "因果関係の仮説、根拠、成立条件、反証となる結果を記します。デモの成功と実運用の実績を分けます。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.outcomes.target",
+      "category": "agent.outcomes",
+      "order": 110,
+      "prompt": "どの指標が、どれだけ変われば成功ですか？",
+      "help": "現状値、目標値、期間、分母、計測担当を記します。確認・修正・引き継ぎの工数も含めます。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.outcomes.tradeoffs",
+      "category": "agent.outcomes",
+      "order": 120,
+      "prompt": "効果を得るためでも悪化させたくないものは？",
+      "help": "品質、費用、速度、担当者の負担、利用者体験の間で許容できる交換条件を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.fit.alternatives",
+      "category": "agent.fit",
+      "order": 130,
+      "prompt": "どの方法と比較しますか？",
+      "help": "成立する中で単純な方法も含めます。エージェントを導入しない結論も有効です。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "process",
+          "label": "AIを使わず業務改善"
+        },
+        {
+          "value": "automation",
+          "label": "固定手順の自動化"
+        },
+        {
+          "value": "assistant",
+          "label": "人が確認するAI支援"
+        },
+        {
+          "value": "workflow",
+          "label": "定めた業務フローにAIを組み込む"
+        },
+        {
+          "value": "agent",
+          "label": "手順・ツールを選ぶエージェント"
+        },
+        {
+          "value": "none",
+          "label": "該当するものなし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.autonomy",
+      "category": "agent.fit",
+      "order": 140,
+      "prompt": "追加の承認なしに何を任せますか？",
+      "help": "提案を作ることと外部の状態を変えることを分け、範囲と上限を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "advice",
+          "label": "回答・下書きのみ"
+        },
+        {
+          "value": "approve_each",
+          "label": "操作ごとに承認して実行"
+        },
+        {
+          "value": "bounded",
+          "label": "事前に合意した範囲で実行"
+        },
+        {
+          "value": "supervised",
+          "label": "節目で確認しながら目標まで進む"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.necessity",
+      "category": "agent.fit",
+      "order": 150,
+      "prompt": "手順やツールを自律的に選ぶ必要はどこにありますか？",
+      "help": "固定手順では扱いにくい例を挙げます。必要性が未確認なら、そのまま記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.fit.feasibility",
+      "category": "agent.fit",
+      "order": 160,
+      "prompt": "実現可能性を裏付けるものは？",
+      "help": "試したシステム、バージョン、データ、制約を補足し、製品説明と自分たちの検証を分けます。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "claim",
+          "label": "説明・製品の主張のみ"
+        },
+        {
+          "value": "demo",
+          "label": "限定条件のデモ"
+        },
+        {
+          "value": "representative",
+          "label": "代表的な仕事で検証"
+        },
+        {
+          "value": "operational",
+          "label": "類似条件の運用実績"
+        },
+        {
+          "value": "not_tested",
+          "label": "未検証"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.stakeholders",
+      "category": "agent.people",
+      "order": 170,
+      "prompt": "誰と誰の期待や負担がずれそうですか？",
+      "help": "導入責任者、現場、確認者、成果物の受け手、直接使わない関係者を分け、異なる声を別々に記録します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.people.owner",
+      "category": "agent.people",
+      "order": 180,
+      "prompt": "成果に責任を持ち、範囲変更を決めるのは誰ですか？",
+      "help": "業務成果、システム運用、最終判断の役割を記します。提供会社がそのまま業務責任者になるわけではありません。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.people.review_capacity",
+      "category": "agent.people",
+      "order": 190,
+      "prompt": "確認・例外対応を担う人は確保できていますか？",
+      "help": "必要な技能、処理件数、応答時間、対応時間帯、不在時の扱いを補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "staffed",
+          "label": "担当と対応能力を確認済み"
+        },
+        {
+          "value": "planned",
+          "label": "担当はいるが対応能力は未検証"
+        },
+        {
+          "value": "unassigned",
+          "label": "担当者未定"
+        },
+        {
+          "value": "not_required",
+          "label": "人の確認を想定しない"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.handoff",
+      "category": "agent.people",
+      "order": 200,
+      "prompt": "人に引き継ぐとき、何を渡しますか？",
+      "help": "元の依頼、実施済み操作、根拠、不明点、次に可能な操作と、引き継ぎを受け付ける人を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.data.sources",
+      "category": "agent.data",
+      "order": 210,
+      "prompt": "仕事の判断に使える情報源は？",
+      "help": "正本となる情報、アクセス管理者、形式、鮮度、不足情報を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.data.sensitivity",
+      "category": "agent.data",
+      "order": 220,
+      "prompt": "扱うデータの種類は？",
+      "help": "この質問票に秘密情報や個人記録そのものを入力せず、種類と条件を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "public",
+          "label": "公開情報"
+        },
+        {
+          "value": "internal",
+          "label": "社内・組織内情報"
+        },
+        {
+          "value": "confidential",
+          "label": "業務上の機密"
+        },
+        {
+          "value": "personal",
+          "label": "個人情報"
+        },
+        {
+          "value": "credentials",
+          "label": "保護された仕組みで扱う認証情報"
+        },
+        {
+          "value": "none",
+          "label": "該当するものなし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.data.transfer",
+      "category": "agent.data",
+      "order": 230,
+      "prompt": "データやログをどこで処理・保持してよいですか？",
+      "help": "許可するサービス、地域、保持・削除、学習利用、条件を確認する担当を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.data.missing",
+      "category": "agent.data",
+      "order": 240,
+      "prompt": "情報が足りない・矛盾する場合はどうしますか？",
+      "help": "仮説と事実を区別し、どの不足が実行を止めるかを補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "ask",
+          "label": "担当者に確認"
+        },
+        {
+          "value": "retrieve",
+          "label": "許可された情報源を調べる"
+        },
+        {
+          "value": "hypothesis",
+          "label": "仮説付きの案を提示し実行は待つ"
+        },
+        {
+          "value": "stop",
+          "label": "停止して引き継ぐ"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.tools",
+      "category": "agent.actions",
+      "order": 250,
+      "prompt": "連携するシステムと接続方法は？",
+      "help": "API・画面操作、読み書きの範囲、実行用アカウント、試験環境、接続担当を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.actions.effects",
+      "category": "agent.actions",
+      "order": 260,
+      "prompt": "実際に変更・実行する必要があるものは？",
+      "help": "操作の準備と実行を分け、操作ごとの上限を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "draft",
+          "label": "下書き・提案を作成"
+        },
+        {
+          "value": "write",
+          "label": "内部の記録・ファイルを変更"
+        },
+        {
+          "value": "send",
+          "label": "外部へ送信・公開"
+        },
+        {
+          "value": "purchase",
+          "label": "発注・支払い"
+        },
+        {
+          "value": "access",
+          "label": "権限・設定を変更"
+        },
+        {
+          "value": "delete",
+          "label": "データを削除"
+        },
+        {
+          "value": "none",
+          "label": "該当するものなし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.approval",
+      "category": "agent.actions",
+      "order": 270,
+      "prompt": "どの操作に、誰の承認が必要ですか？",
+      "help": "操作ごとに承認者、条件、承認の有効期間、記録方法を定めます。無回答を承認扱いしません。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.actions.permissions",
+      "category": "agent.actions",
+      "order": 280,
+      "prompt": "許可した操作の境界をどう守りますか？",
+      "help": "実行主体、必要最小限の権限、ツールの検証、隔離環境、モデルの文章以外での権限確認を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.context.memory",
+      "category": "agent.context",
+      "order": 290,
+      "prompt": "仕事をまたいで何を保持しますか？",
+      "help": "目的、所有者、保持期間、訂正、利用者・組織間の分離を補足します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "session",
+          "label": "その仕事の間だけ"
+        },
+        {
+          "value": "project",
+          "label": "プロジェクトの前提"
+        },
+        {
+          "value": "user",
+          "label": "利用者ごとの選好"
+        },
+        {
+          "value": "knowledge",
+          "label": "承認された共通知識"
+        },
+        {
+          "value": "none",
+          "label": "該当するものなし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.context.precedence",
+      "category": "agent.context",
+      "order": 300,
+      "prompt": "依頼・規程・過去の記録が食い違ったら何を優先しますか？",
+      "help": "権限のある情報源、版、決定者を定めます。引用された内容と実行指示を区別します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.context.untrusted",
+      "category": "agent.context",
+      "order": 310,
+      "prompt": "取得した文書やWebページ内の指示をどう扱いますか？",
+      "help": "プロンプトインジェクション（外部の内容が操作変更・情報流出・権限拡大を誘うこと）への対応を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.context.coordination",
+      "category": "agent.context",
+      "order": 320,
+      "prompt": "人・ツール・エージェント間で文脈をどう引き継ぎますか？",
+      "help": "共通記録、担当、重複実行の防止、競合時の決定方法を記します。複数エージェントは必須ではありません。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.boundaries.failure_impact",
+      "category": "agent.boundaries",
+      "order": 330,
+      "prompt": "何に失敗すると、誰にどのような影響がありますか？",
+      "help": "もっともらしい誤答、見落とし、重複実行、漏えい、遅延、停止などを具体例で記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.boundaries.prohibitions",
+      "category": "agent.boundaries",
+      "order": 340,
+      "prompt": "任せない判断・絶対に実行しない操作は？",
+      "help": "譲れない境界と好みを分け、変更できる決定者を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.boundaries.stop",
+      "category": "agent.boundaries",
+      "order": 350,
+      "prompt": "いつ、誰が、どのように停止できますか？",
+      "help": "停止条件、操作できる人、操作数・時間・費用の上限、待機中の処理の取消、停止後の状態を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.boundaries.recovery",
+      "category": "agent.boundaries",
+      "order": 360,
+      "prompt": "失敗に気づき、元に戻すにはどうしますか？",
+      "help": "ログ、バックアップ、切り戻し、取り消せない操作への対処、安全な再試行、人による代替、対応担当を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.evaluation.cases",
+      "category": "agent.evaluation",
+      "order": 370,
+      "prompt": "どの実例で評価しますか？",
+      "help": "通常、難例、情報不足、矛盾、悪意ある入力を含め、期待結果と使用許可を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.evaluation.comparison",
+      "category": "agent.evaluation",
+      "order": 380,
+      "prompt": "導入前や別の方式と、公平にどう比較しますか？",
+      "help": "同等の仕事量・品質条件で比較し、人の修正工数を含めます。評価点と業務成果を分けます。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.evaluation.evidence",
+      "category": "agent.evaluation",
+      "order": 390,
+      "prompt": "現在ある評価の根拠はどの段階ですか？",
+      "help": "版、日付、件数、観察した失敗、限界を補足します。計画があるだけで検証済みにしません。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "not_run",
+          "label": "未実施"
+        },
+        {
+          "value": "demo",
+          "label": "選んだ例だけ"
+        },
+        {
+          "value": "offline",
+          "label": "代表例での事前評価"
+        },
+        {
+          "value": "pilot",
+          "label": "限定運用での試行"
+        },
+        {
+          "value": "production",
+          "label": "監視下の実運用実績"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.evaluation.gate",
+      "category": "agent.evaluation",
+      "order": 400,
+      "prompt": "どの条件なら導入し、どの条件なら見送りますか？",
+      "help": "品質、効果、費用、境界の基準、決定者、導入を止める未解決事項を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.operations.hosting",
+      "category": "agent.operations",
+      "order": 410,
+      "prompt": "実行環境と提供者の条件は？",
+      "help": "配置の制約、モデル・サービスの選定基準、可用性、依存先、移行可能性を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.operations.budget",
+      "category": "agent.operations",
+      "order": 420,
+      "prompt": "総費用の上限と管理方法は？",
+      "help": "利用料、ツール、設備、接続開発、確認・修正、教育、保守を含め、1件・定期費用の上限を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.operations.monitoring",
+      "category": "agent.operations",
+      "order": 430,
+      "prompt": "運用中に何を観測できる必要がありますか？",
+      "help": "各指標・ログを、見る人と取る行動につなげます。ログ内の機密情報も制限します。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "quality",
+          "label": "成果の品質・誤り"
+        },
+        {
+          "value": "cost",
+          "label": "費用・使用量"
+        },
+        {
+          "value": "latency",
+          "label": "完了時間・待ち時間"
+        },
+        {
+          "value": "actions",
+          "label": "実行操作・承認"
+        },
+        {
+          "value": "handoffs",
+          "label": "人の確認・引き継ぎ"
+        },
+        {
+          "value": "drift",
+          "label": "入力・振る舞いの変化"
+        },
+        {
+          "value": "none",
+          "label": "該当するものなし",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.operations.maintenance",
+      "category": "agent.operations",
+      "order": 440,
+      "prompt": "誰が保守し、変更後に再検証しますか？",
+      "help": "モデル、指示文、ツール、権限、データの変更を対象に、版、評価結果、切り戻し先を保持します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.rollout.entry",
+      "category": "agent.rollout",
+      "order": 450,
+      "prompt": "最初の導入をどう進めますか？",
+      "help": "最初の段階の利用者、仕事量、期間、影響範囲を補足します。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sandbox",
+          "label": "試験データの隔離環境"
+        },
+        {
+          "value": "shadow",
+          "label": "実行せず並行評価"
+        },
+        {
+          "value": "pilot",
+          "label": "監督付きの限定試行"
+        },
+        {
+          "value": "direct",
+          "label": "実業務へ直接導入"
+        },
+        {
+          "value": "other",
+          "label": "その他（補足必須）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "提案を求める",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.rollout.adoption",
+      "category": "agent.rollout",
+      "order": 460,
+      "prompt": "利用者が使い方を学び、業務を変えるには？",
+      "help": "教育、意見の受付、負担の変化、扱えない仕事の代替手段を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.rollout.scale",
+      "category": "agent.rollout",
+      "order": 470,
+      "prompt": "何を確認したら対象や自律性を広げますか？",
+      "help": "利用者、データ、ツール、権限の拡大は、決定者と評価を伴う新しい判断として扱います。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    },
+    {
+      "questionId": "agent.rollout.exit",
+      "category": "agent.rollout",
+      "order": 480,
+      "prompt": "いつ見直し、縮小・撤退を判断しますか？",
+      "help": "日程、条件、決定者と、データ・未完了の仕事・責任の引き継ぎ先を記します。",
+      "responseType": "long-text",
+      "placeholder": "具体例、根拠、境界、未解決の点を記してください。"
+    }
+  ]
+}

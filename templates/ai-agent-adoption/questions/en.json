@@ -1,0 +1,1198 @@
+{
+  "templateId": "ai-agent-adoption",
+  "templateVersion": "0.1.0",
+  "locale": "en",
+  "direction": "ltr",
+  "template": {
+    "name": "AI Agent Adoption Planning",
+    "summary": "48 questions to align intended work, expected value, authority and evaluation."
+  },
+  "answerContext": {
+    "answeringFrom": "Answering from",
+    "recordedBy": "Recorded by",
+    "speakingAs": "Speaking as",
+    "captureMethod": "How this was obtained",
+    "authority": "Authority for this answer",
+    "confirmation": "Source confirmation",
+    "changeForQuestion": "Change for this question",
+    "multiplePerspectives": "Add another perspective"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "Confirmed",
+      "description": "Use this as an accepted project premise."
+    },
+    {
+      "value": "provisional",
+      "label": "Provisional",
+      "description": "Use this for now, but keep it visibly open to revision."
+    },
+    {
+      "value": "unspecified",
+      "label": "Not decided",
+      "description": "Leave this open. Do not let an AI silently fill it in."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "Ask for a proposal",
+      "description": "Request alternatives or a recommendation without treating one as chosen."
+    },
+    {
+      "value": "delegated",
+      "label": "Delegate within bounds",
+      "description": "Allow the implementer or AI to decide within the stated limits and report the choice."
+    },
+    {
+      "value": "not_applicable",
+      "label": "Does not apply",
+      "description": "Mark this question as outside the project."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "Choose whose perspective this answer represents and who recorded it.",
+    "validation.speakingRoleMismatch": "The selected speaking role is not assigned to that participant.",
+    "validation.inferenceUnconfirmed": "An inferred answer must remain unconfirmed until an authorized person verifies it.",
+    "validation.resolutionAuthorityRequired": "Confirming this premise requires an authorized decision source.",
+    "validation.exclusiveChoice": "This option cannot be combined with other selections.",
+    "validation.noteRequired": "Add a short note to explain this selection.",
+    "validation.selectionLimit": "Reduce the number of selected options.",
+    "review.authRuntime": "Authentication is in scope, but the selected runtime may require an external or server component.",
+    "review.paymentHandling": "Payment-related data is in scope. Confirm who processes it and whether the project may store any of it.",
+    "review.analyticsPrivacy": "Analytics or telemetry is in scope. Recheck the privacy boundary, consent, and prohibited practices.",
+    "review.agent.baseline": "The expected reduction has no measured baseline. Define the current workload and measurement before claiming improvement.",
+    "review.agent.authority": "Answer-only scope and state-changing actions are both selected. Clarify whether the agent prepares an action or executes it.",
+    "review.agent.review": "The plan relies on human checkpoints without an assigned review arrangement. Define a responder and what happens while waiting.",
+    "review.agent.release": "Direct introduction is planned without representative evaluation evidence. Revisit the release criteria and initial exposure."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "Purpose & scope",
+      "description": "Define the work before choosing an agent.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.workflow",
+      "label": "Current work & baseline",
+      "description": "Separate observed problems from assumptions.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.outcomes",
+      "label": "Expected value & evidence",
+      "description": "Turn expectations into testable hypotheses.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.fit",
+      "label": "Approach & autonomy",
+      "description": "Decide how much autonomy the work actually needs.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.people",
+      "label": "People & accountability",
+      "description": "Identify who benefits, checks and takes responsibility.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.data",
+      "label": "Information & data boundaries",
+      "description": "Specify what the agent may know and where data may go.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.actions",
+      "label": "Actions & authority",
+      "description": "Distinguish technical access from permission to act.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.context",
+      "label": "Context & handoffs",
+      "description": "Preserve premises across steps and people.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.boundaries",
+      "label": "Failure & recovery",
+      "description": "Make limits and recovery actionable.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.evaluation",
+      "label": "Evaluation & acceptance",
+      "description": "Test the whole workflow under representative conditions.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.operations",
+      "label": "Cost & operations",
+      "description": "Include ongoing human and system effort.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    },
+    {
+      "id": "agent.rollout",
+      "label": "Introduction & review",
+      "description": "Plan trial, adoption, expansion and exit.",
+      "perspectiveHint": "Separate sponsor expectations, frontline observations and technical assessments."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.use_case",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "What work should change, for whom?",
+      "help": "Give one real request, the desired deliverable and who uses it. Avoid goals such as simply introducing AI.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "project.intent.trigger",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "How should work start?",
+      "help": "Specify frequency, volume, deadlines and the boundary between one task and the next.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "request",
+          "label": "A person requests it"
+        },
+        {
+          "value": "event",
+          "label": "A defined event occurs"
+        },
+        {
+          "value": "schedule",
+          "label": "A schedule"
+        },
+        {
+          "value": "monitor",
+          "label": "Continuous monitoring"
+        },
+        {
+          "value": "none",
+          "label": "None",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "What phase is this initiative in?",
+      "help": "For existing deployments, identify the behavior to preserve or change.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "New introduction"
+        },
+        {
+          "value": "redesign",
+          "label": "Redesign"
+        },
+        {
+          "value": "extension",
+          "label": "Extend an existing deployment"
+        },
+        {
+          "value": "repair",
+          "label": "Repair an existing deployment"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.exclusions",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "What is outside this initiative?",
+      "help": "Name excluded decisions, users and workflows, and why they are excluded.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.workflow.workflow",
+      "category": "agent.workflow",
+      "order": 50,
+      "prompt": "How is this work done today?",
+      "help": "Trace input → judgment → action → review → delivery, including informal coordination and exceptions.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.workflow.bottleneck",
+      "category": "agent.workflow",
+      "order": 60,
+      "prompt": "Where is the main observed bottleneck?",
+      "help": "Record evidence and who experiences the delay; distinguish a slow task from waiting for a decision.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "search",
+          "label": "Finding information"
+        },
+        {
+          "value": "production",
+          "label": "Producing the result"
+        },
+        {
+          "value": "judgment",
+          "label": "Making judgments"
+        },
+        {
+          "value": "coordination",
+          "label": "Coordination and approvals"
+        },
+        {
+          "value": "rework",
+          "label": "Errors and rework"
+        },
+        {
+          "value": "capacity",
+          "label": "Insufficient availability"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.baseline",
+      "category": "agent.workflow",
+      "order": 70,
+      "prompt": "What evidence describes current performance?",
+      "help": "Specify period, sample size, workload, quality, human time and waiting time. Estimates remain estimates.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "measured",
+          "label": "Measured on representative work"
+        },
+        {
+          "value": "partial",
+          "label": "Partial records"
+        },
+        {
+          "value": "estimated",
+          "label": "Estimates only"
+        },
+        {
+          "value": "not_measured",
+          "label": "Not yet measured"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.variation",
+      "category": "agent.workflow",
+      "order": 80,
+      "prompt": "How predictable are the tasks and exceptions?",
+      "help": "Give a routine case and a difficult case, including missing or contradictory inputs.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "Mostly fixed steps"
+        },
+        {
+          "value": "branches",
+          "label": "Known branches and exceptions"
+        },
+        {
+          "value": "open",
+          "label": "Steps must be discovered"
+        },
+        {
+          "value": "mixed",
+          "label": "A mixture"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.benefit",
+      "category": "agent.outcomes",
+      "order": 90,
+      "prompt": "Which benefit should take priority?",
+      "help": "Name the beneficiary. Faster output does not necessarily reduce total workload.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "time",
+          "label": "Reduce human working time"
+        },
+        {
+          "value": "cost",
+          "label": "Reduce total cost"
+        },
+        {
+          "value": "quality",
+          "label": "Improve quality or consistency"
+        },
+        {
+          "value": "speed",
+          "label": "Reduce time to delivery"
+        },
+        {
+          "value": "coverage",
+          "label": "Handle more cases or hours"
+        },
+        {
+          "value": "capability",
+          "label": "Enable previously impractical work"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.hypothesis",
+      "category": "agent.outcomes",
+      "order": 100,
+      "prompt": "Why would the proposed approach create that benefit?",
+      "help": "State the causal hypothesis, supporting evidence, assumptions and what would disprove it. A demo is not production evidence.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.outcomes.target",
+      "category": "agent.outcomes",
+      "order": 110,
+      "prompt": "What measurable change would count as success?",
+      "help": "Specify baseline, target, period, denominator and measurement owner. Count review, corrections and escalations in total effort.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.outcomes.tradeoffs",
+      "category": "agent.outcomes",
+      "order": 120,
+      "prompt": "What must not worsen while pursuing the benefit?",
+      "help": "Define acceptable tradeoffs across quality, cost, speed, staff burden and user experience.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.fit.alternatives",
+      "category": "agent.fit",
+      "order": 130,
+      "prompt": "Which approaches should be compared?",
+      "help": "Include the least complex viable approach; choosing no agent remains a valid result.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "process",
+          "label": "Improve the process without AI"
+        },
+        {
+          "value": "automation",
+          "label": "Fixed automation"
+        },
+        {
+          "value": "assistant",
+          "label": "AI suggestions reviewed by a person"
+        },
+        {
+          "value": "workflow",
+          "label": "AI within a controlled workflow"
+        },
+        {
+          "value": "agent",
+          "label": "Agent chooses steps and tools"
+        },
+        {
+          "value": "none",
+          "label": "None",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.autonomy",
+      "category": "agent.fit",
+      "order": 140,
+      "prompt": "What may the system do without new approval?",
+      "help": "Separate generating a suggestion from changing an external system. State scope and limits in the note.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "advice",
+          "label": "Answer or draft only"
+        },
+        {
+          "value": "approve_each",
+          "label": "Act after approval for each action"
+        },
+        {
+          "value": "bounded",
+          "label": "Act within pre-agreed bounds"
+        },
+        {
+          "value": "supervised",
+          "label": "Pursue a goal with checkpoints"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.necessity",
+      "category": "agent.fit",
+      "order": 150,
+      "prompt": "What requires adaptive planning or tool selection?",
+      "help": "Give a case fixed automation cannot handle, or state that the need is not established.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.fit.feasibility",
+      "category": "agent.fit",
+      "order": 160,
+      "prompt": "What evidence supports technical feasibility?",
+      "help": "Identify tested systems, versions, data and constraints; distinguish vendor claims from your own evaluation.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "claim",
+          "label": "Descriptions or vendor claims only"
+        },
+        {
+          "value": "demo",
+          "label": "A controlled demonstration"
+        },
+        {
+          "value": "representative",
+          "label": "Representative task evaluation"
+        },
+        {
+          "value": "operational",
+          "label": "Comparable operational evidence"
+        },
+        {
+          "value": "not_tested",
+          "label": "Not yet tested"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.stakeholders",
+      "category": "agent.people",
+      "order": 170,
+      "prompt": "Whose expectations or workload may differ?",
+      "help": "Separate sponsor, frontline user, reviewer, recipient and affected non-users. Record disagreements as separate contributions.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.people.owner",
+      "category": "agent.people",
+      "order": 180,
+      "prompt": "Who owns the outcome and approves changes in scope?",
+      "help": "Name roles for business results, system operation and final decisions; a supplier is not automatically the business owner.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.people.review_capacity",
+      "category": "agent.people",
+      "order": 190,
+      "prompt": "Who can handle reviews and exceptions, and when?",
+      "help": "Specify competence, volume, response time, coverage and what happens when nobody responds.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "staffed",
+          "label": "Assigned with tested capacity"
+        },
+        {
+          "value": "planned",
+          "label": "Assigned but capacity untested"
+        },
+        {
+          "value": "unassigned",
+          "label": "No assigned reviewer"
+        },
+        {
+          "value": "not_required",
+          "label": "No human review planned"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.handoff",
+      "category": "agent.people",
+      "order": 200,
+      "prompt": "What must a person receive when taking over?",
+      "help": "Include original request, actions already taken, evidence, uncertainty and safe next steps; define who acknowledges the handoff.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.data.sources",
+      "category": "agent.data",
+      "order": 210,
+      "prompt": "Which sources may inform the work?",
+      "help": "Name authoritative sources, access owners, formats, freshness and missing information.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.data.sensitivity",
+      "category": "agent.data",
+      "order": 220,
+      "prompt": "What kinds of data are involved?",
+      "help": "Describe categories without entering actual secrets or personal records into this questionnaire.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "public",
+          "label": "Public information"
+        },
+        {
+          "value": "internal",
+          "label": "Internal information"
+        },
+        {
+          "value": "confidential",
+          "label": "Confidential business information"
+        },
+        {
+          "value": "personal",
+          "label": "Personal information"
+        },
+        {
+          "value": "credentials",
+          "label": "Credentials handled through a protected mechanism"
+        },
+        {
+          "value": "none",
+          "label": "None",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.data.transfer",
+      "category": "agent.data",
+      "order": 230,
+      "prompt": "Where may data and logs be processed or retained?",
+      "help": "Specify approved services, regions, retention, deletion, training use and who verifies the conditions.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.data.missing",
+      "category": "agent.data",
+      "order": 240,
+      "prompt": "What should happen when information is missing or conflicting?",
+      "help": "Define the boundary between a labeled hypothesis and a fact, and which gaps block action.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "ask",
+          "label": "Ask the responsible person"
+        },
+        {
+          "value": "retrieve",
+          "label": "Consult approved sources first"
+        },
+        {
+          "value": "hypothesis",
+          "label": "Offer labeled alternatives without acting"
+        },
+        {
+          "value": "stop",
+          "label": "Stop and hand over"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.tools",
+      "category": "agent.actions",
+      "order": 250,
+      "prompt": "Which systems and interfaces are needed?",
+      "help": "Record APIs or UI operations, read/write scope, service accounts, test environments and integration ownership.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.actions.effects",
+      "category": "agent.actions",
+      "order": 260,
+      "prompt": "What real-world changes must the system make?",
+      "help": "Distinguish preparing an action from executing it; add per-action limits.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "draft",
+          "label": "Create drafts or recommendations"
+        },
+        {
+          "value": "write",
+          "label": "Change internal records or files"
+        },
+        {
+          "value": "send",
+          "label": "Send or publish externally"
+        },
+        {
+          "value": "purchase",
+          "label": "Place orders or spend money"
+        },
+        {
+          "value": "access",
+          "label": "Change access or configuration"
+        },
+        {
+          "value": "delete",
+          "label": "Delete data"
+        },
+        {
+          "value": "none",
+          "label": "None",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.approval",
+      "category": "agent.actions",
+      "order": 270,
+      "prompt": "Which actions require whose approval?",
+      "help": "Map each action to a role, threshold, approval lifetime and record. Never treat silence as approval.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.actions.permissions",
+      "category": "agent.actions",
+      "order": 280,
+      "prompt": "How will the allowed action boundary be enforced?",
+      "help": "Explain identity, least necessary access, tool validation, sandboxing and authorization checks outside model output.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.context.memory",
+      "category": "agent.context",
+      "order": 290,
+      "prompt": "What should persist between tasks?",
+      "help": "Specify purpose, ownership, retention, correction and separation of users or organizations.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "session",
+          "label": "Current task only"
+        },
+        {
+          "value": "project",
+          "label": "Project context"
+        },
+        {
+          "value": "user",
+          "label": "User-specific preferences"
+        },
+        {
+          "value": "knowledge",
+          "label": "Shared approved knowledge"
+        },
+        {
+          "value": "none",
+          "label": "None",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.context.precedence",
+      "category": "agent.context",
+      "order": 300,
+      "prompt": "Which instructions prevail when premises conflict?",
+      "help": "Define sources of authority, versioning and who resolves disagreement. Keep quoted content distinct from instructions.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.context.untrusted",
+      "category": "agent.context",
+      "order": 310,
+      "prompt": "How are instructions inside retrieved content handled?",
+      "help": "Plan for prompt injection: untrusted content attempting to redirect actions, reveal data or expand permissions.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.context.coordination",
+      "category": "agent.context",
+      "order": 320,
+      "prompt": "How will context pass between people, tools or agents?",
+      "help": "Define shared records, ownership, duplicate-work prevention and conflict resolution. Multiple agents are optional.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.boundaries.failure_impact",
+      "category": "agent.boundaries",
+      "order": 330,
+      "prompt": "What failures would matter, and to whom?",
+      "help": "Use concrete cases: plausible wrong answers, omissions, duplicate actions, disclosure, delays or service outage.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.boundaries.prohibitions",
+      "category": "agent.boundaries",
+      "order": 340,
+      "prompt": "What must never be delegated or executed?",
+      "help": "Record hard boundaries separately from preferences and identify who may revise them.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.boundaries.stop",
+      "category": "agent.boundaries",
+      "order": 350,
+      "prompt": "When and how can execution be stopped?",
+      "help": "Define triggers, stop owners, action/time/spend limits, cancellation of queued work and safe state after stopping.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.boundaries.recovery",
+      "category": "agent.boundaries",
+      "order": 360,
+      "prompt": "How will failures be detected and recovered from?",
+      "help": "Cover logs, backups, rollback, compensating actions, safe retries, manual fallback and an accountable responder.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.evaluation.cases",
+      "category": "agent.evaluation",
+      "order": 370,
+      "prompt": "What representative tasks will be used for evaluation?",
+      "help": "Include routine, difficult, incomplete, conflicting and hostile inputs, with expected results and access permission.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.evaluation.comparison",
+      "category": "agent.evaluation",
+      "order": 380,
+      "prompt": "How will the proposed approach be compared fairly?",
+      "help": "Use comparable workload and quality criteria, include human correction costs and distinguish proxy scores from business outcomes.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.evaluation.evidence",
+      "category": "agent.evaluation",
+      "order": 390,
+      "prompt": "What evaluation evidence exists now?",
+      "help": "Record version, date, sample size, observed failures and limitations; do not infer evidence from a plan.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "not_run",
+          "label": "Evaluation not yet run"
+        },
+        {
+          "value": "demo",
+          "label": "Selected examples only"
+        },
+        {
+          "value": "offline",
+          "label": "Representative offline evaluation"
+        },
+        {
+          "value": "pilot",
+          "label": "Limited operational pilot"
+        },
+        {
+          "value": "production",
+          "label": "Monitored operational evidence"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.evaluation.gate",
+      "category": "agent.evaluation",
+      "order": 400,
+      "prompt": "What conditions permit release or require rejection?",
+      "help": "Specify quality, effect, cost and boundary thresholds, decision owner and unresolved items that block release.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.operations.hosting",
+      "category": "agent.operations",
+      "order": 410,
+      "prompt": "What execution environment and suppliers are allowed?",
+      "help": "Record deployment constraints, model/service choice criteria, availability, integration dependencies and portability.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.operations.budget",
+      "category": "agent.operations",
+      "order": 420,
+      "prompt": "What is the total cost limit and how will it be controlled?",
+      "help": "Include usage, tools, infrastructure, integration, review, correction, training and maintenance; specify per-task and recurring limits.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.operations.monitoring",
+      "category": "agent.operations",
+      "order": 430,
+      "prompt": "What must be observable during operation?",
+      "help": "Connect each metric or log to a recipient and response. Limit sensitive data in logs.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "quality",
+          "label": "Outcome quality and errors"
+        },
+        {
+          "value": "cost",
+          "label": "Cost and usage"
+        },
+        {
+          "value": "latency",
+          "label": "Completion and waiting times"
+        },
+        {
+          "value": "actions",
+          "label": "Actions and authorizations"
+        },
+        {
+          "value": "handoffs",
+          "label": "Human reviews and escalations"
+        },
+        {
+          "value": "drift",
+          "label": "Changes in inputs or behavior"
+        },
+        {
+          "value": "none",
+          "label": "None",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.operations.maintenance",
+      "category": "agent.operations",
+      "order": 440,
+      "prompt": "Who maintains and revalidates the system?",
+      "help": "Cover model, prompt, tool, permission and data changes; keep versions, evaluation results and rollback paths.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.rollout.entry",
+      "category": "agent.rollout",
+      "order": 450,
+      "prompt": "How should the first introduction proceed?",
+      "help": "Define users, workload, duration and exposure limits for the first stage.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sandbox",
+          "label": "Sandbox with test data"
+        },
+        {
+          "value": "shadow",
+          "label": "Observe and compare without executing"
+        },
+        {
+          "value": "pilot",
+          "label": "Limited pilot with supervision"
+        },
+        {
+          "value": "direct",
+          "label": "Direct operational introduction"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Not decided",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Request a proposal",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.rollout.adoption",
+      "category": "agent.rollout",
+      "order": 460,
+      "prompt": "How will people learn and adapt their work?",
+      "help": "Define training, feedback, workload changes and an alternative for cases the agent cannot handle.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.rollout.scale",
+      "category": "agent.rollout",
+      "order": 470,
+      "prompt": "What evidence allows expansion of scope or autonomy?",
+      "help": "Treat more users, data, tools or permissions as a new decision with an owner and evaluation, not an automatic reward for success.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    },
+    {
+      "questionId": "agent.rollout.exit",
+      "category": "agent.rollout",
+      "order": 480,
+      "prompt": "When will the plan be reviewed, reduced or stopped?",
+      "help": "Define dates and triggers, who decides, and how data, unfinished work and responsibilities return to people or another system.",
+      "responseType": "long-text",
+      "placeholder": "Describe an example, evidence, boundaries and unresolved points."
+    }
+  ]
+}

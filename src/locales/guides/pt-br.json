@@ -1,0 +1,186 @@
+{
+  "intro": "Comece com uma pergunta. Você pode deixar questões em aberto e voltar depois.",
+  "purpose": "Esta ferramenta registra o que construir ou introduzir, de quem é a perspectiva e o que foi realmente acordado. Ela não gera jogos nem executa agentes de IA.",
+  "conceptsTitle": "Três coisas que devem permanecer separadas",
+  "concepts": [
+    [
+      "Contribuição = uma resposta relatada",
+      "Exemplo: alguém do suporte diz que pesquisar perguntas frequentes demora. Salvar registra sua perspectiva; não a transforma em decisão do projeto."
+    ],
+    [
+      "Resolução = como o projeto trata a resposta",
+      "Escolha adotar provisoriamente, confirmar, pedir proposta ou deixar sem decisão. A resposta e a decisão são registros separados."
+    ],
+    [
+      "Base = uma revisão de referência salva explicitamente",
+      "Na Revisão, confirme o conjunto atual de premissas como Base r1. Itens indecisos podem continuar assim. Edições posteriores exigem nova confirmação da Base para aparecer nas exportações."
+    ]
+  ],
+  "stepsTitle": "Experimente uma entrada completa, do início à exportação",
+  "steps": [
+    [
+      "Escolha o tema na página inicial",
+      "Sites e pequenos aplicativos web tem 42 perguntas, Desenvolvimento de jogos tem 40 e Planejamento de adoção de agentes de IA tem 48. Escolha pelo trabalho a alinhar, não pela ferramenta que pretende usar."
+    ],
+    [
+      "Identifique o projeto e as pessoas",
+      "Informe nome do projeto e nome e papel de quem registra. Essa pessoa insere a resposta. Selecione autoridade de decisão apenas se ela realmente puder aprovar a premissa. Em entrevistas, habilite a perspectiva separada e identifique de quem é a resposta registrada."
+    ],
+    [
+      "Responda uma pergunta e acrescente a razão",
+      "Selecione uma opção ou digite texto. Acrescente contexto, evidências ou limites em Contexto ou justificativa. Confira perspectiva, responsável pelo registro e método de obtenção. Esses campos descrevem a fonte, não a força da resposta. Opções Outro podem exigir nota."
+    ],
+    [
+      "Decida como usar a resposta",
+      "Para experimentar, escolha Provisório no estado da resolução. Confira se a contribuição de origem mostra a resposta desejada. Isso permite testar o fluxo sem afirmar acordo final. Se ainda não souber, deixe Não decidido ou use Deixar em aberto e prossiga."
+    ],
+    [
+      "Revise e confirme uma Base",
+      "Abra Revisão, examine pendências, avisos e fontes, escolha Confirmar revisão Base e confirme a caixa de diálogo. Isso fixa uma referência; não declara todas as respostas corretas nem todos os problemas resolvidos."
+    ],
+    [
+      "Exporte um backup ou contexto para uma IA",
+      "Abra Exportar. Baixe Base JSON para salvar a referência confirmada. Baixe AI Context para fornecer premissas, fontes e questões em aberto a uma IA. O rascunho mais recente não é exportado até confirmar uma nova Base."
+    ]
+  ],
+  "examplesTitle": "Exemplos para cada modelo",
+  "examplesIntro": "São exemplos fictícios para ajudar na escrita. Abri-los não preenche nem altera seu projeto.",
+  "examples": [
+    [
+      "Site: uma página de consultas",
+      [
+        [
+          "Pergunta",
+          "Qual é o principal resultado esperado desta versão?"
+        ],
+        [
+          "Resposta",
+          "Gerar consultas ou contatos comerciais"
+        ],
+        [
+          "Contexto",
+          "Visitantes novos devem entender o serviço e enviar uma consulta. Pagamento online está fora desta versão. Teste o fluxo com três pessoas que não conheçam o serviço."
+        ],
+        [
+          "Fonte e resolução",
+          "O solicitante relata a meta; quem registra a insere. Use Provisório enquanto o responsável pela decisão revisa."
+        ]
+      ]
+    ],
+    [
+      "Jogo: um pequeno protótipo de exploração",
+      [
+        [
+          "Pergunta",
+          "O que esta versão deve alcançar?"
+        ],
+        [
+          "Resposta",
+          "Testar a mecânica central com um protótipo."
+        ],
+        [
+          "Contexto",
+          "Crie três salas e duas ferramentas para testar a diversão de descobrir um caminho. Planeje dez minutos de jogo. Multijogador e arte com qualidade final estão fora do escopo."
+        ],
+        [
+          "Fonte e resolução",
+          "Registre o plano do criador como Provisório. Adicione o retorno dos testes como outra contribuição, preservando o plano original."
+        ]
+      ]
+    ],
+    [
+      "Agente de IA: redigir resposta de suporte",
+      [
+        [
+          "Pergunta",
+          "Que trabalho deve mudar e para quem?"
+        ],
+        [
+          "Resposta",
+          "Ajudar a equipe de suporte a redigir respostas usando fontes aprovadas de perguntas frequentes. A própria equipe envia as respostas."
+        ],
+        [
+          "Contexto",
+          "Esperamos reduzir o tempo de trabalho, mas o total atual não foi medido. Compare tempos de pesquisa, redação, revisão e correção. Não presuma economia antes da avaliação."
+        ],
+        [
+          "Fonte e resolução",
+          "Mantenha expectativas da gestão e observações da linha de frente como contribuições separadas. Adote provisoriamente o escopo do teste e deixe efeitos não medidos em aberto."
+        ]
+      ]
+    ]
+  ],
+  "statesTitle": "Qual estado de resolução devo escolher?",
+  "states": [
+    [
+      "Não decidido",
+      "Nenhuma premissa foi adotada. Não preencha a lacuna por suposição."
+    ],
+    [
+      "Provisório",
+      "Use a resposta selecionada por enquanto, mantendo espaço para revisão."
+    ],
+    [
+      "Confirmado",
+      "Um responsável autorizado aceita esta premissa. Isso não prova que um benefício previsto ocorrerá."
+    ],
+    [
+      "Solicitar proposta",
+      "Peça opções ou orientação sem escolher uma resposta ainda."
+    ],
+    [
+      "Delegar dentro de limites",
+      "Um responsável autorizado delega uma decisão dentro de limites registrados. Explique os limites na nota."
+    ],
+    [
+      "Não se aplica",
+      "Um responsável autorizado determina que a pergunta está fora do projeto. Isso é diferente de não saber."
+    ]
+  ],
+  "filesTitle": "Qual arquivo devo salvar?",
+  "files": [
+    [
+      "Base JSON",
+      "A última referência confirmada. Comece por ela para um backup portátil."
+    ],
+    [
+      "Override JSON",
+      "Alteração opcional de escopo definido ligada a uma revisão Base específica. Não é necessária no primeiro projeto. Preserve também a Base correspondente."
+    ],
+    [
+      "Unified JSON",
+      "Resultado de aplicar Overrides ativos à Base. Guarde Base e Overrides separadamente se precisar preservar alterações individuais."
+    ],
+    [
+      "AI Context Markdown",
+      "Contexto legível para uma IA, incluindo fontes e questões em aberto. Entregue-o junto com a tarefa desejada. Para reabrir um projeto neste aplicativo, use JSON."
+    ]
+  ],
+  "faqTitle": "Quando encontrar dificuldades",
+  "faq": [
+    [
+      "Preciso responder tudo?",
+      "Não. Use Próxima pergunta, Deixar em aberto ou a lista de categorias. Você pode confirmar uma Base com itens indecisos; eles continuam visíveis no contexto entregue."
+    ],
+    [
+      "Por que minha resposta ainda aparece como Não decidido?",
+      "A resposta foi salva como contribuição. Para adotá-la, escolha um estado de resolução e confira a contribuição de origem abaixo da pergunta."
+    ],
+    [
+      "Como confirmar uma premissa individual?",
+      "Primeiro escolha Provisório, confira a contribuição de origem e selecione o responsável adequado; depois mude para Confirmado. Se não houver responsável autorizado, mantenha provisório ou em aberto e obtenha sua participação. Não alegue autoridade apenas para habilitar o controle."
+    ],
+    [
+      "Duas pessoas respondem diferente. Qual resposta guardo?",
+      "Use Adicionar outra perspectiva e defina a fonte de cada resposta. Preserve ambas e selecione separadamente a resposta adotada na resolução. Uma diferença não resolvida pode permanecer como conflito."
+    ],
+    [
+      "Por que as edições recentes não aparecem na exportação?",
+      "A exportação usa a última Base confirmada. Abra Revisão e confirme a próxima revisão, como r2. Salvar rascunho automaticamente e confirmar Base são ações diferentes."
+    ],
+    [
+      "Onde meu trabalho é salvo e como retomar?",
+      "Rascunhos são salvos neste navegador quando há armazenamento disponível. Reabra em Projetos recentes no mesmo navegador e site. Não há sincronização na nuvem: outro dispositivo ou limpar dados do site pode impedir o acesso. Exporte JSON e use Importar JSON para recuperar o conteúdo confirmado; não dependa do JSON para preservar rascunhos não confirmados."
+    ]
+  ]
+}

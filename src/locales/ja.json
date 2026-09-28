@@ -4,8 +4,10 @@
   "name": "日本語",
   "strings": {
     "brand.name": "Premise Builder",
-    "brand.meta": "web-small-app · 日本語",
-    "meta.title": "Premise Builder — Webプロジェクトの要件整理",
+    "brand.meta": "プロジェクトの前提整理 · 日本語",
+    "meta.title": "Premise Builder — プロジェクトの要件・前提整理",
+    "home.authorLink": "Deshimaru Sakaguchi — 作者・研究背景",
+    "home.companionLink": "Preference Compass — 人とAIの関係性を引き継ぐツール",
     "meta.description": "作業開始前に、要件、役割、制約、未決定事項の認識を揃えます。",
     "privacy.localOnly": "ローカルのみ",
     "home.eyebrow": "前提の整列",
@@ -310,7 +312,8 @@
       "proposal_requested": "提案待ち",
       "delegated": "委任",
       "not_applicable": "該当なし",
-      "conflict": "競合"
+      "conflict": "競合",
+      "unresolved": "未解決"
     },
     "projectStatus": {
       "draft": "下書き",

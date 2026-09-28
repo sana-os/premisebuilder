@@ -1,0 +1,1688 @@
+{
+  "templateId": "web-small-app",
+  "templateVersion": "0.1.0",
+  "locale": "ar",
+  "direction": "rtl",
+  "template": {
+    "name": "المواقع وتطبيقات الويب الصغيرة",
+    "summary": "حدّد فرضيات العمل لموقع أو تطبيق ويب واضح النطاق."
+  },
+  "answerContext": {
+    "answeringFrom": "صاحب وجهة النظر",
+    "recordedBy": "سجّلها",
+    "speakingAs": "يتحدث بصفته",
+    "captureMethod": "طريقة الحصول عليها",
+    "authority": "صلاحية هذه الإجابة",
+    "confirmation": "تأكيد المصدر",
+    "changeForQuestion": "تغيير لهذا السؤال",
+    "multiplePerspectives": "إضافة وجهة نظر أخرى"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "مؤكّد",
+      "description": "استخدمها كفرضية معتمدة للمشروع."
+    },
+    {
+      "value": "provisional",
+      "label": "مؤقت",
+      "description": "استخدمها حاليًا مع إظهار إمكانية مراجعتها."
+    },
+    {
+      "value": "unspecified",
+      "label": "غير محسوم",
+      "description": "اتركها معلّقة. لا تسمح للذكاء الاصطناعي بملئها ضمنيًا."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "طلب مقترح",
+      "description": "اطلب بدائل أو توصية دون اعتبار أي منها اختيارًا معتمدًا."
+    },
+    {
+      "value": "delegated",
+      "label": "التفويض ضمن حدود",
+      "description": "اسمح للمنفّذ أو الذكاء الاصطناعي بالقرار ضمن الحدود المعلنة والإبلاغ عن الاختيار."
+    },
+    {
+      "value": "not_applicable",
+      "label": "لا ينطبق",
+      "description": "حدّد أن هذا السؤال خارج المشروع."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "اختر مَن تمثل الإجابة وجهة نظره ومَن سجّلها.",
+    "validation.speakingRoleMismatch": "دور المتحدث المحدد غير مُسند إلى هذا المشارك.",
+    "validation.inferenceUnconfirmed": "يجب أن تبقى الإجابة المستنتجة غير مؤكّدة حتى يتحقق منها شخص مخوّل.",
+    "validation.resolutionAuthorityRequired": "يتطلب تأكيد هذه الفرضية مصدر قرار مخوّلًا.",
+    "validation.exclusiveChoice": "لا يمكن الجمع بين هذا الخيار وخيارات أخرى.",
+    "validation.noteRequired": "أضف ملاحظة موجزة لشرح الاختيار.",
+    "validation.selectionLimit": "قلّل عدد الخيارات المحددة.",
+    "review.authRuntime": "المصادقة ضمن النطاق، لكن نموذج التشغيل المحدد قد يحتاج مكوّنًا خارجيًا أو خادميًا.",
+    "review.paymentHandling": "بيانات الدفع ضمن النطاق. تحقّق مَن يعالجها وما إذا كان يجوز للمشروع تخزين أي منها.",
+    "review.analyticsPrivacy": "التحليلات أو القياس عن بعد ضمن النطاق. راجع حدود الخصوصية والموافقة والممارسات المحظورة."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "قصد المشروع",
+      "description": "حدّد ما يُبنى ولماذا يهم والمرحلة الحالية.",
+      "perspectiveHint": "فضّل مقدّم الطلب أو صاحب القرار. سجّل تفسير المطوّر كمساهمة منفصلة."
+    },
+    {
+      "id": "audience.context",
+      "label": "الجمهور والسياق",
+      "description": "صف مَن سيستخدم النتيجة وظروف الاستخدام.",
+      "perspectiveHint": "افصل عند الإمكان مدخلات المستخدمين الفعلية عن افتراضات الفريق."
+    },
+    {
+      "id": "scope.deliverables",
+      "label": "النطاق والمخرجات",
+      "description": "أظهر حدود الإصدار والشاشات المطلوبة والاستثناءات.",
+      "perspectiveHint": "يصف مقدّم الطلب النطاق المرغوب؛ ويسجّل المطوّر الجدوى وتبعات التنفيذ بشكل منفصل."
+    },
+    {
+      "id": "content.data",
+      "label": "المحتوى والبيانات",
+      "description": "وضّح مسؤولية المحتوى وكيفية التعامل مع بيانات المستخدم المدخلة.",
+      "perspectiveHint": "استند إلى صاحب المحتوى في الحقائق التحريرية وإلى مصدر تقني أو خصوصية مخوّل في معالجة البيانات."
+    },
+    {
+      "id": "design.interaction",
+      "label": "التصميم والتفاعل",
+      "description": "سجّل التوجه البصري وتفضيلات التفاعل دون خلطها بقيود إلزامية.",
+      "perspectiveHint": "أبقِ ملاحظات المستخدمين وتفضيلات مقدّم الطلب وتوصيات المصمّم مساهمات منفصلة."
+    },
+    {
+      "id": "technology.runtime",
+      "label": "التقنية والتشغيل",
+      "description": "حدّد مرونة التقنيات وحدود التشغيل ودعم المتصفحات والخدمات الخارجية.",
+      "perspectiveHint": "قد يوصي المطوّر بتنفيذ معين. سجّل هل التوصية استرشادية أم قرار تقني مخوّل."
+    },
+    {
+      "id": "quality.accessibility",
+      "label": "الجودة وإمكانية الوصول",
+      "description": "حدّد المستوى المتوقع لإمكانية الوصول والتجاوب والأداء.",
+      "perspectiveHint": "اجمع الاحتياجات الملحوظة مع الصلاحية التقنية أو الامتثالية دون إحلال إحداهما محل الأخرى."
+    },
+    {
+      "id": "risk.boundaries",
+      "label": "المخاطر والحدود",
+      "description": "حدّد ما يجب ألا يحدث والإخفاقات المكلفة.",
+      "perspectiveHint": "أكّد المحظورات الملزمة مع صاحب القرار أو صاحب الصلاحية في المجال."
+    },
+    {
+      "id": "delivery.operations",
+      "label": "التسليم والتشغيل",
+      "description": "حدّد توقعات الاستضافة والنشر والصيانة والتسليم.",
+      "perspectiveHint": "سجّل احتياجات مسؤول الصيانة التشغيلية منفصلة عن سير العمل المفضّل للمطوّر."
+    },
+    {
+      "id": "acceptance.validation",
+      "label": "القبول والتحقق",
+      "description": "حدّد مَن يقبل العمل والأدلة التي تثبت اكتماله.",
+      "perspectiveHint": "يجب أن تصدر المعالجة النهائية عن الشخص أو المجموعة المخوّلة بقبول الإصدار."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.project_kind",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "ما الذي تبنيه؟",
+      "help": "اختر الشكل الأساسي الأقرب لهذا الإصدار.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "informational_site",
+          "label": "موقع معلوماتي"
+        },
+        {
+          "value": "landing_page",
+          "label": "صفحة هبوط"
+        },
+        {
+          "value": "portfolio",
+          "label": "معرض أعمال"
+        },
+        {
+          "value": "public_content_site",
+          "label": "موقع محتوى عام"
+        },
+        {
+          "value": "browser_local_utility",
+          "label": "أداة محلية في المتصفح"
+        },
+        {
+          "value": "small_web_app",
+          "label": "تطبيق ويب صغير"
+        },
+        {
+          "value": "mixed",
+          "label": "إصدار يجمع عدة أشكال",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.primary_outcome",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "ما النتيجة الأساسية التي ينبغي أن يحققها هذا الإصدار؟",
+      "help": "اختر النتيجة التي تُقدّم عند ضرورة المفاضلة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "explain_information",
+          "label": "مساعدة الناس على فهم المعلومات"
+        },
+        {
+          "value": "generate_leads",
+          "label": "توليد استفسارات أو عملاء محتملين"
+        },
+        {
+          "value": "showcase_work",
+          "label": "عرض الأعمال أو المؤهلات"
+        },
+        {
+          "value": "complete_workflow",
+          "label": "تمكين المستخدم من إكمال سير عمل"
+        },
+        {
+          "value": "provide_utility",
+          "label": "توفير أداة محددة الغرض"
+        },
+        {
+          "value": "publish_content",
+          "label": "نشر المحتوى أو تنظيمه"
+        },
+        {
+          "value": "validate_idea",
+          "label": "التحقق من فكرة أو نموذج أولي"
+        },
+        {
+          "value": "other",
+          "label": "نتيجة أخرى",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "في أي مرحلة يوجد المشروع؟",
+      "help": "يحدد ذلك إنشاء السلوك الحالي أو الحفاظ عليه أو توسيعه أو إصلاحه.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "بناء جديد"
+        },
+        {
+          "value": "redesign",
+          "label": "إعادة تصميم"
+        },
+        {
+          "value": "extension",
+          "label": "توسعة"
+        },
+        {
+          "value": "repair",
+          "label": "إصلاح"
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.success_evidence",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "ما النتيجة القابلة للملاحظة التي تجعل الإصدار ذا قيمة؟",
+      "help": "صف أدلة بدلًا من طموح عام. تكفي إجابة قصيرة.",
+      "responseType": "long-text",
+      "placeholder": "مثلًا: يستطيع الزائر الجديد فهم العرض وإرسال استفسار دون مساعدة."
+    },
+    {
+      "questionId": "audience.context.primary_group",
+      "category": "audience.context",
+      "order": 50,
+      "prompt": "مَن الجمهور الأساسي؟",
+      "help": "اختر الفئة التي ينبغي لاحتياجاتها توجيه الإصدار الأول.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "general_public",
+          "label": "الجمهور العام"
+        },
+        {
+          "value": "prospective_customers",
+          "label": "عملاء محتملون"
+        },
+        {
+          "value": "existing_customers",
+          "label": "عملاء حاليون"
+        },
+        {
+          "value": "internal_staff",
+          "label": "موظفون داخليون"
+        },
+        {
+          "value": "professionals",
+          "label": "مهنيون أو متخصصون"
+        },
+        {
+          "value": "creators",
+          "label": "مبدعون أو مساهمون"
+        },
+        {
+          "value": "students_researchers",
+          "label": "طلاب أو باحثون"
+        },
+        {
+          "value": "defined_community",
+          "label": "مجتمع محدد"
+        },
+        {
+          "value": "mixed",
+          "label": "عدة فئات بالتساوي",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "جمهور آخر",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.relationship",
+      "category": "audience.context",
+      "order": 60,
+      "prompt": "ما علاقة معظم المستخدمين بالمشروع؟",
+      "help": "يساعد ذلك في تحديد التهيئة والشرح وعمق التنقل.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "first_time_visitors",
+          "label": "غالبًا زوار لأول مرة"
+        },
+        {
+          "value": "occasional_visitors",
+          "label": "زوار من حين لآخر"
+        },
+        {
+          "value": "returning_users",
+          "label": "مستخدمون عائدون"
+        },
+        {
+          "value": "authenticated_members",
+          "label": "أعضاء مسجّلو الدخول"
+        },
+        {
+          "value": "known_internal_users",
+          "label": "مستخدمون داخليون معروفون"
+        },
+        {
+          "value": "mixed",
+          "label": "جمهور متنوع"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.domain_familiarity",
+      "category": "audience.context",
+      "order": 70,
+      "prompt": "ما مدى إلمام الجمهور الأساسي بالموضوع؟",
+      "help": "استند عند الإمكان إلى المعرفة الملحوظة أو المبلغ عنها من المستخدمين.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "لا تُفترض معرفة مسبقة"
+        },
+        {
+          "value": "basic",
+          "label": "إلمام أساسي"
+        },
+        {
+          "value": "working",
+          "label": "معرفة عملية"
+        },
+        {
+          "value": "expert",
+          "label": "معرفة متخصصة"
+        },
+        {
+          "value": "mixed",
+          "label": "مستويات معرفة شديدة التنوع"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.primary_context",
+      "category": "audience.context",
+      "order": 80,
+      "prompt": "في أي ظروف سيُستخدم المشروع؟",
+      "help": "اختر كل الظروف التي تؤثر فعليًا في التصميم أو التنفيذ.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "mobile_on_move",
+          "label": "هاتف أثناء التنقل"
+        },
+        {
+          "value": "mobile_stationary",
+          "label": "هاتف في وضع ثابت"
+        },
+        {
+          "value": "desktop_office",
+          "label": "حاسوب في المكتب"
+        },
+        {
+          "value": "desktop_home",
+          "label": "حاسوب في المنزل"
+        },
+        {
+          "value": "tablet_or_kiosk",
+          "label": "جهاز لوحي أو كشك"
+        },
+        {
+          "value": "constrained_network",
+          "label": "شبكة بطيئة أو غير مستقرة"
+        },
+        {
+          "value": "assistive_technology",
+          "label": "تقنيات مساعدة"
+        },
+        {
+          "value": "mixed",
+          "label": "ظروف متنوعة أو غير متوقعة"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.required_surfaces",
+      "category": "scope.deliverables",
+      "order": 90,
+      "prompt": "ما الصفحات أو الشاشات المطلوبة في هذا الإصدار؟",
+      "help": "اختر الضروري لهذا الإصدار فقط، دون إضافات مستقبلية محتملة.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "home_or_entry",
+          "label": "الصفحة الرئيسية أو شاشة الدخول"
+        },
+        {
+          "value": "content_pages",
+          "label": "صفحات محتوى"
+        },
+        {
+          "value": "listing_or_index",
+          "label": "قائمة أو فهرس"
+        },
+        {
+          "value": "detail_views",
+          "label": "شاشات تفاصيل"
+        },
+        {
+          "value": "form",
+          "label": "نموذج"
+        },
+        {
+          "value": "dashboard",
+          "label": "لوحة معلومات أو مساحة عمل"
+        },
+        {
+          "value": "settings",
+          "label": "إعدادات"
+        },
+        {
+          "value": "authentication",
+          "label": "مسار تسجيل الدخول أو الحساب"
+        },
+        {
+          "value": "admin",
+          "label": "شاشة إدارة"
+        },
+        {
+          "value": "legal",
+          "label": "صفحات قانونية أو سياسات"
+        },
+        {
+          "value": "error_empty_states",
+          "label": "حالات الخطأ والفراغ"
+        },
+        {
+          "value": "other",
+          "label": "شاشة أخرى مطلوبة",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.primary_user_action",
+      "category": "scope.deliverables",
+      "order": 100,
+      "prompt": "ما أهم إجراء يجب أن يستطيع المستخدم إكماله؟",
+      "help": "اختر الإجراء الذي يحدد المسار الأساسي.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "read_or_understand",
+          "label": "القراءة أو الفهم"
+        },
+        {
+          "value": "navigate_or_discover",
+          "label": "التنقل أو اكتشاف المحتوى"
+        },
+        {
+          "value": "submit_form",
+          "label": "إرسال نموذج"
+        },
+        {
+          "value": "search_or_filter",
+          "label": "البحث أو التصفية"
+        },
+        {
+          "value": "create_or_edit",
+          "label": "إنشاء شيء أو تحريره"
+        },
+        {
+          "value": "calculate_or_transform",
+          "label": "حساب البيانات أو تحويلها"
+        },
+        {
+          "value": "upload_or_download",
+          "label": "رفع الملفات أو تنزيلها"
+        },
+        {
+          "value": "manage_account",
+          "label": "تسجيل الدخول أو إدارة حساب"
+        },
+        {
+          "value": "purchase_or_pay",
+          "label": "الشراء أو الدفع"
+        },
+        {
+          "value": "other",
+          "label": "إجراء أساسي آخر",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.release_boundary",
+      "category": "scope.deliverables",
+      "order": 110,
+      "prompt": "كيف يُحدّد نطاق الإصدار الأول؟",
+      "help": "اختر أوضح حد حالي. يجب إبقاء الحد الغامض معلّقًا بوضوح.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "single_page",
+          "label": "صفحة واحدة"
+        },
+        {
+          "value": "small_fixed_set",
+          "label": "مجموعة صغيرة ثابتة من الصفحات"
+        },
+        {
+          "value": "bounded_app_flow",
+          "label": "مسار تطبيق واحد محدد بوضوح"
+        },
+        {
+          "value": "existing_scope_redesign",
+          "label": "إعادة تصميم نطاق المنتج الحالي"
+        },
+        {
+          "value": "specific_repair",
+          "label": "إصلاح محدد فقط"
+        },
+        {
+          "value": "phased_mvp",
+          "label": "مرحلة MVP محددة"
+        },
+        {
+          "value": "not_yet_bounded",
+          "label": "الحد غير واضح بعد"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.explicit_exclusions",
+      "category": "scope.deliverables",
+      "order": 120,
+      "prompt": "ما الذي يقع صراحةً خارج هذا الإصدار؟",
+      "help": "اذكر الإضافات المغرية أو الافتراضات التي لا يجوز إدخالها دون قرار جديد.",
+      "responseType": "long-text",
+      "placeholder": "مثلًا: لا حسابات ولا قاعدة بيانات خادمية ولا مدفوعات ولا CMS في الإصدار الأول."
+    },
+    {
+      "questionId": "content.data.source_owner",
+      "category": "content.data",
+      "order": 130,
+      "prompt": "مَن المسؤول عن محتوى المشروع؟",
+      "help": "اختر مَن يوفّر أو يعتمد النصوص والوسائط ومعلومات المصدر.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "owner_supplies_final",
+          "label": "صاحب المشروع يوفّر المحتوى النهائي"
+        },
+        {
+          "value": "owner_supplies_draft",
+          "label": "صاحب المشروع يوفّر مسودة"
+        },
+        {
+          "value": "developer_structures",
+          "label": "المطوّر ينظّم المواد المقدّمة"
+        },
+        {
+          "value": "developer_writes_from_brief",
+          "label": "المطوّر يكتب وفق موجز معتمد"
+        },
+        {
+          "value": "shared_responsibility",
+          "label": "مسؤولية مشتركة"
+        },
+        {
+          "value": "migrate_existing",
+          "label": "ترحيل المحتوى الحالي"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "لم يُحدد بعد"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.readiness",
+      "category": "content.data",
+      "order": 140,
+      "prompt": "ما مدى جاهزية المحتوى؟",
+      "help": "قيّم المواد المتاحة الآن وليس الحالة المتوقعة عند الإطلاق.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "final",
+          "label": "نهائي ومعتمد"
+        },
+        {
+          "value": "mostly_ready",
+          "label": "جاهز في معظمه"
+        },
+        {
+          "value": "partial",
+          "label": "متاح جزئيًا"
+        },
+        {
+          "value": "source_material_only",
+          "label": "توجد مواد المصدر فقط"
+        },
+        {
+          "value": "not_started",
+          "label": "لم يبدأ"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.user_input_types",
+      "category": "content.data",
+      "order": 150,
+      "prompt": "ما بيانات المستخدم التي قد تدخل النظام؟",
+      "help": "اختر كل نوع يستقبله الإصدار عمدًا، بما فيه القياس عن بعد.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "لا بيانات مستخدم",
+          "exclusive": true
+        },
+        {
+          "value": "contact_details",
+          "label": "بيانات اتصال"
+        },
+        {
+          "value": "account_profile",
+          "label": "بيانات حساب أو ملف شخصي"
+        },
+        {
+          "value": "free_text",
+          "label": "نص حر"
+        },
+        {
+          "value": "files",
+          "label": "ملفات مرفوعة"
+        },
+        {
+          "value": "payment_related",
+          "label": "بيانات متعلقة بالدفع"
+        },
+        {
+          "value": "analytics_telemetry",
+          "label": "تحليلات أو قياس عن بعد"
+        },
+        {
+          "value": "location_device",
+          "label": "بيانات الموقع أو الجهاز"
+        },
+        {
+          "value": "other",
+          "label": "نوع بيانات آخر",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.storage",
+      "category": "content.data",
+      "order": 160,
+      "prompt": "أين يجوز تخزين بيانات المشروع أو مدخلات المستخدم؟",
+      "help": "اختر أشد الحدود الحالية. المقصود المنتج الذي تحدده وليس Premise Builder نفسه.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_user_data",
+          "label": "لا تُخزّن بيانات المستخدم"
+        },
+        {
+          "value": "session_only",
+          "label": "للجلسة الحالية فقط"
+        },
+        {
+          "value": "browser_local_only",
+          "label": "في متصفح المستخدم فقط"
+        },
+        {
+          "value": "server_storage_allowed",
+          "label": "يُسمح بخادم يتحكم به المشروع"
+        },
+        {
+          "value": "third_party_storage",
+          "label": "يجوز لطرف ثالث معتمد تخزينها"
+        },
+        {
+          "value": "hybrid",
+          "label": "مزيج محدد من التخزين المحلي أو الخادمي أو لدى طرف ثالث",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.retention",
+      "category": "content.data",
+      "order": 170,
+      "prompt": "ما مدة الاحتفاظ المسموح بها لبيانات المستخدم؟",
+      "help": "يظهر هذا عندما يستقبل المشروع بيانات قد تستمر.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_retention",
+          "label": "عدم الاحتفاظ"
+        },
+        {
+          "value": "until_session_ends",
+          "label": "حتى نهاية الجلسة"
+        },
+        {
+          "value": "until_local_deletion",
+          "label": "حتى يحذف المستخدم البيانات المحلية"
+        },
+        {
+          "value": "fixed_period",
+          "label": "لمدة محددة",
+          "requiresNote": true
+        },
+        {
+          "value": "account_lifetime",
+          "label": "طوال عمر الحساب"
+        },
+        {
+          "value": "governed_by_policy",
+          "label": "وفق سياسة معتمدة",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.tone",
+      "category": "design.interaction",
+      "order": 180,
+      "prompt": "ما الصفات البصرية التي ينبغي أن توجه التصميم؟",
+      "help": "اختر حتى ثلاث صفات. تُعد تفضيلات ما لم يجعلها قيد منفصل إلزامية.",
+      "responseType": "multi-choice",
+      "maxSelections": 3,
+      "choices": [
+        {
+          "value": "minimal",
+          "label": "بسيط"
+        },
+        {
+          "value": "editorial",
+          "label": "تحريري"
+        },
+        {
+          "value": "technical",
+          "label": "تقني"
+        },
+        {
+          "value": "playful",
+          "label": "مرح"
+        },
+        {
+          "value": "premium",
+          "label": "فاخر"
+        },
+        {
+          "value": "warm",
+          "label": "دافئ"
+        },
+        {
+          "value": "institutional",
+          "label": "مؤسسي"
+        },
+        {
+          "value": "bold",
+          "label": "جريء"
+        },
+        {
+          "value": "quiet",
+          "label": "هادئ"
+        },
+        {
+          "value": "brand_led",
+          "label": "تقوده علامة تجارية حالية"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.brand_source",
+      "category": "design.interaction",
+      "order": 190,
+      "prompt": "ما النظام البصري الذي ينبغي للمشروع اتباعه؟",
+      "help": "اختر المصدر الأكثر صلاحية والمتاح الآن.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed_design_system",
+          "label": "نظام تصميم ثابت"
+        },
+        {
+          "value": "existing_brand_guidelines",
+          "label": "إرشادات علامة تجارية حالية"
+        },
+        {
+          "value": "partial_assets",
+          "label": "عناصر جزئية للعلامة"
+        },
+        {
+          "value": "visual_reference_only",
+          "label": "أمثلة مرجعية فقط"
+        },
+        {
+          "value": "no_existing_brand",
+          "label": "لا يوجد نظام بصري حالي"
+        },
+        {
+          "value": "preserve_current_ui",
+          "label": "الحفاظ على الواجهة الحالية"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.information_density",
+      "category": "design.interaction",
+      "order": 200,
+      "prompt": "ما حجم المعلومات التي يجب إظهارها دفعة واحدة؟",
+      "help": "استند إلى المهمة والجمهور الأساسيين وليس الذوق وحده.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sparse_guided",
+          "label": "قليل وموجّه"
+        },
+        {
+          "value": "balanced",
+          "label": "متوازن"
+        },
+        {
+          "value": "dense_operational",
+          "label": "كثيف وعملي"
+        },
+        {
+          "value": "progressive_disclosure",
+          "label": "إظهار التفاصيل تدريجيًا"
+        },
+        {
+          "value": "varies_by_view",
+          "label": "يختلف حسب الشاشة",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.motion",
+      "category": "design.interaction",
+      "order": 210,
+      "prompt": "كيف ينبغي استخدام الحركة؟",
+      "help": "يجب ألا تحجب الحركة الحالة أو تمنع تفضيل تقليل الحركة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "لا حركة غير ضرورية"
+        },
+        {
+          "value": "subtle_feedback",
+          "label": "استجابة حركة بسيطة للحالة فقط"
+        },
+        {
+          "value": "moderate_transitions",
+          "label": "انتقالات معتدلة"
+        },
+        {
+          "value": "expressive",
+          "label": "حركة تعبيرية عندما تفيد"
+        },
+        {
+          "value": "reduced_motion_first",
+          "label": "تجربة تعطي الأولوية لتقليل الحركة"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.stack_policy",
+      "category": "technology.runtime",
+      "order": 220,
+      "prompt": "ما مدى ثبات التقنيات المستخدمة في التنفيذ؟",
+      "help": "التقنيات الثابتة قيد؛ أما المفضلة فتسمح ببدائل مبررة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "تقنيات ثابتة",
+          "requiresNote": true
+        },
+        {
+          "value": "preferred_negotiable",
+          "label": "مفضلة وقابلة للتفاوض",
+          "requiresNote": true
+        },
+        {
+          "value": "open_to_recommendation",
+          "label": "مفتوحة للتوصية"
+        },
+        {
+          "value": "preserve_existing",
+          "label": "الحفاظ على التقنيات الحالية"
+        },
+        {
+          "value": "static_files_only",
+          "label": "ملفات ثابتة بسيطة فقط"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.mode",
+      "category": "technology.runtime",
+      "order": 230,
+      "prompt": "ما نموذج التشغيل المسموح للمنتج؟",
+      "help": "اختر ما يجوز للمنتج المنشور الاعتماد عليه أثناء التشغيل.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fully_static",
+          "label": "ثابت بالكامل"
+        },
+        {
+          "value": "browser_local",
+          "label": "ثابت مع حالة محلية في المتصفح"
+        },
+        {
+          "value": "static_external_apis",
+          "label": "واجهة ثابتة مع APIs خارجية معتمدة"
+        },
+        {
+          "value": "server_backed",
+          "label": "تطبيق يعتمد على خادم"
+        },
+        {
+          "value": "hybrid",
+          "label": "تشغيل هجين",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.browser_support",
+      "category": "technology.runtime",
+      "order": 240,
+      "prompt": "ما حدود دعم المتصفحات؟",
+      "help": "اختر سياسة قابلة للاختبار بدلًا من الوعد بدعم جميع المتصفحات.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "evergreen_current",
+          "label": "المتصفحات الحديثة المحدّثة"
+        },
+        {
+          "value": "recent_two_versions",
+          "label": "الإصدار الحالي والإصداران الرئيسيان السابقان"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "الأولوية لمتصفحات الهاتف الحديثة"
+        },
+        {
+          "value": "enterprise_legacy",
+          "label": "يلزم متصفح مؤسسي أو قديم",
+          "requiresNote": true
+        },
+        {
+          "value": "specified_matrix",
+          "label": "مصفوفة متصفحات مقدّمة",
+          "requiresNote": true
+        },
+        {
+          "value": "no_special_constraint",
+          "label": "دعم حديث معقول دون قيد خاص"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.external_services",
+      "category": "technology.runtime",
+      "order": 250,
+      "prompt": "ما الخدمات الخارجية المتوقعة؟",
+      "help": "اختر الخدمات اللازمة. تُحسم الموافقة وبيانات الاعتماد وحدود البيانات بشكل منفصل.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "لا خدمات خارجية",
+          "exclusive": true
+        },
+        {
+          "value": "cms",
+          "label": "نظام إدارة محتوى"
+        },
+        {
+          "value": "analytics",
+          "label": "تحليلات"
+        },
+        {
+          "value": "authentication",
+          "label": "موفّر مصادقة"
+        },
+        {
+          "value": "payments",
+          "label": "موفّر مدفوعات"
+        },
+        {
+          "value": "email_forms",
+          "label": "إرسال بريد أو نموذج"
+        },
+        {
+          "value": "maps",
+          "label": "خرائط أو خدمة موقع"
+        },
+        {
+          "value": "ai_api",
+          "label": "خدمة ذكاء اصطناعي أو API"
+        },
+        {
+          "value": "other",
+          "label": "خدمة أخرى",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.discoverability",
+      "category": "technology.runtime",
+      "order": 260,
+      "prompt": "كيف ينبغي اكتشاف المشروع؟",
+      "help": "يحدد ذلك ما إذا كانت فهرسة البحث والنشر المقروء آليًا من المتطلبات.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "public_search_critical",
+          "label": "الظهور في البحث العام ضروري"
+        },
+        {
+          "value": "public_search_helpful",
+          "label": "الظهور في البحث العام مفيد"
+        },
+        {
+          "value": "direct_link_only",
+          "label": "يكفي الوصول برابط مباشر"
+        },
+        {
+          "value": "private_noindex",
+          "label": "يبقى خاصًا أو noindex"
+        },
+        {
+          "value": "app_shell",
+          "label": "فهرسة الهيكل العام للتطبيق فقط"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.target",
+      "category": "quality.accessibility",
+      "order": 270,
+      "prompt": "ما هدف إمكانية الوصول؟",
+      "help": "اختر مستوى يمكن تبريره أثناء المراجعة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "semantic_baseline",
+          "label": "أساس دلالي وقابل للتشغيل"
+        },
+        {
+          "value": "wcag_aa",
+          "label": "هدف WCAG AA"
+        },
+        {
+          "value": "legal_contractual",
+          "label": "معيار قانوني أو تعاقدي",
+          "requiresNote": true
+        },
+        {
+          "value": "best_effort",
+          "label": "أفضل جهد ضمن نطاق معلن",
+          "requiresNote": true
+        },
+        {
+          "value": "specific_requirements",
+          "label": "متطلبات وصول مقدّمة",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.keyboard",
+      "category": "quality.accessibility",
+      "order": 280,
+      "prompt": "ما مستوى التشغيل بلوحة المفاتيح المطلوب؟",
+      "help": "يشمل وضوح التركيز والترتيب المنطقي وعناصر تحكم قابلة للتشغيل.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "all_controls",
+          "label": "جميع عناصر التحكم والمسارات"
+        },
+        {
+          "value": "primary_flow",
+          "label": "المسار الأساسي على الأقل"
+        },
+        {
+          "value": "content_navigation",
+          "label": "التنقل في المحتوى فقط"
+        },
+        {
+          "value": "fixed_pointer_environment",
+          "label": "بيئة ثابتة تستخدم المؤشر فقط",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.responsive",
+      "category": "quality.accessibility",
+      "order": 290,
+      "prompt": "ما أولوية التجاوب؟",
+      "help": "اختر التوازن المقصود مع التصريح بأحجام العرض غير المدعومة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mobile_desktop_equal",
+          "label": "الهاتف والحاسوب متساويان في الأهمية"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "الأولوية للهاتف"
+        },
+        {
+          "value": "desktop_priority",
+          "label": "الأولوية للحاسوب"
+        },
+        {
+          "value": "fixed_environment",
+          "label": "بيئة عرض ثابتة",
+          "requiresNote": true
+        },
+        {
+          "value": "preserve_current_behavior",
+          "label": "الحفاظ على سلوك التجاوب الحالي"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.performance",
+      "category": "quality.accessibility",
+      "order": 300,
+      "prompt": "ما توقع الأداء الذي يوجه المفاضلات؟",
+      "help": "اختر أشد معيار مفيد يمكن للمشروع التحقق منه.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "core_web_vitals",
+          "label": "تحقيق أهداف Core Web Vitals المتفق عليها"
+        },
+        {
+          "value": "constrained_network",
+          "label": "البقاء قابلًا للاستخدام مع شبكة محدودة"
+        },
+        {
+          "value": "balanced",
+          "label": "موازنة السرعة وعمق الميزات"
+        },
+        {
+          "value": "feature_priority",
+          "label": "قد تتقدم القدرة المطلوبة على السرعة"
+        },
+        {
+          "value": "explicit_budget",
+          "label": "ميزانية أداء مقدّمة",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.prohibited_practices",
+      "category": "risk.boundaries",
+      "order": 310,
+      "prompt": "ما الممارسات المحظورة؟",
+      "help": "اختر الحدود الملزمة فقط. توضع التفضيلات في فئاتها المناسبة.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "لا محظورات معروفة",
+          "exclusive": true
+        },
+        {
+          "value": "inline_css",
+          "label": "CSS مضمن"
+        },
+        {
+          "value": "external_fonts",
+          "label": "خطوط محمّلة خارجيًا"
+        },
+        {
+          "value": "behavioral_tracking",
+          "label": "تتبع سلوكي"
+        },
+        {
+          "value": "nonessential_cookies",
+          "label": "ملفات ارتباط غير ضرورية"
+        },
+        {
+          "value": "unapproved_cdn",
+          "label": "شبكات CDN خارجية غير معتمدة"
+        },
+        {
+          "value": "client_side_secrets",
+          "label": "أسرار في شفرة العميل"
+        },
+        {
+          "value": "autoplay_media",
+          "label": "تشغيل الوسائط تلقائيًا"
+        },
+        {
+          "value": "unconfirmed_destructive_actions",
+          "label": "إجراءات مدمرة دون تأكيد"
+        },
+        {
+          "value": "vendor_lock_in",
+          "label": "الارتهان لمورّد"
+        },
+        {
+          "value": "other",
+          "label": "حظر آخر",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.privacy_level",
+      "category": "risk.boundaries",
+      "order": 320,
+      "prompt": "ما أعلى حساسية خصوصية ضمن النطاق؟",
+      "help": "استند إلى أكثر تدفقات البيانات المقصودة حساسية لا إلى المتوسط.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "لا بيانات شخصية"
+        },
+        {
+          "value": "low_nonsensitive",
+          "label": "بيانات شخصية غير حساسة منخفضة المخاطر"
+        },
+        {
+          "value": "personal_data",
+          "label": "بيانات شخصية"
+        },
+        {
+          "value": "sensitive_data",
+          "label": "بيانات شخصية حساسة"
+        },
+        {
+          "value": "regulated_data",
+          "label": "بيانات منظّمة أو محمية بشكل خاص",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "الحساسية غير مفهومة بعد"
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.high_cost_failure",
+      "category": "risk.boundaries",
+      "order": 330,
+      "prompt": "ما الإخفاقات الأعلى تكلفة؟",
+      "help": "اختر الإخفاقات التي ينبغي أن تغيّر أولوية التصميم أو المراجعة أو التنفيذ.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "no_unusual_cost",
+          "label": "لا تكلفة إخفاق غير معتادة",
+          "exclusive": true
+        },
+        {
+          "value": "data_loss",
+          "label": "فقدان بيانات"
+        },
+        {
+          "value": "privacy_breach",
+          "label": "خرق خصوصية أو أمن"
+        },
+        {
+          "value": "inaccessible_primary_flow",
+          "label": "مسار أساسي غير متاح للجميع"
+        },
+        {
+          "value": "wrong_information",
+          "label": "معلومات خاطئة أو مضللة"
+        },
+        {
+          "value": "downtime",
+          "label": "تعطل أو عدم توافر"
+        },
+        {
+          "value": "performance_failure",
+          "label": "تراجع الأداء"
+        },
+        {
+          "value": "brand_damage",
+          "label": "ضرر للعلامة أو الثقة"
+        },
+        {
+          "value": "scope_overrun",
+          "label": "تجاوز النطاق أو التكلفة"
+        },
+        {
+          "value": "other",
+          "label": "إخفاق آخر مرتفع التكلفة",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.compliance",
+      "category": "risk.boundaries",
+      "order": 340,
+      "prompt": "ما مصادر متطلبات الامتثال؟",
+      "help": "اختر المصادر المعروفة وسجّل المعيار أو السياسة بدقة في الملاحظة عند انطباقه.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "لا متطلبات امتثال معروفة",
+          "exclusive": true
+        },
+        {
+          "value": "privacy_law",
+          "label": "قانون أو تنظيم خصوصية",
+          "requiresNote": true
+        },
+        {
+          "value": "cookie_consent",
+          "label": "متطلبات ملفات الارتباط أو الموافقة",
+          "requiresNote": true
+        },
+        {
+          "value": "accessibility_law",
+          "label": "قانون أو معيار إمكانية وصول",
+          "requiresNote": true
+        },
+        {
+          "value": "copyright_licensing",
+          "label": "قواعد حقوق النشر أو الترخيص",
+          "requiresNote": true
+        },
+        {
+          "value": "industry_specific",
+          "label": "قواعد خاصة بالقطاع",
+          "requiresNote": true
+        },
+        {
+          "value": "organization_policy",
+          "label": "سياسة المؤسسة",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "مصدر امتثال آخر",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.hosting",
+      "category": "delivery.operations",
+      "order": 350,
+      "prompt": "أين يُتوقع استضافة الإصدار؟",
+      "help": "اختر الوجهة الحالية حتى لو كانت تفاصيل النشر مؤقتة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "github_pages",
+          "label": "GitHub Pages"
+        },
+        {
+          "value": "cloudflare_pages",
+          "label": "Cloudflare Pages"
+        },
+        {
+          "value": "other_static_host",
+          "label": "مضيف ثابت آخر",
+          "requiresNote": true
+        },
+        {
+          "value": "cloud_application_platform",
+          "label": "منصة تطبيقات سحابية",
+          "requiresNote": true
+        },
+        {
+          "value": "existing_environment",
+          "label": "بيئة مُدارة حالية",
+          "requiresNote": true
+        },
+        {
+          "value": "local_only",
+          "label": "استخدام محلي فقط"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.deployment_workflow",
+      "category": "delivery.operations",
+      "order": 360,
+      "prompt": "كيف ينبغي نشر الإصدارات؟",
+      "help": "اختر سير عمل يستطيع مسؤول الصيانة تشغيله بالفعل.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "manual_upload",
+          "label": "رفع يدوي"
+        },
+        {
+          "value": "git_push_automatic",
+          "label": "نشر تلقائي بعد Git push"
+        },
+        {
+          "value": "pull_request_gate",
+          "label": "مراجعة طلب دمج قبل النشر"
+        },
+        {
+          "value": "platform_cli",
+          "label": "نشر عبر سطر أوامر المنصة"
+        },
+        {
+          "value": "existing_ci",
+          "label": "سير عمل CI/CD حالي",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.maintenance_owner",
+      "category": "delivery.operations",
+      "order": 370,
+      "prompt": "مَن سيصون المشروع بعد الإطلاق؟",
+      "help": "سجّل الدور الذي يجب أن يفهم النتيجة ويشغّلها.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "original_developer",
+          "label": "المطوّر الأصلي"
+        },
+        {
+          "value": "internal_team",
+          "label": "فريق داخلي"
+        },
+        {
+          "value": "client_or_owner",
+          "label": "العميل أو صاحب المشروع"
+        },
+        {
+          "value": "shared",
+          "label": "صيانة مشتركة"
+        },
+        {
+          "value": "no_regular_maintenance",
+          "label": "لا صيانة دورية مخططة"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "لم يُحدد بعد"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.handoff",
+      "category": "delivery.operations",
+      "order": 380,
+      "prompt": "ما مستوى التسليم المطلوب؟",
+      "help": "اختر أصغر حزمة تمكّن المسؤول التالي من العمل بأمان.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "source_only",
+          "label": "ملفات المصدر فقط"
+        },
+        {
+          "value": "source_readme",
+          "label": "المصدر وREADME"
+        },
+        {
+          "value": "docs_and_tests",
+          "label": "المصدر والتوثيق والاختبارات"
+        },
+        {
+          "value": "operational_runbook",
+          "label": "التوثيق ودليل التشغيل"
+        },
+        {
+          "value": "full_transfer",
+          "label": "نقل الملكية والصلاحيات بالكامل"
+        },
+        {
+          "value": "ongoing_support",
+          "label": "اتفاق دعم مستمر"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.approver",
+      "category": "acceptance.validation",
+      "order": 390,
+      "prompt": "مَن يملك صلاحية قبول الإصدار؟",
+      "help": "اختر دور المعتمِد لا مجرد مَن يجري المراجعة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "decision_owner",
+          "label": "صاحب القرار"
+        },
+        {
+          "value": "requester",
+          "label": "مقدّم الطلب أو العميل"
+        },
+        {
+          "value": "end_user_representative",
+          "label": "ممثل المستخدمين النهائيين"
+        },
+        {
+          "value": "technical_reviewer",
+          "label": "مراجع تقني"
+        },
+        {
+          "value": "compliance_reviewer",
+          "label": "مراجع امتثال"
+        },
+        {
+          "value": "multiple_approvers",
+          "label": "عدة معتمِدين",
+          "requiresNote": true
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "لم يُحدد بعد"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.review_method",
+      "category": "acceptance.validation",
+      "order": 400,
+      "prompt": "ما الأدلة التي يجب استخدامها للقبول؟",
+      "help": "اختر طريقة المراجعة الأساسية. يمكن إضافة أدلة مساندة في السياق.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "visual_review",
+          "label": "مراجعة بصرية"
+        },
+        {
+          "value": "requirements_checklist",
+          "label": "قائمة متطلبات"
+        },
+        {
+          "value": "scenario_demonstration",
+          "label": "عرض سيناريوهات"
+        },
+        {
+          "value": "automated_tests",
+          "label": "نتائج اختبارات آلية"
+        },
+        {
+          "value": "accessibility_audit",
+          "label": "تدقيق إمكانية الوصول"
+        },
+        {
+          "value": "performance_audit",
+          "label": "تدقيق الأداء"
+        },
+        {
+          "value": "combined",
+          "label": "مزيج محدد",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.must_pass_scenarios",
+      "category": "acceptance.validation",
+      "order": 410,
+      "prompt": "ما السيناريوهات التي يجب أن تنجح قبل الإطلاق؟",
+      "help": "اختر السيناريوهات التي يمنع فشلها القبول.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "primary_content",
+          "label": "المحتوى الأساسي مفهوم"
+        },
+        {
+          "value": "primary_action",
+          "label": "اكتمال إجراء المستخدم الأساسي"
+        },
+        {
+          "value": "form_submission",
+          "label": "نجاح إرسال النموذج"
+        },
+        {
+          "value": "local_persistence",
+          "label": "عمل الحفظ المحلي وإعادة التحميل"
+        },
+        {
+          "value": "authentication",
+          "label": "عمل المصادقة"
+        },
+        {
+          "value": "payment",
+          "label": "عمل الدفع"
+        },
+        {
+          "value": "keyboard",
+          "label": "عمل مسار لوحة المفاتيح المطلوب"
+        },
+        {
+          "value": "mobile",
+          "label": "عمل مسار الهاتف المطلوب"
+        },
+        {
+          "value": "import_export",
+          "label": "حفاظ الاستيراد والتصدير على البيانات"
+        },
+        {
+          "value": "failure_recovery",
+          "label": "عمل سلوك الإخفاق والتعافي"
+        },
+        {
+          "value": "other",
+          "label": "سيناريو إلزامي آخر",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.unresolved_policy",
+      "category": "acceptance.validation",
+      "order": 420,
+      "prompt": "كيف ينبغي للفرضيات المعلّقة أن تؤثر في العمل؟",
+      "help": "اختر السياسة الافتراضية. يمكن أن تكون للمسائل الفردية حالة صريحة مختلفة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "block_dependent_work",
+          "label": "إيقاف العمل المعتمد عليها"
+        },
+        {
+          "value": "provisional_with_label",
+          "label": "المتابعة باختيار مؤقت موسوم بوضوح"
+        },
+        {
+          "value": "proposal_before_work",
+          "label": "طلب مقترح قبل العمل المعتمد عليها"
+        },
+        {
+          "value": "delegate_with_bounds",
+          "label": "التفويض ضمن حدود صريحة"
+        },
+        {
+          "value": "document_and_continue",
+          "label": "توثيق المجهول ومتابعة العمل المستقل"
+        },
+        {
+          "value": "case_by_case",
+          "label": "القرار لكل حالة"
+        }
+      ]
+    }
+  ]
+}

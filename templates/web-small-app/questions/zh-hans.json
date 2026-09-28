@@ -1,0 +1,1688 @@
+{
+  "templateId": "web-small-app",
+  "templateVersion": "0.1.0",
+  "locale": "zh-hans",
+  "direction": "ltr",
+  "template": {
+    "name": "网站与小型 Web 应用",
+    "summary": "明确网站或边界清晰的 Web 应用的工作前提。"
+  },
+  "answerContext": {
+    "answeringFrom": "回答来源",
+    "recordedBy": "记录者",
+    "speakingAs": "回答时的角色",
+    "captureMethod": "信息获取方式",
+    "authority": "此回答的权限",
+    "confirmation": "来源确认状态",
+    "changeForQuestion": "为此问题更改",
+    "multiplePerspectives": "添加其他视角"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "已确认",
+      "description": "将此内容作为已采纳的项目前提。"
+    },
+    {
+      "value": "provisional",
+      "label": "暂定",
+      "description": "暂时采用，但明确保留修改的可能。"
+    },
+    {
+      "value": "unspecified",
+      "label": "未决定",
+      "description": "保持未决。不得让 AI 擅自补全。"
+    },
+    {
+      "value": "proposal_requested",
+      "label": "请求提案",
+      "description": "请求备选方案或建议，但不将其视为已选定。"
+    },
+    {
+      "value": "delegated",
+      "label": "在限定范围内委托",
+      "description": "允许实施者或 AI 在规定范围内决定，并报告选择。"
+    },
+    {
+      "value": "not_applicable",
+      "label": "不适用",
+      "description": "将此问题标记为不属于此项目。"
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "请选择回答代表谁的视角，以及由谁记录。",
+    "validation.speakingRoleMismatch": "所选回答角色未分配给该参与者。",
+    "validation.inferenceUnconfirmed": "推断所得的回答，在有权人员核实前必须保持未确认。",
+    "validation.resolutionAuthorityRequired": "确认此前提需要有决策权的信息来源。",
+    "validation.exclusiveChoice": "此选项不能与其他选项同时选择。",
+    "validation.noteRequired": "请添加简短备注，说明此选择。",
+    "validation.selectionLimit": "请减少所选选项数量。",
+    "review.authRuntime": "身份验证在范围内，但所选运行模式可能需要外部或服务器组件。",
+    "review.paymentHandling": "支付相关数据在范围内。请确认由谁处理，以及项目是否可以存储其中任何数据。",
+    "review.analyticsPrivacy": "分析或遥测在范围内。请重新检查隐私边界、同意机制与禁止的做法。"
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "项目意图",
+      "description": "明确要构建什么、为何重要，以及当前阶段。",
+      "perspectiveHint": "优先记录需求提出者或决策负责人的意见。开发者的理解应作为单独的来源回答记录。"
+    },
+    {
+      "id": "audience.context",
+      "label": "受众与场景",
+      "description": "描述结果的使用者及其使用条件。",
+      "perspectiveHint": "尽可能将实际最终用户的输入与项目团队的假设分别记录。"
+    },
+    {
+      "id": "scope.deliverables",
+      "label": "范围与交付物",
+      "description": "明确发行范围、必需界面与排除事项。",
+      "perspectiveHint": "需求提出者可以描述期望范围；开发者应单独记录可行性与实施影响。"
+    },
+    {
+      "id": "content.data",
+      "label": "内容与数据",
+      "description": "明确内容责任，以及如何处理用户输入的数据。",
+      "perspectiveHint": "编辑事实由内容负责人提供；数据处理由有权的技术或隐私负责人确认。"
+    },
+    {
+      "id": "design.interaction",
+      "label": "设计与交互",
+      "description": "记录视觉方向与交互偏好，避免将其混同于硬性限制。",
+      "perspectiveHint": "分别保留最终用户的观察、需求提出者的偏好与设计师的建议。"
+    },
+    {
+      "id": "technology.runtime",
+      "label": "技术与运行环境",
+      "description": "明确技术栈的灵活性、运行边界、浏览器支持与外部服务。",
+      "perspectiveHint": "开发者可以推荐实现方式。请记录该建议是参考意见，还是经授权的技术决定。"
+    },
+    {
+      "id": "quality.accessibility",
+      "label": "质量与无障碍",
+      "description": "确定无障碍、响应式表现与性能的预期水平。",
+      "perspectiveHint": "结合观察到的用户需求与技术或合规权限，不能用其中一方取代另一方。"
+    },
+    {
+      "id": "risk.boundaries",
+      "label": "风险与边界",
+      "description": "说明哪些事情不得发生，以及哪些失败会造成高昂代价。",
+      "perspectiveHint": "硬性禁令应由决策负责人或相关领域有权人员确认。"
+    },
+    {
+      "id": "delivery.operations",
+      "label": "交付与运维",
+      "description": "明确托管、部署、维护与交接的预期。",
+      "perspectiveHint": "将维护者的运维需求与开发者偏好的工作流程分别记录。"
+    },
+    {
+      "id": "acceptance.validation",
+      "label": "验收与验证",
+      "description": "明确由谁验收，以及哪些证据足以判定完成。",
+      "perspectiveHint": "最终决议应来自有权验收此次发行的个人或群体。"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.project_kind",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "您要构建什么？",
+      "help": "请选择最接近此次发行主要形态的选项。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "informational_site",
+          "label": "信息网站"
+        },
+        {
+          "value": "landing_page",
+          "label": "落地页"
+        },
+        {
+          "value": "portfolio",
+          "label": "作品集"
+        },
+        {
+          "value": "public_content_site",
+          "label": "公开内容网站"
+        },
+        {
+          "value": "browser_local_utility",
+          "label": "浏览器本地工具"
+        },
+        {
+          "value": "small_web_app",
+          "label": "小型 Web 应用"
+        },
+        {
+          "value": "mixed",
+          "label": "混合类型的发行",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.primary_outcome",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "此次发行最主要应实现什么结果？",
+      "help": "当必须权衡时，选择应优先保障的结果。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "explain_information",
+          "label": "帮助人们理解信息"
+        },
+        {
+          "value": "generate_leads",
+          "label": "获取咨询或潜在客户"
+        },
+        {
+          "value": "showcase_work",
+          "label": "展示作品或资历"
+        },
+        {
+          "value": "complete_workflow",
+          "label": "让用户完成工作流程"
+        },
+        {
+          "value": "provide_utility",
+          "label": "提供专注的工具或实用功能"
+        },
+        {
+          "value": "publish_content",
+          "label": "发布或组织内容"
+        },
+        {
+          "value": "validate_idea",
+          "label": "验证想法或原型"
+        },
+        {
+          "value": "other",
+          "label": "其他结果",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "项目处于哪个阶段？",
+      "help": "这会决定工作应新建、保留、扩展还是修复现有行为。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "全新开发"
+        },
+        {
+          "value": "redesign",
+          "label": "重新设计"
+        },
+        {
+          "value": "extension",
+          "label": "扩展"
+        },
+        {
+          "value": "repair",
+          "label": "修复"
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.success_evidence",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "什么可观察的结果能证明此次发行有价值？",
+      "help": "描述证据，而非笼统的愿望。简短回答即可。",
+      "responseType": "long-text",
+      "placeholder": "例如：首次访问者能够理解服务内容，并在无人协助下提交咨询。"
+    },
+    {
+      "questionId": "audience.context.primary_group",
+      "category": "audience.context",
+      "order": 50,
+      "prompt": "主要受众是谁？",
+      "help": "选择首个版本应优先满足需求的群体。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "general_public",
+          "label": "公众"
+        },
+        {
+          "value": "prospective_customers",
+          "label": "潜在客户"
+        },
+        {
+          "value": "existing_customers",
+          "label": "现有客户"
+        },
+        {
+          "value": "internal_staff",
+          "label": "内部员工"
+        },
+        {
+          "value": "professionals",
+          "label": "专业人士或专家"
+        },
+        {
+          "value": "creators",
+          "label": "创作者或贡献者"
+        },
+        {
+          "value": "students_researchers",
+          "label": "学生或研究人员"
+        },
+        {
+          "value": "defined_community",
+          "label": "明确的社群"
+        },
+        {
+          "value": "mixed",
+          "label": "多个同等重要的群体",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "其他受众",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.relationship",
+      "category": "audience.context",
+      "order": 60,
+      "prompt": "大多数用户与项目是什么关系？",
+      "help": "这有助于确定入门引导、说明与导航的深度。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "first_time_visitors",
+          "label": "主要是首次访问者"
+        },
+        {
+          "value": "occasional_visitors",
+          "label": "偶尔访问者"
+        },
+        {
+          "value": "returning_users",
+          "label": "回访用户"
+        },
+        {
+          "value": "authenticated_members",
+          "label": "已验证身份的会员"
+        },
+        {
+          "value": "known_internal_users",
+          "label": "已知的内部用户"
+        },
+        {
+          "value": "mixed",
+          "label": "混合受众"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.domain_familiarity",
+      "category": "audience.context",
+      "order": 70,
+      "prompt": "主要受众对主题有多熟悉？",
+      "help": "尽可能根据观察或报告得知的用户知识作答。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不假定具有任何先验知识"
+        },
+        {
+          "value": "basic",
+          "label": "基本了解"
+        },
+        {
+          "value": "working",
+          "label": "具有实用知识"
+        },
+        {
+          "value": "expert",
+          "label": "具有专家知识"
+        },
+        {
+          "value": "mixed",
+          "label": "知识水平差异很大"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.primary_context",
+      "category": "audience.context",
+      "order": 80,
+      "prompt": "项目会在什么条件下使用？",
+      "help": "选择所有对设计或实施有实质影响的条件。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "mobile_on_move",
+          "label": "移动中使用手机"
+        },
+        {
+          "value": "mobile_stationary",
+          "label": "静止时使用手机"
+        },
+        {
+          "value": "desktop_office",
+          "label": "办公室桌面端"
+        },
+        {
+          "value": "desktop_home",
+          "label": "家中桌面端"
+        },
+        {
+          "value": "tablet_or_kiosk",
+          "label": "平板或自助终端"
+        },
+        {
+          "value": "constrained_network",
+          "label": "缓慢或不稳定的网络"
+        },
+        {
+          "value": "assistive_technology",
+          "label": "辅助技术"
+        },
+        {
+          "value": "mixed",
+          "label": "混合或不可预测的条件"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.required_surfaces",
+      "category": "scope.deliverables",
+      "order": 90,
+      "prompt": "此次发行需要哪些界面？",
+      "help": "只选此次发行必须具备的内容，不包含未来可能的新增内容。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "home_or_entry",
+          "label": "首页或入口视图"
+        },
+        {
+          "value": "content_pages",
+          "label": "内容页面"
+        },
+        {
+          "value": "listing_or_index",
+          "label": "列表或索引"
+        },
+        {
+          "value": "detail_views",
+          "label": "详情视图"
+        },
+        {
+          "value": "form",
+          "label": "表单"
+        },
+        {
+          "value": "dashboard",
+          "label": "仪表板或工作区"
+        },
+        {
+          "value": "settings",
+          "label": "设置"
+        },
+        {
+          "value": "authentication",
+          "label": "登录或账户流程"
+        },
+        {
+          "value": "admin",
+          "label": "管理界面"
+        },
+        {
+          "value": "legal",
+          "label": "法律或政策页面"
+        },
+        {
+          "value": "error_empty_states",
+          "label": "错误与空状态"
+        },
+        {
+          "value": "other",
+          "label": "其他必需界面",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.primary_user_action",
+      "category": "scope.deliverables",
+      "order": 100,
+      "prompt": "用户必须能完成的最重要操作是什么？",
+      "help": "选择定义主要流程的操作。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "read_or_understand",
+          "label": "阅读或理解"
+        },
+        {
+          "value": "navigate_or_discover",
+          "label": "浏览或发现内容"
+        },
+        {
+          "value": "submit_form",
+          "label": "提交表单"
+        },
+        {
+          "value": "search_or_filter",
+          "label": "搜索或筛选"
+        },
+        {
+          "value": "create_or_edit",
+          "label": "创建或编辑内容"
+        },
+        {
+          "value": "calculate_or_transform",
+          "label": "计算或转换数据"
+        },
+        {
+          "value": "upload_or_download",
+          "label": "上传或下载"
+        },
+        {
+          "value": "manage_account",
+          "label": "登录或管理账户"
+        },
+        {
+          "value": "purchase_or_pay",
+          "label": "购买或支付"
+        },
+        {
+          "value": "other",
+          "label": "其他主要操作",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.release_boundary",
+      "category": "scope.deliverables",
+      "order": 110,
+      "prompt": "首个版本的边界是什么？",
+      "help": "选择当前最明确的边界。模糊的边界应保持明显的未决状态。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "single_page",
+          "label": "一个页面"
+        },
+        {
+          "value": "small_fixed_set",
+          "label": "少量固定页面"
+        },
+        {
+          "value": "bounded_app_flow",
+          "label": "一个边界清晰的应用流程"
+        },
+        {
+          "value": "existing_scope_redesign",
+          "label": "重新设计现有产品范围"
+        },
+        {
+          "value": "specific_repair",
+          "label": "仅修复特定问题"
+        },
+        {
+          "value": "phased_mvp",
+          "label": "明确定义的最小可行产品阶段"
+        },
+        {
+          "value": "not_yet_bounded",
+          "label": "边界尚不清楚"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.explicit_exclusions",
+      "category": "scope.deliverables",
+      "order": 120,
+      "prompt": "哪些内容明确不属于此次发行？",
+      "help": "列出未经新决定不得加入工作的额外功能或假设。",
+      "responseType": "long-text",
+      "placeholder": "例如：首个版本不包含账户、服务器数据库、支付和 CMS。"
+    },
+    {
+      "questionId": "content.data.source_owner",
+      "category": "content.data",
+      "order": 130,
+      "prompt": "谁负责项目内容？",
+      "help": "选择由谁提供或批准文本、媒体与来源信息。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "owner_supplies_final",
+          "label": "项目负责人提供最终内容"
+        },
+        {
+          "value": "owner_supplies_draft",
+          "label": "项目负责人提供草稿"
+        },
+        {
+          "value": "developer_structures",
+          "label": "开发者整理提供的材料"
+        },
+        {
+          "value": "developer_writes_from_brief",
+          "label": "开发者根据已批准的简报撰写"
+        },
+        {
+          "value": "shared_responsibility",
+          "label": "共同负责"
+        },
+        {
+          "value": "migrate_existing",
+          "label": "迁移现有内容"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "尚未指定"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.readiness",
+      "category": "content.data",
+      "order": 140,
+      "prompt": "内容准备到什么程度？",
+      "help": "评估目前已有的材料，而非预计上线时的状态。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "final",
+          "label": "已定稿并获批准"
+        },
+        {
+          "value": "mostly_ready",
+          "label": "大部分已准备好"
+        },
+        {
+          "value": "partial",
+          "label": "已有部分内容"
+        },
+        {
+          "value": "source_material_only",
+          "label": "仅有来源材料"
+        },
+        {
+          "value": "not_started",
+          "label": "尚未开始"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.user_input_types",
+      "category": "content.data",
+      "order": 150,
+      "prompt": "哪些用户数据可能进入系统？",
+      "help": "选择此次发行有意接收的每种数据，包括遥测。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不接收用户数据",
+          "exclusive": true
+        },
+        {
+          "value": "contact_details",
+          "label": "联系信息"
+        },
+        {
+          "value": "account_profile",
+          "label": "账户或个人资料"
+        },
+        {
+          "value": "free_text",
+          "label": "自由文本"
+        },
+        {
+          "value": "files",
+          "label": "上传文件"
+        },
+        {
+          "value": "payment_related",
+          "label": "支付相关数据"
+        },
+        {
+          "value": "analytics_telemetry",
+          "label": "分析或遥测"
+        },
+        {
+          "value": "location_device",
+          "label": "位置或设备数据"
+        },
+        {
+          "value": "other",
+          "label": "其他数据类型",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.storage",
+      "category": "content.data",
+      "order": 160,
+      "prompt": "项目数据或用户输入的数据可以存储在哪里？",
+      "help": "选择当前最严格的边界。这里指正在定义的产品，而非 Premise Builder 本身。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_user_data",
+          "label": "不存储用户数据"
+        },
+        {
+          "value": "session_only",
+          "label": "仅在当前会话内"
+        },
+        {
+          "value": "browser_local_only",
+          "label": "仅在用户浏览器中"
+        },
+        {
+          "value": "server_storage_allowed",
+          "label": "允许使用项目控制的服务器存储"
+        },
+        {
+          "value": "third_party_storage",
+          "label": "可由获批准的第三方存储"
+        },
+        {
+          "value": "hybrid",
+          "label": "明确定义的本地、服务器或第三方混合存储",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.retention",
+      "category": "content.data",
+      "order": 170,
+      "prompt": "保留的用户数据可以保存多久？",
+      "help": "当项目接收可能持续保存的数据时显示此问题。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_retention",
+          "label": "不保留"
+        },
+        {
+          "value": "until_session_ends",
+          "label": "直到会话结束"
+        },
+        {
+          "value": "until_local_deletion",
+          "label": "直到用户删除本地数据"
+        },
+        {
+          "value": "fixed_period",
+          "label": "指定期限",
+          "requiresNote": true
+        },
+        {
+          "value": "account_lifetime",
+          "label": "账户存续期间"
+        },
+        {
+          "value": "governed_by_policy",
+          "label": "根据已批准的政策",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.tone",
+      "category": "design.interaction",
+      "order": 180,
+      "prompt": "哪些视觉特征应指导设计？",
+      "help": "最多选择三项。除非另有限制规定为必需，否则这些属于偏好。",
+      "responseType": "multi-choice",
+      "maxSelections": 3,
+      "choices": [
+        {
+          "value": "minimal",
+          "label": "极简"
+        },
+        {
+          "value": "editorial",
+          "label": "编辑风格"
+        },
+        {
+          "value": "technical",
+          "label": "技术感"
+        },
+        {
+          "value": "playful",
+          "label": "活泼"
+        },
+        {
+          "value": "premium",
+          "label": "高端"
+        },
+        {
+          "value": "warm",
+          "label": "温暖"
+        },
+        {
+          "value": "institutional",
+          "label": "机构风格"
+        },
+        {
+          "value": "bold",
+          "label": "醒目"
+        },
+        {
+          "value": "quiet",
+          "label": "安静"
+        },
+        {
+          "value": "brand_led",
+          "label": "遵循现有品牌"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.brand_source",
+      "category": "design.interaction",
+      "order": 190,
+      "prompt": "项目应遵循什么视觉体系？",
+      "help": "选择目前最具权威性的来源。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed_design_system",
+          "label": "固定的设计系统"
+        },
+        {
+          "value": "existing_brand_guidelines",
+          "label": "现有品牌规范"
+        },
+        {
+          "value": "partial_assets",
+          "label": "部分品牌素材"
+        },
+        {
+          "value": "visual_reference_only",
+          "label": "仅有参考示例"
+        },
+        {
+          "value": "no_existing_brand",
+          "label": "没有现成的视觉体系"
+        },
+        {
+          "value": "preserve_current_ui",
+          "label": "保留当前界面"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.information_density",
+      "category": "design.interaction",
+      "order": 200,
+      "prompt": "应同时显示多少信息？",
+      "help": "根据主要任务与受众选择，不只依据个人喜好。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sparse_guided",
+          "label": "简洁并提供引导"
+        },
+        {
+          "value": "balanced",
+          "label": "均衡"
+        },
+        {
+          "value": "dense_operational",
+          "label": "高密度、面向操作"
+        },
+        {
+          "value": "progressive_disclosure",
+          "label": "逐步展示详情"
+        },
+        {
+          "value": "varies_by_view",
+          "label": "因视图而异",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.motion",
+      "category": "design.interaction",
+      "order": 210,
+      "prompt": "应如何使用动画？",
+      "help": "动画不得掩盖状态，也不得妨碍减少动态效果的偏好。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不使用非必要动画"
+        },
+        {
+          "value": "subtle_feedback",
+          "label": "仅提供轻微状态反馈"
+        },
+        {
+          "value": "moderate_transitions",
+          "label": "适度过渡效果"
+        },
+        {
+          "value": "expressive",
+          "label": "在有用时使用表现性动画"
+        },
+        {
+          "value": "reduced_motion_first",
+          "label": "优先减少动态效果"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.stack_policy",
+      "category": "technology.runtime",
+      "order": 220,
+      "prompt": "实现技术栈有多固定？",
+      "help": "固定技术栈是一种限制；偏好的技术栈仍可接受有理由的替代方案。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "固定技术栈",
+          "requiresNote": true
+        },
+        {
+          "value": "preferred_negotiable",
+          "label": "有偏好但可协商",
+          "requiresNote": true
+        },
+        {
+          "value": "open_to_recommendation",
+          "label": "接受建议"
+        },
+        {
+          "value": "preserve_existing",
+          "label": "保留现有技术栈"
+        },
+        {
+          "value": "static_files_only",
+          "label": "仅使用普通静态文件"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.mode",
+      "category": "technology.runtime",
+      "order": 230,
+      "prompt": "产品可以使用什么运行模式？",
+      "help": "选择部署后的产品在运行时可以依赖什么。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fully_static",
+          "label": "完全静态"
+        },
+        {
+          "value": "browser_local",
+          "label": "静态加浏览器本地状态"
+        },
+        {
+          "value": "static_external_apis",
+          "label": "静态前端加获批准的外部 API"
+        },
+        {
+          "value": "server_backed",
+          "label": "有服务器支持的应用"
+        },
+        {
+          "value": "hybrid",
+          "label": "混合运行模式",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.browser_support",
+      "category": "technology.runtime",
+      "order": 240,
+      "prompt": "适用什么浏览器支持边界？",
+      "help": "选择可测试的策略，不要承诺支持所有浏览器。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "evergreen_current",
+          "label": "当前持续更新的浏览器"
+        },
+        {
+          "value": "recent_two_versions",
+          "label": "当前及前两个主要版本"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "优先支持现代移动浏览器"
+        },
+        {
+          "value": "enterprise_legacy",
+          "label": "必须支持企业或旧版浏览器",
+          "requiresNote": true
+        },
+        {
+          "value": "specified_matrix",
+          "label": "使用提供的浏览器支持矩阵",
+          "requiresNote": true
+        },
+        {
+          "value": "no_special_constraint",
+          "label": "除合理支持现代浏览器外无特殊限制"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.external_services",
+      "category": "technology.runtime",
+      "order": 250,
+      "prompt": "预期需要哪些外部服务？",
+      "help": "选择此次发行必需的服务。批准、凭证与数据边界另行确定。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "无外部服务",
+          "exclusive": true
+        },
+        {
+          "value": "cms",
+          "label": "内容管理系统"
+        },
+        {
+          "value": "analytics",
+          "label": "分析"
+        },
+        {
+          "value": "authentication",
+          "label": "身份验证服务"
+        },
+        {
+          "value": "payments",
+          "label": "支付服务"
+        },
+        {
+          "value": "email_forms",
+          "label": "邮件或表单发送"
+        },
+        {
+          "value": "maps",
+          "label": "地图或位置服务"
+        },
+        {
+          "value": "ai_api",
+          "label": "AI 服务或 API"
+        },
+        {
+          "value": "other",
+          "label": "其他服务",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.discoverability",
+      "category": "technology.runtime",
+      "order": 260,
+      "prompt": "用户应如何发现项目？",
+      "help": "这决定搜索索引和机器可读发布是否属于需求。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "public_search_critical",
+          "label": "公开搜索可见性至关重要"
+        },
+        {
+          "value": "public_search_helpful",
+          "label": "公开搜索可见性有帮助"
+        },
+        {
+          "value": "direct_link_only",
+          "label": "通过直接链接访问即可"
+        },
+        {
+          "value": "private_noindex",
+          "label": "保持私有或禁止索引"
+        },
+        {
+          "value": "app_shell",
+          "label": "仅索引公开的应用外壳"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.target",
+      "category": "quality.accessibility",
+      "order": 270,
+      "prompt": "适用什么无障碍目标？",
+      "help": "选择在审查中能够以证据支持的水平。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "semantic_baseline",
+          "label": "具备语义与可操作性的基本水平"
+        },
+        {
+          "value": "wcag_aa",
+          "label": "WCAG AA 目标"
+        },
+        {
+          "value": "legal_contractual",
+          "label": "法律或合同规定的标准",
+          "requiresNote": true
+        },
+        {
+          "value": "best_effort",
+          "label": "在声明范围内尽力实现",
+          "requiresNote": true
+        },
+        {
+          "value": "specific_requirements",
+          "label": "使用提供的无障碍需求",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.keyboard",
+      "category": "quality.accessibility",
+      "order": 280,
+      "prompt": "需要何种程度的键盘操作？",
+      "help": "键盘访问包括可见焦点、逻辑顺序与可操作控件。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "all_controls",
+          "label": "全部控件与流程"
+        },
+        {
+          "value": "primary_flow",
+          "label": "至少包括主要流程"
+        },
+        {
+          "value": "content_navigation",
+          "label": "仅内容导航"
+        },
+        {
+          "value": "fixed_pointer_environment",
+          "label": "固定的仅指针操作环境",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.responsive",
+      "category": "quality.accessibility",
+      "order": 290,
+      "prompt": "响应式设计优先考虑什么？",
+      "help": "选择预期的平衡方式，并明确不支持的视口。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mobile_desktop_equal",
+          "label": "移动端与桌面端同等重要"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "移动端优先"
+        },
+        {
+          "value": "desktop_priority",
+          "label": "桌面端优先"
+        },
+        {
+          "value": "fixed_environment",
+          "label": "固定显示环境",
+          "requiresNote": true
+        },
+        {
+          "value": "preserve_current_behavior",
+          "label": "保留当前响应式行为"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.performance",
+      "category": "quality.accessibility",
+      "order": 300,
+      "prompt": "什么性能预期应指导权衡？",
+      "help": "选择项目能够验证的、最有意义的严格标准。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "core_web_vitals",
+          "label": "达到约定的 Core Web Vitals 目标"
+        },
+        {
+          "value": "constrained_network",
+          "label": "在受限网络下仍可用"
+        },
+        {
+          "value": "balanced",
+          "label": "平衡速度与功能深度"
+        },
+        {
+          "value": "feature_priority",
+          "label": "必需能力可优先于速度"
+        },
+        {
+          "value": "explicit_budget",
+          "label": "使用提供的性能预算",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.prohibited_practices",
+      "category": "risk.boundaries",
+      "order": 310,
+      "prompt": "禁止哪些做法？",
+      "help": "只选择硬性边界。偏好应记录在相应类别中。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "没有已知的禁止做法",
+          "exclusive": true
+        },
+        {
+          "value": "inline_css",
+          "label": "内联 CSS"
+        },
+        {
+          "value": "external_fonts",
+          "label": "外部加载字体"
+        },
+        {
+          "value": "behavioral_tracking",
+          "label": "行为跟踪"
+        },
+        {
+          "value": "nonessential_cookies",
+          "label": "非必要 Cookie"
+        },
+        {
+          "value": "unapproved_cdn",
+          "label": "未经批准的外部 CDN"
+        },
+        {
+          "value": "client_side_secrets",
+          "label": "客户端代码中的秘密凭证"
+        },
+        {
+          "value": "autoplay_media",
+          "label": "自动播放媒体"
+        },
+        {
+          "value": "unconfirmed_destructive_actions",
+          "label": "未经确认的破坏性操作"
+        },
+        {
+          "value": "vendor_lock_in",
+          "label": "供应商锁定"
+        },
+        {
+          "value": "other",
+          "label": "其他禁令",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.privacy_level",
+      "category": "risk.boundaries",
+      "order": 320,
+      "prompt": "范围内最高的隐私敏感程度是什么？",
+      "help": "根据有意设计的数据流中最敏感的一项选择，而非平均水平。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不涉及个人数据"
+        },
+        {
+          "value": "low_nonsensitive",
+          "label": "低风险、非敏感个人数据"
+        },
+        {
+          "value": "personal_data",
+          "label": "个人数据"
+        },
+        {
+          "value": "sensitive_data",
+          "label": "敏感个人数据"
+        },
+        {
+          "value": "regulated_data",
+          "label": "受监管或特别保护的数据",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "尚不清楚敏感程度"
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.high_cost_failure",
+      "category": "risk.boundaries",
+      "order": 330,
+      "prompt": "哪些失败会造成最高代价？",
+      "help": "选择会影响设计、审查或实施优先级的失败。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "no_unusual_cost",
+          "label": "没有异常高的失败代价",
+          "exclusive": true
+        },
+        {
+          "value": "data_loss",
+          "label": "数据丢失"
+        },
+        {
+          "value": "privacy_breach",
+          "label": "隐私或安全泄露"
+        },
+        {
+          "value": "inaccessible_primary_flow",
+          "label": "主要流程无法无障碍使用"
+        },
+        {
+          "value": "wrong_information",
+          "label": "错误或误导性信息"
+        },
+        {
+          "value": "downtime",
+          "label": "停机或不可用"
+        },
+        {
+          "value": "performance_failure",
+          "label": "性能下降"
+        },
+        {
+          "value": "brand_damage",
+          "label": "品牌或信任受损"
+        },
+        {
+          "value": "scope_overrun",
+          "label": "范围或成本超支"
+        },
+        {
+          "value": "other",
+          "label": "其他高代价失败",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.compliance",
+      "category": "risk.boundaries",
+      "order": 340,
+      "prompt": "适用哪些合规依据？",
+      "help": "选择已知的依据。适用时，请在备注中写明具体标准或政策。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "没有已知的合规要求",
+          "exclusive": true
+        },
+        {
+          "value": "privacy_law",
+          "label": "隐私法律或法规",
+          "requiresNote": true
+        },
+        {
+          "value": "cookie_consent",
+          "label": "Cookie 或同意要求",
+          "requiresNote": true
+        },
+        {
+          "value": "accessibility_law",
+          "label": "无障碍法律或标准",
+          "requiresNote": true
+        },
+        {
+          "value": "copyright_licensing",
+          "label": "版权或许可规则",
+          "requiresNote": true
+        },
+        {
+          "value": "industry_specific",
+          "label": "行业特定规则",
+          "requiresNote": true
+        },
+        {
+          "value": "organization_policy",
+          "label": "组织政策",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "其他合规依据",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.hosting",
+      "category": "delivery.operations",
+      "order": 350,
+      "prompt": "预计将版本托管在哪里？",
+      "help": "即使部署细节仍属暂定，也请选择当前目标。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "github_pages",
+          "label": "GitHub Pages"
+        },
+        {
+          "value": "cloudflare_pages",
+          "label": "Cloudflare Pages"
+        },
+        {
+          "value": "other_static_host",
+          "label": "其他静态托管服务",
+          "requiresNote": true
+        },
+        {
+          "value": "cloud_application_platform",
+          "label": "云应用平台",
+          "requiresNote": true
+        },
+        {
+          "value": "existing_environment",
+          "label": "现有的托管环境",
+          "requiresNote": true
+        },
+        {
+          "value": "local_only",
+          "label": "仅本地使用"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.deployment_workflow",
+      "category": "delivery.operations",
+      "order": 360,
+      "prompt": "应如何部署版本？",
+      "help": "选择维护者实际能够操作的流程。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "manual_upload",
+          "label": "手动上传"
+        },
+        {
+          "value": "git_push_automatic",
+          "label": "Git 推送后自动部署"
+        },
+        {
+          "value": "pull_request_gate",
+          "label": "部署前进行拉取请求审查"
+        },
+        {
+          "value": "platform_cli",
+          "label": "通过平台命令行部署"
+        },
+        {
+          "value": "existing_ci",
+          "label": "现有 CI/CD 流程",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.maintenance_owner",
+      "category": "delivery.operations",
+      "order": 370,
+      "prompt": "发行后由谁维护项目？",
+      "help": "记录必须能理解并运行成果的角色。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "original_developer",
+          "label": "原开发者"
+        },
+        {
+          "value": "internal_team",
+          "label": "内部团队"
+        },
+        {
+          "value": "client_or_owner",
+          "label": "客户或项目负责人"
+        },
+        {
+          "value": "shared",
+          "label": "共同维护"
+        },
+        {
+          "value": "no_regular_maintenance",
+          "label": "不计划定期维护"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "尚未指定"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.handoff",
+      "category": "delivery.operations",
+      "order": 380,
+      "prompt": "需要什么程度的交接？",
+      "help": "选择能让下一位维护者安全工作的最小交接包。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "source_only",
+          "label": "仅源文件"
+        },
+        {
+          "value": "source_readme",
+          "label": "源文件与 README"
+        },
+        {
+          "value": "docs_and_tests",
+          "label": "源码、文档与测试"
+        },
+        {
+          "value": "operational_runbook",
+          "label": "文档加运维手册"
+        },
+        {
+          "value": "full_transfer",
+          "label": "完整移交所有权与访问权限"
+        },
+        {
+          "value": "ongoing_support",
+          "label": "持续支持安排"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.approver",
+      "category": "acceptance.validation",
+      "order": 390,
+      "prompt": "谁有权验收此次发行？",
+      "help": "选择有批准权的角色，而不仅是执行审查的人。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "decision_owner",
+          "label": "决策负责人"
+        },
+        {
+          "value": "requester",
+          "label": "需求提出者或客户"
+        },
+        {
+          "value": "end_user_representative",
+          "label": "最终用户代表"
+        },
+        {
+          "value": "technical_reviewer",
+          "label": "技术审查者"
+        },
+        {
+          "value": "compliance_reviewer",
+          "label": "合规审查者"
+        },
+        {
+          "value": "multiple_approvers",
+          "label": "多名批准者",
+          "requiresNote": true
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "尚未指定"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.review_method",
+      "category": "acceptance.validation",
+      "order": 400,
+      "prompt": "验收应采用什么证据？",
+      "help": "选择主要审查方式。辅助证据可补充在背景中。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "visual_review",
+          "label": "视觉审查"
+        },
+        {
+          "value": "requirements_checklist",
+          "label": "需求检查表"
+        },
+        {
+          "value": "scenario_demonstration",
+          "label": "场景演示"
+        },
+        {
+          "value": "automated_tests",
+          "label": "自动化测试结果"
+        },
+        {
+          "value": "accessibility_audit",
+          "label": "无障碍审计"
+        },
+        {
+          "value": "performance_audit",
+          "label": "性能审计"
+        },
+        {
+          "value": "combined",
+          "label": "明确的组合方式",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.must_pass_scenarios",
+      "category": "acceptance.validation",
+      "order": 410,
+      "prompt": "发行前必须通过哪些场景？",
+      "help": "选择失败时会阻止验收的场景。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "primary_content",
+          "label": "主要内容易于理解"
+        },
+        {
+          "value": "primary_action",
+          "label": "用户主要操作可完成"
+        },
+        {
+          "value": "form_submission",
+          "label": "表单成功提交"
+        },
+        {
+          "value": "local_persistence",
+          "label": "本地保存与重新加载正常"
+        },
+        {
+          "value": "authentication",
+          "label": "身份验证流程正常"
+        },
+        {
+          "value": "payment",
+          "label": "支付流程正常"
+        },
+        {
+          "value": "keyboard",
+          "label": "必需的键盘流程正常"
+        },
+        {
+          "value": "mobile",
+          "label": "必需的移动端流程正常"
+        },
+        {
+          "value": "import_export",
+          "label": "导入导出能保留数据"
+        },
+        {
+          "value": "failure_recovery",
+          "label": "故障与恢复行为正常"
+        },
+        {
+          "value": "other",
+          "label": "其他必过场景",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.unresolved_policy",
+      "category": "acceptance.validation",
+      "order": 420,
+      "prompt": "未解决的前提应如何影响工作？",
+      "help": "选择默认策略。个别未知事项仍可采用不同的明确状态。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "block_dependent_work",
+          "label": "阻止依赖此项的工作"
+        },
+        {
+          "value": "provisional_with_label",
+          "label": "使用清楚标注的暂定选择继续"
+        },
+        {
+          "value": "proposal_before_work",
+          "label": "在相关工作开始前请求提案"
+        },
+        {
+          "value": "delegate_with_bounds",
+          "label": "在明确边界内委托"
+        },
+        {
+          "value": "document_and_continue",
+          "label": "记录未知，并继续独立的工作"
+        },
+        {
+          "value": "case_by_case",
+          "label": "逐项决定"
+        }
+      ]
+    }
+  ]
+}

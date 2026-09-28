@@ -12,6 +12,7 @@ import {
   createProjectState,
   defaultAuthorityForRole,
   eligibleDeciders,
+  evaluateRuleCondition,
   hasValue,
   humanize,
   markDraftChanged,
@@ -26,6 +27,7 @@ import { BrowserStore } from "./storage.js";
 import { applyPatches, encodePointerSegment, readPointer } from "./merge.js";
 import { downloadText, exportFilename, generateAIContext, readJsonFile } from "./import-export.js";
 import { validateAnswer, validateDocument, validatePatch } from "./validation.js";
+import { renderGuide } from "./guide.js";
 
 const TEMPLATE_ID = "web-small-app";
 const bootData = globalThis.__PREMISE_BUILDER_DATA__;
@@ -93,12 +95,16 @@ function bootstrap() {
     chromeMessages = chromeLocale.messages || {};
     document.documentElement.lang = chromeLocale.locale;
     document.documentElement.dir = chromeLocale.direction;
-    document.title = chromeStrings["meta.title"] || "Premise Builder — Requirements Alignment for Web Projects";
+    document.title = chromeStrings["meta.title"] || "Premise Builder — Project Requirements Alignment";
     document.querySelector('meta[name="description"]').content = chromeStrings["meta.description"] || "Align requirements, roles, constraints, and unknowns before work begins.";
     for (const node of document.querySelectorAll("[data-i18n]")) {
       if (chromeStrings[node.dataset.i18n]) node.textContent = chromeStrings[node.dataset.i18n];
     }
     translateStaticTree(document.body);
+    for (const field of document.querySelectorAll('input:not([type]), input[type="text"], input[type="search"], textarea')) {
+      field.dir = ["contentLanguage", "patchNewItemId"].includes(field.id) ? "ltr" : "auto";
+    }
+    renderGuide(document.getElementById("guideContent"), chromeLocale.guide);
     renderLanguageSwitcher();
     configureBundle(TEMPLATE_ID, uiLocale);
     wireEvents();
@@ -119,23 +125,32 @@ function renderLanguageSwitcher() {
   if (bootData.locales?.[pathParts[0]]) pathParts.shift();
   const suffix = pathParts.length ? `/${pathParts.join("/")}/` : "/";
   elements.languageSwitcher.replaceChildren();
+  const select = document.createElement("select");
+  select.id = "languageSelect";
+  select.setAttribute("aria-label", translateText("Language"));
+  select.addEventListener("change", () => {
+    persistNow();
+    globalThis.location.assign(`/${select.value}${suffix}`);
+  });
   const localeOrder = bootData.templates?.[TEMPLATE_ID]?.manifest?.locales || Object.keys(bootData.locales || {});
   for (const localeId of localeOrder) {
     const locale = bootData.locales?.[localeId];
     if (!locale) continue;
-    const link = document.createElement("a");
-    link.href = `/${localeId}${suffix}`;
-    link.lang = localeId;
-    link.textContent = locale.name || localeId;
-    link.setAttribute("aria-current", localeId === uiLocale ? "page" : "false");
-    elements.languageSwitcher.append(link);
+    const option = document.createElement("option");
+    option.value = localeId;
+    option.lang = localeId;
+    option.dir = locale.direction;
+    option.textContent = locale.name || localeId;
+    option.selected = localeId === uiLocale;
+    select.append(option);
   }
+  elements.languageSwitcher.append(select);
 }
 
 function assertTemplateCompatibility() {
   const { manifest, locale, mappings, rules } = bundle;
   if (
-    manifest.id !== TEMPLATE_ID ||
+    !bootData.templates[manifest.id] ||
     locale.templateId !== manifest.id ||
     mappings.templateId !== manifest.id ||
     rules.templateId !== manifest.id ||
@@ -358,6 +373,7 @@ function showSetup() {
   elements.perspectiveFields.hidden = true;
   elements.perspectiveLabel.required = false;
   elements.setupTemplateName.textContent = bundle.locale.template.name;
+  elements.projectName.placeholder = bundle.locale.template.name;
   elements.projectName.focus({ preventScroll: true });
 }
 
@@ -716,6 +732,7 @@ function renderAnswerControl(question, value) {
   }
   elements.answerControl.removeAttribute("role");
   const textarea = document.createElement("textarea");
+  textarea.dir = "auto";
   textarea.className = "text-answer";
   textarea.rows = question.responseType === "short-text" ? 3 : 6;
   textarea.maxLength = 8000;
@@ -1107,14 +1124,7 @@ function activeReviewWarnings() {
 }
 
 function evaluateCondition(condition) {
-  if (condition.all) return condition.all.every(evaluateCondition);
-  const value = answerValueForVisibility(condition.questionId);
-  if (condition.operator === "contains") return Array.isArray(value) && value.includes(condition.value);
-  if (condition.operator === "not_contains") return !Array.isArray(value) || !value.includes(condition.value);
-  if (condition.operator === "contains_any") return Array.isArray(value) && condition.values.some((entry) => value.includes(entry));
-  if (condition.operator === "in") return condition.values.includes(value);
-  if (condition.operator === "equals") return valuesEqual(value, condition.value);
-  return false;
+  return evaluateRuleCondition(condition, answerValueForVisibility);
 }
 
 function renderAttentionList(container, messages, emptyMessage, error = false) {
@@ -1188,7 +1198,7 @@ function renderReviewRows() {
     else {
       for (const contribution of contributions.slice(0, 2)) {
         const line = document.createElement("span");
-        line.textContent = `${state.document.participants[contribution.perspectiveRef]?.label || translateText("Unknown")} → ${state.document.participants[contribution.recordedByRef]?.label || translateText("Unknown")}`;
+        line.textContent = `${state.document.participants[contribution.perspectiveRef]?.label || translateText("Unknown")} ${chromeLocale.direction === "rtl" ? "←" : "→"} ${state.document.participants[contribution.recordedByRef]?.label || translateText("Unknown")}`;
         const detail = document.createElement("small");
         detail.textContent = `${labelFor("capture", contribution.captureMethod)} · ${labelFor("confirmation", contribution.confirmation)}`;
         sourceCell.append(line, detail);
@@ -1712,7 +1722,7 @@ function registerWebMcpTools() {
   registerTool({
     name: "create_local_premise_project",
     title: "Create local premise project",
-    description: "Create a browser-local web-small-app requirements project.",
+    description: "Create a browser-local requirements project using the currently selected template.",
     inputSchema: {
       type: "object",
       properties: {

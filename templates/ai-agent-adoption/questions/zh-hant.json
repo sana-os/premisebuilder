@@ -1,0 +1,1198 @@
+{
+  "templateId": "ai-agent-adoption",
+  "templateVersion": "0.1.0",
+  "locale": "zh-hant",
+  "direction": "ltr",
+  "template": {
+    "name": "AI 代理導入規劃",
+    "summary": "通過 48 個問題統一目標工作、預期價值、權限與評估的認識。"
+  },
+  "answerContext": {
+    "answeringFrom": "回答來源",
+    "recordedBy": "記錄者",
+    "speakingAs": "回答時的角色",
+    "captureMethod": "資訊獲取方式",
+    "authority": "此回答的權限",
+    "confirmation": "來源確認狀態",
+    "changeForQuestion": "為此問題更改",
+    "multiplePerspectives": "新增其他視角"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "已確認",
+      "description": "將此內容作為已採納的專案前提。"
+    },
+    {
+      "value": "provisional",
+      "label": "暫定",
+      "description": "暫時採用，但明確保留修改的可能。"
+    },
+    {
+      "value": "unspecified",
+      "label": "未決定",
+      "description": "保持未決。不得讓 AI 擅自補全。"
+    },
+    {
+      "value": "proposal_requested",
+      "label": "請求提案",
+      "description": "請求備選方案或建議，但不將其視為已選定。"
+    },
+    {
+      "value": "delegated",
+      "label": "在限定範圍內委託",
+      "description": "允許實施者或 AI 在規定範圍內決定，並報告選擇。"
+    },
+    {
+      "value": "not_applicable",
+      "label": "不適用",
+      "description": "將此問題標記為不屬於此專案。"
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "請選擇回答代表誰的視角，以及由誰記錄。",
+    "validation.speakingRoleMismatch": "所選回答角色未分配給該參與者。",
+    "validation.inferenceUnconfirmed": "推斷所得的回答，在有權人員核實前必須保持未確認。",
+    "validation.resolutionAuthorityRequired": "確認此前提需要有決策權的資訊來源。",
+    "validation.exclusiveChoice": "此選項不能與其他選項同時選擇。",
+    "validation.noteRequired": "請新增簡短備註，說明此選擇。",
+    "validation.selectionLimit": "請減少所選選項數量。",
+    "review.authRuntime": "身份驗證在範圍內，但所選執行模式可能需要外部或伺服器組件。",
+    "review.paymentHandling": "支付相關資料在範圍內。請確認由誰處理，以及專案是否可以儲存其中任何資料。",
+    "review.analyticsPrivacy": "分析或遙測在範圍內。請重新檢查隱私邊界、同意機制與禁止的做法。",
+    "review.agent.baseline": "預期的減少量沒有測量基線。聲稱有所改善前，請先明確目前工作量與測量方式。",
+    "review.agent.authority": "同時選擇了“僅回答”的範圍與會改變狀態的操作。請明確代理是準備操作，還是執行操作。",
+    "review.agent.review": "計劃依賴人工檢查點，但尚未安排審查人員。請明確回應者與等待期間的處理方式。",
+    "review.agent.release": "計劃直接導入，但缺少代表性的評估證據。請重新考慮上線標準與初始影響範圍。"
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "目的與範圍",
+      "description": "在選擇代理之前，先明確工作。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.workflow",
+      "label": "目前工作與基線",
+      "description": "區分觀察到的問題與假設。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.outcomes",
+      "label": "預期價值與證據",
+      "description": "將期望轉化為可驗證的假設。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.fit",
+      "label": "方法與自主性",
+      "description": "判斷工作實際需要多少自主性。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.people",
+      "label": "人員與責任",
+      "description": "確定誰受益、誰檢查、誰承擔責任。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.data",
+      "label": "資訊與資料邊界",
+      "description": "明確代理可以知道什麼，以及資料可以流向哪裡。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.actions",
+      "label": "操作與權限",
+      "description": "區分技術訪問能力與行動許可。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.context",
+      "label": "上下文與交接",
+      "description": "在步驟和人員之間保留前提。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.boundaries",
+      "label": "失敗與恢復",
+      "description": "讓限制與恢復措施能夠實際執行。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.evaluation",
+      "label": "評估與驗收",
+      "description": "在有代表性的條件下測試整個工作流程。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.operations",
+      "label": "成本與維運",
+      "description": "包含持續的人力與系統投入。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    },
+    {
+      "id": "agent.rollout",
+      "label": "導入與復審",
+      "description": "規劃試用、採用、擴展與退出。",
+      "perspectiveHint": "將發起方的期望、一線觀察與技術評估分別記錄。"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.use_case",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "希望為誰改變什麼工作？",
+      "help": "給出一個真實請求、期望交付物與使用者。避免將“導入 AI”本身當作目標。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "project.intent.trigger",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "工作應如何開始？",
+      "help": "說明頻率、數量、截止時間，以及任務之間的邊界。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "request",
+          "label": "由人提出請求"
+        },
+        {
+          "value": "event",
+          "label": "發生指定事件"
+        },
+        {
+          "value": "schedule",
+          "label": "按計劃時間"
+        },
+        {
+          "value": "monitor",
+          "label": "持續監控"
+        },
+        {
+          "value": "none",
+          "label": "無",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "此項計劃處於哪個階段？",
+      "help": "對於現有部署，請說明需要保留或改變的行為。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "首次導入"
+        },
+        {
+          "value": "redesign",
+          "label": "重新設計"
+        },
+        {
+          "value": "extension",
+          "label": "擴展現有部署"
+        },
+        {
+          "value": "repair",
+          "label": "修復現有部署"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.exclusions",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "哪些內容不屬於此項計劃？",
+      "help": "說明排除的決策、使用者與工作流程，以及排除原因。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.workflow.workflow",
+      "category": "agent.workflow",
+      "order": 50,
+      "prompt": "目前如何完成這項工作？",
+      "help": "梳理“輸入 → 判斷 → 操作 → 審查 → 交付”，包括非正式協調與例外情況。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.workflow.bottleneck",
+      "category": "agent.workflow",
+      "order": 60,
+      "prompt": "觀察到的主要瓶頸在哪裡？",
+      "help": "記錄證據與受延遲影響的人；區分任務處理緩慢與等待決策。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "search",
+          "label": "尋找資訊"
+        },
+        {
+          "value": "production",
+          "label": "製作成果"
+        },
+        {
+          "value": "judgment",
+          "label": "作出判斷"
+        },
+        {
+          "value": "coordination",
+          "label": "協調與審批"
+        },
+        {
+          "value": "rework",
+          "label": "錯誤與返工"
+        },
+        {
+          "value": "capacity",
+          "label": "可用人力或時段不足"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.baseline",
+      "category": "agent.workflow",
+      "order": 70,
+      "prompt": "有哪些證據描述目前表現？",
+      "help": "說明時間段、樣本量、工作量、品質、人工時間與等待時間。估算仍應標為估算。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "measured",
+          "label": "已對代表性工作進行測量"
+        },
+        {
+          "value": "partial",
+          "label": "部分記錄"
+        },
+        {
+          "value": "estimated",
+          "label": "僅有估算"
+        },
+        {
+          "value": "not_measured",
+          "label": "尚未測量"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.variation",
+      "category": "agent.workflow",
+      "order": 80,
+      "prompt": "任務與例外情況有多可預測？",
+      "help": "給出一個常規案例與一個困難案例，包括輸入缺失或矛盾的情況。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "大多是固定步驟"
+        },
+        {
+          "value": "branches",
+          "label": "已知分支與例外"
+        },
+        {
+          "value": "open",
+          "label": "需要探索步驟"
+        },
+        {
+          "value": "mixed",
+          "label": "混合情況"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.benefit",
+      "category": "agent.outcomes",
+      "order": 90,
+      "prompt": "應優先考慮哪種收益？",
+      "help": "註明受益者。更快產出不一定減少總工作量。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "time",
+          "label": "減少人工工作時間"
+        },
+        {
+          "value": "cost",
+          "label": "降低總成本"
+        },
+        {
+          "value": "quality",
+          "label": "提高品質或一致性"
+        },
+        {
+          "value": "speed",
+          "label": "縮短交付時間"
+        },
+        {
+          "value": "coverage",
+          "label": "覆蓋更多案例或時段"
+        },
+        {
+          "value": "capability",
+          "label": "實現過去難以開展的工作"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.hypothesis",
+      "category": "agent.outcomes",
+      "order": 100,
+      "prompt": "為什麼所提方法能帶來該收益？",
+      "help": "說明因果假設、支持證據、前提假設，以及什麼結果會推翻它。演示不等於生產環境證據。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.outcomes.target",
+      "category": "agent.outcomes",
+      "order": 110,
+      "prompt": "什麼可衡量的變化算作成功？",
+      "help": "說明基線、目標、時間段、計算分母與測量負責人。將審查、修正和升級處理計入總投入。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.outcomes.tradeoffs",
+      "category": "agent.outcomes",
+      "order": 120,
+      "prompt": "追求收益時，哪些方面不得變差？",
+      "help": "明確品質、成本、速度、員工負擔與使用者體驗之間可接受的權衡。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.fit.alternatives",
+      "category": "agent.fit",
+      "order": 130,
+      "prompt": "應比較哪些方法？",
+      "help": "包含可行方法中最簡單的一種；不使用代理也可以是有效結論。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "process",
+          "label": "不使用 AI，改進流程"
+        },
+        {
+          "value": "automation",
+          "label": "固定自動化"
+        },
+        {
+          "value": "assistant",
+          "label": "由人審查的 AI 建議"
+        },
+        {
+          "value": "workflow",
+          "label": "在受控流程中使用 AI"
+        },
+        {
+          "value": "agent",
+          "label": "由代理選擇步驟與工具"
+        },
+        {
+          "value": "none",
+          "label": "無",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.autonomy",
+      "category": "agent.fit",
+      "order": 140,
+      "prompt": "沒有新的核准時，系統可以做什麼？",
+      "help": "區分產生建議與更改外部系統。在備註中說明範圍與限制。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "advice",
+          "label": "僅回答或起草"
+        },
+        {
+          "value": "approve_each",
+          "label": "每項操作獲批後執行"
+        },
+        {
+          "value": "bounded",
+          "label": "在預先約定的邊界內執行"
+        },
+        {
+          "value": "supervised",
+          "label": "通過檢查點監督目標推進"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.necessity",
+      "category": "agent.fit",
+      "order": 150,
+      "prompt": "什麼工作需要自適應規劃或工具選擇？",
+      "help": "給出固定自動化無法處理的案例，或說明尚未證實此需求。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.fit.feasibility",
+      "category": "agent.fit",
+      "order": 160,
+      "prompt": "有哪些證據支持技術可行性？",
+      "help": "明確測試過的系統、版本、資料與限制；區分供應商聲明與自己的評估。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "claim",
+          "label": "僅有描述或供應商聲明"
+        },
+        {
+          "value": "demo",
+          "label": "受控演示"
+        },
+        {
+          "value": "representative",
+          "label": "代表性任務評估"
+        },
+        {
+          "value": "operational",
+          "label": "可比較的實際執行證據"
+        },
+        {
+          "value": "not_tested",
+          "label": "尚未測試"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.stakeholders",
+      "category": "agent.people",
+      "order": 170,
+      "prompt": "哪些人的期望或工作量可能不同？",
+      "help": "區分發起方、一線使用者、審查者、接收者與受影響的非使用者。將分歧記錄為不同的來源回答。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.people.owner",
+      "category": "agent.people",
+      "order": 180,
+      "prompt": "誰對結果負責並核准範圍變更？",
+      "help": "註明業務成果、系統維運與最終決策的責任角色；供應商不自動成為業務負責人。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.people.review_capacity",
+      "category": "agent.people",
+      "order": 190,
+      "prompt": "誰能在什麼時間處理審查與例外？",
+      "help": "說明能力、數量、回應時間、覆蓋時段，以及無人回應時如何處理。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "staffed",
+          "label": "已指定人員且處理能力經過測試"
+        },
+        {
+          "value": "planned",
+          "label": "已指定人員但未測試處理能力"
+        },
+        {
+          "value": "unassigned",
+          "label": "未指定審查者"
+        },
+        {
+          "value": "not_required",
+          "label": "不計劃人工審查"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.handoff",
+      "category": "agent.people",
+      "order": 200,
+      "prompt": "人工接手時必須獲得什麼？",
+      "help": "包含原始請求、已執行操作、證據、不確定性與安全的後續步驟；明確誰確認接收交接。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.data.sources",
+      "category": "agent.data",
+      "order": 210,
+      "prompt": "哪些來源可以作為工作依據？",
+      "help": "註明權威來源、訪問負責人、格式、時效性與缺失資訊。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.data.sensitivity",
+      "category": "agent.data",
+      "order": 220,
+      "prompt": "涉及哪些資料類型？",
+      "help": "描述類別，不要在此問卷中輸入真實秘密或個人記錄。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "public",
+          "label": "公開資訊"
+        },
+        {
+          "value": "internal",
+          "label": "內部資訊"
+        },
+        {
+          "value": "confidential",
+          "label": "機密業務資訊"
+        },
+        {
+          "value": "personal",
+          "label": "個人資訊"
+        },
+        {
+          "value": "credentials",
+          "label": "通過受保護機制處理的憑證"
+        },
+        {
+          "value": "none",
+          "label": "無",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.data.transfer",
+      "category": "agent.data",
+      "order": 230,
+      "prompt": "資料與日志可以在哪裡處理或保留？",
+      "help": "說明獲核准的服務、地區、保留、刪除、訓練用途，以及誰核實這些條件。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.data.missing",
+      "category": "agent.data",
+      "order": 240,
+      "prompt": "資訊缺失或矛盾時應如何處理？",
+      "help": "明確標注為假設的內容與事實之間的邊界，以及哪些資訊缺口會阻止操作。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "ask",
+          "label": "詢問負責人"
+        },
+        {
+          "value": "retrieve",
+          "label": "先查詢獲核准的來源"
+        },
+        {
+          "value": "hypothesis",
+          "label": "提供標明性質的備選方案，但不執行"
+        },
+        {
+          "value": "stop",
+          "label": "停止並交接"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.tools",
+      "category": "agent.actions",
+      "order": 250,
+      "prompt": "需要哪些系統與介面？",
+      "help": "記錄 API 或界面操作、讀寫範圍、服務帳戶、測試環境與集成責任人。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.actions.effects",
+      "category": "agent.actions",
+      "order": 260,
+      "prompt": "系統必須在現實中產生哪些更改？",
+      "help": "區分準備操作與執行操作；為每類操作新增限制。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "draft",
+          "label": "建立草稿或建議"
+        },
+        {
+          "value": "write",
+          "label": "更改內部記錄或檔案"
+        },
+        {
+          "value": "send",
+          "label": "對外發送或發布"
+        },
+        {
+          "value": "purchase",
+          "label": "下單或花費資金"
+        },
+        {
+          "value": "access",
+          "label": "更改訪問權限或配置"
+        },
+        {
+          "value": "delete",
+          "label": "刪除資料"
+        },
+        {
+          "value": "none",
+          "label": "無",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.approval",
+      "category": "agent.actions",
+      "order": 270,
+      "prompt": "哪些操作需要誰的核准？",
+      "help": "為每項操作對應角色、閾值、核准有效期與記錄。絕不能將沉默視為核准。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.actions.permissions",
+      "category": "agent.actions",
+      "order": 280,
+      "prompt": "如何強制執行允許操作的邊界？",
+      "help": "說明身份、最低必要權限、工具驗證、沙盒，以及在模型輸出之外執行的授權檢查。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.context.memory",
+      "category": "agent.context",
+      "order": 290,
+      "prompt": "任務之間應保留什麼？",
+      "help": "說明目的、歸屬、保留期限、更正方式，以及使用者或組織之間的隔離。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "session",
+          "label": "僅目前任務"
+        },
+        {
+          "value": "project",
+          "label": "專案上下文"
+        },
+        {
+          "value": "user",
+          "label": "使用者特定偏好"
+        },
+        {
+          "value": "knowledge",
+          "label": "共享的獲核准知識"
+        },
+        {
+          "value": "none",
+          "label": "無",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.context.precedence",
+      "category": "agent.context",
+      "order": 300,
+      "prompt": "前提沖突時，以哪些指令為準？",
+      "help": "明確權限來源、版本管理與分歧解決者。區分引用內容與指令。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.context.untrusted",
+      "category": "agent.context",
+      "order": 310,
+      "prompt": "如何處理檢索內容中的指令？",
+      "help": "應對提示注入：不可信內容可能試圖改變操作方向、泄露資料或擴大權限。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.context.coordination",
+      "category": "agent.context",
+      "order": 320,
+      "prompt": "上下文如何在人員、工具或代理之間傳遞？",
+      "help": "明確共享記錄、責任歸屬、防止重復工作與沖突解決方式。多代理是可選項。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.boundaries.failure_impact",
+      "category": "agent.boundaries",
+      "order": 330,
+      "prompt": "哪些失敗會造成影響，又會影響誰？",
+      "help": "使用具體案例：看似可信的錯誤回答、遺漏、重復操作、泄露、延遲或服務中斷。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.boundaries.prohibitions",
+      "category": "agent.boundaries",
+      "order": 340,
+      "prompt": "哪些事項絕不能委託或執行？",
+      "help": "將硬性邊界與偏好分別記錄，並明確誰有權修改邊界。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.boundaries.stop",
+      "category": "agent.boundaries",
+      "order": 350,
+      "prompt": "何時以及如何停止執行？",
+      "help": "明確觸發條件、停止責任人、操作/時間/費用上限、排隊任務取消方式，以及停止後的安全狀態。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.boundaries.recovery",
+      "category": "agent.boundaries",
+      "order": 360,
+      "prompt": "如何檢測失敗並從中恢復？",
+      "help": "涵蓋日志、備份、回滾、補償操作、安全重試、人工替代方案與負責的回應者。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.evaluation.cases",
+      "category": "agent.evaluation",
+      "order": 370,
+      "prompt": "將用哪些代表性任務進行評估？",
+      "help": "包含常規、困難、不完整、矛盾與惡意輸入，並明確預期結果與訪問許可。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.evaluation.comparison",
+      "category": "agent.evaluation",
+      "order": 380,
+      "prompt": "如何公平比較所提方法？",
+      "help": "採用可比較的工作量與品質標準，計入人工修正成本，並區分代理指標得分與業務成果。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.evaluation.evidence",
+      "category": "agent.evaluation",
+      "order": 390,
+      "prompt": "目前有哪些評估證據？",
+      "help": "記錄版本、日期、樣本量、觀察到的失敗與限制；不能因有計劃就假定有證據。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "not_run",
+          "label": "尚未開展評估"
+        },
+        {
+          "value": "demo",
+          "label": "僅有挑選的示例"
+        },
+        {
+          "value": "offline",
+          "label": "代表性的離線評估"
+        },
+        {
+          "value": "pilot",
+          "label": "有限的實際執行試點"
+        },
+        {
+          "value": "production",
+          "label": "受監控的實際執行證據"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.evaluation.gate",
+      "category": "agent.evaluation",
+      "order": 400,
+      "prompt": "什麼條件允許上線，或要求拒絕上線？",
+      "help": "明確品質、效果、成本與邊界閾值、決策負責人，以及阻止上線的未決事項。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.operations.hosting",
+      "category": "agent.operations",
+      "order": 410,
+      "prompt": "允許哪些執行環境與供應商？",
+      "help": "記錄部署限制、模型/服務選擇標準、可用性、集成依賴與可遷移性。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.operations.budget",
+      "category": "agent.operations",
+      "order": 420,
+      "prompt": "總成本上限是多少，如何控制？",
+      "help": "包含用量、工具、基礎設施、集成、審查、修正、培訓與維護；說明單任務及經常性成本上限。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.operations.monitoring",
+      "category": "agent.operations",
+      "order": 430,
+      "prompt": "執行期間必須能觀察到什麼？",
+      "help": "將每項指標或日志對應到接收者與回應措施。限制日志中的敏感資料。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "quality",
+          "label": "結果品質與錯誤"
+        },
+        {
+          "value": "cost",
+          "label": "成本與用量"
+        },
+        {
+          "value": "latency",
+          "label": "完成時間與等待時間"
+        },
+        {
+          "value": "actions",
+          "label": "操作與授權"
+        },
+        {
+          "value": "handoffs",
+          "label": "人工審查與升級處理"
+        },
+        {
+          "value": "drift",
+          "label": "輸入或行為的變化"
+        },
+        {
+          "value": "none",
+          "label": "無",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.operations.maintenance",
+      "category": "agent.operations",
+      "order": 440,
+      "prompt": "誰負責維護系統並重新驗證？",
+      "help": "涵蓋模型、提示、工具、權限與資料的變更；保留版本、評估結果與回滾路徑。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.rollout.entry",
+      "category": "agent.rollout",
+      "order": 450,
+      "prompt": "首次導入應如何推進？",
+      "help": "明確第一階段的使用者、工作量、持續時間與影響範圍限制。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sandbox",
+          "label": "使用測試資料的沙盒"
+        },
+        {
+          "value": "shadow",
+          "label": "觀察與比較，但不執行"
+        },
+        {
+          "value": "pilot",
+          "label": "有人監督的有限試點"
+        },
+        {
+          "value": "direct",
+          "label": "直接投入實際執行"
+        },
+        {
+          "value": "other",
+          "label": "其他（請說明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未決定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "請求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.rollout.adoption",
+      "category": "agent.rollout",
+      "order": 460,
+      "prompt": "人們如何學習並調整工作？",
+      "help": "明確培訓、回饋、工作量變化，以及代理無法處理時的替代方案。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.rollout.scale",
+      "category": "agent.rollout",
+      "order": 470,
+      "prompt": "什麼證據允許擴大範圍或自主性？",
+      "help": "將增加使用者、資料、工具或權限視為需要負責人和評估的新決定，而不是成功後自動獲得的獎勵。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    },
+    {
+      "questionId": "agent.rollout.exit",
+      "category": "agent.rollout",
+      "order": 480,
+      "prompt": "何時復審、縮減或停止計劃？",
+      "help": "明確日期與觸發條件、決策者，以及資料、未完成工作與責任如何交還人員或其他系統。",
+      "responseType": "long-text",
+      "placeholder": "描述示例、證據、邊界與未決事項。"
+    }
+  ]
+}

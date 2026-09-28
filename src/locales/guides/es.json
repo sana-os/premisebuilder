@@ -1,0 +1,186 @@
+{
+  "intro": "Empieza con una pregunta. Puedes dejar dudas abiertas y volver después.",
+  "purpose": "Esta herramienta registra qué crear o implantar, de quién es cada opinión y qué se ha acordado. No genera juegos ni ejecuta agentes de IA.",
+  "conceptsTitle": "Tres cosas que conviene distinguir",
+  "concepts": [
+    [
+      "Contribution = respuesta de una fuente",
+      "Por ejemplo: una persona de soporte dice que buscar en las FAQ lleva tiempo. Guardarlo registra su perspectiva, no una decisión del proyecto."
+    ],
+    [
+      "Resolution = cómo lo trata el proyecto",
+      "Elige adoptar una respuesta provisionalmente, confirmarla, solicitar propuestas o dejarla pendiente. Introducir una respuesta no la adopta automáticamente."
+    ],
+    [
+      "Base = versión de referencia confirmada",
+      "En Revisión, confirma el conjunto actual como Base r1. Puede contener asuntos pendientes. Los cambios posteriores requieren confirmar otra Base para aparecer en la exportación."
+    ]
+  ],
+  "stepsTitle": "Prueba una pregunta desde el inicio hasta la exportación",
+  "steps": [
+    [
+      "Elige el tema en el inicio",
+      "Webs y pequeñas aplicaciones tiene 42 preguntas; juegos, 40; adopción de agentes de IA, 48. Elige según el trabajo que quieras alinear."
+    ],
+    [
+      "Identifica el proyecto y las personas",
+      "Introduce nombre del proyecto, nombre y rol de quien registra. Marca autoridad de decisión solo si puede aprobar realmente las premisas. En entrevistas, activa la perspectiva de otra persona e identifica la fuente."
+    ],
+    [
+      "Responde una pregunta y añade el motivo",
+      "Selecciona una opción o escribe. Añade contexto, evidencia o límites en Contexto o motivo. Comprueba perspectiva, registrador y método: describen la fuente, no la fuerza de la respuesta. Otra opción puede exigir una nota."
+    ],
+    [
+      "Decide cómo usar la respuesta",
+      "Para empezar, elige Provisional en Estado de Resolution y comprueba la contribución de origen. Así pruebas el flujo sin afirmar un acuerdo final. Si aún no sabes, deja Sin decidir o usa Dejar sin resolver y continúa."
+    ],
+    [
+      "Revisa y confirma una Base",
+      "Abre Revisión, comprueba pendientes, avisos y fuentes, y pulsa Confirmar revisión Base. Confirma el diálogo. Fija una referencia; no declara correctas todas las respuestas ni resueltos todos los asuntos."
+    ],
+    [
+      "Exporta una copia o un contexto para IA",
+      "Abre Exportar. Descarga Base JSON para guardar la referencia o AI Context para entregar premisas, fuentes y dudas a una IA. El borrador más reciente no se exporta hasta confirmar una nueva Base."
+    ]
+  ],
+  "examplesTitle": "Ejemplos por plantilla",
+  "examplesIntro": "Son ejemplos ficticios para orientarte. Abrirlos no rellena ni modifica tu proyecto.",
+  "examples": [
+    [
+      "Web: página de consultas",
+      [
+        [
+          "Pregunta",
+          "¿Cuál es el resultado principal que debe permitir esta entrega?"
+        ],
+        [
+          "Respuesta",
+          "Generar consultas o contactos"
+        ],
+        [
+          "Contexto",
+          "Los visitantes nuevos deben entender el servicio y enviar una consulta. El pago en línea queda fuera. Probar el flujo con tres personas que no conozcan el servicio."
+        ],
+        [
+          "Fuente y Resolution",
+          "El solicitante comunica el objetivo y otra persona lo registra. Mantenerlo Provisional hasta la revisión del decisor."
+        ]
+      ]
+    ],
+    [
+      "Juego: prototipo de exploración",
+      [
+        [
+          "Pregunta",
+          "¿Qué debe lograr esta entrega?"
+        ],
+        [
+          "Respuesta",
+          "Probar el juego básico con un prototipo."
+        ],
+        [
+          "Contexto",
+          "Crear tres salas y dos herramientas para probar el descubrimiento de rutas. Unos diez minutos de juego; sin multijugador ni arte final."
+        ],
+        [
+          "Fuente y Resolution",
+          "Registrar el plan del creador como Provisional. Añadir comentarios de pruebas como otra contribución, sin sobrescribir el plan."
+        ]
+      ]
+    ],
+    [
+      "Agente de IA: borrador de respuesta",
+      [
+        [
+          "Pregunta",
+          "¿Qué trabajo debe cambiar y para quién?"
+        ],
+        [
+          "Respuesta",
+          "Ayudar al personal a redactar respuestas con FAQ aprobadas. El personal realiza el envío."
+        ],
+        [
+          "Contexto",
+          "Esperamos ahorrar tiempo, pero el total actual no está medido. Comparar búsqueda, redacción, revisión y corrección; no dar el ahorro por demostrado."
+        ],
+        [
+          "Fuente y Resolution",
+          "Separar expectativas de dirección y observaciones del personal. Adoptar provisionalmente el alcance del piloto y mantener los efectos sin medir como no comprobados."
+        ]
+      ]
+    ]
+  ],
+  "statesTitle": "¿Qué estado de Resolution elijo?",
+  "states": [
+    [
+      "Sin decidir",
+      "Aún no hay una premisa adoptada. No hace falta rellenarla con suposiciones."
+    ],
+    [
+      "Provisional",
+      "Usar por ahora la respuesta elegida, abierta a revisión."
+    ],
+    [
+      "Confirmada",
+      "Una persona autorizada acepta la premisa. No demuestra que un beneficio futuro vaya a ocurrir."
+    ],
+    [
+      "Solicitar una propuesta",
+      "Pedir opciones o consejo sin elegir todavía una respuesta."
+    ],
+    [
+      "Delegar dentro de límites",
+      "Una persona autorizada delega dentro de límites registrados. Explica esos límites en la nota."
+    ],
+    [
+      "No corresponde",
+      "Una persona autorizada decide que la pregunta no se aplica. No equivale a no saber."
+    ]
+  ],
+  "filesTitle": "¿Qué archivo debo guardar?",
+  "files": [
+    [
+      "Base JSON",
+      "La última referencia confirmada. Empieza por esta copia portátil."
+    ],
+    [
+      "Override JSON",
+      "Cambio opcional acotado a una revisión Base. No hace falta al empezar. Conserva también la Base correspondiente."
+    ],
+    [
+      "Unified JSON",
+      "Resultado de aplicar Overrides activos a la Base. Guarda Base y Overrides por separado para conservar los cambios individuales."
+    ],
+    [
+      "AI Context Markdown",
+      "Contexto legible para una IA con fuentes y dudas. Entrégalo junto a la tarea. Para reabrir el proyecto aquí, usa JSON."
+    ]
+  ],
+  "faqTitle": "Si te atascas",
+  "faq": [
+    [
+      "¿Tengo que responder todo?",
+      "No. Usa Siguiente pregunta, Dejar sin resolver o las categorías. Puedes confirmar una Base con pendientes que seguirán visibles al compartirla."
+    ],
+    [
+      "¿Por qué sigue Sin decidir tras responder?",
+      "La respuesta se guardó como Contribution. Para adoptarla, elige un estado de Resolution y comprueba la contribución de origen bajo la pregunta."
+    ],
+    [
+      "¿Cómo confirmo una premisa individual?",
+      "Elige primero Provisional, comprueba el origen y selecciona al Decisor adecuado; después cambia a Confirmada. Sin autoridad disponible, mantenla provisional o pendiente y consulta a la persona responsable."
+    ],
+    [
+      "¿Qué hago si dos personas responden distinto?",
+      "Usa Añadir otra perspectiva y asigna la fuente de cada respuesta. Conserva ambas y selecciona la adoptada en Resolution. Una diferencia sin resolver puede quedar como conflicto."
+    ],
+    [
+      "¿Por qué no aparecen los cambios al exportar?",
+      "Las exportaciones usan la última Base confirmada. Confirma la siguiente revisión, como r2, en Revisión. Guardar el borrador y confirmar Base son acciones distintas."
+    ],
+    [
+      "¿Dónde se guarda y cómo continúo?",
+      "Los borradores se guardan en este navegador si hay almacenamiento disponible. Continúa desde Proyectos recientes en el mismo navegador y sitio. No hay sincronización: otro dispositivo no los verá y borrar datos puede eliminarlos. Exporta JSON e impórtalo para recuperar contenido confirmado, no borradores sin confirmar."
+    ]
+  ]
+}

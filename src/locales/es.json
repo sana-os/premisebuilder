@@ -4,8 +4,10 @@
   "name": "Español",
   "strings": {
     "brand.name": "Premise Builder",
-    "brand.meta": "web-small-app · Español",
-    "meta.title": "Premise Builder — Alineación de requisitos para proyectos web",
+    "brand.meta": "Alineación de proyectos · Español",
+    "meta.title": "Premise Builder — Alineación de requisitos de proyectos",
+    "home.authorLink": "Deshimaru Sakaguchi — Autor e investigación",
+    "home.companionLink": "Preference Compass — Portabilidad de relaciones humano–IA",
     "meta.description": "Alinea requisitos, roles, restricciones e incógnitas antes de empezar el trabajo.",
     "privacy.localOnly": "Solo local",
     "home.eyebrow": "Alineación de premisas",
@@ -251,18 +253,93 @@
     "A contribution is not a confirmed requirement by itself. Unspecified means “do not assume”; proposal-requested permits suggestions but not silent decisions; delegated permits a bounded decision that must be reported.": "Una contribución no es por sí misma un requisito confirmado. Sin decidir significa «no suponer»; solicitar una propuesta permite sugerencias, pero no decisiones implícitas; delegar permite una decisión acotada que debe comunicarse."
   },
   "labels": {
-    "role": { "developer": "Desarrollo", "end_user": "Usuario final", "requester": "Solicitante", "decision_owner": "Responsable de la decisión", "designer": "Diseño", "maintainer": "Mantenimiento", "security_compliance": "Seguridad o cumplimiento", "mixed": "Roles mixtos", "unknown": "Fuente desconocida" },
-    "authority": { "decision_owner": "Responsable de la decisión", "domain_authority": "Autoridad del ámbito", "implementation_authority": "Autoridad de implementación", "consulted": "Consultado", "informant": "Informante", "recorder_only": "Solo registro", "unknown": "Desconocida" },
-    "capture": { "direct_input": "Entrada directa", "interview": "Entrevista", "observation": "Observación", "inference": "Inferencia", "document_import": "Importación de documento", "data_import": "Importación de datos", "other": "Otro" },
-    "confirmation": { "directly_reported": "Comunicado directamente", "source_confirmed": "Confirmado por la fuente", "unconfirmed": "Sin confirmar", "disputed": "Cuestionado", "imported_unverified": "Importado, sin verificar" },
-    "axis": { "fact": "Hecho", "view": "Perspectiva", "care": "Consideración", "unknown": "Desconocido" },
-    "enforcement": { "hard": "Obligatorio", "soft": "Flexible", "advisory": "Orientativo" },
-    "priority": { "must": "Debe", "should": "Debería", "could": "Podría" },
-    "status": { "confirmed": "Confirmado", "provisional": "Provisional", "unspecified": "Sin decidir", "proposal_requested": "Propuesta solicitada", "delegated": "Delegado", "not_applicable": "No aplica", "conflict": "Conflicto" },
-    "projectStatus": { "draft": "Borrador", "changes_pending": "Cambios pendientes", "base_confirmed": "Base confirmada", "session_only": "Solo sesión" },
-    "scope": { "user": "Usuario", "branch": "Rama", "environment": "Entorno", "session": "Sesión" },
-    "operation": { "add": "Añadir", "replace": "Sustituir", "remove": "Eliminar" },
-    "kind": { "requirement": "Requisito", "decision": "Decisión", "preference": "Preferencia", "constraint": "Restricción", "risk": "Riesgo", "observation": "Observación" }
+    "role": {
+      "developer": "Desarrollo",
+      "end_user": "Usuario final",
+      "requester": "Solicitante",
+      "decision_owner": "Responsable de la decisión",
+      "designer": "Diseño",
+      "maintainer": "Mantenimiento",
+      "security_compliance": "Seguridad o cumplimiento",
+      "mixed": "Roles mixtos",
+      "unknown": "Fuente desconocida"
+    },
+    "authority": {
+      "decision_owner": "Responsable de la decisión",
+      "domain_authority": "Autoridad del ámbito",
+      "implementation_authority": "Autoridad de implementación",
+      "consulted": "Consultado",
+      "informant": "Informante",
+      "recorder_only": "Solo registro",
+      "unknown": "Desconocida"
+    },
+    "capture": {
+      "direct_input": "Entrada directa",
+      "interview": "Entrevista",
+      "observation": "Observación",
+      "inference": "Inferencia",
+      "document_import": "Importación de documento",
+      "data_import": "Importación de datos",
+      "other": "Otro"
+    },
+    "confirmation": {
+      "directly_reported": "Comunicado directamente",
+      "source_confirmed": "Confirmado por la fuente",
+      "unconfirmed": "Sin confirmar",
+      "disputed": "Cuestionado",
+      "imported_unverified": "Importado, sin verificar"
+    },
+    "axis": {
+      "fact": "Hecho",
+      "view": "Perspectiva",
+      "care": "Consideración",
+      "unknown": "Desconocido"
+    },
+    "enforcement": {
+      "hard": "Obligatorio",
+      "soft": "Flexible",
+      "advisory": "Orientativo"
+    },
+    "priority": {
+      "must": "Debe",
+      "should": "Debería",
+      "could": "Podría"
+    },
+    "status": {
+      "confirmed": "Confirmado",
+      "provisional": "Provisional",
+      "unspecified": "Sin decidir",
+      "proposal_requested": "Propuesta solicitada",
+      "delegated": "Delegado",
+      "not_applicable": "No aplica",
+      "conflict": "Conflicto",
+      "unresolved": "Sin resolver"
+    },
+    "projectStatus": {
+      "draft": "Borrador",
+      "changes_pending": "Cambios pendientes",
+      "base_confirmed": "Base confirmada",
+      "session_only": "Solo sesión"
+    },
+    "scope": {
+      "user": "Usuario",
+      "branch": "Rama",
+      "environment": "Entorno",
+      "session": "Sesión"
+    },
+    "operation": {
+      "add": "Añadir",
+      "replace": "Sustituir",
+      "remove": "Eliminar"
+    },
+    "kind": {
+      "requirement": "Requisito",
+      "decision": "Decisión",
+      "preference": "Preferencia",
+      "constraint": "Restricción",
+      "risk": "Riesgo",
+      "observation": "Observación"
+    }
   },
   "messages": {
     "language.invalid": "Introduce una etiqueta de idioma como en, ja, es o pt-br.",

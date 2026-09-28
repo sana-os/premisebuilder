@@ -1,0 +1,186 @@
+{
+  "intro": "Start with one question. You can leave unknowns open and return later.",
+  "purpose": "This tool records what to build or introduce, whose view it is, and what has actually been agreed. It does not generate a game or run an AI agent.",
+  "conceptsTitle": "Three things to keep separate",
+  "concepts": [
+    [
+      "Contribution = a reported answer",
+      "For example: a support worker says that searching the FAQ takes time. Saving it records their view; it does not make it a project decision."
+    ],
+    [
+      "Resolution = how the project treats that answer",
+      "Choose whether to adopt an answer provisionally, confirm it, request a proposal, or leave it undecided. An answer and a decision are separate records."
+    ],
+    [
+      "Base = an explicitly saved reference revision",
+      "In Review, confirm the current collection of premises as Base r1. Undecided items may remain undecided. Later edits require a new Base confirmation to appear in exports."
+    ]
+  ],
+  "stepsTitle": "Try one complete input, from start to export",
+  "steps": [
+    [
+      "Choose the subject on the home page",
+      "Websites & Small Web Apps has 42 questions, Game Development has 40, and AI Agent Adoption Planning has 48. Choose for the work you want to align, not the tool you plan to use."
+    ],
+    [
+      "Identify the project and the people",
+      "Enter a project name and the recorder's label and role. The recorder is the person entering the answer. Select decision authority only if they really can approve the premise. For an interview, enable the separate perspective option and identify the person whose answer is being recorded."
+    ],
+    [
+      "Answer one question and add the reason",
+      "Select an option or enter text. Add background, evidence or limits in Context or rationale. Check the perspective, recorder and capture method. These fields describe the source, not the strength of the answer. Other options may require a note."
+    ],
+    [
+      "Decide how to use the answer",
+      "For a first trial, choose Provisional under Resolution status. Check that Source contribution shows the answer you intend to use. This lets you try the flow without claiming final agreement. If you do not know yet, leave Not decided or use Leave unresolved, then move on."
+    ],
+    [
+      "Review and confirm a Base",
+      "Open Review, inspect unresolved items, warnings and sources, then choose Confirm Base revision and confirm the dialog. This freezes a reference version; it does not declare every answer correct or every issue resolved."
+    ],
+    [
+      "Export a backup or an AI handoff",
+      "Open Export. Download Base JSON to save the confirmed reference. Download AI Context to give an AI the premises, sources and unknowns. The latest draft is not exported until you confirm a new Base."
+    ]
+  ],
+  "examplesTitle": "Examples for each template",
+  "examplesIntro": "These are fictional examples to help you write. Opening them does not fill in or change your project.",
+  "examples": [
+    [
+      "Website: an inquiry page",
+      [
+        [
+          "Question",
+          "What is the primary outcome this release should enable?"
+        ],
+        [
+          "Answer",
+          "Generate inquiries or leads"
+        ],
+        [
+          "Context",
+          "First-time visitors should understand the service and send an inquiry. Online payment is outside this release. Check the flow with three people unfamiliar with the service."
+        ],
+        [
+          "Source and Resolution",
+          "Requester reports the goal; recorder enters it. Use Provisional while the decision owner reviews it."
+        ]
+      ]
+    ],
+    [
+      "Game: a small exploration prototype",
+      [
+        [
+          "Question",
+          "What should this release achieve?"
+        ],
+        [
+          "Answer",
+          "Test the core play with a prototype."
+        ],
+        [
+          "Context",
+          "Build three rooms and two tools to test the fun of discovering a route. Aim for ten minutes of play. Multiplayer and final-quality art are out of scope."
+        ],
+        [
+          "Source and Resolution",
+          "Record the creator's plan as Provisional. Add playtest feedback as another contribution rather than overwriting the original plan."
+        ]
+      ]
+    ],
+    [
+      "AI agent: draft a support reply",
+      [
+        [
+          "Question",
+          "What work should change, for whom?"
+        ],
+        [
+          "Answer",
+          "Help support staff draft replies using approved FAQ sources. Staff send the replies themselves."
+        ],
+        [
+          "Context",
+          "We expect to reduce working time, but the current total is not measured. Compare search, drafting, review and correction time. Do not assume savings before evaluation."
+        ],
+        [
+          "Source and Resolution",
+          "Keep management expectations and frontline observations as separate contributions. Adopt the trial scope provisionally and leave unmeasured effects open."
+        ]
+      ]
+    ]
+  ],
+  "statesTitle": "Which Resolution status should I choose?",
+  "states": [
+    [
+      "Not decided",
+      "No adopted premise yet. Do not fill the gap by guessing."
+    ],
+    [
+      "Provisional",
+      "Use the selected answer for now, with room to revise."
+    ],
+    [
+      "Confirmed",
+      "An authorized decider accepts this premise. This is not proof that a predicted benefit will occur."
+    ],
+    [
+      "Ask for a proposal",
+      "Request options or advice without choosing an answer yet."
+    ],
+    [
+      "Delegate within bounds",
+      "An authorized decider delegates a decision within recorded limits. Explain those limits in the note."
+    ],
+    [
+      "Does not apply",
+      "An authorized decider determines that the question is outside this project. This is different from not knowing."
+    ]
+  ],
+  "filesTitle": "Which file should I save?",
+  "files": [
+    [
+      "Base JSON",
+      "The last confirmed reference. Start with this for a portable backup."
+    ],
+    [
+      "Override JSON",
+      "An optional scoped change tied to a specific Base revision. You do not need it for your first project. Preserve the matching Base too."
+    ],
+    [
+      "Unified JSON",
+      "The result of applying active Overrides to Base. Keep Base and Override files separately if you need to preserve the individual changes."
+    ],
+    [
+      "AI Context Markdown",
+      "A readable handoff for an AI, including sources and unknowns. Give it with the task you want performed. To reopen a project in this app, use JSON instead."
+    ]
+  ],
+  "faqTitle": "When you get stuck",
+  "faq": [
+    [
+      "Do I have to answer everything?",
+      "No. Use Next question, Leave unresolved or the category list. You can confirm a Base with undecided items; they remain visible in the handoff."
+    ],
+    [
+      "Why does my answer still say Not decided?",
+      "The answer was saved as a Contribution. To adopt it, choose a Resolution status and check the source contribution below the question."
+    ],
+    [
+      "How do I confirm an individual premise?",
+      "First choose Provisional, check the source contribution and select the appropriate Decider; then switch to Confirmed. If no authorized decider is available, keep it provisional or unresolved and obtain their input. Do not claim authority just to enable the control."
+    ],
+    [
+      "Two people give different answers. Which do I keep?",
+      "Use Add another perspective and set the source for each answer. Keep both accounts; select the adopted answer separately in Resolution. An unresolved difference can remain a conflict."
+    ],
+    [
+      "Why are recent edits missing from the export?",
+      "Exports use the last confirmed Base. Open Review and confirm the next revision, such as r2. Draft autosave and Base confirmation are different actions."
+    ],
+    [
+      "Where is my work saved, and how do I resume?",
+      "Drafts save in this browser when storage is available. Reopen from Recent projects on the same browser and site. There is no cloud sync: another device or clearing site data can lose access. Export JSON and use Import JSON to bring back the confirmed content; do not rely on JSON to preserve an unconfirmed draft."
+    ]
+  ]
+}

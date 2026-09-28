@@ -1,0 +1,1313 @@
+{
+  "templateId": "game-development",
+  "templateVersion": "0.1.0",
+  "locale": "ar",
+  "direction": "rtl",
+  "template": {
+    "name": "تطوير الألعاب",
+    "summary": "40 سؤالًا لمواءمة اللعب والنطاق والإنتاج والإطلاق."
+  },
+  "answerContext": {
+    "answeringFrom": "صاحب وجهة النظر",
+    "recordedBy": "سجّلها",
+    "speakingAs": "يتحدث بصفته",
+    "captureMethod": "طريقة الحصول عليها",
+    "authority": "صلاحية هذه الإجابة",
+    "confirmation": "تأكيد المصدر",
+    "changeForQuestion": "تغيير لهذا السؤال",
+    "multiplePerspectives": "إضافة وجهة نظر أخرى"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "مؤكّد",
+      "description": "استخدمها كفرضية معتمدة للمشروع."
+    },
+    {
+      "value": "provisional",
+      "label": "مؤقت",
+      "description": "استخدمها حاليًا مع إظهار إمكانية مراجعتها."
+    },
+    {
+      "value": "unspecified",
+      "label": "غير محسوم",
+      "description": "اتركها معلّقة. لا تسمح للذكاء الاصطناعي بملئها ضمنيًا."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "طلب مقترح",
+      "description": "اطلب بدائل أو توصية دون اعتبار أي منها اختيارًا معتمدًا."
+    },
+    {
+      "value": "delegated",
+      "label": "التفويض ضمن حدود",
+      "description": "اسمح للمنفّذ أو الذكاء الاصطناعي بالقرار ضمن الحدود المعلنة والإبلاغ عن الاختيار."
+    },
+    {
+      "value": "not_applicable",
+      "label": "لا ينطبق",
+      "description": "حدّد أن هذا السؤال خارج المشروع."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "اختر مَن تمثل الإجابة وجهة نظره ومَن سجّلها.",
+    "validation.speakingRoleMismatch": "دور المتحدث المحدد غير مُسند إلى هذا المشارك.",
+    "validation.inferenceUnconfirmed": "يجب أن تبقى الإجابة المستنتجة غير مؤكّدة حتى يتحقق منها شخص مخوّل.",
+    "validation.resolutionAuthorityRequired": "يتطلب تأكيد هذه الفرضية مصدر قرار مخوّلًا.",
+    "validation.exclusiveChoice": "لا يمكن الجمع بين هذا الخيار وخيارات أخرى.",
+    "validation.noteRequired": "أضف ملاحظة موجزة لشرح الاختيار.",
+    "validation.selectionLimit": "قلّل عدد الخيارات المحددة.",
+    "review.authRuntime": "المصادقة ضمن النطاق، لكن نموذج التشغيل المحدد قد يحتاج مكوّنًا خارجيًا أو خادميًا.",
+    "review.paymentHandling": "بيانات الدفع ضمن النطاق. تحقّق مَن يعالجها وما إذا كان يجوز للمشروع تخزين أي منها.",
+    "review.analyticsPrivacy": "التحليلات أو القياس عن بعد ضمن النطاق. راجع حدود الخصوصية والموافقة والممارسات المحظورة.",
+    "review.onlineOffline": "اختير اللعب عبر الإنترنت مع سياسة شبكة دون اتصال فقط. وضّح ما إذا كان الإصدار يشمل ميزات اتصال."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "القصد والتجربة",
+      "description": "حدّد التجربة وهدف الإصدار.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.players",
+      "label": "اللاعبون والجلسات",
+      "description": "حدّد اللاعبين والأجهزة وظروف اللعب.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.rules",
+      "label": "الدورة الأساسية والقواعد",
+      "description": "صف الأفعال والنتائج والتقدم.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.scope",
+      "label": "النطاق والمحتوى",
+      "description": "حدّد نطاق العمل لهذا الإصدار.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.presentation",
+      "label": "الفن والصوت والسرد",
+      "description": "صف العرض ومسؤوليات الأصول.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.technology",
+      "label": "التقنية وحفظ البيانات",
+      "description": "حدّد حدود التنفيذ والخدمات.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.accessibility",
+      "label": "سهولة الاستخدام وإمكانية الوصول",
+      "description": "اجعل التجربة المقصودة قابلة للعب.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.boundaries",
+      "label": "الحدود والحقوق",
+      "description": "سجّل حدود المحتوى والبيانات وتحقيق الإيرادات.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.delivery",
+      "label": "الإنتاج والإطلاق",
+      "description": "خطّط للقدرة والتوزيع والصيانة.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    },
+    {
+      "id": "game.validation",
+      "label": "اختبار اللعب والقبول",
+      "description": "حدّد أدلة الاكتمال وصلاحية اعتماده.",
+      "perspectiveHint": "افصل ملاحظات اللاعبين وقصد المبدعين والتوصيات التقنية."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.release_goal",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "ما الذي ينبغي لهذا الإصدار تحقيقه؟",
+      "help": "اختر المرحلة التي ستقيّم نجاحها.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "prototype",
+          "label": "اختبار اللعب الأساسي بنموذج أولي"
+        },
+        {
+          "value": "vertical_slice",
+          "label": "جزء تمثيلي مصقول"
+        },
+        {
+          "value": "demo",
+          "label": "عرض تجريبي عام"
+        },
+        {
+          "value": "full_release",
+          "label": "إصدار كامل"
+        },
+        {
+          "value": "update",
+          "label": "تحديث للعبة حالية"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.experience",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "ما التجربة الأساسية المقصودة للاعبين؟",
+      "help": "اختر الأولوية عند تنافس أهداف التصميم؛ صف الشعور المقصود في الملاحظة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mastery",
+          "label": "الإتقان والتحدي"
+        },
+        {
+          "value": "exploration",
+          "label": "الاستكشاف والاكتشاف"
+        },
+        {
+          "value": "story",
+          "label": "القصة والعاطفة"
+        },
+        {
+          "value": "creation",
+          "label": "الإبداع والتجريب"
+        },
+        {
+          "value": "connection",
+          "label": "التعاون أو المنافسة"
+        },
+        {
+          "value": "relaxation",
+          "label": "الاسترخاء"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "في أي مرحلة يوجد المشروع؟",
+      "help": "حافظ على السلوك الحالي عندما يتطلب العمل ذلك.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "بناء جديد"
+        },
+        {
+          "value": "redesign",
+          "label": "إعادة تصميم"
+        },
+        {
+          "value": "extension",
+          "label": "توسعة"
+        },
+        {
+          "value": "repair",
+          "label": "إصلاح"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.concept",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "ما فكرة اللعبة ونوعها؟",
+      "help": "صف ما يفعله اللاعب وما يميز اللعبة. المراجع أمثلة وليست إذنًا بالنسخ.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.players.audience",
+      "category": "game.players",
+      "order": 50,
+      "prompt": "مَن اللاعبون المستهدفون؟",
+      "help": "سجّل العمر والخبرة واللغات والأدلة الفعلية عن اللاعبين منفصلة عن الافتراضات.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.players.platforms",
+      "category": "game.players",
+      "order": 60,
+      "prompt": "ما المنصات المشمولة في هذا الإصدار؟",
+      "help": "اختر الأهداف الملتزم بها وسجّل الحد الأدنى للأجهزة وأنظمة التشغيل.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "browser",
+          "label": "المتصفح"
+        },
+        {
+          "value": "desktop",
+          "label": "الحاسوب"
+        },
+        {
+          "value": "mobile",
+          "label": "الهاتف أو الجهاز اللوحي"
+        },
+        {
+          "value": "console",
+          "label": "منصة ألعاب"
+        },
+        {
+          "value": "xr",
+          "label": "الواقع الافتراضي أو المعزز"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.player_mode",
+      "category": "game.players",
+      "order": 70,
+      "prompt": "كيف يلعب اللاعبون معًا؟",
+      "help": "حدّد أقصى عدد للاعبين واللعب المحلي أو عبر الإنترنت وما إذا كانت الأنماط تتشارك التقدم.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "solo",
+          "label": "لاعب واحد"
+        },
+        {
+          "value": "local_coop",
+          "label": "تعاون محلي"
+        },
+        {
+          "value": "local_versus",
+          "label": "منافسة محلية"
+        },
+        {
+          "value": "online_coop",
+          "label": "تعاون عبر الإنترنت"
+        },
+        {
+          "value": "online_versus",
+          "label": "منافسة عبر الإنترنت"
+        },
+        {
+          "value": "async",
+          "label": "تفاعل غير متزامن"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.session",
+      "category": "game.players",
+      "order": 80,
+      "prompt": "كم تستغرق جلسة اللعب المعتادة؟",
+      "help": "راعِ المقاطعة والاستئناف ومدة اللعب الإجمالية المتوقعة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "short",
+          "label": "أقل من 10 دقائق"
+        },
+        {
+          "value": "medium",
+          "label": "10–30 دقيقة"
+        },
+        {
+          "value": "long",
+          "label": "30–60 دقيقة"
+        },
+        {
+          "value": "extended",
+          "label": "أكثر من ساعة"
+        },
+        {
+          "value": "flexible",
+          "label": "يحددها اللاعب"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.core_loop",
+      "category": "game.rules",
+      "order": 90,
+      "prompt": "ما الأفعال التي تشكل دورة اللعب الأساسية؟",
+      "help": "صف الفعل ثم الاستجابة ثم القرار التالي، مستخدمًا مثالًا ملموسًا.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.rules.outcomes",
+      "category": "game.rules",
+      "order": 100,
+      "prompt": "كيف تنتهي اللعبة أو يتحقق النجاح؟",
+      "help": "حدّد شروط الفوز والخسارة وإعادة المحاولة والإكمال؛ قد لا توجد في الألعاب المفتوحة.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.rules.progression",
+      "category": "game.rules",
+      "order": 110,
+      "prompt": "ما أنظمة التقدم اللازمة؟",
+      "help": "حدّد الحدود وقواعد إعادة الضبط في الملاحظة.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "levels",
+          "label": "مراحل أو فصول"
+        },
+        {
+          "value": "skills",
+          "label": "مهارات اللاعب أو الشخصية"
+        },
+        {
+          "value": "collection",
+          "label": "الجمع وفتح المحتوى"
+        },
+        {
+          "value": "economy",
+          "label": "الموارد والاقتصاد"
+        },
+        {
+          "value": "ranking",
+          "label": "النقاط أو التصنيفات"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.difficulty",
+      "category": "game.rules",
+      "order": 120,
+      "prompt": "كيف ينبغي أن تعمل الصعوبة؟",
+      "help": "اشرح الإنصاف والعشوائية وتكلفة الفشل وحدود التكيف.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "صعوبة ثابتة"
+        },
+        {
+          "value": "selectable",
+          "label": "صعوبة يختارها اللاعب"
+        },
+        {
+          "value": "adaptive",
+          "label": "صعوبة تكيفية"
+        },
+        {
+          "value": "sandbox",
+          "label": "لا تحدٍ إلزامي"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.content_budget",
+      "category": "game.scope",
+      "order": 130,
+      "prompt": "ما حجم المحتوى القابل للعب المشمول؟",
+      "help": "حدّد أعداد المراحل والشخصيات والعناصر ووقت اللعب أو حدودها ومَن ينشئها.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.scope.required_features",
+      "category": "game.scope",
+      "order": 140,
+      "prompt": "ما الميزات المساندة المطلوبة؟",
+      "help": "اختر ما يجب تسليمه في هذا الإصدار فقط.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "tutorial",
+          "label": "تعليم اللعب"
+        },
+        {
+          "value": "settings",
+          "label": "إعدادات"
+        },
+        {
+          "value": "inventory",
+          "label": "مخزون"
+        },
+        {
+          "value": "achievements",
+          "label": "إنجازات"
+        },
+        {
+          "value": "editor",
+          "label": "محرر مراحل"
+        },
+        {
+          "value": "replays",
+          "label": "إعادة عرض اللعب"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.exclusions",
+      "category": "game.scope",
+      "order": 150,
+      "prompt": "ما الذي يقع صراحةً خارج النطاق؟",
+      "help": "اذكر الإضافات المغرية التي يجب تأجيلها وما قد يبرر إعادة النظر فيها.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.scope.dependencies",
+      "category": "game.scope",
+      "order": 160,
+      "prompt": "ما العمل أو الاعتماديات الحالية التي يجب الحفاظ عليها؟",
+      "help": "اذكر الشفرة والتنسيقات والأدوات والأصول وقيود التوافق الحالية، أو صرّح بأنه مشروع جديد.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.presentation.visual_style",
+      "category": "game.presentation",
+      "order": 170,
+      "prompt": "ما التوجه البصري؟",
+      "help": "حدّد الكاميرا وسهولة القراءة والمراجع وما ينبغي أن يبدو مميزًا.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "text",
+          "label": "قائم على النص"
+        },
+        {
+          "value": "2d",
+          "label": "ثنائي الأبعاد"
+        },
+        {
+          "value": "3d",
+          "label": "ثلاثي الأبعاد"
+        },
+        {
+          "value": "hybrid",
+          "label": "مزيج ثنائي وثلاثي الأبعاد"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.narrative",
+      "category": "game.presentation",
+      "order": 180,
+      "prompt": "ما دور السرد؟",
+      "help": "صف العالم والنبرة والتفرعات واحتياجات الترجمة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "لا سرد مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "background",
+          "label": "خلفية وأجواء"
+        },
+        {
+          "value": "linear",
+          "label": "قصة خطية"
+        },
+        {
+          "value": "branching",
+          "label": "قصة متفرعة"
+        },
+        {
+          "value": "emergent",
+          "label": "قصص ينشئها اللاعبون"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.audio",
+      "category": "game.presentation",
+      "order": 190,
+      "prompt": "ما العناصر الصوتية المطلوبة؟",
+      "help": "حدّد التحكم في الصوت والترجمة النصية وما إذا كان الصوت يحمل معلومات أساسية.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "effects",
+          "label": "مؤثرات صوتية"
+        },
+        {
+          "value": "music",
+          "label": "موسيقى"
+        },
+        {
+          "value": "voice",
+          "label": "تمثيل صوتي"
+        },
+        {
+          "value": "ambient",
+          "label": "أصوات محيطية"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.asset_pipeline",
+      "category": "game.presentation",
+      "order": 200,
+      "prompt": "مَن يوفّر الأصول ويعتمدها؟",
+      "help": "افصل الأصول المؤقتة عن النهائية؛ سجّل التنسيقات والتراخيص ونسب الفضل وسياسة الأصول المولّدة.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.technology.engine",
+      "category": "game.technology",
+      "order": 210,
+      "prompt": "كيف يُختار المحرك أو إطار العمل؟",
+      "help": "اذكر الأدوات والإصدارات الثابتة أو معايير مثل مهارات الفريق والترخيص والمنصات المستهدفة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "أداة محددة مطلوبة"
+        },
+        {
+          "value": "existing",
+          "label": "الحفاظ على التقنيات الحالية"
+        },
+        {
+          "value": "evaluate",
+          "label": "تقييم البدائل أولًا"
+        },
+        {
+          "value": "delegated",
+          "label": "المنفّذ يقترح ضمن القيود"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.input",
+      "category": "game.technology",
+      "order": 220,
+      "prompt": "ما طرق الإدخال التي يجب دعمها؟",
+      "help": "حدّد إعادة تعيين الأزرار ودعم تبديل الأجهزة أثناء اللعب.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "keyboard_mouse",
+          "label": "لوحة المفاتيح والفأرة"
+        },
+        {
+          "value": "controller",
+          "label": "ذراع تحكم"
+        },
+        {
+          "value": "touch",
+          "label": "لمس"
+        },
+        {
+          "value": "motion",
+          "label": "أجهزة حركة أو XR"
+        },
+        {
+          "value": "assistive",
+          "label": "إدخال مساعد"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.save",
+      "category": "game.technology",
+      "order": 230,
+      "prompt": "كيف يُحفظ التقدم؟",
+      "help": "صف توقيت الحفظ والترحيل والحذف والتعافي من انقطاع الكتابة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "لا تقدم دائم",
+          "exclusive": true
+        },
+        {
+          "value": "local",
+          "label": "حفظ محلي"
+        },
+        {
+          "value": "cloud",
+          "label": "حفظ سحابي أو مرتبط بحساب"
+        },
+        {
+          "value": "hybrid",
+          "label": "محلي مع مزامنة سحابية"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.network",
+      "category": "game.technology",
+      "order": 240,
+      "prompt": "ما سلوك الشبكة المطلوب؟",
+      "help": "للعب عبر الإنترنت، حدّد السلطة والمزامنة والتعامل مع الانقطاع وتكلفة الخادم وملكيته.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "offline",
+          "label": "قابلة للعب بالكامل دون اتصال"
+        },
+        {
+          "value": "optional",
+          "label": "ميزات اتصال اختيارية"
+        },
+        {
+          "value": "required",
+          "label": "الاتصال مطلوب"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.onboarding",
+      "category": "game.accessibility",
+      "order": 250,
+      "prompt": "كيف يتعلم اللاعبون اللعبة؟",
+      "help": "حدّد ما يجب أن يحققه اللاعب لأول مرة دون مساعدة خارجية.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "guided",
+          "label": "شرح تعليمي موجّه"
+        },
+        {
+          "value": "contextual",
+          "label": "تلميحات سياقية"
+        },
+        {
+          "value": "manual",
+          "label": "مرجع أو دليل"
+        },
+        {
+          "value": "discovery",
+          "label": "الاكتشاف أثناء اللعب"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.access",
+      "category": "game.accessibility",
+      "order": 260,
+      "prompt": "ما ميزات إمكانية الوصول المطلوبة؟",
+      "help": "تحقق من الاحتياجات مع اللاعبين المستهدفين؛ لا تفترض أن إعدادًا واحدًا يناسب الجميع.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "remap",
+          "label": "إعادة تعيين عناصر التحكم"
+        },
+        {
+          "value": "subtitles",
+          "label": "ترجمة نصية وبدائل نصية"
+        },
+        {
+          "value": "color",
+          "label": "معلومات لا تعتمد على اللون وحده"
+        },
+        {
+          "value": "motion",
+          "label": "تقليل الحركة والوميض"
+        },
+        {
+          "value": "text",
+          "label": "حجم نص قابل للتعديل"
+        },
+        {
+          "value": "timing",
+          "label": "مساعدة في التوقيت والصعوبة"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.performance",
+      "category": "game.accessibility",
+      "order": 270,
+      "prompt": "ما أهداف الأداء القابلة للقياس التي يجب تحقيقها؟",
+      "help": "اذكر أجهزة الاختبار ومعدل الإطارات وزمن التحميل وحدود الذاكرة أو البطارية وطريقة قياسها.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.accessibility.interruption",
+      "category": "game.accessibility",
+      "order": 280,
+      "prompt": "ماذا يحدث عند انقطاع اللعب؟",
+      "help": "غطِّ الإيقاف المؤقت والخلفية وفقدان التركيز وانقطاع الاتصال والعودة؛ راعِ الإنصاف في اللعب الجماعي.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.boundaries.content_limits",
+      "category": "game.boundaries",
+      "order": 290,
+      "prompt": "ما المحتوى أو التفاعلات التي يجب تجنبها؟",
+      "help": "سجّل الجمهور والتصنيف العمري وحدود المحتوى الحساس وإشراف المحادثات والإبلاغ عند الحاجة.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.boundaries.monetization",
+      "category": "game.boundaries",
+      "order": 300,
+      "prompt": "ما أسلوب تحقيق الإيرادات المخطط؟",
+      "help": "حدّد حدود الشراء والضغط المحظور؛ أبقِ التفاصيل غير المحسومة معلّقة بوضوح.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "free",
+          "label": "مجانية دون إيرادات"
+        },
+        {
+          "value": "paid",
+          "label": "شراء لمرة واحدة"
+        },
+        {
+          "value": "ads",
+          "label": "إعلانات"
+        },
+        {
+          "value": "iap",
+          "label": "مشتريات داخل اللعبة"
+        },
+        {
+          "value": "subscription",
+          "label": "اشتراك"
+        },
+        {
+          "value": "donation",
+          "label": "تبرعات اختيارية"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.boundaries.data",
+      "category": "game.boundaries",
+      "order": 310,
+      "prompt": "ما بيانات اللاعبين التي تُجمع أو تُشارك؟",
+      "help": "حدّد الغرض والتخزين والاحتفاظ والحذف ومشغلي الخدمات؛ تحتاج بيانات الحفظ المحلي أيضًا إلى حدود.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.boundaries.rights",
+      "category": "game.boundaries",
+      "order": 320,
+      "prompt": "ما قيود الحقوق والتوزيع المطبقة؟",
+      "help": "اذكر تراخيص الأصول والمحرك ونسب الفضل والملكية ومتطلبات المنصة ومَن يتحقق منها.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.delivery.capacity",
+      "category": "game.delivery",
+      "order": 330,
+      "prompt": "ما الأشخاص والوقت والميزانية المتاحة؟",
+      "help": "حدّد المسؤوليات والمهارات والمراحل وخطة بديلة لنقص القدرة.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.delivery.distribution",
+      "category": "game.delivery",
+      "order": 340,
+      "prompt": "كيف سيحصل اللاعبون على اللعبة؟",
+      "help": "اذكر القنوات ومسؤول الإطلاق ومتطلبات الحساب أو المراجعة.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "web",
+          "label": "لعبة ويب مستضافة"
+        },
+        {
+          "value": "download",
+          "label": "تنزيل مباشر"
+        },
+        {
+          "value": "store",
+          "label": "متجر رقمي"
+        },
+        {
+          "value": "private",
+          "label": "اختبار خاص"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.delivery.handoff",
+      "category": "game.delivery",
+      "order": 350,
+      "prompt": "ما الذي يجب تسليمه مع اللعبة؟",
+      "help": "حدّد عمليات بناء قابلة لإعادة الإنتاج والمصدر والأصول القابلة للتحرير والتراخيص وأدلة الاختبار وإرشادات التشغيل.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.delivery.maintenance",
+      "category": "game.delivery",
+      "order": 360,
+      "prompt": "مَن يتولى التحديثات والحوادث بعد الإطلاق؟",
+      "help": "حدّد المسؤولية ومدة الدعم والتوافق والتراجع عن التحديث وتوقعات إيقاف الخدمة.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.validation.playtest",
+      "category": "game.validation",
+      "order": 370,
+      "prompt": "كيف ستُختبر التجربة المقصودة؟",
+      "help": "حدّد المشاركين والسيناريوهات والملاحظات ومعايير التعديل؛ افصل الآراء عن السلوك المقاس.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.validation.must_pass",
+      "category": "game.validation",
+      "order": 380,
+      "prompt": "ما السيناريوهات التي يجب أن تنجح قبل الإطلاق؟",
+      "help": "أضف خطوات ملموسة ونتائج متوقعة في الملاحظة.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "first_play",
+          "label": "أول لعب عبر الدورة الأساسية"
+        },
+        {
+          "value": "completion",
+          "label": "الفوز والخسارة وإعادة المحاولة"
+        },
+        {
+          "value": "save_restore",
+          "label": "الحفظ والاستعادة"
+        },
+        {
+          "value": "devices",
+          "label": "الأجهزة وطرق الإدخال المستهدفة"
+        },
+        {
+          "value": "network",
+          "label": "قطع الاتصال وإعادته"
+        },
+        {
+          "value": "access",
+          "label": "إعدادات إمكانية الوصول"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء مطلوب",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.validation.approval",
+      "category": "game.validation",
+      "order": 390,
+      "prompt": "مَن يقرر جاهزية اللعبة وبأي معايير؟",
+      "help": "حدّد دور صاحب القرار والعيوب المقبولة وشروط الإصدار القابلة للقياس.",
+      "responseType": "long-text",
+      "placeholder": "صف الفرضية والحدود والأدلة. يمكنك إبقاؤها معلّقة."
+    },
+    {
+      "questionId": "game.validation.unknowns",
+      "category": "game.validation",
+      "order": 400,
+      "prompt": "كيف تُعالج قرارات التصميم المعلّقة؟",
+      "help": "حدّد حدود التفويض ومتى يجب إيقاف العمل لإعادة المواءمة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "pause",
+          "label": "إيقاف العمل المتأثر حتى التوضيح"
+        },
+        {
+          "value": "prototype",
+          "label": "اختبار نموذج أولي يمكن التراجع عنه"
+        },
+        {
+          "value": "propose",
+          "label": "طلب بدائل قبل القرار"
+        },
+        {
+          "value": "delegate",
+          "label": "التفويض ضمن حدود مسجّلة"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    }
+  ]
+}

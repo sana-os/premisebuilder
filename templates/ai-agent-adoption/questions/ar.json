@@ -1,0 +1,1198 @@
+{
+  "templateId": "ai-agent-adoption",
+  "templateVersion": "0.1.0",
+  "locale": "ar",
+  "direction": "rtl",
+  "template": {
+    "name": "تخطيط اعتماد وكلاء الذكاء الاصطناعي",
+    "summary": "48 سؤالًا لمواءمة العمل المقصود والقيمة المتوقعة والصلاحية والتقييم."
+  },
+  "answerContext": {
+    "answeringFrom": "صاحب وجهة النظر",
+    "recordedBy": "سجّلها",
+    "speakingAs": "يتحدث بصفته",
+    "captureMethod": "طريقة الحصول عليها",
+    "authority": "صلاحية هذه الإجابة",
+    "confirmation": "تأكيد المصدر",
+    "changeForQuestion": "تغيير لهذا السؤال",
+    "multiplePerspectives": "إضافة وجهة نظر أخرى"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "مؤكّد",
+      "description": "استخدمها كفرضية معتمدة للمشروع."
+    },
+    {
+      "value": "provisional",
+      "label": "مؤقت",
+      "description": "استخدمها حاليًا مع إظهار إمكانية مراجعتها."
+    },
+    {
+      "value": "unspecified",
+      "label": "غير محسوم",
+      "description": "اتركها معلّقة. لا تسمح للذكاء الاصطناعي بملئها ضمنيًا."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "طلب مقترح",
+      "description": "اطلب بدائل أو توصية دون اعتبار أي منها اختيارًا معتمدًا."
+    },
+    {
+      "value": "delegated",
+      "label": "التفويض ضمن حدود",
+      "description": "اسمح للمنفّذ أو الذكاء الاصطناعي بالقرار ضمن الحدود المعلنة والإبلاغ عن الاختيار."
+    },
+    {
+      "value": "not_applicable",
+      "label": "لا ينطبق",
+      "description": "حدّد أن هذا السؤال خارج المشروع."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "اختر مَن تمثل الإجابة وجهة نظره ومَن سجّلها.",
+    "validation.speakingRoleMismatch": "دور المتحدث المحدد غير مُسند إلى هذا المشارك.",
+    "validation.inferenceUnconfirmed": "يجب أن تبقى الإجابة المستنتجة غير مؤكّدة حتى يتحقق منها شخص مخوّل.",
+    "validation.resolutionAuthorityRequired": "يتطلب تأكيد هذه الفرضية مصدر قرار مخوّلًا.",
+    "validation.exclusiveChoice": "لا يمكن الجمع بين هذا الخيار وخيارات أخرى.",
+    "validation.noteRequired": "أضف ملاحظة موجزة لشرح الاختيار.",
+    "validation.selectionLimit": "قلّل عدد الخيارات المحددة.",
+    "review.authRuntime": "المصادقة ضمن النطاق، لكن نموذج التشغيل المحدد قد يحتاج مكوّنًا خارجيًا أو خادميًا.",
+    "review.paymentHandling": "بيانات الدفع ضمن النطاق. تحقّق مَن يعالجها وما إذا كان يجوز للمشروع تخزين أي منها.",
+    "review.analyticsPrivacy": "التحليلات أو القياس عن بعد ضمن النطاق. راجع حدود الخصوصية والموافقة والممارسات المحظورة.",
+    "review.agent.baseline": "ليس للتحسن المتوقع خط أساس مقاس. حدّد حجم العمل الحالي والقياس قبل ادعاء التحسين.",
+    "review.agent.authority": "اختير نطاق الإجابة فقط مع إجراءات تغيّر الحالة. وضّح ما إذا كان الوكيل يجهّز الإجراء أو ينفّذه.",
+    "review.agent.review": "تعتمد الخطة على نقاط تحقق بشرية دون ترتيب مراجعة محدد. حدّد المستجيب وما يحدث أثناء الانتظار.",
+    "review.agent.release": "خُطّط لإدخال مباشر دون أدلة تقييم تمثيلية. راجع معايير الإطلاق وحدود التعرض الأولي."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "الغرض والنطاق",
+      "description": "حدّد العمل قبل اختيار وكيل.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.workflow",
+      "label": "العمل الحالي وخط الأساس",
+      "description": "افصل المشكلات الملحوظة عن الافتراضات.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.outcomes",
+      "label": "القيمة المتوقعة والأدلة",
+      "description": "حوّل التوقعات إلى فرضيات قابلة للاختبار.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.fit",
+      "label": "الطريقة والاستقلالية",
+      "description": "حدّد مقدار الاستقلالية التي يحتاجها العمل فعليًا.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.people",
+      "label": "الأشخاص والمساءلة",
+      "description": "حدّد المستفيد ومَن يتحقق ومَن يتحمل المسؤولية.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.data",
+      "label": "المعلومات وحدود البيانات",
+      "description": "حدّد ما يجوز للوكيل معرفته وإلى أين يجوز نقل البيانات.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.actions",
+      "label": "الإجراءات والصلاحية",
+      "description": "ميّز الوصول التقني عن إذن التنفيذ.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.context",
+      "label": "السياق وتسليم العمل",
+      "description": "حافظ على الفرضيات بين الخطوات والأشخاص.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.boundaries",
+      "label": "الإخفاق والتعافي",
+      "description": "اجعل الحدود والتعافي قابلين للتنفيذ.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.evaluation",
+      "label": "التقييم والقبول",
+      "description": "اختبر سير العمل كاملًا في ظروف تمثيلية.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.operations",
+      "label": "التكلفة والتشغيل",
+      "description": "احسب الجهد المستمر للأشخاص والأنظمة.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    },
+    {
+      "id": "agent.rollout",
+      "label": "الإدخال والمراجعة",
+      "description": "خطّط للتجربة والاعتماد والتوسع والخروج.",
+      "perspectiveHint": "افصل توقعات الراعي وملاحظات العاملين المباشرين والتقييمات التقنية."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.use_case",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "ما العمل الذي ينبغي تغييره ولمن؟",
+      "help": "اذكر طلبًا حقيقيًا والمخرج المطلوب ومَن يستخدمه. تجنب هدفًا مثل مجرد إدخال الذكاء الاصطناعي.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "project.intent.trigger",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "كيف ينبغي أن يبدأ العمل؟",
+      "help": "حدّد التكرار والحجم والمواعيد والحد الفاصل بين مهمة وأخرى.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "request",
+          "label": "بطلب شخص"
+        },
+        {
+          "value": "event",
+          "label": "عند وقوع حدث محدد"
+        },
+        {
+          "value": "schedule",
+          "label": "وفق جدول"
+        },
+        {
+          "value": "monitor",
+          "label": "مراقبة مستمرة"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "في أي مرحلة توجد هذه المبادرة؟",
+      "help": "للأنظمة الحالية، حدّد السلوك الذي يجب الحفاظ عليه أو تغييره.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "إدخال جديد"
+        },
+        {
+          "value": "redesign",
+          "label": "إعادة تصميم"
+        },
+        {
+          "value": "extension",
+          "label": "توسيع تطبيق حالي"
+        },
+        {
+          "value": "repair",
+          "label": "إصلاح تطبيق حالي"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.exclusions",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "ما الذي يقع خارج هذه المبادرة؟",
+      "help": "اذكر القرارات والمستخدمين ومسارات العمل المستبعدة وأسباب استبعادها.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.workflow.workflow",
+      "category": "agent.workflow",
+      "order": 50,
+      "prompt": "كيف يُنجز هذا العمل اليوم؟",
+      "help": "تتبّع المدخلات ثم الحكم ثم الإجراء ثم المراجعة ثم التسليم، بما يشمل التنسيق غير الرسمي والاستثناءات.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.workflow.bottleneck",
+      "category": "agent.workflow",
+      "order": 60,
+      "prompt": "أين تقع العقبة الرئيسية الملحوظة؟",
+      "help": "سجّل الأدلة ومَن يعاني التأخير؛ ميّز بين بطء المهمة وانتظار القرار.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "search",
+          "label": "العثور على المعلومات"
+        },
+        {
+          "value": "production",
+          "label": "إنتاج النتيجة"
+        },
+        {
+          "value": "judgment",
+          "label": "إصدار الأحكام"
+        },
+        {
+          "value": "coordination",
+          "label": "التنسيق والموافقات"
+        },
+        {
+          "value": "rework",
+          "label": "الأخطاء وإعادة العمل"
+        },
+        {
+          "value": "capacity",
+          "label": "نقص التوافر"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.baseline",
+      "category": "agent.workflow",
+      "order": 70,
+      "prompt": "ما الأدلة التي تصف الأداء الحالي؟",
+      "help": "حدّد الفترة وحجم العينة وحجم العمل والجودة والوقت البشري والانتظار. تبقى التقديرات تقديرات.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "measured",
+          "label": "قياس على عمل تمثيلي"
+        },
+        {
+          "value": "partial",
+          "label": "سجلات جزئية"
+        },
+        {
+          "value": "estimated",
+          "label": "تقديرات فقط"
+        },
+        {
+          "value": "not_measured",
+          "label": "لم يُقَس بعد"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.variation",
+      "category": "agent.workflow",
+      "order": 80,
+      "prompt": "ما مدى قابلية التنبؤ بالمهام والاستثناءات؟",
+      "help": "اذكر حالة روتينية وأخرى صعبة، تشمل مدخلات ناقصة أو متناقضة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "خطوات ثابتة غالبًا"
+        },
+        {
+          "value": "branches",
+          "label": "تفرعات واستثناءات معروفة"
+        },
+        {
+          "value": "open",
+          "label": "يجب اكتشاف الخطوات"
+        },
+        {
+          "value": "mixed",
+          "label": "مزيج"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.benefit",
+      "category": "agent.outcomes",
+      "order": 90,
+      "prompt": "ما الفائدة ذات الأولوية؟",
+      "help": "حدّد المستفيد. تسريع المخرجات لا يخفض بالضرورة حجم العمل الإجمالي.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "time",
+          "label": "تقليل وقت العمل البشري"
+        },
+        {
+          "value": "cost",
+          "label": "تقليل التكلفة الإجمالية"
+        },
+        {
+          "value": "quality",
+          "label": "تحسين الجودة أو الاتساق"
+        },
+        {
+          "value": "speed",
+          "label": "تقليل زمن التسليم"
+        },
+        {
+          "value": "coverage",
+          "label": "معالجة حالات أكثر أو تغطية ساعات أكثر"
+        },
+        {
+          "value": "capability",
+          "label": "إتاحة عمل كان غير عملي"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.hypothesis",
+      "category": "agent.outcomes",
+      "order": 100,
+      "prompt": "لماذا تحقق الطريقة المقترحة هذه الفائدة؟",
+      "help": "اذكر الفرضية السببية والأدلة والافتراضات وما قد يدحضها. العرض التجريبي ليس دليل تشغيل فعلي.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.outcomes.target",
+      "category": "agent.outcomes",
+      "order": 110,
+      "prompt": "ما التغيير القابل للقياس الذي يُعد نجاحًا؟",
+      "help": "حدّد خط الأساس والهدف والفترة والمقام ومسؤول القياس. احسب المراجعة والتصحيح والتصعيد ضمن الجهد الإجمالي.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.outcomes.tradeoffs",
+      "category": "agent.outcomes",
+      "order": 120,
+      "prompt": "ما الذي يجب ألا يسوء عند السعي للفائدة؟",
+      "help": "حدّد المفاضلات المقبولة بين الجودة والتكلفة والسرعة وعبء الموظفين وتجربة المستخدم.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.fit.alternatives",
+      "category": "agent.fit",
+      "order": 130,
+      "prompt": "ما الطرق التي ينبغي مقارنتها؟",
+      "help": "أدرج أقل طريقة قابلة للتنفيذ تعقيدًا؛ يظل عدم استخدام وكيل نتيجة مشروعة.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "process",
+          "label": "تحسين العملية دون ذكاء اصطناعي"
+        },
+        {
+          "value": "automation",
+          "label": "أتمتة ثابتة"
+        },
+        {
+          "value": "assistant",
+          "label": "اقتراحات ذكاء اصطناعي يراجعها شخص"
+        },
+        {
+          "value": "workflow",
+          "label": "ذكاء اصطناعي ضمن مسار مضبوط"
+        },
+        {
+          "value": "agent",
+          "label": "وكيل يختار الخطوات والأدوات"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.autonomy",
+      "category": "agent.fit",
+      "order": 140,
+      "prompt": "ما الذي يجوز للنظام فعله دون موافقة جديدة؟",
+      "help": "افصل توليد الاقتراح عن تغيير نظام خارجي. حدّد النطاق والحدود في الملاحظة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "advice",
+          "label": "إجابة أو مسودة فقط"
+        },
+        {
+          "value": "approve_each",
+          "label": "التنفيذ بعد موافقة لكل إجراء"
+        },
+        {
+          "value": "bounded",
+          "label": "التنفيذ ضمن حدود متفق عليها مسبقًا"
+        },
+        {
+          "value": "supervised",
+          "label": "السعي لهدف مع نقاط تحقق"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.necessity",
+      "category": "agent.fit",
+      "order": 150,
+      "prompt": "ما الذي يتطلب تخطيطًا تكيفيًا أو اختيار أدوات؟",
+      "help": "اذكر حالة لا تعالجها الأتمتة الثابتة أو صرّح بأن الحاجة لم تثبت.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.fit.feasibility",
+      "category": "agent.fit",
+      "order": 160,
+      "prompt": "ما الأدلة الداعمة للجدوى التقنية؟",
+      "help": "حدّد الأنظمة والإصدارات والبيانات والقيود المختبرة؛ ميّز ادعاءات المورّد عن تقييمك.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "claim",
+          "label": "أوصاف أو ادعاءات مورّد فقط"
+        },
+        {
+          "value": "demo",
+          "label": "عرض تجريبي مضبوط"
+        },
+        {
+          "value": "representative",
+          "label": "تقييم مهام تمثيلية"
+        },
+        {
+          "value": "operational",
+          "label": "أدلة تشغيلية قابلة للمقارنة"
+        },
+        {
+          "value": "not_tested",
+          "label": "لم يُختبر بعد"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.stakeholders",
+      "category": "agent.people",
+      "order": 170,
+      "prompt": "توقعات مَن أو عبء عمل مَن قد يختلف؟",
+      "help": "افصل الراعي والمستخدم المباشر والمراجع والمتلقي وغير المستخدمين المتأثرين. سجّل الخلافات كمساهمات منفصلة.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.people.owner",
+      "category": "agent.people",
+      "order": 180,
+      "prompt": "مَن يتحمل مسؤولية النتيجة ويعتمد تغييرات النطاق؟",
+      "help": "حدّد أدوار نتائج الأعمال وتشغيل النظام والقرار النهائي؛ المورّد ليس تلقائيًا صاحب مسؤولية الأعمال.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.people.review_capacity",
+      "category": "agent.people",
+      "order": 190,
+      "prompt": "مَن يستطيع معالجة المراجعات والاستثناءات ومتى؟",
+      "help": "حدّد الكفاءة والحجم وزمن الاستجابة والتغطية وما يحدث عند غياب الرد.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "staffed",
+          "label": "مسؤول محدد بقدرة مختبرة"
+        },
+        {
+          "value": "planned",
+          "label": "مسؤول محدد بقدرة غير مختبرة"
+        },
+        {
+          "value": "unassigned",
+          "label": "لا مراجع محدد"
+        },
+        {
+          "value": "not_required",
+          "label": "لا مراجعة بشرية مخططة"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.handoff",
+      "category": "agent.people",
+      "order": 200,
+      "prompt": "ما الذي يجب أن يتلقاه الشخص عند تسلّم العمل؟",
+      "help": "أدرج الطلب الأصلي والإجراءات المنفّذة والأدلة والشكوك والخطوات الآمنة التالية؛ حدّد مَن يؤكد التسليم.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.data.sources",
+      "category": "agent.data",
+      "order": 210,
+      "prompt": "ما المصادر المسموح لها بإثراء العمل؟",
+      "help": "اذكر المصادر المعتمدة ومسؤولي الوصول والتنسيقات وحداثة المعلومات وما ينقصها.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.data.sensitivity",
+      "category": "agent.data",
+      "order": 220,
+      "prompt": "ما أنواع البيانات المعنية؟",
+      "help": "صف الفئات دون إدخال أسرار فعلية أو سجلات شخصية في هذا الاستبيان.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "public",
+          "label": "معلومات عامة"
+        },
+        {
+          "value": "internal",
+          "label": "معلومات داخلية"
+        },
+        {
+          "value": "confidential",
+          "label": "معلومات أعمال سرية"
+        },
+        {
+          "value": "personal",
+          "label": "معلومات شخصية"
+        },
+        {
+          "value": "credentials",
+          "label": "بيانات اعتماد تُعالج بآلية محمية"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.data.transfer",
+      "category": "agent.data",
+      "order": 230,
+      "prompt": "أين يجوز معالجة البيانات والسجلات أو الاحتفاظ بها؟",
+      "help": "حدّد الخدمات المعتمدة والمناطق والاحتفاظ والحذف والاستخدام في التدريب ومَن يتحقق من الشروط.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.data.missing",
+      "category": "agent.data",
+      "order": 240,
+      "prompt": "ماذا ينبغي أن يحدث عند نقص المعلومات أو تعارضها؟",
+      "help": "حدّد الحد بين فرضية موسومة وحقيقة، وأي فجوات تمنع التنفيذ.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "ask",
+          "label": "سؤال الشخص المسؤول"
+        },
+        {
+          "value": "retrieve",
+          "label": "الرجوع أولًا إلى مصادر معتمدة"
+        },
+        {
+          "value": "hypothesis",
+          "label": "تقديم بدائل موسومة دون تنفيذ"
+        },
+        {
+          "value": "stop",
+          "label": "التوقف وتسليم العمل"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.tools",
+      "category": "agent.actions",
+      "order": 250,
+      "prompt": "ما الأنظمة والواجهات اللازمة؟",
+      "help": "سجّل APIs أو عمليات الواجهة ونطاق القراءة والكتابة وحسابات الخدمة وبيئات الاختبار ومسؤولية التكامل.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.actions.effects",
+      "category": "agent.actions",
+      "order": 260,
+      "prompt": "ما التغييرات الفعلية التي يجب أن يجريها النظام؟",
+      "help": "ميّز التحضير للإجراء عن تنفيذه؛ أضف حدودًا لكل إجراء.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "draft",
+          "label": "إنشاء مسودات أو توصيات"
+        },
+        {
+          "value": "write",
+          "label": "تغيير سجلات أو ملفات داخلية"
+        },
+        {
+          "value": "send",
+          "label": "إرسال أو نشر خارجي"
+        },
+        {
+          "value": "purchase",
+          "label": "تقديم طلبات شراء أو إنفاق مال"
+        },
+        {
+          "value": "access",
+          "label": "تغيير الوصول أو الإعدادات"
+        },
+        {
+          "value": "delete",
+          "label": "حذف بيانات"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.approval",
+      "category": "agent.actions",
+      "order": 270,
+      "prompt": "ما الإجراءات التي تتطلب موافقة مَن؟",
+      "help": "اربط كل إجراء بدور وحد ومدة صلاحية للموافقة وسجل. لا تعتبر الصمت موافقة مطلقًا.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.actions.permissions",
+      "category": "agent.actions",
+      "order": 280,
+      "prompt": "كيف ستُفرض حدود الإجراءات المسموحة؟",
+      "help": "اشرح الهوية والحد الأدنى اللازم للوصول والتحقق من الأدوات والعزل وفحوص التفويض خارج مخرجات النموذج.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.context.memory",
+      "category": "agent.context",
+      "order": 290,
+      "prompt": "ما الذي ينبغي الاحتفاظ به بين المهام؟",
+      "help": "حدّد الغرض والملكية والاحتفاظ والتصحيح والفصل بين المستخدمين أو المؤسسات.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "session",
+          "label": "المهمة الحالية فقط"
+        },
+        {
+          "value": "project",
+          "label": "سياق المشروع"
+        },
+        {
+          "value": "user",
+          "label": "تفضيلات خاصة بالمستخدم"
+        },
+        {
+          "value": "knowledge",
+          "label": "معرفة مشتركة معتمدة"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.context.precedence",
+      "category": "agent.context",
+      "order": 300,
+      "prompt": "ما التعليمات التي تسود عند تعارض الفرضيات؟",
+      "help": "حدّد مصادر الصلاحية والإصدارات ومَن يحسم الخلاف. افصل المحتوى المقتبس عن التعليمات.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.context.untrusted",
+      "category": "agent.context",
+      "order": 310,
+      "prompt": "كيف تُعالج التعليمات داخل المحتوى المسترجع؟",
+      "help": "خطّط لمواجهة حقن التعليمات: محتوى غير موثوق يحاول توجيه الأفعال أو كشف البيانات أو توسيع الصلاحيات.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.context.coordination",
+      "category": "agent.context",
+      "order": 320,
+      "prompt": "كيف ينتقل السياق بين الأشخاص أو الأدوات أو الوكلاء؟",
+      "help": "حدّد السجلات المشتركة والملكية ومنع تكرار العمل وحل التعارضات. تعدد الوكلاء اختياري.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.boundaries.failure_impact",
+      "category": "agent.boundaries",
+      "order": 330,
+      "prompt": "ما الإخفاقات المؤثرة وعلى مَن؟",
+      "help": "استخدم حالات ملموسة: إجابات خاطئة مقنعة أو إغفال أو إجراءات مكررة أو كشف بيانات أو تأخير أو انقطاع الخدمة.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.boundaries.prohibitions",
+      "category": "agent.boundaries",
+      "order": 340,
+      "prompt": "ما الذي يجب ألا يُفوّض أو يُنفّذ مطلقًا؟",
+      "help": "سجّل الحدود الملزمة منفصلة عن التفضيلات وحدّد مَن يحق له تعديلها.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.boundaries.stop",
+      "category": "agent.boundaries",
+      "order": 350,
+      "prompt": "متى وكيف يمكن إيقاف التنفيذ؟",
+      "help": "حدّد المحفزات ومسؤولي الإيقاف وحدود الإجراءات والوقت والإنفاق وإلغاء العمل المنتظر والحالة الآمنة بعد الإيقاف.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.boundaries.recovery",
+      "category": "agent.boundaries",
+      "order": 360,
+      "prompt": "كيف تُكتشف الإخفاقات ويُتعافى منها؟",
+      "help": "غطِّ السجلات والنسخ الاحتياطية والتراجع والإجراءات التعويضية وإعادة المحاولة الآمنة والبديل اليدوي ومسؤول الاستجابة.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.evaluation.cases",
+      "category": "agent.evaluation",
+      "order": 370,
+      "prompt": "ما المهام التمثيلية المستخدمة في التقييم؟",
+      "help": "أدرج المدخلات الروتينية والصعبة والناقصة والمتعارضة والعدائية مع النتائج المتوقعة وإذن الوصول.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.evaluation.comparison",
+      "category": "agent.evaluation",
+      "order": 380,
+      "prompt": "كيف تُقارن الطريقة المقترحة بعدل؟",
+      "help": "استخدم حجم عمل ومعايير جودة قابلة للمقارنة، واحسب تكلفة التصحيح البشري وميّز المؤشرات البديلة عن نتائج الأعمال.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.evaluation.evidence",
+      "category": "agent.evaluation",
+      "order": 390,
+      "prompt": "ما أدلة التقييم الموجودة الآن؟",
+      "help": "سجّل الإصدار والتاريخ وحجم العينة والإخفاقات الملحوظة والقيود؛ لا تستنتج أدلة من مجرد خطة.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "not_run",
+          "label": "لم يُجرَ التقييم بعد"
+        },
+        {
+          "value": "demo",
+          "label": "أمثلة منتقاة فقط"
+        },
+        {
+          "value": "offline",
+          "label": "تقييم تمثيلي خارج التشغيل"
+        },
+        {
+          "value": "pilot",
+          "label": "تجربة تشغيل محدودة"
+        },
+        {
+          "value": "production",
+          "label": "أدلة تشغيلية خاضعة للمراقبة"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.evaluation.gate",
+      "category": "agent.evaluation",
+      "order": 400,
+      "prompt": "ما الشروط التي تسمح بالإطلاق أو تفرض الرفض؟",
+      "help": "حدّد حدود الجودة والأثر والتكلفة والنطاق وصاحب القرار والمسائل المعلّقة التي تمنع الإطلاق.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.operations.hosting",
+      "category": "agent.operations",
+      "order": 410,
+      "prompt": "ما بيئة التشغيل والمورّدون المسموح بهم؟",
+      "help": "سجّل قيود النشر ومعايير اختيار النموذج أو الخدمة والتوافر واعتماديات التكامل وقابلية النقل.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.operations.budget",
+      "category": "agent.operations",
+      "order": 420,
+      "prompt": "ما حد التكلفة الإجمالية وكيف ستُضبط؟",
+      "help": "احسب الاستخدام والأدوات والبنية والتكامل والمراجعة والتصحيح والتدريب والصيانة؛ حدّد حدودًا لكل مهمة وحدودًا دورية.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.operations.monitoring",
+      "category": "agent.operations",
+      "order": 430,
+      "prompt": "ما الذي يجب ملاحظته أثناء التشغيل؟",
+      "help": "اربط كل مقياس أو سجل بمتلقٍ واستجابة. قلّل البيانات الحساسة في السجلات.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "quality",
+          "label": "جودة النتائج والأخطاء"
+        },
+        {
+          "value": "cost",
+          "label": "التكلفة والاستخدام"
+        },
+        {
+          "value": "latency",
+          "label": "أوقات الإكمال والانتظار"
+        },
+        {
+          "value": "actions",
+          "label": "الإجراءات والتفويضات"
+        },
+        {
+          "value": "handoffs",
+          "label": "المراجعات البشرية والتصعيد"
+        },
+        {
+          "value": "drift",
+          "label": "تغييرات المدخلات أو السلوك"
+        },
+        {
+          "value": "none",
+          "label": "لا شيء",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.operations.maintenance",
+      "category": "agent.operations",
+      "order": 440,
+      "prompt": "مَن يصون النظام ويعيد التحقق منه؟",
+      "help": "غطِّ تغييرات النموذج والتعليمات والأدوات والصلاحيات والبيانات؛ احتفظ بالإصدارات ونتائج التقييم ومسارات التراجع.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.rollout.entry",
+      "category": "agent.rollout",
+      "order": 450,
+      "prompt": "كيف ينبغي أن تتم البداية الأولى؟",
+      "help": "حدّد المستخدمين وحجم العمل والمدة وحدود التعرض في المرحلة الأولى.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sandbox",
+          "label": "بيئة معزولة ببيانات اختبار"
+        },
+        {
+          "value": "shadow",
+          "label": "الملاحظة والمقارنة دون تنفيذ"
+        },
+        {
+          "value": "pilot",
+          "label": "تجربة محدودة بإشراف"
+        },
+        {
+          "value": "direct",
+          "label": "إدخال مباشر في التشغيل"
+        },
+        {
+          "value": "other",
+          "label": "غير ذلك (وضّح)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "غير محسوم",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "طلب مقترح",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.rollout.adoption",
+      "category": "agent.rollout",
+      "order": 460,
+      "prompt": "كيف سيتعلم الناس ويكيّفون عملهم؟",
+      "help": "حدّد التدريب والتغذية الراجعة وتغيرات العبء وبديلًا للحالات التي لا يستطيع الوكيل معالجتها.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.rollout.scale",
+      "category": "agent.rollout",
+      "order": 470,
+      "prompt": "ما الأدلة التي تسمح بتوسيع النطاق أو الاستقلالية؟",
+      "help": "زيادة المستخدمين أو البيانات أو الأدوات أو الصلاحيات قرار جديد له مسؤول وتقييم، وليست مكافأة تلقائية للنجاح.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    },
+    {
+      "questionId": "agent.rollout.exit",
+      "category": "agent.rollout",
+      "order": 480,
+      "prompt": "متى تُراجع الخطة أو تُقلّص أو تُوقف؟",
+      "help": "حدّد المواعيد والمحفزات وصاحب القرار وكيف تعود البيانات والعمل غير المكتمل والمسؤوليات إلى الأشخاص أو نظام آخر.",
+      "responseType": "long-text",
+      "placeholder": "صف مثالًا والأدلة والحدود والمسائل المعلّقة."
+    }
+  ]
+}

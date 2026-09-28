@@ -1,0 +1,1688 @@
+{
+  "templateId": "web-small-app",
+  "templateVersion": "0.1.0",
+  "locale": "zh-hant",
+  "direction": "ltr",
+  "template": {
+    "name": "網站與小型 Web 應用程式",
+    "summary": "明確網站或邊界清晰的 Web 應用程式的工作前提。"
+  },
+  "answerContext": {
+    "answeringFrom": "回答來源",
+    "recordedBy": "記錄者",
+    "speakingAs": "回答時的角色",
+    "captureMethod": "資訊獲取方式",
+    "authority": "此回答的權限",
+    "confirmation": "來源確認狀態",
+    "changeForQuestion": "為此問題更改",
+    "multiplePerspectives": "新增其他視角"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "已確認",
+      "description": "將此內容作為已採納的專案前提。"
+    },
+    {
+      "value": "provisional",
+      "label": "暫定",
+      "description": "暫時採用，但明確保留修改的可能。"
+    },
+    {
+      "value": "unspecified",
+      "label": "未決定",
+      "description": "保持未決。不得讓 AI 擅自補全。"
+    },
+    {
+      "value": "proposal_requested",
+      "label": "請求提案",
+      "description": "請求備選方案或建議，但不將其視為已選定。"
+    },
+    {
+      "value": "delegated",
+      "label": "在限定範圍內委託",
+      "description": "允許實施者或 AI 在規定範圍內決定，並報告選擇。"
+    },
+    {
+      "value": "not_applicable",
+      "label": "不適用",
+      "description": "將此問題標記為不屬於此專案。"
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "請選擇回答代表誰的視角，以及由誰記錄。",
+    "validation.speakingRoleMismatch": "所選回答角色未分配給該參與者。",
+    "validation.inferenceUnconfirmed": "推斷所得的回答，在有權人員核實前必須保持未確認。",
+    "validation.resolutionAuthorityRequired": "確認此前提需要有決策權的資訊來源。",
+    "validation.exclusiveChoice": "此選項不能與其他選項同時選擇。",
+    "validation.noteRequired": "請新增簡短備註，說明此選擇。",
+    "validation.selectionLimit": "請減少所選選項數量。",
+    "review.authRuntime": "身份驗證在範圍內，但所選執行模式可能需要外部或伺服器組件。",
+    "review.paymentHandling": "支付相關資料在範圍內。請確認由誰處理，以及專案是否可以儲存其中任何資料。",
+    "review.analyticsPrivacy": "分析或遙測在範圍內。請重新檢查隱私邊界、同意機制與禁止的做法。"
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "專案意圖",
+      "description": "明確要建置什麼、為何重要，以及目前階段。",
+      "perspectiveHint": "優先記錄需求提出者或決策負責人的意見。開發者的理解應作為單獨的來源回答記錄。"
+    },
+    {
+      "id": "audience.context",
+      "label": "受眾與場景",
+      "description": "描述結果的使用者及其使用條件。",
+      "perspectiveHint": "盡可能將實際最終使用者的輸入與專案團隊的假設分別記錄。"
+    },
+    {
+      "id": "scope.deliverables",
+      "label": "範圍與交付物",
+      "description": "明確發行範圍、必需界面與排除事項。",
+      "perspectiveHint": "需求提出者可以描述期望範圍；開發者應單獨記錄可行性與實施影響。"
+    },
+    {
+      "id": "content.data",
+      "label": "內容與資料",
+      "description": "明確內容責任，以及如何處理使用者輸入的資料。",
+      "perspectiveHint": "編輯事實由內容負責人提供；資料處理由有權的技術或隱私負責人確認。"
+    },
+    {
+      "id": "design.interaction",
+      "label": "設計與互動",
+      "description": "記錄視覺方向與互動偏好，避免將其混為一談於硬性限制。",
+      "perspectiveHint": "分別保留最終使用者的觀察、需求提出者的偏好與設計師的建議。"
+    },
+    {
+      "id": "technology.runtime",
+      "label": "技術與執行環境",
+      "description": "明確技術棧的靈活性、執行邊界、瀏覽器支持與外部服務。",
+      "perspectiveHint": "開發者可以推薦實現方式。請記錄該建議是參考意見，還是經授權的技術決定。"
+    },
+    {
+      "id": "quality.accessibility",
+      "label": "品質與無障礙",
+      "description": "確定無障礙、回應式表現與性能的預期水平。",
+      "perspectiveHint": "結合觀察到的使用者需求與技術或合規權限，不能用其中一方取代另一方。"
+    },
+    {
+      "id": "risk.boundaries",
+      "label": "風險與邊界",
+      "description": "說明哪些事情不得發生，以及哪些失敗會造成高昂代價。",
+      "perspectiveHint": "硬性禁令應由決策負責人或相關領域有權人員確認。"
+    },
+    {
+      "id": "delivery.operations",
+      "label": "交付與維運",
+      "description": "明確托管、部署、維護與交接的預期。",
+      "perspectiveHint": "將維護者的維運需求與開發者偏好的工作流程分別記錄。"
+    },
+    {
+      "id": "acceptance.validation",
+      "label": "驗收與驗證",
+      "description": "明確由誰驗收，以及哪些證據足以判定完成。",
+      "perspectiveHint": "最終決議應來自有權驗收此次發行的個人或群體。"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.project_kind",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "您要建置什麼？",
+      "help": "請選擇最接近此次發行主要形態的選項。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "informational_site",
+          "label": "資訊網站"
+        },
+        {
+          "value": "landing_page",
+          "label": "落地頁"
+        },
+        {
+          "value": "portfolio",
+          "label": "作品集"
+        },
+        {
+          "value": "public_content_site",
+          "label": "公開內容網站"
+        },
+        {
+          "value": "browser_local_utility",
+          "label": "瀏覽器本機工具"
+        },
+        {
+          "value": "small_web_app",
+          "label": "小型 Web 應用程式"
+        },
+        {
+          "value": "mixed",
+          "label": "混合類型的發行",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.primary_outcome",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "此次發行最主要應實現什麼結果？",
+      "help": "當必須權衡時，選擇應優先保障的結果。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "explain_information",
+          "label": "幫助人們理解資訊"
+        },
+        {
+          "value": "generate_leads",
+          "label": "獲取咨詢或潛在客戶"
+        },
+        {
+          "value": "showcase_work",
+          "label": "展示作品或資歷"
+        },
+        {
+          "value": "complete_workflow",
+          "label": "讓使用者完成工作流程"
+        },
+        {
+          "value": "provide_utility",
+          "label": "提供專注的工具或實用功能"
+        },
+        {
+          "value": "publish_content",
+          "label": "發布或組織內容"
+        },
+        {
+          "value": "validate_idea",
+          "label": "驗證想法或原型"
+        },
+        {
+          "value": "other",
+          "label": "其他結果",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "專案處於哪個階段？",
+      "help": "這會決定工作應新建、保留、擴展還是修復現有行為。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "全新開發"
+        },
+        {
+          "value": "redesign",
+          "label": "重新設計"
+        },
+        {
+          "value": "extension",
+          "label": "擴展"
+        },
+        {
+          "value": "repair",
+          "label": "修復"
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.success_evidence",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "什麼可觀察的結果能證明此次發行有價值？",
+      "help": "描述證據，而非籠統的愿望。簡短回答即可。",
+      "responseType": "long-text",
+      "placeholder": "例如：首次訪問者能夠理解服務內容，並在無人協助下提交咨詢。"
+    },
+    {
+      "questionId": "audience.context.primary_group",
+      "category": "audience.context",
+      "order": 50,
+      "prompt": "主要受眾是誰？",
+      "help": "選擇首個版本應優先滿足需求的群體。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "general_public",
+          "label": "公眾"
+        },
+        {
+          "value": "prospective_customers",
+          "label": "潛在客戶"
+        },
+        {
+          "value": "existing_customers",
+          "label": "現有客戶"
+        },
+        {
+          "value": "internal_staff",
+          "label": "內部員工"
+        },
+        {
+          "value": "professionals",
+          "label": "專業人士或專家"
+        },
+        {
+          "value": "creators",
+          "label": "創作者或貢獻者"
+        },
+        {
+          "value": "students_researchers",
+          "label": "學生或研究人員"
+        },
+        {
+          "value": "defined_community",
+          "label": "明確的社群"
+        },
+        {
+          "value": "mixed",
+          "label": "多個同等重要的群體",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "其他受眾",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.relationship",
+      "category": "audience.context",
+      "order": 60,
+      "prompt": "大多數使用者與專案是什麼關係？",
+      "help": "這有助於確定入門引導、說明與導航的深度。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "first_time_visitors",
+          "label": "主要是首次訪問者"
+        },
+        {
+          "value": "occasional_visitors",
+          "label": "偶爾訪問者"
+        },
+        {
+          "value": "returning_users",
+          "label": "回訪使用者"
+        },
+        {
+          "value": "authenticated_members",
+          "label": "已驗證身份的會員"
+        },
+        {
+          "value": "known_internal_users",
+          "label": "已知的內部使用者"
+        },
+        {
+          "value": "mixed",
+          "label": "混合受眾"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.domain_familiarity",
+      "category": "audience.context",
+      "order": 70,
+      "prompt": "主要受眾對主題有多熟悉？",
+      "help": "盡可能根據觀察或報告得知的使用者知識作答。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不假定具有任何先驗知識"
+        },
+        {
+          "value": "basic",
+          "label": "基本了解"
+        },
+        {
+          "value": "working",
+          "label": "具有實用知識"
+        },
+        {
+          "value": "expert",
+          "label": "具有專家知識"
+        },
+        {
+          "value": "mixed",
+          "label": "知識水平差異很大"
+        }
+      ]
+    },
+    {
+      "questionId": "audience.context.primary_context",
+      "category": "audience.context",
+      "order": 80,
+      "prompt": "專案會在什麼條件下使用？",
+      "help": "選擇所有對設計或實施有實質影響的條件。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "mobile_on_move",
+          "label": "移動中使用手機"
+        },
+        {
+          "value": "mobile_stationary",
+          "label": "靜止時使用手機"
+        },
+        {
+          "value": "desktop_office",
+          "label": "辦公室桌面版"
+        },
+        {
+          "value": "desktop_home",
+          "label": "家中桌面版"
+        },
+        {
+          "value": "tablet_or_kiosk",
+          "label": "平板或自助終端"
+        },
+        {
+          "value": "constrained_network",
+          "label": "緩慢或不穩定的網路"
+        },
+        {
+          "value": "assistive_technology",
+          "label": "輔助技術"
+        },
+        {
+          "value": "mixed",
+          "label": "混合或不可預測的條件"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.required_surfaces",
+      "category": "scope.deliverables",
+      "order": 90,
+      "prompt": "此次發行需要哪些界面？",
+      "help": "只選此次發行必須具備的內容，不包含未來可能的新增內容。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "home_or_entry",
+          "label": "首頁或入口視圖"
+        },
+        {
+          "value": "content_pages",
+          "label": "內容頁面"
+        },
+        {
+          "value": "listing_or_index",
+          "label": "列表或索引"
+        },
+        {
+          "value": "detail_views",
+          "label": "詳情視圖"
+        },
+        {
+          "value": "form",
+          "label": "表單"
+        },
+        {
+          "value": "dashboard",
+          "label": "儀表板或工作區"
+        },
+        {
+          "value": "settings",
+          "label": "設置"
+        },
+        {
+          "value": "authentication",
+          "label": "登錄或帳戶流程"
+        },
+        {
+          "value": "admin",
+          "label": "管理界面"
+        },
+        {
+          "value": "legal",
+          "label": "法律或政策頁面"
+        },
+        {
+          "value": "error_empty_states",
+          "label": "錯誤與空狀態"
+        },
+        {
+          "value": "other",
+          "label": "其他必需界面",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.primary_user_action",
+      "category": "scope.deliverables",
+      "order": 100,
+      "prompt": "使用者必須能完成的最重要操作是什麼？",
+      "help": "選擇定義主要流程的操作。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "read_or_understand",
+          "label": "閱讀或理解"
+        },
+        {
+          "value": "navigate_or_discover",
+          "label": "瀏覽或發現內容"
+        },
+        {
+          "value": "submit_form",
+          "label": "提交表單"
+        },
+        {
+          "value": "search_or_filter",
+          "label": "搜尋或篩選"
+        },
+        {
+          "value": "create_or_edit",
+          "label": "建立或編輯內容"
+        },
+        {
+          "value": "calculate_or_transform",
+          "label": "計算或轉換資料"
+        },
+        {
+          "value": "upload_or_download",
+          "label": "上傳或下載"
+        },
+        {
+          "value": "manage_account",
+          "label": "登錄或管理帳戶"
+        },
+        {
+          "value": "purchase_or_pay",
+          "label": "購買或支付"
+        },
+        {
+          "value": "other",
+          "label": "其他主要操作",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.release_boundary",
+      "category": "scope.deliverables",
+      "order": 110,
+      "prompt": "首個版本的邊界是什麼？",
+      "help": "選擇目前最明確的邊界。模糊的邊界應保持明顯的未決狀態。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "single_page",
+          "label": "一個頁面"
+        },
+        {
+          "value": "small_fixed_set",
+          "label": "少量固定頁面"
+        },
+        {
+          "value": "bounded_app_flow",
+          "label": "一個邊界清晰的應用程式流程"
+        },
+        {
+          "value": "existing_scope_redesign",
+          "label": "重新設計現有產品範圍"
+        },
+        {
+          "value": "specific_repair",
+          "label": "僅修復特定問題"
+        },
+        {
+          "value": "phased_mvp",
+          "label": "明確定義的最小可行產品階段"
+        },
+        {
+          "value": "not_yet_bounded",
+          "label": "邊界尚不清楚"
+        }
+      ]
+    },
+    {
+      "questionId": "scope.deliverables.explicit_exclusions",
+      "category": "scope.deliverables",
+      "order": 120,
+      "prompt": "哪些內容明確不屬於此次發行？",
+      "help": "列出未經新決定不得加入工作的額外功能或假設。",
+      "responseType": "long-text",
+      "placeholder": "例如：首個版本不包含帳戶、伺服器資料庫、支付和 CMS。"
+    },
+    {
+      "questionId": "content.data.source_owner",
+      "category": "content.data",
+      "order": 130,
+      "prompt": "誰負責專案內容？",
+      "help": "選擇由誰提供或核准文字、媒體與來源資訊。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "owner_supplies_final",
+          "label": "專案負責人提供最終內容"
+        },
+        {
+          "value": "owner_supplies_draft",
+          "label": "專案負責人提供草稿"
+        },
+        {
+          "value": "developer_structures",
+          "label": "開發者整理提供的材料"
+        },
+        {
+          "value": "developer_writes_from_brief",
+          "label": "開發者根據已核准的簡報撰寫"
+        },
+        {
+          "value": "shared_responsibility",
+          "label": "共同負責"
+        },
+        {
+          "value": "migrate_existing",
+          "label": "遷移現有內容"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "尚未指定"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.readiness",
+      "category": "content.data",
+      "order": 140,
+      "prompt": "內容準備到什麼程度？",
+      "help": "評估目前已有的材料，而非預計上線時的狀態。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "final",
+          "label": "已定稿並獲核准"
+        },
+        {
+          "value": "mostly_ready",
+          "label": "大部分已準備好"
+        },
+        {
+          "value": "partial",
+          "label": "已有部分內容"
+        },
+        {
+          "value": "source_material_only",
+          "label": "僅有來源材料"
+        },
+        {
+          "value": "not_started",
+          "label": "尚未開始"
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.user_input_types",
+      "category": "content.data",
+      "order": 150,
+      "prompt": "哪些使用者資料可能進入系統？",
+      "help": "選擇此次發行有意接收的每種資料，包括遙測。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不接收使用者資料",
+          "exclusive": true
+        },
+        {
+          "value": "contact_details",
+          "label": "聯系資訊"
+        },
+        {
+          "value": "account_profile",
+          "label": "帳戶或個人資料"
+        },
+        {
+          "value": "free_text",
+          "label": "自由文字"
+        },
+        {
+          "value": "files",
+          "label": "上傳檔案"
+        },
+        {
+          "value": "payment_related",
+          "label": "支付相關資料"
+        },
+        {
+          "value": "analytics_telemetry",
+          "label": "分析或遙測"
+        },
+        {
+          "value": "location_device",
+          "label": "位置或裝置資料"
+        },
+        {
+          "value": "other",
+          "label": "其他資料類型",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.storage",
+      "category": "content.data",
+      "order": 160,
+      "prompt": "專案資料或使用者輸入的資料可以儲存在哪裡？",
+      "help": "選擇目前最嚴格的邊界。這裡指正在定義的產品，而非 Premise Builder 本身。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_user_data",
+          "label": "不儲存使用者資料"
+        },
+        {
+          "value": "session_only",
+          "label": "僅在目前工作階段內"
+        },
+        {
+          "value": "browser_local_only",
+          "label": "僅在使用者瀏覽器中"
+        },
+        {
+          "value": "server_storage_allowed",
+          "label": "允許使用專案控制的伺服器儲存"
+        },
+        {
+          "value": "third_party_storage",
+          "label": "可由獲核准的第三方儲存"
+        },
+        {
+          "value": "hybrid",
+          "label": "明確定義的本機、伺服器或第三方混合儲存",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "content.data.retention",
+      "category": "content.data",
+      "order": 170,
+      "prompt": "保留的使用者資料可以儲存多久？",
+      "help": "當專案接收可能持續儲存的資料時顯示此問題。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "no_retention",
+          "label": "不保留"
+        },
+        {
+          "value": "until_session_ends",
+          "label": "直到工作階段結束"
+        },
+        {
+          "value": "until_local_deletion",
+          "label": "直到使用者刪除本機資料"
+        },
+        {
+          "value": "fixed_period",
+          "label": "指定期限",
+          "requiresNote": true
+        },
+        {
+          "value": "account_lifetime",
+          "label": "帳戶存續期間"
+        },
+        {
+          "value": "governed_by_policy",
+          "label": "根據已核准的政策",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.tone",
+      "category": "design.interaction",
+      "order": 180,
+      "prompt": "哪些視覺特征應指導設計？",
+      "help": "最多選擇三項。除非另有限制規定為必需，否則這些屬於偏好。",
+      "responseType": "multi-choice",
+      "maxSelections": 3,
+      "choices": [
+        {
+          "value": "minimal",
+          "label": "極簡"
+        },
+        {
+          "value": "editorial",
+          "label": "編輯風格"
+        },
+        {
+          "value": "technical",
+          "label": "技術感"
+        },
+        {
+          "value": "playful",
+          "label": "活潑"
+        },
+        {
+          "value": "premium",
+          "label": "高端"
+        },
+        {
+          "value": "warm",
+          "label": "溫暖"
+        },
+        {
+          "value": "institutional",
+          "label": "機構風格"
+        },
+        {
+          "value": "bold",
+          "label": "醒目"
+        },
+        {
+          "value": "quiet",
+          "label": "安靜"
+        },
+        {
+          "value": "brand_led",
+          "label": "遵循現有品牌"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.brand_source",
+      "category": "design.interaction",
+      "order": 190,
+      "prompt": "專案應遵循什麼視覺體系？",
+      "help": "選擇目前最具權威性的來源。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed_design_system",
+          "label": "固定的設計系統"
+        },
+        {
+          "value": "existing_brand_guidelines",
+          "label": "現有品牌規范"
+        },
+        {
+          "value": "partial_assets",
+          "label": "部分品牌素材"
+        },
+        {
+          "value": "visual_reference_only",
+          "label": "僅有參考示例"
+        },
+        {
+          "value": "no_existing_brand",
+          "label": "沒有現成的視覺體系"
+        },
+        {
+          "value": "preserve_current_ui",
+          "label": "保留目前界面"
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.information_density",
+      "category": "design.interaction",
+      "order": 200,
+      "prompt": "應同時顯示多少資訊？",
+      "help": "根據主要任務與受眾選擇，不只依據個人喜好。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sparse_guided",
+          "label": "簡潔並提供引導"
+        },
+        {
+          "value": "balanced",
+          "label": "均衡"
+        },
+        {
+          "value": "dense_operational",
+          "label": "高密度、面向操作"
+        },
+        {
+          "value": "progressive_disclosure",
+          "label": "逐步展示詳情"
+        },
+        {
+          "value": "varies_by_view",
+          "label": "因視圖而異",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "design.interaction.motion",
+      "category": "design.interaction",
+      "order": 210,
+      "prompt": "應如何使用動畫？",
+      "help": "動畫不得掩蓋狀態，也不得妨礙減少動態效果的偏好。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不使用非必要動畫"
+        },
+        {
+          "value": "subtle_feedback",
+          "label": "僅提供輕微狀態回饋"
+        },
+        {
+          "value": "moderate_transitions",
+          "label": "適度過渡效果"
+        },
+        {
+          "value": "expressive",
+          "label": "在有用時使用表現性動畫"
+        },
+        {
+          "value": "reduced_motion_first",
+          "label": "優先減少動態效果"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.stack_policy",
+      "category": "technology.runtime",
+      "order": 220,
+      "prompt": "實現技術棧有多固定？",
+      "help": "固定技術棧是一種限制；偏好的技術棧仍可接受有理由的替代方案。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "固定技術棧",
+          "requiresNote": true
+        },
+        {
+          "value": "preferred_negotiable",
+          "label": "有偏好但可協商",
+          "requiresNote": true
+        },
+        {
+          "value": "open_to_recommendation",
+          "label": "接受建議"
+        },
+        {
+          "value": "preserve_existing",
+          "label": "保留現有技術棧"
+        },
+        {
+          "value": "static_files_only",
+          "label": "僅使用普通靜態檔案"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.mode",
+      "category": "technology.runtime",
+      "order": 230,
+      "prompt": "產品可以使用什麼執行模式？",
+      "help": "選擇部署後的產品在執行時可以依賴什麼。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fully_static",
+          "label": "完全靜態"
+        },
+        {
+          "value": "browser_local",
+          "label": "靜態加瀏覽器本機狀態"
+        },
+        {
+          "value": "static_external_apis",
+          "label": "靜態前端加獲核准的外部 API"
+        },
+        {
+          "value": "server_backed",
+          "label": "有伺服器支持的應用"
+        },
+        {
+          "value": "hybrid",
+          "label": "混合執行模式",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.browser_support",
+      "category": "technology.runtime",
+      "order": 240,
+      "prompt": "適用什麼瀏覽器支持邊界？",
+      "help": "選擇可測試的策略，不要承諾支持所有瀏覽器。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "evergreen_current",
+          "label": "目前持續更新的瀏覽器"
+        },
+        {
+          "value": "recent_two_versions",
+          "label": "目前及前兩個主要版本"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "優先支持現代移動瀏覽器"
+        },
+        {
+          "value": "enterprise_legacy",
+          "label": "必須支持企業或舊版瀏覽器",
+          "requiresNote": true
+        },
+        {
+          "value": "specified_matrix",
+          "label": "使用提供的瀏覽器支持矩陣",
+          "requiresNote": true
+        },
+        {
+          "value": "no_special_constraint",
+          "label": "除合理支持現代瀏覽器外無特殊限制"
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.external_services",
+      "category": "technology.runtime",
+      "order": 250,
+      "prompt": "預期需要哪些外部服務？",
+      "help": "選擇此次發行必需的服務。核准、憑證與資料邊界另行確定。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "無外部服務",
+          "exclusive": true
+        },
+        {
+          "value": "cms",
+          "label": "內容管理系統"
+        },
+        {
+          "value": "analytics",
+          "label": "分析"
+        },
+        {
+          "value": "authentication",
+          "label": "身份驗證服務"
+        },
+        {
+          "value": "payments",
+          "label": "支付服務"
+        },
+        {
+          "value": "email_forms",
+          "label": "郵件或表單發送"
+        },
+        {
+          "value": "maps",
+          "label": "地圖或位置服務"
+        },
+        {
+          "value": "ai_api",
+          "label": "AI 服務或 API"
+        },
+        {
+          "value": "other",
+          "label": "其他服務",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "technology.runtime.discoverability",
+      "category": "technology.runtime",
+      "order": 260,
+      "prompt": "使用者應如何發現專案？",
+      "help": "這決定搜尋索引和機器可讀發布是否屬於需求。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "public_search_critical",
+          "label": "公開搜尋可見性至關重要"
+        },
+        {
+          "value": "public_search_helpful",
+          "label": "公開搜尋可見性有幫助"
+        },
+        {
+          "value": "direct_link_only",
+          "label": "通過直接連結訪問即可"
+        },
+        {
+          "value": "private_noindex",
+          "label": "保持私有或禁止索引"
+        },
+        {
+          "value": "app_shell",
+          "label": "僅索引公開的應用外殼"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.target",
+      "category": "quality.accessibility",
+      "order": 270,
+      "prompt": "適用什麼無障礙目標？",
+      "help": "選擇在審查中能夠以證據支持的水平。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "semantic_baseline",
+          "label": "具備語義與可操作性的基本水平"
+        },
+        {
+          "value": "wcag_aa",
+          "label": "WCAG AA 目標"
+        },
+        {
+          "value": "legal_contractual",
+          "label": "法律或合同規定的標準",
+          "requiresNote": true
+        },
+        {
+          "value": "best_effort",
+          "label": "在聲明範圍內盡力實現",
+          "requiresNote": true
+        },
+        {
+          "value": "specific_requirements",
+          "label": "使用提供的無障礙需求",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.keyboard",
+      "category": "quality.accessibility",
+      "order": 280,
+      "prompt": "需要何種程度的鍵盤操作？",
+      "help": "鍵盤訪問包括可見焦點、邏輯順序與可操作控制項。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "all_controls",
+          "label": "全部控制項與流程"
+        },
+        {
+          "value": "primary_flow",
+          "label": "至少包括主要流程"
+        },
+        {
+          "value": "content_navigation",
+          "label": "僅內容導航"
+        },
+        {
+          "value": "fixed_pointer_environment",
+          "label": "固定的僅指針操作環境",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.responsive",
+      "category": "quality.accessibility",
+      "order": 290,
+      "prompt": "回應式設計優先考慮什麼？",
+      "help": "選擇預期的平衡方式，並明確不支持的視口。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mobile_desktop_equal",
+          "label": "行動版與桌面版同等重要"
+        },
+        {
+          "value": "mobile_priority",
+          "label": "行動版優先"
+        },
+        {
+          "value": "desktop_priority",
+          "label": "桌面版優先"
+        },
+        {
+          "value": "fixed_environment",
+          "label": "固定顯示環境",
+          "requiresNote": true
+        },
+        {
+          "value": "preserve_current_behavior",
+          "label": "保留目前回應式行為"
+        }
+      ]
+    },
+    {
+      "questionId": "quality.accessibility.performance",
+      "category": "quality.accessibility",
+      "order": 300,
+      "prompt": "什麼性能預期應指導權衡？",
+      "help": "選擇專案能夠驗證的、最有意義的嚴格標準。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "core_web_vitals",
+          "label": "達到約定的 Core Web Vitals 目標"
+        },
+        {
+          "value": "constrained_network",
+          "label": "在受限網路下仍可用"
+        },
+        {
+          "value": "balanced",
+          "label": "平衡速度與功能深度"
+        },
+        {
+          "value": "feature_priority",
+          "label": "必需能力可優先於速度"
+        },
+        {
+          "value": "explicit_budget",
+          "label": "使用提供的性能預算",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.prohibited_practices",
+      "category": "risk.boundaries",
+      "order": 310,
+      "prompt": "禁止哪些做法？",
+      "help": "只選擇硬性邊界。偏好應記錄在相應類別中。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "沒有已知的禁止做法",
+          "exclusive": true
+        },
+        {
+          "value": "inline_css",
+          "label": "內聯 CSS"
+        },
+        {
+          "value": "external_fonts",
+          "label": "外部載入字型"
+        },
+        {
+          "value": "behavioral_tracking",
+          "label": "行為追蹤"
+        },
+        {
+          "value": "nonessential_cookies",
+          "label": "非必要 Cookie"
+        },
+        {
+          "value": "unapproved_cdn",
+          "label": "未經核准的外部 CDN"
+        },
+        {
+          "value": "client_side_secrets",
+          "label": "客戶端程式碼中的秘密憑證"
+        },
+        {
+          "value": "autoplay_media",
+          "label": "自動播放媒體"
+        },
+        {
+          "value": "unconfirmed_destructive_actions",
+          "label": "未經確認的破壞性操作"
+        },
+        {
+          "value": "vendor_lock_in",
+          "label": "供應商鎖定"
+        },
+        {
+          "value": "other",
+          "label": "其他禁令",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.privacy_level",
+      "category": "risk.boundaries",
+      "order": 320,
+      "prompt": "範圍內最高的隱私敏感程度是什麼？",
+      "help": "根據有意設計的資料流中最敏感的一項選擇，而非平均水平。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不涉及個人資料"
+        },
+        {
+          "value": "low_nonsensitive",
+          "label": "低風險、非敏感個人資料"
+        },
+        {
+          "value": "personal_data",
+          "label": "個人資料"
+        },
+        {
+          "value": "sensitive_data",
+          "label": "敏感個人資料"
+        },
+        {
+          "value": "regulated_data",
+          "label": "受監管或特別保護的資料",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "尚不清楚敏感程度"
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.high_cost_failure",
+      "category": "risk.boundaries",
+      "order": 330,
+      "prompt": "哪些失敗會造成最高代價？",
+      "help": "選擇會影響設計、審查或實施優先級的失敗。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "no_unusual_cost",
+          "label": "沒有異常高的失敗代價",
+          "exclusive": true
+        },
+        {
+          "value": "data_loss",
+          "label": "資料丟失"
+        },
+        {
+          "value": "privacy_breach",
+          "label": "隱私或安全泄露"
+        },
+        {
+          "value": "inaccessible_primary_flow",
+          "label": "主要流程無法無障礙使用"
+        },
+        {
+          "value": "wrong_information",
+          "label": "錯誤或誤導性資訊"
+        },
+        {
+          "value": "downtime",
+          "label": "停機或不可用"
+        },
+        {
+          "value": "performance_failure",
+          "label": "性能下降"
+        },
+        {
+          "value": "brand_damage",
+          "label": "品牌或信任受損"
+        },
+        {
+          "value": "scope_overrun",
+          "label": "範圍或成本超支"
+        },
+        {
+          "value": "other",
+          "label": "其他高代價失敗",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "risk.boundaries.compliance",
+      "category": "risk.boundaries",
+      "order": 340,
+      "prompt": "適用哪些合規依據？",
+      "help": "選擇已知的依據。適用時，請在備註中寫明具體標準或政策。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "none_known",
+          "label": "沒有已知的合規要求",
+          "exclusive": true
+        },
+        {
+          "value": "privacy_law",
+          "label": "隱私法律或法規",
+          "requiresNote": true
+        },
+        {
+          "value": "cookie_consent",
+          "label": "Cookie 或同意要求",
+          "requiresNote": true
+        },
+        {
+          "value": "accessibility_law",
+          "label": "無障礙法律或標準",
+          "requiresNote": true
+        },
+        {
+          "value": "copyright_licensing",
+          "label": "版權或許可規則",
+          "requiresNote": true
+        },
+        {
+          "value": "industry_specific",
+          "label": "行業特定規則",
+          "requiresNote": true
+        },
+        {
+          "value": "organization_policy",
+          "label": "組織政策",
+          "requiresNote": true
+        },
+        {
+          "value": "other",
+          "label": "其他合規依據",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.hosting",
+      "category": "delivery.operations",
+      "order": 350,
+      "prompt": "預計將版本托管在哪裡？",
+      "help": "即使部署細節仍屬暫定，也請選擇目前目標。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "github_pages",
+          "label": "GitHub Pages"
+        },
+        {
+          "value": "cloudflare_pages",
+          "label": "Cloudflare Pages"
+        },
+        {
+          "value": "other_static_host",
+          "label": "其他靜態托管服務",
+          "requiresNote": true
+        },
+        {
+          "value": "cloud_application_platform",
+          "label": "雲應用平臺",
+          "requiresNote": true
+        },
+        {
+          "value": "existing_environment",
+          "label": "現有的托管環境",
+          "requiresNote": true
+        },
+        {
+          "value": "local_only",
+          "label": "僅本機使用"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.deployment_workflow",
+      "category": "delivery.operations",
+      "order": 360,
+      "prompt": "應如何部署版本？",
+      "help": "選擇維護者實際能夠操作的流程。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "manual_upload",
+          "label": "手動上傳"
+        },
+        {
+          "value": "git_push_automatic",
+          "label": "Git 推送後自動部署"
+        },
+        {
+          "value": "pull_request_gate",
+          "label": "部署前進行拉取請求審查"
+        },
+        {
+          "value": "platform_cli",
+          "label": "通過平臺命令行部署"
+        },
+        {
+          "value": "existing_ci",
+          "label": "現有 CI/CD 流程",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.maintenance_owner",
+      "category": "delivery.operations",
+      "order": 370,
+      "prompt": "發行後由誰維護專案？",
+      "help": "記錄必須能理解並執行成果的角色。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "original_developer",
+          "label": "原開發者"
+        },
+        {
+          "value": "internal_team",
+          "label": "內部團隊"
+        },
+        {
+          "value": "client_or_owner",
+          "label": "客戶或專案負責人"
+        },
+        {
+          "value": "shared",
+          "label": "共同維護"
+        },
+        {
+          "value": "no_regular_maintenance",
+          "label": "不計劃定期維護"
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "尚未指定"
+        }
+      ]
+    },
+    {
+      "questionId": "delivery.operations.handoff",
+      "category": "delivery.operations",
+      "order": 380,
+      "prompt": "需要什麼程度的交接？",
+      "help": "選擇能讓下一位維護者安全工作的最小交接包。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "source_only",
+          "label": "僅源檔案"
+        },
+        {
+          "value": "source_readme",
+          "label": "源檔案與 README"
+        },
+        {
+          "value": "docs_and_tests",
+          "label": "原始碼、文件與測試"
+        },
+        {
+          "value": "operational_runbook",
+          "label": "文件加維運手冊"
+        },
+        {
+          "value": "full_transfer",
+          "label": "完整移交所有權與訪問權限"
+        },
+        {
+          "value": "ongoing_support",
+          "label": "持續支持安排"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.approver",
+      "category": "acceptance.validation",
+      "order": 390,
+      "prompt": "誰有權驗收此次發行？",
+      "help": "選擇有核准權的角色，而不僅是執行審查的人。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "decision_owner",
+          "label": "決策負責人"
+        },
+        {
+          "value": "requester",
+          "label": "需求提出者或客戶"
+        },
+        {
+          "value": "end_user_representative",
+          "label": "最終使用者代表"
+        },
+        {
+          "value": "technical_reviewer",
+          "label": "技術審查者"
+        },
+        {
+          "value": "compliance_reviewer",
+          "label": "合規審查者"
+        },
+        {
+          "value": "multiple_approvers",
+          "label": "多名核准者",
+          "requiresNote": true
+        },
+        {
+          "value": "not_yet_assigned",
+          "label": "尚未指定"
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.review_method",
+      "category": "acceptance.validation",
+      "order": 400,
+      "prompt": "驗收應採用什麼證據？",
+      "help": "選擇主要審查方式。輔助證據可補充在背景中。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "visual_review",
+          "label": "視覺審查"
+        },
+        {
+          "value": "requirements_checklist",
+          "label": "需求檢查表"
+        },
+        {
+          "value": "scenario_demonstration",
+          "label": "場景演示"
+        },
+        {
+          "value": "automated_tests",
+          "label": "自動化測試結果"
+        },
+        {
+          "value": "accessibility_audit",
+          "label": "無障礙審計"
+        },
+        {
+          "value": "performance_audit",
+          "label": "性能審計"
+        },
+        {
+          "value": "combined",
+          "label": "明確的組合方式",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.must_pass_scenarios",
+      "category": "acceptance.validation",
+      "order": 410,
+      "prompt": "發行前必須通過哪些場景？",
+      "help": "選擇失敗時會阻止驗收的場景。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "primary_content",
+          "label": "主要內容易於理解"
+        },
+        {
+          "value": "primary_action",
+          "label": "使用者主要操作可完成"
+        },
+        {
+          "value": "form_submission",
+          "label": "表單成功提交"
+        },
+        {
+          "value": "local_persistence",
+          "label": "本機儲存與重新載入正常"
+        },
+        {
+          "value": "authentication",
+          "label": "身份驗證流程正常"
+        },
+        {
+          "value": "payment",
+          "label": "支付流程正常"
+        },
+        {
+          "value": "keyboard",
+          "label": "必需的鍵盤流程正常"
+        },
+        {
+          "value": "mobile",
+          "label": "必需的行動版流程正常"
+        },
+        {
+          "value": "import_export",
+          "label": "匯入匯出能保留資料"
+        },
+        {
+          "value": "failure_recovery",
+          "label": "故障與恢復行為正常"
+        },
+        {
+          "value": "other",
+          "label": "其他必過場景",
+          "requiresNote": true
+        }
+      ]
+    },
+    {
+      "questionId": "acceptance.validation.unresolved_policy",
+      "category": "acceptance.validation",
+      "order": 420,
+      "prompt": "未解決的前提應如何影響工作？",
+      "help": "選擇預設策略。個別未知事項仍可採用不同的明確狀態。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "block_dependent_work",
+          "label": "阻止依賴此項的工作"
+        },
+        {
+          "value": "provisional_with_label",
+          "label": "使用清楚標注的暫定選擇繼續"
+        },
+        {
+          "value": "proposal_before_work",
+          "label": "在相關工作開始前請求提案"
+        },
+        {
+          "value": "delegate_with_bounds",
+          "label": "在明確邊界內委託"
+        },
+        {
+          "value": "document_and_continue",
+          "label": "記錄未知，並繼續獨立的工作"
+        },
+        {
+          "value": "case_by_case",
+          "label": "逐項決定"
+        }
+      ]
+    }
+  ]
+}

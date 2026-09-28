@@ -1,0 +1,1198 @@
+{
+  "templateId": "ai-agent-adoption",
+  "templateVersion": "0.1.0",
+  "locale": "fr",
+  "direction": "ltr",
+  "template": {
+    "name": "Planification de l’adoption d’agents IA",
+    "summary": "48 questions pour s’accorder sur le travail visé, les bénéfices attendus, les pouvoirs et l’évaluation."
+  },
+  "answerContext": {
+    "answeringFrom": "Réponse provenant de",
+    "recordedBy": "Saisi par",
+    "speakingAs": "Rôle exprimé",
+    "captureMethod": "Mode d’obtention",
+    "authority": "Pouvoir de décision pour cette réponse",
+    "confirmation": "Confirmation par la source",
+    "changeForQuestion": "Modifier pour cette question",
+    "multiplePerspectives": "Ajouter un autre point de vue"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "Confirmé",
+      "description": "Adopter comme prémisse acceptée du projet."
+    },
+    {
+      "value": "provisional",
+      "label": "Provisoire",
+      "description": "Utiliser pour le moment tout en laissant la révision explicitement possible."
+    },
+    {
+      "value": "unspecified",
+      "label": "Non décidé",
+      "description": "Laisser ouvert. Ne pas laisser l’IA combler le manque implicitement."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "Demander une proposition",
+      "description": "Demander des alternatives ou une recommandation sans considérer une option comme choisie."
+    },
+    {
+      "value": "delegated",
+      "label": "Déléguer dans des limites",
+      "description": "Autoriser la personne chargée de la réalisation ou l’IA à décider dans les limites indiquées et à rapporter son choix."
+    },
+    {
+      "value": "not_applicable",
+      "label": "Sans objet",
+      "description": "Indiquer que la question ne concerne pas ce projet."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "Choisissez le point de vue représenté et la personne qui a saisi la réponse.",
+    "validation.speakingRoleMismatch": "Le rôle exprimé n’est pas attribué à ce participant.",
+    "validation.inferenceUnconfirmed": "Une réponse déduite doit rester non confirmée jusqu’à vérification par une personne habilitée.",
+    "validation.resolutionAuthorityRequired": "Confirmer cette prémisse nécessite une source habilitée à décider.",
+    "validation.exclusiveChoice": "Cette option ne peut pas être combinée avec d’autres.",
+    "validation.noteRequired": "Ajoutez une courte note expliquant ce choix.",
+    "validation.selectionLimit": "Réduisez le nombre d’options sélectionnées.",
+    "review.authRuntime": "L’authentification est prévue, mais l’environnement choisi peut nécessiter un composant externe ou serveur.",
+    "review.paymentHandling": "Des données de paiement sont prévues. Confirmez qui les traite et si le projet peut en stocker.",
+    "review.analyticsPrivacy": "Des analyses ou télémesures sont prévues. Revérifiez les limites de confidentialité, le consentement et les pratiques interdites.",
+    "review.agent.baseline": "La réduction attendue n’a pas de référence mesurée. Définissez la charge actuelle et la mesure avant d’affirmer une amélioration.",
+    "review.agent.authority": "Le périmètre « réponse uniquement » et des actions modificatrices sont tous deux sélectionnés. Clarifiez si l’agent prépare ou exécute l’action.",
+    "review.agent.review": "Le plan dépend de contrôles humains sans révision attribuée. Définissez un responsable de réponse et le comportement pendant l’attente.",
+    "review.agent.release": "Une introduction directe est prévue sans évaluation représentative. Revoyez les critères de mise en service et l’exposition initiale."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "Objectif et périmètre",
+      "description": "Définir le travail avant de choisir un agent.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.workflow",
+      "label": "Travail actuel et référence",
+      "description": "Séparer les problèmes observés des hypothèses.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.outcomes",
+      "label": "Valeur attendue et preuves",
+      "description": "Transformer les attentes en hypothèses vérifiables.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.fit",
+      "label": "Approche et autonomie",
+      "description": "Déterminer l’autonomie réellement nécessaire.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.people",
+      "label": "Personnes et responsabilité",
+      "description": "Identifier qui bénéficie, contrôle et assume la responsabilité.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.data",
+      "label": "Informations et limites de données",
+      "description": "Préciser ce que l’agent peut savoir et où les données peuvent aller.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.actions",
+      "label": "Actions et pouvoirs",
+      "description": "Distinguer accès technique et permission d’agir.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.context",
+      "label": "Contexte et transmissions",
+      "description": "Préserver les prémisses entre étapes et personnes.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.boundaries",
+      "label": "Défaillance et récupération",
+      "description": "Rendre les limites et la récupération opérationnelles.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.evaluation",
+      "label": "Évaluation et acceptation",
+      "description": "Tester le processus entier dans des conditions représentatives.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.operations",
+      "label": "Coût et exploitation",
+      "description": "Inclure l’effort humain et technique récurrent.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    },
+    {
+      "id": "agent.rollout",
+      "label": "Introduction et révision",
+      "description": "Planifier essai, adoption, extension et sortie.",
+      "perspectiveHint": "Séparez attentes du commanditaire, observations du terrain et évaluations techniques."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.use_case",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "Quel travail doit changer, et pour qui ?",
+      "help": "Donnez une demande réelle, le livrable attendu et son utilisateur. Évitez le seul objectif d’introduire l’IA.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "project.intent.trigger",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "Comment le travail doit-il commencer ?",
+      "help": "Précisez fréquence, volume, délais et frontière entre deux tâches.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "request",
+          "label": "À la demande d’une personne"
+        },
+        {
+          "value": "event",
+          "label": "Lors d’un événement défini"
+        },
+        {
+          "value": "schedule",
+          "label": "Selon un calendrier"
+        },
+        {
+          "value": "monitor",
+          "label": "Surveillance continue"
+        },
+        {
+          "value": "none",
+          "label": "Aucun",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "À quelle phase se trouve cette initiative ?",
+      "help": "Pour les déploiements existants, identifiez les comportements à conserver ou changer.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "Nouvelle introduction"
+        },
+        {
+          "value": "redesign",
+          "label": "Refonte"
+        },
+        {
+          "value": "extension",
+          "label": "Étendre un déploiement existant"
+        },
+        {
+          "value": "repair",
+          "label": "Corriger un déploiement existant"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.exclusions",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "Qu’est-ce qui est exclu de cette initiative ?",
+      "help": "Nommez décisions, utilisateurs et processus exclus, ainsi que les raisons.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.workflow.workflow",
+      "category": "agent.workflow",
+      "order": 50,
+      "prompt": "Comment ce travail est-il effectué aujourd’hui ?",
+      "help": "Tracez entrée → jugement → action → révision → livraison, y compris coordination informelle et exceptions.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.workflow.bottleneck",
+      "category": "agent.workflow",
+      "order": 60,
+      "prompt": "Où se situe le principal blocage observé ?",
+      "help": "Notez les preuves et qui subit le retard ; distinguez tâche lente et attente d’une décision.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "search",
+          "label": "Trouver l’information"
+        },
+        {
+          "value": "production",
+          "label": "Produire le résultat"
+        },
+        {
+          "value": "judgment",
+          "label": "Porter des jugements"
+        },
+        {
+          "value": "coordination",
+          "label": "Coordination et approbations"
+        },
+        {
+          "value": "rework",
+          "label": "Erreurs et reprises"
+        },
+        {
+          "value": "capacity",
+          "label": "Disponibilité insuffisante"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.baseline",
+      "category": "agent.workflow",
+      "order": 70,
+      "prompt": "Quelles preuves décrivent la performance actuelle ?",
+      "help": "Précisez période, échantillon, charge, qualité, temps humain et attente. Les estimations restent des estimations.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "measured",
+          "label": "Mesure sur un travail représentatif"
+        },
+        {
+          "value": "partial",
+          "label": "Traces partielles"
+        },
+        {
+          "value": "estimated",
+          "label": "Estimations uniquement"
+        },
+        {
+          "value": "not_measured",
+          "label": "Pas encore mesuré"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.workflow.variation",
+      "category": "agent.workflow",
+      "order": 80,
+      "prompt": "Les tâches et exceptions sont-elles prévisibles ?",
+      "help": "Donnez un cas courant et un cas difficile, y compris des entrées manquantes ou contradictoires.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "Étapes généralement fixes"
+        },
+        {
+          "value": "branches",
+          "label": "Embranchements et exceptions connus"
+        },
+        {
+          "value": "open",
+          "label": "Étapes à découvrir"
+        },
+        {
+          "value": "mixed",
+          "label": "Combinaison"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.benefit",
+      "category": "agent.outcomes",
+      "order": 90,
+      "prompt": "Quel bénéfice doit être prioritaire ?",
+      "help": "Nommez le bénéficiaire. Produire plus vite ne réduit pas forcément la charge totale.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "time",
+          "label": "Réduire le temps de travail humain"
+        },
+        {
+          "value": "cost",
+          "label": "Réduire le coût total"
+        },
+        {
+          "value": "quality",
+          "label": "Améliorer qualité ou cohérence"
+        },
+        {
+          "value": "speed",
+          "label": "Réduire le délai de livraison"
+        },
+        {
+          "value": "coverage",
+          "label": "Traiter plus de cas ou couvrir plus d’heures"
+        },
+        {
+          "value": "capability",
+          "label": "Permettre un travail auparavant peu praticable"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.outcomes.hypothesis",
+      "category": "agent.outcomes",
+      "order": 100,
+      "prompt": "Pourquoi l’approche proposée créerait-elle ce bénéfice ?",
+      "help": "Exposez hypothèse causale, preuves, suppositions et réfutation possible. Une démo ne prouve pas l’efficacité en production.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.outcomes.target",
+      "category": "agent.outcomes",
+      "order": 110,
+      "prompt": "Quel changement mesurable constituerait une réussite ?",
+      "help": "Définissez référence, cible, période, dénominateur et responsable de mesure. Comptez révision, corrections et escalades.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.outcomes.tradeoffs",
+      "category": "agent.outcomes",
+      "order": 120,
+      "prompt": "Qu’est-ce qui ne doit pas se dégrader en recherchant ce bénéfice ?",
+      "help": "Définissez les compromis acceptables entre qualité, coût, vitesse, charge du personnel et expérience utilisateur.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.fit.alternatives",
+      "category": "agent.fit",
+      "order": 130,
+      "prompt": "Quelles approches faut-il comparer ?",
+      "help": "Incluez l’approche viable la plus simple ; ne pas utiliser d’agent reste un résultat valide.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "process",
+          "label": "Améliorer le processus sans IA"
+        },
+        {
+          "value": "automation",
+          "label": "Automatisation fixe"
+        },
+        {
+          "value": "assistant",
+          "label": "Suggestions d’IA révisées par une personne"
+        },
+        {
+          "value": "workflow",
+          "label": "IA dans un processus contrôlé"
+        },
+        {
+          "value": "agent",
+          "label": "L’agent choisit les étapes et outils"
+        },
+        {
+          "value": "none",
+          "label": "Aucun",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.autonomy",
+      "category": "agent.fit",
+      "order": 140,
+      "prompt": "Que peut faire le système sans nouvelle autorisation ?",
+      "help": "Distinguez suggestion et modification d’un système externe. Indiquez portée et limites en note.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "advice",
+          "label": "Réponse ou brouillon uniquement"
+        },
+        {
+          "value": "approve_each",
+          "label": "Agir après approbation de chaque action"
+        },
+        {
+          "value": "bounded",
+          "label": "Agir dans des limites convenues"
+        },
+        {
+          "value": "supervised",
+          "label": "Poursuivre un objectif avec des points de contrôle"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.fit.necessity",
+      "category": "agent.fit",
+      "order": 150,
+      "prompt": "Qu’est-ce qui exige une planification adaptative ou un choix d’outils ?",
+      "help": "Donnez un cas qu’une automatisation fixe ne peut traiter, ou précisez que le besoin n’est pas établi.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.fit.feasibility",
+      "category": "agent.fit",
+      "order": 160,
+      "prompt": "Quelles preuves soutiennent la faisabilité technique ?",
+      "help": "Identifiez systèmes, versions, données et contraintes testés ; distinguez promesses fournisseurs et évaluation propre.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "claim",
+          "label": "Descriptions ou promesses fournisseurs uniquement"
+        },
+        {
+          "value": "demo",
+          "label": "Démonstration contrôlée"
+        },
+        {
+          "value": "representative",
+          "label": "Évaluation sur tâches représentatives"
+        },
+        {
+          "value": "operational",
+          "label": "Preuves d’exploitation comparables"
+        },
+        {
+          "value": "not_tested",
+          "label": "Pas encore testé"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.stakeholders",
+      "category": "agent.people",
+      "order": 170,
+      "prompt": "Quelles attentes ou charges peuvent différer selon les personnes ?",
+      "help": "Séparez commanditaire, utilisateur de terrain, réviseur, destinataire et non-utilisateurs affectés. Consignez les désaccords séparément.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.people.owner",
+      "category": "agent.people",
+      "order": 180,
+      "prompt": "Qui est responsable du résultat et approuve les changements de périmètre ?",
+      "help": "Nommez les rôles pour résultats métier, exploitation et décisions finales ; le fournisseur n’est pas automatiquement responsable métier.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.people.review_capacity",
+      "category": "agent.people",
+      "order": 190,
+      "prompt": "Qui peut traiter les révisions et exceptions, et quand ?",
+      "help": "Précisez compétences, volume, délai de réponse, couverture et conduite en l’absence de réponse.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "staffed",
+          "label": "Responsable désigné, capacité testée"
+        },
+        {
+          "value": "planned",
+          "label": "Responsable désigné, capacité non testée"
+        },
+        {
+          "value": "unassigned",
+          "label": "Aucun réviseur désigné"
+        },
+        {
+          "value": "not_required",
+          "label": "Aucune révision humaine prévue"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.people.handoff",
+      "category": "agent.people",
+      "order": 200,
+      "prompt": "Que doit recevoir une personne qui reprend le travail ?",
+      "help": "Incluez demande initiale, actions réalisées, preuves, incertitudes et prochaines étapes sûres ; définissez l’accusé de réception.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.data.sources",
+      "category": "agent.data",
+      "order": 210,
+      "prompt": "Quelles sources peuvent informer le travail ?",
+      "help": "Nommez sources faisant autorité, responsables d’accès, formats, fraîcheur et informations manquantes.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.data.sensitivity",
+      "category": "agent.data",
+      "order": 220,
+      "prompt": "Quels types de données sont concernés ?",
+      "help": "Décrivez les catégories sans saisir de vrais secrets ni dossiers personnels dans ce questionnaire.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "public",
+          "label": "Informations publiques"
+        },
+        {
+          "value": "internal",
+          "label": "Informations internes"
+        },
+        {
+          "value": "confidential",
+          "label": "Informations métier confidentielles"
+        },
+        {
+          "value": "personal",
+          "label": "Informations personnelles"
+        },
+        {
+          "value": "credentials",
+          "label": "Identifiants gérés par un mécanisme protégé"
+        },
+        {
+          "value": "none",
+          "label": "Aucun",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.data.transfer",
+      "category": "agent.data",
+      "order": 230,
+      "prompt": "Où les données et journaux peuvent-ils être traités ou conservés ?",
+      "help": "Précisez services, régions, conservation, suppression, usage pour entraînement et responsable de vérification.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.data.missing",
+      "category": "agent.data",
+      "order": 240,
+      "prompt": "Que faire si l’information manque ou se contredit ?",
+      "help": "Définissez la frontière entre hypothèse signalée et fait, ainsi que les lacunes bloquantes.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "ask",
+          "label": "Demander à la personne responsable"
+        },
+        {
+          "value": "retrieve",
+          "label": "Consulter d’abord les sources approuvées"
+        },
+        {
+          "value": "hypothesis",
+          "label": "Proposer des alternatives signalées sans agir"
+        },
+        {
+          "value": "stop",
+          "label": "Arrêter et transmettre à une personne"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.tools",
+      "category": "agent.actions",
+      "order": 250,
+      "prompt": "Quels systèmes et interfaces sont nécessaires ?",
+      "help": "Indiquez API ou opérations d’interface, droits lecture/écriture, comptes de service, environnements de test et responsables d’intégration.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.actions.effects",
+      "category": "agent.actions",
+      "order": 260,
+      "prompt": "Quelles modifications réelles le système doit-il effectuer ?",
+      "help": "Distinguez préparation et exécution d’une action ; ajoutez des limites par action.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "draft",
+          "label": "Créer des brouillons ou recommandations"
+        },
+        {
+          "value": "write",
+          "label": "Modifier des fichiers ou enregistrements internes"
+        },
+        {
+          "value": "send",
+          "label": "Envoyer ou publier à l’extérieur"
+        },
+        {
+          "value": "purchase",
+          "label": "Commander ou dépenser de l’argent"
+        },
+        {
+          "value": "access",
+          "label": "Modifier accès ou configuration"
+        },
+        {
+          "value": "delete",
+          "label": "Supprimer des données"
+        },
+        {
+          "value": "none",
+          "label": "Aucun",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.actions.approval",
+      "category": "agent.actions",
+      "order": 270,
+      "prompt": "Quelles actions nécessitent l’approbation de qui ?",
+      "help": "Associez chaque action à un rôle, seuil, durée d’autorisation et trace. Le silence n’est jamais une autorisation.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.actions.permissions",
+      "category": "agent.actions",
+      "order": 280,
+      "prompt": "Comment faire respecter les limites d’action autorisées ?",
+      "help": "Expliquez identité, accès minimal, validation d’outils, isolation et contrôles d’autorisation hors de la sortie du modèle.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.context.memory",
+      "category": "agent.context",
+      "order": 290,
+      "prompt": "Que doit-on conserver entre les tâches ?",
+      "help": "Précisez objectif, responsabilité, conservation, correction et séparation des utilisateurs ou organisations.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "session",
+          "label": "Tâche actuelle uniquement"
+        },
+        {
+          "value": "project",
+          "label": "Contexte du projet"
+        },
+        {
+          "value": "user",
+          "label": "Préférences propres à l’utilisateur"
+        },
+        {
+          "value": "knowledge",
+          "label": "Connaissances partagées approuvées"
+        },
+        {
+          "value": "none",
+          "label": "Aucun",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.context.precedence",
+      "category": "agent.context",
+      "order": 300,
+      "prompt": "Quelles instructions prévalent en cas de prémisses contradictoires ?",
+      "help": "Définissez autorités, versions et résolution des désaccords. Distinguez contenu cité et instructions.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.context.untrusted",
+      "category": "agent.context",
+      "order": 310,
+      "prompt": "Comment traiter les instructions contenues dans les documents récupérés ?",
+      "help": "Prévoyez les injections de prompt : contenu non fiable cherchant à détourner l’action, révéler des données ou élargir les droits.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.context.coordination",
+      "category": "agent.context",
+      "order": 320,
+      "prompt": "Comment transmettre le contexte entre personnes, outils ou agents ?",
+      "help": "Définissez traces partagées, responsabilités, prévention des doublons et résolution des conflits. Plusieurs agents sont facultatifs.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.boundaries.failure_impact",
+      "category": "agent.boundaries",
+      "order": 330,
+      "prompt": "Quelles défaillances auraient un impact, et pour qui ?",
+      "help": "Utilisez des cas concrets : réponses fausses plausibles, omissions, actions dupliquées, divulgation, retards ou panne.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.boundaries.prohibitions",
+      "category": "agent.boundaries",
+      "order": 340,
+      "prompt": "Qu’est-ce qui ne doit jamais être délégué ou exécuté ?",
+      "help": "Séparez les interdictions absolues des préférences et identifiez qui peut les revoir.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.boundaries.stop",
+      "category": "agent.boundaries",
+      "order": 350,
+      "prompt": "Quand et comment peut-on arrêter l’exécution ?",
+      "help": "Définissez déclencheurs, responsables, limites d’actions/temps/coût, annulation des files et état sûr après arrêt.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.boundaries.recovery",
+      "category": "agent.boundaries",
+      "order": 360,
+      "prompt": "Comment détecter les défaillances et s’en remettre ?",
+      "help": "Couvrez journaux, sauvegardes, retour arrière, compensation, répétition sûre, reprise manuelle et responsable.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.evaluation.cases",
+      "category": "agent.evaluation",
+      "order": 370,
+      "prompt": "Quelles tâches représentatives serviront à l’évaluation ?",
+      "help": "Incluez entrées courantes, difficiles, incomplètes, contradictoires et hostiles, avec résultats attendus et accès autorisé.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.evaluation.comparison",
+      "category": "agent.evaluation",
+      "order": 380,
+      "prompt": "Comment comparer équitablement l’approche proposée ?",
+      "help": "Utilisez charge et qualité comparables, comptez les corrections humaines et distinguez indicateurs indirects et résultats métier.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.evaluation.evidence",
+      "category": "agent.evaluation",
+      "order": 390,
+      "prompt": "Quelles preuves d’évaluation existent maintenant ?",
+      "help": "Indiquez version, date, échantillon, échecs et limites ; un plan ne constitue pas une preuve.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "not_run",
+          "label": "Évaluation pas encore exécutée"
+        },
+        {
+          "value": "demo",
+          "label": "Exemples sélectionnés uniquement"
+        },
+        {
+          "value": "offline",
+          "label": "Évaluation hors ligne représentative"
+        },
+        {
+          "value": "pilot",
+          "label": "Pilote opérationnel limité"
+        },
+        {
+          "value": "production",
+          "label": "Preuves d’exploitation surveillée"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.evaluation.gate",
+      "category": "agent.evaluation",
+      "order": 400,
+      "prompt": "Quelles conditions autorisent la mise en service ou imposent le rejet ?",
+      "help": "Précisez seuils de qualité, effet, coût et limites, décideur et inconnues bloquantes.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.operations.hosting",
+      "category": "agent.operations",
+      "order": 410,
+      "prompt": "Quels environnements et fournisseurs sont autorisés ?",
+      "help": "Indiquez contraintes de déploiement, critères de modèle/service, disponibilité, dépendances et portabilité.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.operations.budget",
+      "category": "agent.operations",
+      "order": 420,
+      "prompt": "Quel est le plafond du coût total et comment le contrôler ?",
+      "help": "Incluez usage, outils, infrastructure, intégration, révision, corrections, formation et maintenance ; fixez limites par tâche et récurrentes.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.operations.monitoring",
+      "category": "agent.operations",
+      "order": 430,
+      "prompt": "Que faut-il observer pendant l’exploitation ?",
+      "help": "Reliez chaque mesure ou journal à un destinataire et une réponse. Limitez les données sensibles dans les journaux.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "quality",
+          "label": "Qualité des résultats et erreurs"
+        },
+        {
+          "value": "cost",
+          "label": "Coût et usage"
+        },
+        {
+          "value": "latency",
+          "label": "Délais d’achèvement et d’attente"
+        },
+        {
+          "value": "actions",
+          "label": "Actions et autorisations"
+        },
+        {
+          "value": "handoffs",
+          "label": "Révisions et escalades humaines"
+        },
+        {
+          "value": "drift",
+          "label": "Évolution des entrées ou comportements"
+        },
+        {
+          "value": "none",
+          "label": "Aucun",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.operations.maintenance",
+      "category": "agent.operations",
+      "order": 440,
+      "prompt": "Qui maintient et revalide le système ?",
+      "help": "Couvrez changements de modèle, prompt, outils, droits et données ; conservez versions, évaluations et retours arrière.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.rollout.entry",
+      "category": "agent.rollout",
+      "order": 450,
+      "prompt": "Comment doit se dérouler la première introduction ?",
+      "help": "Définissez utilisateurs, charge, durée et limites d’exposition de la première étape.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "sandbox",
+          "label": "Environnement isolé avec données de test"
+        },
+        {
+          "value": "shadow",
+          "label": "Observer et comparer sans exécuter"
+        },
+        {
+          "value": "pilot",
+          "label": "Pilote limité avec supervision"
+        },
+        {
+          "value": "direct",
+          "label": "Introduction directe en exploitation"
+        },
+        {
+          "value": "other",
+          "label": "Autre (précisez)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Non décidé",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Demander une proposition",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "agent.rollout.adoption",
+      "category": "agent.rollout",
+      "order": 460,
+      "prompt": "Comment les personnes apprendront-elles et adapteront-elles leur travail ?",
+      "help": "Définissez formation, retours, évolution de charge et alternative pour les cas non traitables par l’agent.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.rollout.scale",
+      "category": "agent.rollout",
+      "order": 470,
+      "prompt": "Quelles preuves permettent d’étendre le périmètre ou l’autonomie ?",
+      "help": "Traitez davantage d’utilisateurs, données, outils ou droits comme une nouvelle décision évaluée et attribuée, pas une récompense automatique.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    },
+    {
+      "questionId": "agent.rollout.exit",
+      "category": "agent.rollout",
+      "order": 480,
+      "prompt": "Quand le plan sera-t-il révisé, réduit ou arrêté ?",
+      "help": "Définissez dates, déclencheurs, décideurs et retour des données, tâches inachevées et responsabilités aux personnes ou à un autre système.",
+      "responseType": "long-text",
+      "placeholder": "Décrivez un exemple, les éléments probants, les limites et les points ouverts."
+    }
+  ]
+}

@@ -55,6 +55,17 @@ export function valuesEqual(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
 }
 
+export function evaluateRuleCondition(condition, answerFor) {
+  if (condition.all) return condition.all.every((entry) => evaluateRuleCondition(entry, answerFor));
+  const value = answerFor(condition.questionId);
+  if (condition.operator === "contains") return Array.isArray(value) && value.includes(condition.value);
+  if (condition.operator === "not_contains") return !Array.isArray(value) || !value.includes(condition.value);
+  if (condition.operator === "contains_any") return Array.isArray(value) && condition.values.some((entry) => value.includes(entry));
+  if (condition.operator === "in") return condition.values.includes(value);
+  if (condition.operator === "equals") return valuesEqual(value, condition.value);
+  return false;
+}
+
 export function normalizeLanguageTag(value) {
   return value.trim().replaceAll("_", "-").toLowerCase();
 }

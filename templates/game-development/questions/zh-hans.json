@@ -1,0 +1,1313 @@
+{
+  "templateId": "game-development",
+  "templateVersion": "0.1.0",
+  "locale": "zh-hans",
+  "direction": "ltr",
+  "template": {
+    "name": "游戏开发",
+    "summary": "通过 40 个问题统一玩法、范围、制作与发行的认识。"
+  },
+  "answerContext": {
+    "answeringFrom": "回答来源",
+    "recordedBy": "记录者",
+    "speakingAs": "回答时的角色",
+    "captureMethod": "信息获取方式",
+    "authority": "此回答的权限",
+    "confirmation": "来源确认状态",
+    "changeForQuestion": "为此问题更改",
+    "multiplePerspectives": "添加其他视角"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "已确认",
+      "description": "将此内容作为已采纳的项目前提。"
+    },
+    {
+      "value": "provisional",
+      "label": "暂定",
+      "description": "暂时采用，但明确保留修改的可能。"
+    },
+    {
+      "value": "unspecified",
+      "label": "未决定",
+      "description": "保持未决。不得让 AI 擅自补全。"
+    },
+    {
+      "value": "proposal_requested",
+      "label": "请求提案",
+      "description": "请求备选方案或建议，但不将其视为已选定。"
+    },
+    {
+      "value": "delegated",
+      "label": "在限定范围内委托",
+      "description": "允许实施者或 AI 在规定范围内决定，并报告选择。"
+    },
+    {
+      "value": "not_applicable",
+      "label": "不适用",
+      "description": "将此问题标记为不属于此项目。"
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "请选择回答代表谁的视角，以及由谁记录。",
+    "validation.speakingRoleMismatch": "所选回答角色未分配给该参与者。",
+    "validation.inferenceUnconfirmed": "推断所得的回答，在有权人员核实前必须保持未确认。",
+    "validation.resolutionAuthorityRequired": "确认此前提需要有决策权的信息来源。",
+    "validation.exclusiveChoice": "此选项不能与其他选项同时选择。",
+    "validation.noteRequired": "请添加简短备注，说明此选择。",
+    "validation.selectionLimit": "请减少所选选项数量。",
+    "review.authRuntime": "身份验证在范围内，但所选运行模式可能需要外部或服务器组件。",
+    "review.paymentHandling": "支付相关数据在范围内。请确认由谁处理，以及项目是否可以存储其中任何数据。",
+    "review.analyticsPrivacy": "分析或遥测在范围内。请重新检查隐私边界、同意机制与禁止的做法。",
+    "review.onlineOffline": "已选择在线游戏，但网络策略为仅离线。请明确此次发行是否包含在线功能。"
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "意图与体验",
+      "description": "明确体验与发行目标。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.players",
+      "label": "玩家与游玩时段",
+      "description": "确定玩家、设备与游玩条件。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.rules",
+      "label": "核心循环与规则",
+      "description": "描述操作、结果与进展。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.scope",
+      "label": "范围与内容",
+      "description": "限定此次发行的工作范围。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.presentation",
+      "label": "美术、音频与叙事",
+      "description": "描述表现方式与素材责任。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.technology",
+      "label": "技术与持久化",
+      "description": "设置实现与服务边界。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.accessibility",
+      "label": "易用性与无障碍",
+      "description": "使预期体验能够被顺利游玩。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.boundaries",
+      "label": "边界与权利",
+      "description": "记录内容、数据与变现的限制。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.delivery",
+      "label": "制作与发行",
+      "description": "规划能力、分发与维护。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    },
+    {
+      "id": "game.validation",
+      "label": "试玩与验收",
+      "description": "明确完成的证据与决策权限。",
+      "perspectiveHint": "将玩家观察、创作者意图与技术建议分别记录。"
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.release_goal",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "此次发行应实现什么目标？",
+      "help": "选择将用于评估成功的里程碑。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "prototype",
+          "label": "通过原型测试核心玩法"
+        },
+        {
+          "value": "vertical_slice",
+          "label": "具有代表性的高完成度片段"
+        },
+        {
+          "value": "demo",
+          "label": "公开演示版"
+        },
+        {
+          "value": "full_release",
+          "label": "完整发行版"
+        },
+        {
+          "value": "update",
+          "label": "现有游戏的更新"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.experience",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "玩家最主要应体验到什么？",
+      "help": "当设计目标冲突时，选择优先项；在备注中描述期望的感受。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mastery",
+          "label": "精进与挑战"
+        },
+        {
+          "value": "exploration",
+          "label": "探索与发现"
+        },
+        {
+          "value": "story",
+          "label": "故事与情感"
+        },
+        {
+          "value": "creation",
+          "label": "创作与实验"
+        },
+        {
+          "value": "connection",
+          "label": "合作或竞争"
+        },
+        {
+          "value": "relaxation",
+          "label": "放松"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "项目处于哪个阶段？",
+      "help": "工作需要时，应保留现有行为。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "全新开发"
+        },
+        {
+          "value": "redesign",
+          "label": "重新设计"
+        },
+        {
+          "value": "extension",
+          "label": "扩展"
+        },
+        {
+          "value": "repair",
+          "label": "修复"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.concept",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "游戏的概念与类型是什么？",
+      "help": "描述玩家做什么，以及游戏有何独特之处。参考作品只是示例，不代表允许复制。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.players.audience",
+      "category": "game.players",
+      "order": 50,
+      "prompt": "目标玩家是谁？",
+      "help": "记录年龄范围、经验、语言，并将实际玩家证据与假设分开。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.players.platforms",
+      "category": "game.players",
+      "order": 60,
+      "prompt": "此次发行包含哪些平台？",
+      "help": "选择已承诺的平台，并注明最低设备与操作系统要求。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "browser",
+          "label": "浏览器"
+        },
+        {
+          "value": "desktop",
+          "label": "桌面电脑"
+        },
+        {
+          "value": "mobile",
+          "label": "手机或平板"
+        },
+        {
+          "value": "console",
+          "label": "游戏主机"
+        },
+        {
+          "value": "xr",
+          "label": "VR 或 AR"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.player_mode",
+      "category": "game.players",
+      "order": 70,
+      "prompt": "玩家如何一起游玩？",
+      "help": "说明最大人数、本地或在线玩法，以及各模式是否共享进度。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "solo",
+          "label": "单人"
+        },
+        {
+          "value": "local_coop",
+          "label": "本地合作"
+        },
+        {
+          "value": "local_versus",
+          "label": "本地对战"
+        },
+        {
+          "value": "online_coop",
+          "label": "在线合作"
+        },
+        {
+          "value": "online_versus",
+          "label": "在线对战"
+        },
+        {
+          "value": "async",
+          "label": "异步互动"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.session",
+      "category": "game.players",
+      "order": 80,
+      "prompt": "一次典型的游玩会持续多久？",
+      "help": "考虑中断、恢复与预期总游玩时长。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "short",
+          "label": "少于 10 分钟"
+        },
+        {
+          "value": "medium",
+          "label": "10–30 分钟"
+        },
+        {
+          "value": "long",
+          "label": "30–60 分钟"
+        },
+        {
+          "value": "extended",
+          "label": "超过一小时"
+        },
+        {
+          "value": "flexible",
+          "label": "由玩家决定"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.core_loop",
+      "category": "game.rules",
+      "order": 90,
+      "prompt": "哪些操作构成核心玩法循环？",
+      "help": "用一个具体例子描述“操作 → 反馈 → 下一步决定”。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.rules.outcomes",
+      "category": "game.rules",
+      "order": 100,
+      "prompt": "游戏如何结束或取得成功？",
+      "help": "说明获胜、失败、重试与完成条件；开放式游戏可以没有这些条件。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.rules.progression",
+      "category": "game.rules",
+      "order": 110,
+      "prompt": "需要哪些进展系统？",
+      "help": "在备注中说明限制与重置规则。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "levels",
+          "label": "关卡或章节"
+        },
+        {
+          "value": "skills",
+          "label": "玩家或角色技能"
+        },
+        {
+          "value": "collection",
+          "label": "收集与解锁"
+        },
+        {
+          "value": "economy",
+          "label": "资源与经济"
+        },
+        {
+          "value": "ranking",
+          "label": "分数或排名"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.difficulty",
+      "category": "game.rules",
+      "order": 120,
+      "prompt": "难度应如何运作？",
+      "help": "说明公平性、随机性、失败代价与自适应边界。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "固定难度"
+        },
+        {
+          "value": "selectable",
+          "label": "玩家选择难度"
+        },
+        {
+          "value": "adaptive",
+          "label": "自适应难度"
+        },
+        {
+          "value": "sandbox",
+          "label": "没有强制挑战"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.content_budget",
+      "category": "game.scope",
+      "order": 130,
+      "prompt": "包含多少可玩内容？",
+      "help": "给出关卡、角色、物品与游玩时间的数量或边界，并说明由谁制作。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.scope.required_features",
+      "category": "game.scope",
+      "order": 140,
+      "prompt": "需要哪些辅助功能？",
+      "help": "只选择此次发行必须交付的功能。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "tutorial",
+          "label": "教程"
+        },
+        {
+          "value": "settings",
+          "label": "设置"
+        },
+        {
+          "value": "inventory",
+          "label": "物品栏"
+        },
+        {
+          "value": "achievements",
+          "label": "成就"
+        },
+        {
+          "value": "editor",
+          "label": "关卡编辑器"
+        },
+        {
+          "value": "replays",
+          "label": "回放"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.exclusions",
+      "category": "game.scope",
+      "order": 150,
+      "prompt": "哪些内容明确不在范围内？",
+      "help": "列出必须延后的额外内容，并说明什么情况值得重新考虑。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.scope.dependencies",
+      "category": "game.scope",
+      "order": 160,
+      "prompt": "必须保留哪些已有工作或依赖？",
+      "help": "注明现有代码、格式、工具、素材与兼容性限制，或说明这是新项目。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.presentation.visual_style",
+      "category": "game.presentation",
+      "order": 170,
+      "prompt": "视觉方向是什么？",
+      "help": "说明镜头、可读性、参考作品，以及希望体现的独特感。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "text",
+          "label": "以文字为主"
+        },
+        {
+          "value": "2d",
+          "label": "2D"
+        },
+        {
+          "value": "3d",
+          "label": "3D"
+        },
+        {
+          "value": "hybrid",
+          "label": "2D 与 3D 混合"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.narrative",
+      "category": "game.presentation",
+      "order": 180,
+      "prompt": "叙事起什么作用？",
+      "help": "描述世界设定、基调、分支与本地化需求。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不需要叙事",
+          "exclusive": true
+        },
+        {
+          "value": "background",
+          "label": "背景与氛围"
+        },
+        {
+          "value": "linear",
+          "label": "线性故事"
+        },
+        {
+          "value": "branching",
+          "label": "分支故事"
+        },
+        {
+          "value": "emergent",
+          "label": "玩家创造的故事"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.audio",
+      "category": "game.presentation",
+      "order": 190,
+      "prompt": "需要哪些音频元素？",
+      "help": "说明音量控制、字幕，以及声音是否可以承载关键信息。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "effects",
+          "label": "音效"
+        },
+        {
+          "value": "music",
+          "label": "音乐"
+        },
+        {
+          "value": "voice",
+          "label": "配音"
+        },
+        {
+          "value": "ambient",
+          "label": "环境音"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.asset_pipeline",
+      "category": "game.presentation",
+      "order": 200,
+      "prompt": "谁提供并批准素材？",
+      "help": "区分占位素材与最终素材；记录格式、许可、署名，以及生成式素材的使用政策。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.technology.engine",
+      "category": "game.technology",
+      "order": 210,
+      "prompt": "如何选择引擎或框架？",
+      "help": "注明固定工具与版本，或团队技能、许可和目标平台等选择标准。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "必须使用特定工具"
+        },
+        {
+          "value": "existing",
+          "label": "保留现有技术栈"
+        },
+        {
+          "value": "evaluate",
+          "label": "先评估替代方案"
+        },
+        {
+          "value": "delegated",
+          "label": "实施者在限制内提出方案"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.input",
+      "category": "game.technology",
+      "order": 220,
+      "prompt": "必须支持哪些输入方式？",
+      "help": "说明按键重映射，以及是否支持游玩中切换设备。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "keyboard_mouse",
+          "label": "键盘与鼠标"
+        },
+        {
+          "value": "controller",
+          "label": "手柄"
+        },
+        {
+          "value": "touch",
+          "label": "触控"
+        },
+        {
+          "value": "motion",
+          "label": "体感或 XR 控制器"
+        },
+        {
+          "value": "assistive",
+          "label": "辅助输入设备"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.save",
+      "category": "game.technology",
+      "order": 230,
+      "prompt": "如何保存进度？",
+      "help": "描述保存时机、迁移、删除，以及写入中断后的恢复。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "不持久保存进度",
+          "exclusive": true
+        },
+        {
+          "value": "local",
+          "label": "本地存档"
+        },
+        {
+          "value": "cloud",
+          "label": "云端或账户存档"
+        },
+        {
+          "value": "hybrid",
+          "label": "本地存档加云同步"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.network",
+      "category": "game.technology",
+      "order": 240,
+      "prompt": "需要什么网络行为？",
+      "help": "在线玩法需明确状态权威、同步、断线处理、服务器成本与归属。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "offline",
+          "label": "可完全离线游玩"
+        },
+        {
+          "value": "optional",
+          "label": "可选的在线功能"
+        },
+        {
+          "value": "required",
+          "label": "必须联网"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.onboarding",
+      "category": "game.accessibility",
+      "order": 250,
+      "prompt": "玩家如何学习游戏？",
+      "help": "说明初次游玩的玩家应能在无外部帮助下完成什么。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "guided",
+          "label": "引导式教程"
+        },
+        {
+          "value": "contextual",
+          "label": "情境提示"
+        },
+        {
+          "value": "manual",
+          "label": "参考资料或手册"
+        },
+        {
+          "value": "discovery",
+          "label": "通过游玩探索"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.access",
+      "category": "game.accessibility",
+      "order": 260,
+      "prompt": "需要哪些无障碍功能？",
+      "help": "向目标玩家确认需求；不要假定一种设置适合所有人。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "remap",
+          "label": "可重新映射的控制"
+        },
+        {
+          "value": "subtitles",
+          "label": "字幕与文字替代"
+        },
+        {
+          "value": "color",
+          "label": "不只依赖颜色的信息"
+        },
+        {
+          "value": "motion",
+          "label": "减少动态效果与闪烁"
+        },
+        {
+          "value": "text",
+          "label": "可调整文字大小"
+        },
+        {
+          "value": "timing",
+          "label": "时间与难度辅助"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.performance",
+      "category": "game.accessibility",
+      "order": 270,
+      "prompt": "必须满足哪些可衡量的性能目标？",
+      "help": "注明测试硬件、帧率、加载时间、内存或电池限制，以及测量方法。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.accessibility.interruption",
+      "category": "game.accessibility",
+      "order": 280,
+      "prompt": "游玩中断时会发生什么？",
+      "help": "涵盖暂停、转入后台、失去焦点、断线与返回，并考虑多人游戏的公平性。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.boundaries.content_limits",
+      "category": "game.boundaries",
+      "order": 290,
+      "prompt": "必须避免哪些内容或互动？",
+      "help": "记录受众与分级预期、敏感内容限制，以及适用时的聊天管理和举报机制。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.boundaries.monetization",
+      "category": "game.boundaries",
+      "order": 300,
+      "prompt": "计划采用什么变现方式？",
+      "help": "说明购买边界与禁止的施压行为；未决定的细节应保持明显的未决状态。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "free",
+          "label": "免费，不变现"
+        },
+        {
+          "value": "paid",
+          "label": "一次性购买"
+        },
+        {
+          "value": "ads",
+          "label": "广告"
+        },
+        {
+          "value": "iap",
+          "label": "游戏内购买"
+        },
+        {
+          "value": "subscription",
+          "label": "订阅"
+        },
+        {
+          "value": "donation",
+          "label": "自愿捐赠"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.boundaries.data",
+      "category": "game.boundaries",
+      "order": 310,
+      "prompt": "收集或共享哪些玩家数据？",
+      "help": "明确目的、存储、保留、删除与服务运营方；本地存档也需要边界。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.boundaries.rights",
+      "category": "game.boundaries",
+      "order": 320,
+      "prompt": "适用哪些权利与分发限制？",
+      "help": "列出素材和引擎许可、署名、所有权、平台要求，以及由谁核实。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.delivery.capacity",
+      "category": "game.delivery",
+      "order": 330,
+      "prompt": "有哪些人员、时间与预算？",
+      "help": "注明职责、技能、里程碑，以及能力不足时的应急方案。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.delivery.distribution",
+      "category": "game.delivery",
+      "order": 340,
+      "prompt": "玩家如何获得游戏？",
+      "help": "注明渠道、发行责任，以及任何账户或审核要求。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "web",
+          "label": "托管的网页游戏"
+        },
+        {
+          "value": "download",
+          "label": "直接下载"
+        },
+        {
+          "value": "store",
+          "label": "数字商店"
+        },
+        {
+          "value": "private",
+          "label": "私下测试"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.delivery.handoff",
+      "category": "game.delivery",
+      "order": 350,
+      "prompt": "游戏需要随附哪些交接内容？",
+      "help": "说明可复现构建、源码、可编辑素材、许可、测试证据与运维说明。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.delivery.maintenance",
+      "category": "game.delivery",
+      "order": 360,
+      "prompt": "发行后由谁处理更新与事故？",
+      "help": "明确责任归属、支持期限、兼容性、回滚与服务关闭预期。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.validation.playtest",
+      "category": "game.validation",
+      "order": 370,
+      "prompt": "如何测试预期体验？",
+      "help": "明确参与者、场景、观察与修改标准；区分主观意见与测量到的行为。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.validation.must_pass",
+      "category": "game.validation",
+      "order": 380,
+      "prompt": "发行前必须通过哪些场景？",
+      "help": "在备注中添加具体步骤与预期结果。",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "first_play",
+          "label": "首次游玩完成核心循环"
+        },
+        {
+          "value": "completion",
+          "label": "胜利、失败与重试"
+        },
+        {
+          "value": "save_restore",
+          "label": "保存与恢复"
+        },
+        {
+          "value": "devices",
+          "label": "目标设备与输入方式"
+        },
+        {
+          "value": "network",
+          "label": "断线与重新连接"
+        },
+        {
+          "value": "access",
+          "label": "无障碍设置"
+        },
+        {
+          "value": "none",
+          "label": "不需要",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.validation.approval",
+      "category": "game.validation",
+      "order": 390,
+      "prompt": "由谁按什么标准决定游戏已准备好？",
+      "help": "注明决策角色、可接受的缺陷与可衡量的发行门槛。",
+      "responseType": "long-text",
+      "placeholder": "描述前提、限制与证据。可以保持未解决。"
+    },
+    {
+      "questionId": "game.validation.unknowns",
+      "category": "game.validation",
+      "order": 400,
+      "prompt": "应如何处理尚未解决的设计决定？",
+      "help": "说明委托边界，以及何时应暂停工作并重新统一认识。",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "pause",
+          "label": "澄清前暂停相关工作"
+        },
+        {
+          "value": "prototype",
+          "label": "测试可撤回的原型"
+        },
+        {
+          "value": "propose",
+          "label": "决定前请求备选方案"
+        },
+        {
+          "value": "delegate",
+          "label": "在已记录的限制内委托"
+        },
+        {
+          "value": "other",
+          "label": "其他（请说明）",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "未决定",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "请求提案",
+          "exclusive": true
+        }
+      ]
+    }
+  ]
+}

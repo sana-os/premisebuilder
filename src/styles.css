@@ -110,8 +110,7 @@ h1, h2, h3 { color: var(--ink); }
 .brand-meta { color: #9fb0c7; font-size: 0.78rem; }
 .topbar-actions { gap: 0.75rem; }
 .language-switcher { display: inline-flex; padding: 0.2rem; background: #182235; border: 1px solid #344157; border-radius: 999px; }
-.language-switcher a { min-height: 30px; padding: 0.35rem 0.65rem; color: #b8c4d7; border-radius: 999px; font-size: 0.78rem; font-weight: 760; text-decoration: none; }
-.language-switcher a[aria-current="page"] { color: #07111f; background: var(--accent-soft); }
+.language-switcher select { width: auto; max-width: 12rem; min-height: 36px; padding: 0.35rem 0.65rem; color: #e4edf8; background: #182235; border: 0; border-radius: 999px; font-size: 0.82rem; font-weight: 760; }
 :lang(ja) { line-break: strict; word-break: normal; }
 .privacy-badge, .status-pill, .document-status, .storage-state, .save-state {
   display: inline-flex;
@@ -398,9 +397,30 @@ dialog::backdrop { background: rgba(5, 12, 25, 0.66); backdrop-filter: blur(3px)
 .dialog-card h2 { margin: 0; font-size: 1.5rem; }
 .dialog-card p { margin: 0; color: var(--ink-3); }
 .dialog-document { max-height: 80vh; overflow: auto; }
-.guide-dialog ol { display: grid; gap: 0.55rem; margin: 0; padding-inline-start: 1.4rem; color: var(--ink-2); }
-.guide-example { display: grid; gap: 0.55rem; padding: 1rem; background: var(--surface-2); border-radius: 10px; }
-.guide-example h3 { margin: 0; font-size: 1rem; }
+#guideDialog { width: min(840px, calc(100% - 2rem)); max-height: 90dvh; overflow: hidden; }
+.guide-dialog { display: flex; flex-direction: column; max-height: 90dvh; margin: 0; }
+.guide-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.2rem clamp(1rem, 4vw, 2rem); border-block-end: 1px solid var(--line); }
+.guide-header h2 { margin: 0; font-size: clamp(1.15rem, 3vw, 1.5rem); }
+.guide-header p { margin-block: 0 0.35rem; }
+.guide-header button { flex-shrink: 0; }
+.guide-content { min-height: 0; overflow-y: auto; padding: 1.5rem clamp(1rem, 4vw, 2rem); color: var(--ink-2); line-height: 1.8; overflow-wrap: anywhere; }
+.guide-content > p { margin-block: 0 0.8rem; }
+.guide-lead { padding: 1rem; background: var(--accent-soft); border-radius: var(--radius); font-weight: 700; }
+.guide-section { margin-block-start: 2rem; }
+.guide-section h3 { color: var(--ink); margin-block: 0 0.9rem; font-size: 1.1rem; }
+.guide-steps { display: grid; gap: 1.2rem; padding-inline-start: 1.6rem; }
+.guide-steps li::marker { font-weight: 800; color: var(--accent-strong); }
+.guide-steps h4 { margin: 0; color: var(--ink); font-size: 1rem; }
+.guide-steps p { margin-block: 0.35rem 0; }
+.guide-definitions { display: grid; gap: 0.9rem; margin: 0; }
+.guide-definitions > div { padding: 0.9rem 1rem; background: var(--surface-2); border-radius: var(--radius); }
+.guide-definitions dt { font-weight: 750; color: var(--ink); }
+.guide-definitions dd { margin: 0.3rem 0 0; }
+.guide-details { margin-block: 0.7rem; border: 1px solid var(--line); border-radius: var(--radius); padding: 0.85rem 1rem; }
+.guide-details summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+.guide-details[open] summary { margin-block-end: 0.9rem; }
+.guide-details p { margin: 0; }
+.guide-footer { padding: 0.85rem clamp(1rem, 4vw, 2rem); border-block-start: 1px solid var(--line); text-align: end; }
 .toast { position: fixed; inset-inline-end: 1rem; inset-block-end: 1rem; z-index: 100; max-width: min(420px, calc(100% - 2rem)); padding: 0.85rem 1rem; color: white; background: var(--surface-dark); border: 1px solid #52627a; border-radius: 10px; box-shadow: var(--shadow); font-weight: 680; }
 
 @media (max-width: 1200px) {
@@ -431,7 +451,7 @@ dialog::backdrop { background: rgba(5, 12, 25, 0.66); backdrop-filter: blur(3px)
   .topbar { min-height: 62px; }
   .brand-mark { width: 36px; height: 36px; }
   .brand-meta, .topbar .button-quiet { display: none; }
-  .language-switcher a { padding-inline: 0.5rem; }
+  .language-switcher select { max-width: 9.5rem; padding-inline: 0.5rem; }
   .privacy-badge { font-size: 0.76rem; }
   .home-shell, .setup-shell, .workspace { width: min(100% - 1rem, 100%); }
   .home-shell { padding-block-start: 2rem; }
@@ -473,4 +493,6 @@ dialog::backdrop { background: rgba(5, 12, 25, 0.66); backdrop-filter: blur(3px)
 }
 
 [dir="rtl"] .choice-label:has(input:checked) { box-shadow: inset -4px 0 var(--accent); }
+:lang(ar) .home-intro h1, :lang(ar) .setup-copy h1 { line-height: 1.35; letter-spacing: normal; }
+:lang(zh) .home-intro h1, :lang(zh) .setup-copy h1 { line-height: 1.2; letter-spacing: normal; }
 [dir="rtl"] pre, [dir="rtl"] code, [dir="rtl"] .comparison-field code, [dir="rtl"] .diff-cell code { direction: ltr; text-align: left; }

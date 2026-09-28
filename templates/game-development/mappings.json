@@ -1,0 +1,664 @@
+{
+  "templateId": "game-development",
+  "version": "0.1.0",
+  "mappingDefaults": {
+    "recordAs": "contribution",
+    "allowMultipleContributions": true,
+    "autoResolve": false,
+    "suggestResolutionWhenAuthorized": true,
+    "defaultResolutionStatus": "provisional",
+    "emptyResponseStatus": "unspecified",
+    "axisWhenUnresolved": "unknown"
+  },
+  "categoryProvenance": {
+    "project.intent": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    },
+    "game.players": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    },
+    "game.rules": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    },
+    "game.scope": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    },
+    "game.presentation": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    },
+    "game.technology": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner",
+        "implementation_authority"
+      ]
+    },
+    "game.accessibility": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    },
+    "game.boundaries": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    },
+    "game.delivery": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    },
+    "game.validation": {
+      "preferredPerspectiveRoles": [
+        "decision_owner",
+        "end_user",
+        "designer",
+        "developer"
+      ],
+      "acceptedResolutionAuthorities": [
+        "decision_owner"
+      ]
+    }
+  },
+  "mappings": [
+    {
+      "questionId": "project.intent.release_goal",
+      "itemId": "project.intent.release_goal",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "project.intent.experience",
+      "itemId": "project.intent.experience",
+      "axisWhenResolved": "view",
+      "kind": "preference",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "itemId": "project.intent.current_phase",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "project.intent.concept",
+      "itemId": "project.intent.concept",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.players.audience",
+      "itemId": "game.players.audience",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.players.platforms",
+      "itemId": "game.players.platforms",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.players.player_mode",
+      "itemId": "game.players.player_mode",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.players.session",
+      "itemId": "game.players.session",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.rules.core_loop",
+      "itemId": "game.rules.core_loop",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.rules.outcomes",
+      "itemId": "game.rules.outcomes",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.rules.progression",
+      "itemId": "game.rules.progression",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.rules.difficulty",
+      "itemId": "game.rules.difficulty",
+      "axisWhenResolved": "view",
+      "kind": "preference",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.scope.content_budget",
+      "itemId": "game.scope.content_budget",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.scope.required_features",
+      "itemId": "game.scope.required_features",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.scope.exclusions",
+      "itemId": "game.scope.exclusions",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.scope.dependencies",
+      "itemId": "game.scope.dependencies",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.presentation.visual_style",
+      "itemId": "game.presentation.visual_style",
+      "axisWhenResolved": "view",
+      "kind": "preference",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.presentation.narrative",
+      "itemId": "game.presentation.narrative",
+      "axisWhenResolved": "view",
+      "kind": "preference",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.presentation.audio",
+      "itemId": "game.presentation.audio",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.presentation.asset_pipeline",
+      "itemId": "game.presentation.asset_pipeline",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.technology.engine",
+      "itemId": "game.technology.engine",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.technology.input",
+      "itemId": "game.technology.input",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.technology.save",
+      "itemId": "game.technology.save",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.technology.network",
+      "itemId": "game.technology.network",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.accessibility.onboarding",
+      "itemId": "game.accessibility.onboarding",
+      "axisWhenResolved": "view",
+      "kind": "preference",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.accessibility.access",
+      "itemId": "game.accessibility.access",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.accessibility.performance",
+      "itemId": "game.accessibility.performance",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.accessibility.interruption",
+      "itemId": "game.accessibility.interruption",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.boundaries.content_limits",
+      "itemId": "game.boundaries.content_limits",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.boundaries.monetization",
+      "itemId": "game.boundaries.monetization",
+      "axisWhenResolved": "care",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.boundaries.data",
+      "itemId": "game.boundaries.data",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.boundaries.rights",
+      "itemId": "game.boundaries.rights",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.delivery.capacity",
+      "itemId": "game.delivery.capacity",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.delivery.distribution",
+      "itemId": "game.delivery.distribution",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.delivery.handoff",
+      "itemId": "game.delivery.handoff",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.delivery.maintenance",
+      "itemId": "game.delivery.maintenance",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.validation.playtest",
+      "itemId": "game.validation.playtest",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.validation.must_pass",
+      "itemId": "game.validation.must_pass",
+      "axisWhenResolved": "fact",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "array",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    },
+    {
+      "questionId": "game.validation.approval",
+      "itemId": "game.validation.approval",
+      "axisWhenResolved": "fact",
+      "kind": "requirement",
+      "enforcement": "soft",
+      "priority": "must",
+      "valueMode": "scalar"
+    },
+    {
+      "questionId": "game.validation.unknowns",
+      "itemId": "game.validation.unknowns",
+      "axisWhenResolved": "care",
+      "kind": "constraint",
+      "enforcement": "hard",
+      "priority": "must",
+      "valueMode": "scalar",
+      "choiceEffects": {
+        "unknown": {
+          "resolutionStatus": "unspecified"
+        },
+        "proposal_requested": {
+          "resolutionStatus": "proposal_requested"
+        }
+      }
+    }
+  ]
+}

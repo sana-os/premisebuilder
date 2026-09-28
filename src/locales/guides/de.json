@@ -1,0 +1,186 @@
+{
+  "intro": "Beginnen Sie mit einer Frage. Offene Punkte können Sie später klären.",
+  "purpose": "Dieses Werkzeug erfasst, was entwickelt oder eingeführt werden soll, aus wessen Sicht und was tatsächlich vereinbart ist. Es erstellt kein Spiel und führt keinen KI-Agenten aus.",
+  "conceptsTitle": "Drei Dinge getrennt halten",
+  "concepts": [
+    [
+      "Beitrag = eine berichtete Antwort",
+      "Beispiel: Eine Supportkraft berichtet, dass die FAQ-Suche Zeit kostet. Das Speichern hält ihre Sicht fest; daraus wird noch keine Projektentscheidung."
+    ],
+    [
+      "Festlegung = wie das Projekt mit dieser Antwort umgeht",
+      "Wählen Sie, ob Sie die Antwort vorläufig übernehmen, bestätigen, einen Vorschlag anfordern oder offenlassen. Antwort und Entscheidung werden getrennt erfasst."
+    ],
+    [
+      "Base = eine ausdrücklich gespeicherte Referenzversion",
+      "Bestätigen Sie unter Prüfung die aktuellen Grundlagen als Base r1. Unentschiedene Punkte dürfen offenbleiben. Spätere Änderungen erscheinen erst nach erneuter Base-Bestätigung im Export."
+    ]
+  ],
+  "stepsTitle": "Eine vollständige Eingabe vom Start bis zum Export ausprobieren",
+  "steps": [
+    [
+      "Thema auf der Startseite wählen",
+      "Websites und kleine Webanwendungen hat 42 Fragen, Spieleentwicklung 40 und Einführungsplanung für KI-Agenten 48. Wählen Sie nach der abzustimmenden Arbeit, nicht nach dem geplanten Werkzeug."
+    ],
+    [
+      "Projekt und Personen benennen",
+      "Geben Sie Projektnamen sowie Bezeichnung und Rolle der erfassenden Person ein. Diese Person trägt die Antwort ein. Wählen Sie Entscheidungsbefugnis nur, wenn sie die Grundlage wirklich genehmigen darf. Aktivieren Sie bei Interviews die gesonderte Perspektive und benennen Sie die befragte Person."
+    ],
+    [
+      "Eine Frage beantworten und den Grund ergänzen",
+      "Wählen Sie eine Option oder geben Sie Text ein. Ergänzen Sie Hintergrund, Belege oder Grenzen unter Kontext oder Begründung. Prüfen Sie Perspektive, erfassende Person und Erfassungsmethode. Diese Felder beschreiben die Quelle, nicht die Stärke der Antwort. Sonstige Optionen können eine Notiz erfordern."
+    ],
+    [
+      "Festlegen, wie die Antwort verwendet wird",
+      "Wählen Sie zum ersten Ausprobieren Vorläufig als Festlegungsstatus. Prüfen Sie, ob der Quellbeitrag die gewünschte Antwort zeigt. So testen Sie den Ablauf, ohne endgültige Einigung zu behaupten. Wenn Sie es noch nicht wissen, lassen Sie Unentschieden stehen oder wählen Sie Offenlassen und gehen weiter."
+    ],
+    [
+      "Prüfen und eine Base bestätigen",
+      "Öffnen Sie Prüfung, sehen Sie offene Punkte, Warnungen und Quellen durch und wählen Sie Base-Version bestätigen. Bestätigen Sie den Dialog. Dadurch wird ein Referenzstand festgehalten; nicht jede Antwort wird damit richtig oder jede Frage gelöst."
+    ],
+    [
+      "Sicherung oder KI-Übergabe exportieren",
+      "Öffnen Sie Exportieren. Laden Sie Base JSON herunter, um die bestätigte Referenz zu sichern. AI Context übergibt einer KI Grundlagen, Quellen und offene Punkte. Der neueste Entwurf wird erst nach Bestätigung einer neuen Base exportiert."
+    ]
+  ],
+  "examplesTitle": "Beispiele für jede Vorlage",
+  "examplesIntro": "Diese erfundenen Beispiele helfen beim Formulieren. Ihr Öffnen füllt oder verändert Ihr Projekt nicht.",
+  "examples": [
+    [
+      "Website: eine Anfrageseite",
+      [
+        [
+          "Frage",
+          "Welches Hauptergebnis soll diese Version ermöglichen?"
+        ],
+        [
+          "Antwort",
+          "Anfragen oder Interessenten gewinnen"
+        ],
+        [
+          "Kontext",
+          "Erstbesucher sollen den Dienst verstehen und eine Anfrage senden. Online-Zahlungen gehören nicht zu dieser Version. Prüfen Sie den Ablauf mit drei Personen, die den Dienst noch nicht kennen."
+        ],
+        [
+          "Quelle und Festlegung",
+          "Der Auftraggeber nennt das Ziel; die erfassende Person trägt es ein. Nutzen Sie Vorläufig, während die Entscheidungsverantwortung es prüft."
+        ]
+      ]
+    ],
+    [
+      "Spiel: ein kleiner Erkundungsprototyp",
+      [
+        [
+          "Frage",
+          "Was soll diese Version erreichen?"
+        ],
+        [
+          "Antwort",
+          "Kernspiel mit einem Prototyp testen."
+        ],
+        [
+          "Kontext",
+          "Erstellen Sie drei Räume und zwei Werkzeuge, um den Spaß am Entdecken eines Weges zu testen. Ziel sind zehn Minuten Spielzeit. Mehrspielerbetrieb und fertige Grafik sind ausgeschlossen."
+        ],
+        [
+          "Quelle und Festlegung",
+          "Erfassen Sie den Plan der gestaltenden Person als Vorläufig. Ergänzen Sie Spieltest-Rückmeldungen als weiteren Beitrag, statt den ursprünglichen Plan zu überschreiben."
+        ]
+      ]
+    ],
+    [
+      "KI-Agent: Supportantwort entwerfen",
+      [
+        [
+          "Frage",
+          "Welche Arbeit soll sich für wen ändern?"
+        ],
+        [
+          "Antwort",
+          "Supportkräfte beim Entwerfen von Antworten aus freigegebenen FAQ-Quellen unterstützen. Die Mitarbeitenden versenden die Antworten selbst."
+        ],
+        [
+          "Kontext",
+          "Wir erwarten weniger Arbeitszeit, haben den heutigen Gesamtaufwand aber nicht gemessen. Vergleichen Sie Such-, Entwurfs-, Prüf- und Korrekturzeit. Nehmen Sie vor der Bewertung keine Einsparung an."
+        ],
+        [
+          "Quelle und Festlegung",
+          "Halten Sie Leitungserwartungen und Praxisbeobachtungen in getrennten Beiträgen fest. Übernehmen Sie den Versuchsumfang vorläufig und lassen Sie ungemessene Wirkungen offen."
+        ]
+      ]
+    ]
+  ],
+  "statesTitle": "Welchen Festlegungsstatus sollte ich wählen?",
+  "states": [
+    [
+      "Unentschieden",
+      "Noch keine Grundlage übernommen. Füllen Sie die Lücke nicht durch Raten."
+    ],
+    [
+      "Vorläufig",
+      "Verwenden Sie die gewählte Antwort vorerst und halten Sie Änderungen offen."
+    ],
+    [
+      "Bestätigt",
+      "Eine befugte Person nimmt diese Grundlage an. Das beweist nicht, dass ein vorhergesagter Nutzen eintreten wird."
+    ],
+    [
+      "Vorschlag anfordern",
+      "Fordern Sie Optionen oder Rat an, ohne bereits eine Antwort auszuwählen."
+    ],
+    [
+      "Innerhalb von Grenzen delegieren",
+      "Eine befugte Person delegiert eine Entscheidung innerhalb dokumentierter Grenzen. Erläutern Sie diese in der Notiz."
+    ],
+    [
+      "Nicht zutreffend",
+      "Eine befugte Person legt fest, dass die Frage außerhalb des Projekts liegt. Das unterscheidet sich von Nichtwissen."
+    ]
+  ],
+  "filesTitle": "Welche Datei sollte ich speichern?",
+  "files": [
+    [
+      "Base JSON",
+      "Die zuletzt bestätigte Referenz. Beginnen Sie damit für eine übertragbare Sicherung."
+    ],
+    [
+      "Override JSON",
+      "Eine optionale, begrenzte Änderung für eine bestimmte Base-Version. Für Ihr erstes Projekt benötigen Sie sie nicht. Bewahren Sie auch die passende Base auf."
+    ],
+    [
+      "Unified JSON",
+      "Das Ergebnis der Anwendung aktiver Overrides auf die Base. Bewahren Sie Base- und Override-Dateien getrennt auf, wenn einzelne Änderungen erhalten bleiben sollen."
+    ],
+    [
+      "AI Context Markdown",
+      "Eine lesbare Übergabe für eine KI mit Quellen und offenen Punkten. Geben Sie sie zusammen mit dem Arbeitsauftrag weiter. Zum erneuten Öffnen des Projekts in dieser Anwendung verwenden Sie JSON."
+    ]
+  ],
+  "faqTitle": "Wenn Sie nicht weiterkommen",
+  "faq": [
+    [
+      "Muss ich alles beantworten?",
+      "Nein. Nutzen Sie Nächste Frage, Offenlassen oder die Kategorien. Sie können eine Base mit unentschiedenen Punkten bestätigen; diese bleiben in der Übergabe sichtbar."
+    ],
+    [
+      "Warum steht bei meiner Antwort noch Unentschieden?",
+      "Die Antwort wurde als Beitrag gespeichert. Wählen Sie zur Übernahme einen Festlegungsstatus und prüfen Sie den Quellbeitrag unter der Frage."
+    ],
+    [
+      "Wie bestätige ich eine einzelne Grundlage?",
+      "Wählen Sie zuerst Vorläufig, prüfen Sie den Quellbeitrag und wählen Sie die passende entscheidende Person; wechseln Sie dann zu Bestätigt. Ohne befugte Person bleibt der Punkt vorläufig oder offen, bis deren Aussage vorliegt. Behaupten Sie keine Befugnis, nur um die Bedienung freizuschalten."
+    ],
+    [
+      "Zwei Personen antworten unterschiedlich. Was behalte ich?",
+      "Nutzen Sie Weitere Perspektive hinzufügen und legen Sie für jede Antwort die Quelle fest. Bewahren Sie beide Aussagen und wählen Sie die übernommene Antwort gesondert unter Festlegung. Ein ungelöster Unterschied darf als Konflikt bestehen bleiben."
+    ],
+    [
+      "Warum fehlen die neuesten Änderungen im Export?",
+      "Exporte verwenden die zuletzt bestätigte Base. Öffnen Sie Prüfung und bestätigen Sie die nächste Version, etwa r2. Automatisches Entwurfsspeichern und Base-Bestätigung sind unterschiedliche Aktionen."
+    ],
+    [
+      "Wo wird meine Arbeit gespeichert und wie setze ich sie fort?",
+      "Entwürfe werden in diesem Browser gespeichert, sofern Speicher verfügbar ist. Öffnen Sie sie unter Letzte Projekte im selben Browser auf derselben Website. Es gibt keine Cloud-Synchronisierung: Auf einem anderen Gerät oder nach Löschen der Websitedaten kann der Zugriff fehlen. Exportieren und importieren Sie JSON, um bestätigte Inhalte wiederherzustellen; verlassen Sie sich bei unbestätigten Entwürfen nicht auf JSON."
+    ]
+  ]
+}

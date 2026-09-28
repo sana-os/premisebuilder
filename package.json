@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "localize": "node scripts/generate-ja-questions.mjs && node scripts/generate-es-questions.mjs",
+    "localize": "node scripts/generate-ja-questions.mjs && node scripts/generate-es-questions.mjs && node scripts/generate-game-questions.mjs && node scripts/generate-agent-questions.mjs && node scripts/generate-guides.mjs",
     "localize:ja": "node scripts/generate-ja-questions.mjs",
     "localize:es": "node scripts/generate-es-questions.mjs",
     "serve": "node scripts/serve.mjs",
     "test": "node --test",
-    "check": "npm run localize && node --check src/app.js && node --check src/core.js && node --check src/storage.js && node --check src/validation.js && node --check src/merge.js && node --check src/import-export.js && npm test && npm run build && node scripts/check-static.mjs"
+    "check": "npm run localize && node --check src/app.js && node --check src/core.js && node --check src/storage.js && node --check src/validation.js && node --check src/merge.js && node --check src/import-export.js && node --check src/guide.js && node --check src/locales/guide.js && npm test && npm run build && node scripts/check-static.mjs"
   }
 }

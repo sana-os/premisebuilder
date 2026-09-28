@@ -1,0 +1,230 @@
+{
+  "templateId": "ai-agent-adoption",
+  "version": "0.1.0",
+  "rules": [
+    {
+      "ruleId": "provenance.attribution_required",
+      "type": "contribution-validation",
+      "scope": "all-questions",
+      "severity": "error",
+      "requireFields": [
+        "perspectiveRef",
+        "recordedByRef",
+        "speakingAs",
+        "captureMethod",
+        "authority",
+        "confirmation",
+        "value",
+        "recordedAt"
+      ],
+      "messageKey": "validation.provenanceRequired"
+    },
+    {
+      "ruleId": "provenance.speaking_role_membership",
+      "type": "contribution-validation",
+      "scope": "all-questions",
+      "severity": "error",
+      "assert": {
+        "speakingAsBelongsToPerspectiveRoles": true
+      },
+      "messageKey": "validation.speakingRoleMismatch"
+    },
+    {
+      "ruleId": "provenance.inference_stays_unconfirmed",
+      "type": "contribution-validation",
+      "scope": "all-questions",
+      "severity": "error",
+      "when": {
+        "field": "captureMethod",
+        "operator": "equals",
+        "value": "inference"
+      },
+      "assert": {
+        "field": "confirmation",
+        "operator": "equals",
+        "value": "unconfirmed"
+      },
+      "messageKey": "validation.inferenceUnconfirmed"
+    },
+    {
+      "ruleId": "resolution.accepted_authority_required",
+      "type": "resolution-validation",
+      "scope": "all-questions",
+      "severity": "error",
+      "when": {
+        "field": "resolution.status",
+        "operator": "in",
+        "values": [
+          "confirmed",
+          "delegated",
+          "not_applicable"
+        ]
+      },
+      "assert": {
+        "deciderAuthorityInResolvedMapping": true,
+        "decidedByRefsMinimum": 1,
+        "decidedAtRequired": true
+      },
+      "messageKey": "validation.resolutionAuthorityRequired"
+    },
+    {
+      "ruleId": "resolution.no_silent_promotion",
+      "type": "resolution-transition",
+      "scope": "all-questions",
+      "severity": "error",
+      "assert": {
+        "explicitUserActionRequired": true,
+        "contributionNeverEqualsResolutionByImplication": true
+      }
+    },
+    {
+      "ruleId": "answer.exclusive_choice",
+      "type": "answer-validation",
+      "scope": "multi-choice",
+      "severity": "error",
+      "when": {
+        "selectedChoiceProperty": "exclusive",
+        "operator": "equals",
+        "value": true
+      },
+      "assert": {
+        "maximumSelectedChoices": 1
+      },
+      "messageKey": "validation.exclusiveChoice"
+    },
+    {
+      "ruleId": "answer.required_note",
+      "type": "answer-validation",
+      "scope": "choice-answers",
+      "severity": "error",
+      "when": {
+        "selectedChoiceProperty": "requiresNote",
+        "operator": "equals",
+        "value": true
+      },
+      "assert": {
+        "noteMinimumTrimmedLength": 1
+      },
+      "messageKey": "validation.noteRequired"
+    },
+    {
+      "ruleId": "answer.selection_limit",
+      "type": "answer-validation",
+      "scope": "multi-choice",
+      "severity": "error",
+      "when": {
+        "questionProperty": "maxSelections",
+        "operator": "exists"
+      },
+      "assert": {
+        "selectedCountAtMostQuestionMaxSelections": true
+      },
+      "messageKey": "validation.selectionLimit"
+    },
+    {
+      "ruleId": "review.agent_baseline",
+      "type": "review-warning",
+      "severity": "warning",
+      "when": {
+        "all": [
+          {
+            "questionId": "agent.outcomes.benefit",
+            "operator": "in",
+            "values": [
+              "time",
+              "cost",
+              "speed"
+            ]
+          },
+          {
+            "questionId": "agent.workflow.baseline",
+            "operator": "in",
+            "values": [
+              "estimated",
+              "not_measured",
+              "unknown"
+            ]
+          }
+        ]
+      },
+      "messageKey": "review.agent.baseline"
+    },
+    {
+      "ruleId": "review.agent_authority",
+      "type": "review-warning",
+      "severity": "warning",
+      "when": {
+        "all": [
+          {
+            "questionId": "agent.fit.autonomy",
+            "operator": "equals",
+            "value": "advice"
+          },
+          {
+            "questionId": "agent.actions.effects",
+            "operator": "contains_any",
+            "values": [
+              "write",
+              "send",
+              "purchase",
+              "access",
+              "delete"
+            ]
+          }
+        ]
+      },
+      "messageKey": "review.agent.authority"
+    },
+    {
+      "ruleId": "review.agent_review",
+      "type": "review-warning",
+      "severity": "warning",
+      "when": {
+        "all": [
+          {
+            "questionId": "agent.fit.autonomy",
+            "operator": "in",
+            "values": [
+              "approve_each",
+              "supervised"
+            ]
+          },
+          {
+            "questionId": "agent.people.review_capacity",
+            "operator": "in",
+            "values": [
+              "unassigned",
+              "not_required",
+              "unknown"
+            ]
+          }
+        ]
+      },
+      "messageKey": "review.agent.review"
+    },
+    {
+      "ruleId": "review.agent_release",
+      "type": "review-warning",
+      "severity": "warning",
+      "when": {
+        "all": [
+          {
+            "questionId": "agent.rollout.entry",
+            "operator": "equals",
+            "value": "direct"
+          },
+          {
+            "questionId": "agent.evaluation.evidence",
+            "operator": "in",
+            "values": [
+              "not_run",
+              "demo",
+              "unknown"
+            ]
+          }
+        ]
+      },
+      "messageKey": "review.agent.release"
+    }
+  ]
+}

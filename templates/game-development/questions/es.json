@@ -1,0 +1,1313 @@
+{
+  "templateId": "game-development",
+  "templateVersion": "0.1.0",
+  "locale": "es",
+  "direction": "ltr",
+  "template": {
+    "name": "Desarrollo de juegos",
+    "summary": "40 preguntas para alinear el juego, el alcance, la producción y la publicación."
+  },
+  "answerContext": {
+    "answeringFrom": "Respuesta desde",
+    "recordedBy": "Registrado por",
+    "speakingAs": "Rol al responder",
+    "captureMethod": "Método de obtención",
+    "authority": "Autoridad de esta respuesta",
+    "confirmation": "Confirmación de la fuente",
+    "changeForQuestion": "Cambiar para esta pregunta",
+    "multiplePerspectives": "Añadir otra perspectiva"
+  },
+  "resolutionStates": [
+    {
+      "value": "confirmed",
+      "label": "Confirmado",
+      "description": "Usar como premisa aceptada del proyecto."
+    },
+    {
+      "value": "provisional",
+      "label": "Provisional",
+      "description": "Usar por ahora, manteniéndolo visiblemente abierto a revisión."
+    },
+    {
+      "value": "unspecified",
+      "label": "Sin decidir",
+      "description": "Dejar abierto. No permitir que una IA lo complete de forma implícita."
+    },
+    {
+      "value": "proposal_requested",
+      "label": "Solicitar una propuesta",
+      "description": "Pedir alternativas o una recomendación sin tratar ninguna como elegida."
+    },
+    {
+      "value": "delegated",
+      "label": "Delegar dentro de límites",
+      "description": "Permitir que quien implementa o la IA decida dentro de los límites indicados e informe de la elección."
+    },
+    {
+      "value": "not_applicable",
+      "label": "No aplica",
+      "description": "Marcar esta pregunta como ajena al proyecto."
+    }
+  ],
+  "messages": {
+    "validation.provenanceRequired": "Selecciona la perspectiva representada por esta respuesta y quién la registró.",
+    "validation.speakingRoleMismatch": "El rol seleccionado no está asignado a esa persona participante.",
+    "validation.inferenceUnconfirmed": "Una inferencia debe permanecer sin confirmar hasta que la verifique alguien con autoridad.",
+    "validation.resolutionAuthorityRequired": "Para confirmar esta premisa se necesita una fuente de decisión autorizada.",
+    "validation.exclusiveChoice": "Esta opción no puede combinarse con otras.",
+    "validation.noteRequired": "Añade una breve explicación para esta elección.",
+    "validation.selectionLimit": "Reduce la selección hasta el límite permitido.",
+    "review.authRuntime": "La autenticación está incluida, pero el modelo de ejecución elegido puede requerir un servidor o servicio externo.",
+    "review.paymentHandling": "Se incluyen datos relacionados con pagos. Confirma quién los procesa y qué puede almacenar el proyecto.",
+    "review.analyticsPrivacy": "Se incluyen analítica o telemetría. Revisa los límites de privacidad, el consentimiento y las prácticas prohibidas.",
+    "review.onlineOffline": "Se ha elegido juego en línea con una política sin conexión. Aclara si esta entrega incluye funciones en línea."
+  },
+  "categories": [
+    {
+      "id": "project.intent",
+      "label": "Intención y experiencia",
+      "description": "Define la experiencia y el objetivo de esta entrega.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.players",
+      "label": "Jugadores y sesiones",
+      "description": "Identifica quién juega, con qué dispositivos y en qué condiciones.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.rules",
+      "label": "Bucle de juego y reglas",
+      "description": "Describe las acciones, sus resultados y la progresión.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.scope",
+      "label": "Alcance y contenido",
+      "description": "Delimita el trabajo de esta entrega.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.presentation",
+      "label": "Arte, sonido y narrativa",
+      "description": "Define la presentación y la responsabilidad sobre los recursos.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.technology",
+      "label": "Tecnología y persistencia",
+      "description": "Establece los límites de implementación, guardado y servicios.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.accessibility",
+      "label": "Usabilidad y accesibilidad",
+      "description": "Define las condiciones para que la experiencia sea accesible.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.boundaries",
+      "label": "Límites y derechos",
+      "description": "Registra los límites de contenido, datos y monetización.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.delivery",
+      "label": "Producción y publicación",
+      "description": "Planifica los recursos, la distribución y el mantenimiento.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    },
+    {
+      "id": "game.validation",
+      "label": "Pruebas de juego y aceptación",
+      "description": "Define las pruebas y quién decide cuándo está terminado.",
+      "perspectiveHint": "Separa observaciones de jugadores, intenciones creativas y recomendaciones técnicas."
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "project.intent.release_goal",
+      "category": "project.intent",
+      "order": 10,
+      "prompt": "¿Qué debe lograr esta entrega?",
+      "help": "Elige el hito cuyo éxito se evaluará.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "prototype",
+          "label": "Probar el juego básico con un prototipo"
+        },
+        {
+          "value": "vertical_slice",
+          "label": "Una sección representativa y pulida"
+        },
+        {
+          "value": "demo",
+          "label": "Una demo pública"
+        },
+        {
+          "value": "full_release",
+          "label": "Una versión completa"
+        },
+        {
+          "value": "update",
+          "label": "Actualizar un juego existente"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.experience",
+      "category": "project.intent",
+      "order": 20,
+      "prompt": "¿Qué experiencia debe predominar?",
+      "help": "Elige la prioridad ante objetivos en conflicto y explica la sensación buscada.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "mastery",
+          "label": "Dominio y desafío"
+        },
+        {
+          "value": "exploration",
+          "label": "Exploración y descubrimiento"
+        },
+        {
+          "value": "story",
+          "label": "Historia y emoción"
+        },
+        {
+          "value": "creation",
+          "label": "Creación y experimentación"
+        },
+        {
+          "value": "connection",
+          "label": "Cooperación o competición"
+        },
+        {
+          "value": "relaxation",
+          "label": "Relajación"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.current_phase",
+      "category": "project.intent",
+      "order": 30,
+      "prompt": "¿En qué fase está el proyecto?",
+      "help": "Si existe un juego previo, indica qué debe conservarse.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "new_build",
+          "label": "Creación nueva"
+        },
+        {
+          "value": "redesign",
+          "label": "Rediseño"
+        },
+        {
+          "value": "extension",
+          "label": "Ampliación"
+        },
+        {
+          "value": "repair",
+          "label": "Corrección"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "project.intent.concept",
+      "category": "project.intent",
+      "order": 40,
+      "prompt": "¿Cuál es el concepto y género del juego?",
+      "help": "Describe qué hace el jugador y qué distingue al juego. Las referencias no autorizan la copia.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.players.audience",
+      "category": "game.players",
+      "order": 50,
+      "prompt": "¿A quién va dirigido?",
+      "help": "Indica edades, experiencia e idiomas; separa la evidencia de las suposiciones.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.players.platforms",
+      "category": "game.players",
+      "order": 60,
+      "prompt": "¿Qué plataformas incluye esta entrega?",
+      "help": "Selecciona los destinos comprometidos e indica los requisitos mínimos.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "browser",
+          "label": "Navegador"
+        },
+        {
+          "value": "desktop",
+          "label": "Ordenador"
+        },
+        {
+          "value": "mobile",
+          "label": "Móvil o tableta"
+        },
+        {
+          "value": "console",
+          "label": "Consola"
+        },
+        {
+          "value": "xr",
+          "label": "RV o RA"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.player_mode",
+      "category": "game.players",
+      "order": 70,
+      "prompt": "¿Cómo participan los jugadores?",
+      "help": "Indica el máximo de jugadores y si los modos comparten el progreso.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "solo",
+          "label": "Un jugador"
+        },
+        {
+          "value": "local_coop",
+          "label": "Cooperativo local"
+        },
+        {
+          "value": "local_versus",
+          "label": "Competitivo local"
+        },
+        {
+          "value": "online_coop",
+          "label": "Cooperativo en línea"
+        },
+        {
+          "value": "online_versus",
+          "label": "Competitivo en línea"
+        },
+        {
+          "value": "async",
+          "label": "Interacción asíncrona"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.players.session",
+      "category": "game.players",
+      "order": 80,
+      "prompt": "¿Cuánto dura una sesión típica?",
+      "help": "Considera las interrupciones, la reanudación y la duración total.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "short",
+          "label": "Menos de 10 minutos"
+        },
+        {
+          "value": "medium",
+          "label": "10–30 minutos"
+        },
+        {
+          "value": "long",
+          "label": "30–60 minutos"
+        },
+        {
+          "value": "extended",
+          "label": "Más de una hora"
+        },
+        {
+          "value": "flexible",
+          "label": "A elección del jugador"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.core_loop",
+      "category": "game.rules",
+      "order": 90,
+      "prompt": "¿Qué acciones forman el bucle principal?",
+      "help": "Describe acción → respuesta → siguiente decisión con un ejemplo.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.rules.outcomes",
+      "category": "game.rules",
+      "order": 100,
+      "prompt": "¿Cómo se determina el éxito o el final?",
+      "help": "Indica victoria, derrota, reintento y finalización; puede no haber un final.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.rules.progression",
+      "category": "game.rules",
+      "order": 110,
+      "prompt": "¿Qué sistemas de progresión hacen falta?",
+      "help": "Indica los límites y las reglas de reinicio.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "levels",
+          "label": "Niveles o capítulos"
+        },
+        {
+          "value": "skills",
+          "label": "Habilidades del jugador o personaje"
+        },
+        {
+          "value": "collection",
+          "label": "Colección y desbloqueos"
+        },
+        {
+          "value": "economy",
+          "label": "Recursos y economía"
+        },
+        {
+          "value": "ranking",
+          "label": "Puntuaciones o clasificaciones"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.rules.difficulty",
+      "category": "game.rules",
+      "order": 120,
+      "prompt": "¿Cómo funcionará la dificultad?",
+      "help": "Explica la equidad, el azar, el coste del fallo y los límites de adaptación.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "Dificultad fija"
+        },
+        {
+          "value": "selectable",
+          "label": "Elegida por el jugador"
+        },
+        {
+          "value": "adaptive",
+          "label": "Adaptativa"
+        },
+        {
+          "value": "sandbox",
+          "label": "Sin desafío obligatorio"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.content_budget",
+      "category": "game.scope",
+      "order": 130,
+      "prompt": "¿Cuánto contenido jugable se incluye?",
+      "help": "Indica cantidades o límites de niveles, personajes, objetos y duración, y quién los crea.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.scope.required_features",
+      "category": "game.scope",
+      "order": 140,
+      "prompt": "¿Qué funciones complementarias son necesarias?",
+      "help": "Selecciona solo lo imprescindible para esta entrega.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "tutorial",
+          "label": "Tutorial"
+        },
+        {
+          "value": "settings",
+          "label": "Ajustes"
+        },
+        {
+          "value": "inventory",
+          "label": "Inventario"
+        },
+        {
+          "value": "achievements",
+          "label": "Logros"
+        },
+        {
+          "value": "editor",
+          "label": "Editor de niveles"
+        },
+        {
+          "value": "replays",
+          "label": "Repeticiones"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.scope.exclusions",
+      "category": "game.scope",
+      "order": 150,
+      "prompt": "¿Qué queda expresamente fuera del alcance?",
+      "help": "Enumera las ampliaciones que deben esperar y cuándo se reconsiderarían.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.scope.dependencies",
+      "category": "game.scope",
+      "order": 160,
+      "prompt": "¿Qué trabajo previo o dependencias deben conservarse?",
+      "help": "Indica código, formatos, herramientas, recursos y compatibilidad, o que es un proyecto nuevo.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.presentation.visual_style",
+      "category": "game.presentation",
+      "order": 170,
+      "prompt": "¿Cuál es la dirección visual?",
+      "help": "Especifica cámara, legibilidad, referencias y rasgos propios.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "text",
+          "label": "Basada en texto"
+        },
+        {
+          "value": "2d",
+          "label": "2D"
+        },
+        {
+          "value": "3d",
+          "label": "3D"
+        },
+        {
+          "value": "hybrid",
+          "label": "Mezcla de 2D y 3D"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.narrative",
+      "category": "game.presentation",
+      "order": 180,
+      "prompt": "¿Qué papel tiene la narrativa?",
+      "help": "Describe ambientación, tono, ramificaciones y traducción.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "No requiere narrativa",
+          "exclusive": true
+        },
+        {
+          "value": "background",
+          "label": "Trasfondo y ambiente"
+        },
+        {
+          "value": "linear",
+          "label": "Historia lineal"
+        },
+        {
+          "value": "branching",
+          "label": "Historia ramificada"
+        },
+        {
+          "value": "emergent",
+          "label": "Historias surgidas del juego"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.audio",
+      "category": "game.presentation",
+      "order": 190,
+      "prompt": "¿Qué elementos de audio hacen falta?",
+      "help": "Indica controles de volumen, subtítulos y si el sonido transmite información esencial.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "effects",
+          "label": "Efectos"
+        },
+        {
+          "value": "music",
+          "label": "Música"
+        },
+        {
+          "value": "voice",
+          "label": "Voces"
+        },
+        {
+          "value": "ambient",
+          "label": "Sonido ambiental"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.presentation.asset_pipeline",
+      "category": "game.presentation",
+      "order": 200,
+      "prompt": "¿Quién proporciona y aprueba los recursos?",
+      "help": "Separa recursos provisionales y finales; registra formatos, licencias, créditos y política de recursos generados.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.technology.engine",
+      "category": "game.technology",
+      "order": 210,
+      "prompt": "¿Cómo se elige el motor o framework?",
+      "help": "Indica herramientas y versiones obligatorias, o criterios de experiencia, licencia y plataformas.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "fixed",
+          "label": "Herramienta obligatoria"
+        },
+        {
+          "value": "existing",
+          "label": "Conservar la tecnología actual"
+        },
+        {
+          "value": "evaluate",
+          "label": "Evaluar alternativas"
+        },
+        {
+          "value": "delegated",
+          "label": "Propuesta del implementador dentro de límites"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.input",
+      "category": "game.technology",
+      "order": 220,
+      "prompt": "¿Qué métodos de entrada deben funcionar?",
+      "help": "Indica reasignación de controles y cambio de dispositivo durante el juego.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "keyboard_mouse",
+          "label": "Teclado y ratón"
+        },
+        {
+          "value": "controller",
+          "label": "Mando"
+        },
+        {
+          "value": "touch",
+          "label": "Pantalla táctil"
+        },
+        {
+          "value": "motion",
+          "label": "Movimiento o mandos XR"
+        },
+        {
+          "value": "assistive",
+          "label": "Dispositivos de apoyo"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.save",
+      "category": "game.technology",
+      "order": 230,
+      "prompt": "¿Cómo se guarda el progreso?",
+      "help": "Describe cuándo se guarda, migración, borrado y recuperación ante interrupciones.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Sin progreso persistente",
+          "exclusive": true
+        },
+        {
+          "value": "local",
+          "label": "Guardado local"
+        },
+        {
+          "value": "cloud",
+          "label": "Guardado en la nube o cuenta"
+        },
+        {
+          "value": "hybrid",
+          "label": "Local con sincronización"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.technology.network",
+      "category": "game.technology",
+      "order": 240,
+      "prompt": "¿Qué conexión de red se requiere?",
+      "help": "Para juego en línea, define autoridad, sincronización, desconexiones, costes y responsables.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "offline",
+          "label": "Jugable sin conexión"
+        },
+        {
+          "value": "optional",
+          "label": "Funciones en línea opcionales"
+        },
+        {
+          "value": "required",
+          "label": "Conexión obligatoria"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.onboarding",
+      "category": "game.accessibility",
+      "order": 250,
+      "prompt": "¿Cómo se aprende a jugar?",
+      "help": "Indica qué debe lograr alguien nuevo sin ayuda externa.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "guided",
+          "label": "Tutorial guiado"
+        },
+        {
+          "value": "contextual",
+          "label": "Ayudas contextuales"
+        },
+        {
+          "value": "manual",
+          "label": "Manual o referencia"
+        },
+        {
+          "value": "discovery",
+          "label": "Descubrimiento jugando"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.access",
+      "category": "game.accessibility",
+      "order": 260,
+      "prompt": "¿Qué opciones de accesibilidad son necesarias?",
+      "help": "Confirma las necesidades con jugadores; no supongas que un ajuste sirve para todos.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "remap",
+          "label": "Controles reasignables"
+        },
+        {
+          "value": "subtitles",
+          "label": "Subtítulos y alternativas de texto"
+        },
+        {
+          "value": "color",
+          "label": "Información no basada solo en color"
+        },
+        {
+          "value": "motion",
+          "label": "Reducir movimiento y destellos"
+        },
+        {
+          "value": "text",
+          "label": "Tamaño de texto ajustable"
+        },
+        {
+          "value": "timing",
+          "label": "Ayudas de tiempo y dificultad"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.accessibility.performance",
+      "category": "game.accessibility",
+      "order": 270,
+      "prompt": "¿Qué objetivos medibles de rendimiento se exigen?",
+      "help": "Indica equipos, FPS, carga, memoria o batería y cómo medirlos.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.accessibility.interruption",
+      "category": "game.accessibility",
+      "order": 280,
+      "prompt": "¿Qué sucede al interrumpir el juego?",
+      "help": "Incluye pausa, segundo plano, pérdida de foco, desconexión y retorno, con equidad multijugador.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.boundaries.content_limits",
+      "category": "game.boundaries",
+      "order": 290,
+      "prompt": "¿Qué contenido o interacciones deben evitarse?",
+      "help": "Registra edad y clasificación previstas, límites de contenido y, si procede, moderación y denuncias.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.boundaries.monetization",
+      "category": "game.boundaries",
+      "order": 300,
+      "prompt": "¿Qué monetización se prevé?",
+      "help": "Indica los límites de compra y la presión prohibida; conserva las decisiones pendientes.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "free",
+          "label": "Gratis, sin monetización"
+        },
+        {
+          "value": "paid",
+          "label": "Compra única"
+        },
+        {
+          "value": "ads",
+          "label": "Publicidad"
+        },
+        {
+          "value": "iap",
+          "label": "Compras dentro del juego"
+        },
+        {
+          "value": "subscription",
+          "label": "Suscripción"
+        },
+        {
+          "value": "donation",
+          "label": "Donaciones opcionales"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.boundaries.data",
+      "category": "game.boundaries",
+      "order": 310,
+      "prompt": "¿Qué datos del jugador se recopilan o comparten?",
+      "help": "Indica finalidad, almacenamiento, conservación, borrado y operadores; incluye guardados locales.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.boundaries.rights",
+      "category": "game.boundaries",
+      "order": 320,
+      "prompt": "¿Qué restricciones de derechos y distribución se aplican?",
+      "help": "Enumera licencias de recursos y motor, atribución, titularidad, requisitos de plataforma y responsables.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.delivery.capacity",
+      "category": "game.delivery",
+      "order": 330,
+      "prompt": "¿Qué personal, tiempo y presupuesto hay?",
+      "help": "Indica responsabilidades, habilidades, hitos y alternativas ante falta de recursos.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.delivery.distribution",
+      "category": "game.delivery",
+      "order": 340,
+      "prompt": "¿Cómo se distribuirá el juego?",
+      "help": "Indica canales, responsables y requisitos de cuenta o revisión.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "web",
+          "label": "Juego web alojado"
+        },
+        {
+          "value": "download",
+          "label": "Descarga directa"
+        },
+        {
+          "value": "store",
+          "label": "Tienda digital"
+        },
+        {
+          "value": "private",
+          "label": "Pruebas privadas"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.delivery.handoff",
+      "category": "game.delivery",
+      "order": 350,
+      "prompt": "¿Qué se entrega además del juego?",
+      "help": "Especifica compilación reproducible, código, recursos editables, licencias, pruebas e instrucciones.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.delivery.maintenance",
+      "category": "game.delivery",
+      "order": 360,
+      "prompt": "¿Quién atiende actualizaciones e incidentes?",
+      "help": "Define responsables, duración, compatibilidad, reversión y cierre del servicio.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.validation.playtest",
+      "category": "game.validation",
+      "order": 370,
+      "prompt": "¿Cómo se probará la experiencia buscada?",
+      "help": "Define participantes, escenarios, observaciones y criterios de revisión; separa opiniones y conducta medida.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.validation.must_pass",
+      "category": "game.validation",
+      "order": 380,
+      "prompt": "¿Qué pruebas deben superarse antes de publicar?",
+      "help": "Añade pasos concretos y resultados esperados.",
+      "responseType": "multi-choice",
+      "choices": [
+        {
+          "value": "first_play",
+          "label": "Primera partida y bucle principal"
+        },
+        {
+          "value": "completion",
+          "label": "Victoria, derrota y reintento"
+        },
+        {
+          "value": "save_restore",
+          "label": "Guardado y recuperación"
+        },
+        {
+          "value": "devices",
+          "label": "Dispositivos y controles previstos"
+        },
+        {
+          "value": "network",
+          "label": "Desconexión y reconexión"
+        },
+        {
+          "value": "access",
+          "label": "Ajustes de accesibilidad"
+        },
+        {
+          "value": "none",
+          "label": "Ninguna",
+          "exclusive": true
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    },
+    {
+      "questionId": "game.validation.approval",
+      "category": "game.validation",
+      "order": 390,
+      "prompt": "¿Quién decide que está listo y con qué criterios?",
+      "help": "Indica el rol decisor, defectos aceptables y condiciones de publicación.",
+      "responseType": "long-text",
+      "placeholder": "Describe premisas, límites y evidencia. Puede quedar sin resolver."
+    },
+    {
+      "questionId": "game.validation.unknowns",
+      "category": "game.validation",
+      "order": 400,
+      "prompt": "¿Cómo se tratan las decisiones pendientes?",
+      "help": "Indica límites de delegación y cuándo detenerse para realinear premisas.",
+      "responseType": "single-choice",
+      "choices": [
+        {
+          "value": "pause",
+          "label": "Pausar el trabajo afectado hasta aclararlo"
+        },
+        {
+          "value": "prototype",
+          "label": "Probar un prototipo reversible"
+        },
+        {
+          "value": "propose",
+          "label": "Solicitar alternativas antes de decidir"
+        },
+        {
+          "value": "delegate",
+          "label": "Delegar dentro de límites registrados"
+        },
+        {
+          "value": "other",
+          "label": "Otra opción (explica)",
+          "requiresNote": true
+        },
+        {
+          "value": "unknown",
+          "label": "Sin decidir",
+          "exclusive": true
+        },
+        {
+          "value": "proposal_requested",
+          "label": "Solicitar una propuesta",
+          "exclusive": true
+        }
+      ]
+    }
+  ]
+}

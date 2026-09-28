@@ -29,6 +29,7 @@ for (const file of chromeLocaleFiles) {
     throw new Error(`Invalid application locale: ${file.name}`);
   }
   chromeLocales[locale.locale] = locale;
+  locale.guide = JSON.parse(await readFile(resolve(chromeLocaleRoot, "guides", `${locale.locale}.json`), "utf8"));
 }
 if (!chromeLocales.en) throw new Error("The canonical English application locale is missing");
 const englishChromeKeys = Object.keys(chromeLocales.en.strings).sort();
@@ -36,6 +37,19 @@ for (const [localeId, locale] of Object.entries(chromeLocales)) {
   if (JSON.stringify(Object.keys(locale.strings).sort()) !== JSON.stringify(englishChromeKeys)) {
     throw new Error(`Application locale keys do not match English: ${localeId}`);
   }
+}
+
+const sourceHtml = await readFile(resolve(root, "src/index.html"), "utf8");
+const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+async function writeLocalePage(directory, localeId) {
+  const locale = chromeLocales[localeId];
+  if (!locale) throw new Error(`Missing application locale: ${localeId}`);
+  const html = sourceHtml
+    .replace('<html lang="en" dir="ltr">', `<html lang="${localeId}" dir="${locale.direction}">`)
+    .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(locale.strings["meta.title"])}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapeHtml(locale.strings["meta.description"])}">`);
+  await mkdir(directory, { recursive: true });
+  await writeFile(resolve(directory, "index.html"), html);
 }
 
 for (const directory of templateDirectories) {
@@ -61,8 +75,7 @@ for (const directory of templateDirectories) {
     localeRoutes.add(locale);
     localizedQuestions[locale] = questionSet;
     const routeDirectory = resolve(dist, locale, "new", manifest.id);
-    await mkdir(routeDirectory, { recursive: true });
-    await cp(resolve(root, "src/index.html"), resolve(routeDirectory, "index.html"));
+    await writeLocalePage(routeDirectory, locale);
   }
   registry.push({
     id: manifest.id,
@@ -82,8 +95,7 @@ for (const directory of templateDirectories) {
 
 for (const locale of [...localeRoutes].sort()) {
   const routeDirectory = resolve(dist, locale);
-  await mkdir(routeDirectory, { recursive: true });
-  await cp(resolve(root, "src/index.html"), resolve(routeDirectory, "index.html"));
+  await writeLocalePage(routeDirectory, locale);
 }
 
 await writeFile(resolve(dist, "templates/index.json"), `${JSON.stringify({ templates: registry }, null, 2)}\n`);

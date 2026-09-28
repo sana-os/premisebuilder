@@ -1,0 +1,186 @@
+{
+  "intro": "Commencez par une question. Vous pouvez laisser les inconnues ouvertes et revenir plus tard.",
+  "purpose": "Cet outil enregistre ce qu’il faut créer ou introduire, de quel point de vue et ce qui a réellement été convenu. Il ne génère pas de jeu et n’exécute pas d’agent IA.",
+  "conceptsTitle": "Trois éléments à distinguer",
+  "concepts": [
+    [
+      "Contribution = une réponse rapportée",
+      "Exemple : une personne du support dit que chercher dans la FAQ prend du temps. L’enregistrer conserve son point de vue ; cela n’en fait pas une décision du projet."
+    ],
+    [
+      "Résolution = la façon dont le projet traite cette réponse",
+      "Choisissez d’adopter provisoirement la réponse, de la confirmer, de demander une proposition ou de laisser ouvert. Réponse et décision sont enregistrées séparément."
+    ],
+    [
+      "Base = une révision de référence explicitement enregistrée",
+      "Dans Révision, confirmez l’ensemble actuel des prémisses comme Base r1. Les points indécis peuvent le rester. Les modifications suivantes n’apparaissent dans les exports qu’après une nouvelle confirmation de Base."
+    ]
+  ],
+  "stepsTitle": "Essayez une saisie complète, du début à l’export",
+  "steps": [
+    [
+      "Choisir le sujet sur la page d’accueil",
+      "Sites web et petites applications web propose 42 questions, Création de jeux 40 et Planification de l’adoption d’agents IA 48. Choisissez selon le travail à clarifier, pas l’outil prévu."
+    ],
+    [
+      "Identifier le projet et les personnes",
+      "Saisissez le nom du projet ainsi que le nom et le rôle de la personne qui saisit. Celle-ci entre la réponse. Ne cochez le pouvoir de décision que si elle peut réellement approuver la prémisse. Pour un entretien, activez le point de vue distinct et identifiez la personne interrogée."
+    ],
+    [
+      "Répondre à une question et ajouter la raison",
+      "Choisissez une option ou saisissez du texte. Ajoutez contexte, preuves ou limites dans Contexte ou justification. Vérifiez point de vue, personne qui saisit et mode d’obtention. Ces champs décrivent la source, pas la force de la réponse. Les options Autre peuvent nécessiter une note."
+    ],
+    [
+      "Décider comment utiliser la réponse",
+      "Pour un premier essai, choisissez Provisoire dans l’état de résolution. Vérifiez que la contribution source est la réponse souhaitée. Vous pouvez ainsi essayer le parcours sans prétendre à un accord final. Si vous ne savez pas encore, laissez Non décidé ou choisissez Laisser ouvert, puis continuez."
+    ],
+    [
+      "Réviser et confirmer une Base",
+      "Ouvrez Révision, examinez les points ouverts, alertes et sources, puis choisissez Confirmer la révision Base et confirmez dans la boîte de dialogue. Une référence est ainsi figée ; cela ne signifie pas que toutes les réponses sont correctes ou tous les problèmes résolus."
+    ],
+    [
+      "Exporter une sauvegarde ou une transmission pour l’IA",
+      "Ouvrez Exporter. Téléchargez Base JSON pour sauvegarder la référence confirmée. Téléchargez AI Context pour transmettre prémisses, sources et inconnues à une IA. Le dernier brouillon n’est exporté qu’après confirmation d’une nouvelle Base."
+    ]
+  ],
+  "examplesTitle": "Exemples pour chaque modèle",
+  "examplesIntro": "Ces exemples fictifs vous aident à rédiger. Leur ouverture ne remplit ni ne modifie votre projet.",
+  "examples": [
+    [
+      "Site web : une page de contact",
+      [
+        [
+          "Question",
+          "Quel résultat principal cette version doit-elle permettre ?"
+        ],
+        [
+          "Réponse",
+          "Générer des demandes ou des prospects"
+        ],
+        [
+          "Contexte",
+          "Les nouveaux visiteurs doivent comprendre le service et envoyer une demande. Le paiement en ligne est exclu de cette version. Testez le parcours avec trois personnes qui ne connaissent pas le service."
+        ],
+        [
+          "Source et résolution",
+          "Le commanditaire exprime l’objectif ; la personne qui saisit l’enregistre. Utilisez Provisoire pendant que le décideur l’examine."
+        ]
+      ]
+    ],
+    [
+      "Jeu : un petit prototype d’exploration",
+      [
+        [
+          "Question",
+          "Que doit accomplir cette version ?"
+        ],
+        [
+          "Réponse",
+          "Tester le jeu principal avec un prototype."
+        ],
+        [
+          "Contexte",
+          "Créez trois salles et deux outils pour tester le plaisir de découvrir un chemin. Visez dix minutes de jeu. Multijoueur et graphismes définitifs sont exclus."
+        ],
+        [
+          "Source et résolution",
+          "Enregistrez le plan du créateur comme Provisoire. Ajoutez les retours de test comme nouvelle contribution sans écraser le plan initial."
+        ]
+      ]
+    ],
+    [
+      "Agent IA : rédiger une réponse de support",
+      [
+        [
+          "Question",
+          "Quel travail doit changer, et pour qui ?"
+        ],
+        [
+          "Réponse",
+          "Aider le support à rédiger des réponses à partir de FAQ approuvées. Le personnel envoie lui-même les réponses."
+        ],
+        [
+          "Contexte",
+          "Nous espérons réduire le temps de travail, mais le total actuel n’est pas mesuré. Comparez recherche, rédaction, révision et correction. Ne supposez pas d’économies avant l’évaluation."
+        ],
+        [
+          "Source et résolution",
+          "Conservez attentes de la direction et observations du terrain dans des contributions distinctes. Adoptez provisoirement le périmètre d’essai et laissez ouverts les effets non mesurés."
+        ]
+      ]
+    ]
+  ],
+  "statesTitle": "Quel état de résolution choisir ?",
+  "states": [
+    [
+      "Non décidé",
+      "Aucune prémisse adoptée. Ne comblez pas le manque par une supposition."
+    ],
+    [
+      "Provisoire",
+      "Utilisez la réponse sélectionnée pour le moment, en permettant sa révision."
+    ],
+    [
+      "Confirmé",
+      "Un décideur habilité accepte cette prémisse. Cela ne prouve pas qu’un bénéfice prévu se réalisera."
+    ],
+    [
+      "Demander une proposition",
+      "Demandez des options ou conseils sans choisir encore de réponse."
+    ],
+    [
+      "Déléguer dans des limites",
+      "Un décideur habilité délègue une décision dans des limites enregistrées. Expliquez ces limites en note."
+    ],
+    [
+      "Sans objet",
+      "Un décideur habilité juge la question hors projet. Ce n’est pas la même chose que ne pas savoir."
+    ]
+  ],
+  "filesTitle": "Quel fichier sauvegarder ?",
+  "files": [
+    [
+      "Base JSON",
+      "La dernière référence confirmée. Commencez par elle pour une sauvegarde portable."
+    ],
+    [
+      "Override JSON",
+      "Une modification facultative et délimitée liée à une révision Base précise. Inutile pour un premier projet. Conservez aussi la Base correspondante."
+    ],
+    [
+      "Unified JSON",
+      "Le résultat de l’application des Overrides actifs à la Base. Gardez les fichiers Base et Override séparément pour conserver chaque modification."
+    ],
+    [
+      "AI Context Markdown",
+      "Une transmission lisible pour l’IA, avec sources et inconnues. Joignez-la à la tâche demandée. Pour rouvrir le projet dans cette application, utilisez plutôt JSON."
+    ]
+  ],
+  "faqTitle": "Si vous bloquez",
+  "faq": [
+    [
+      "Dois-je répondre à tout ?",
+      "Non. Utilisez Question suivante, Laisser ouvert ou les catégories. Vous pouvez confirmer une Base avec des points indécis ; ils restent visibles dans la transmission."
+    ],
+    [
+      "Pourquoi ma réponse indique-t-elle encore Non décidé ?",
+      "La réponse a été enregistrée comme contribution. Pour l’adopter, choisissez un état de résolution et vérifiez la contribution source sous la question."
+    ],
+    [
+      "Comment confirmer une prémisse individuelle ?",
+      "Choisissez d’abord Provisoire, vérifiez la contribution source et sélectionnez le décideur approprié ; passez ensuite à Confirmé. Sans décideur habilité, gardez l’état provisoire ou ouvert et demandez son avis. Ne revendiquez pas une autorité uniquement pour activer la commande."
+    ],
+    [
+      "Deux personnes répondent différemment. Que conserver ?",
+      "Utilisez Ajouter un autre point de vue et identifiez chaque source. Conservez les deux versions ; choisissez séparément la réponse adoptée dans Résolution. Un désaccord non résolu peut rester un conflit."
+    ],
+    [
+      "Pourquoi les dernières modifications manquent-elles à l’export ?",
+      "Les exports utilisent la dernière Base confirmée. Ouvrez Révision et confirmez la révision suivante, par exemple r2. Sauvegarde automatique du brouillon et confirmation de Base sont deux actions distinctes."
+    ],
+    [
+      "Où mon travail est-il sauvegardé et comment le reprendre ?",
+      "Les brouillons sont enregistrés dans ce navigateur si le stockage est disponible. Rouvrez-les depuis Projets récents sur le même navigateur et le même site. Il n’y a pas de synchronisation cloud : changer d’appareil ou effacer les données du site peut faire perdre l’accès. Exportez puis importez du JSON pour retrouver le contenu confirmé ; ne comptez pas sur le JSON pour conserver un brouillon non confirmé."
+    ]
+  ]
+}
